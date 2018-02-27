@@ -8,10 +8,10 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: /run/secrets/mysql_root_password
-      MYSQL_USER: pl
-      MYSQL_PASSWORD: /run/secrets/mysql_password
-      MYSQL_DATABASE: playlist
+      MYSQL_ROOT_PASSWORD: /run/secrets/MYSQL_ROOT_PASSWORD
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: /run/secrets/MYSQL_PASSWORD
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     ports:
       - "8889:3306"
     networks:
@@ -19,7 +19,6 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     secrets:
-      - xtrabackup_password
       - mysql_password
       - mysql_root_password
      deploy:
@@ -41,9 +40,9 @@ volumes:
       device: ":/webgrab_volume/mariadb/data"
 secrets:
   mysql_password:
-    file: .secrets/mysql_password
+    external: true
   mysql_root_password:
-    file: .secrets/mysql_root_password
+    external: true
 networks:
   elk_elk:
     external: true
