@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   rabbit1:
-    image: harbur/rabbitmq-cluster
+    image: rabbitmq:${RABBIT_TAG}-management-alpine
     hostname: rabbit1
     ports:
       - "5672:5672"
@@ -13,6 +13,9 @@ services:
       update_config:
         parallelism: 1
         delay: 10s
+      placement:
+        constraints: 
+          - node.labels.size == small
     environment:
       - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
@@ -22,7 +25,7 @@ services:
       - elk_elk
 
   rabbit2:
-    image: harbur/rabbitmq-cluster
+    image: rabbitmq:${RABBIT_TAG}-management-alpine
     hostname: rabbit2
     deploy:
       replicas: 1
