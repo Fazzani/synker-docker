@@ -22,7 +22,7 @@ services:
       - SLOT={{.Task.Slot}}
       - MASTER_SLOT=1
     volumes:
-      - rabbit_data:/var/lib/rabbitmq
+      - rabbit_data:/var/lib/rabbitmq:rw
     ports:
       - "5672:5672"   # amqp
       - "15672:15672" # web ui
