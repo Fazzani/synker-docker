@@ -12,7 +12,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: /run/secrets/MYSQL_PASSWORD
       MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_HOST: "localhost"
     ports:
       - "8889:3306"
     networks:
