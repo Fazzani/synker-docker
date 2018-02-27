@@ -1,29 +1,42 @@
 version: "3.3"
 services:
-  rmq:
-    image: lovelysystems/rabbitmq-swarm-cluster
-    hostname: "{{.Service.Name}}.{{.Task.Slot}}.{{.Task.ID}}"
-    deploy:
-      replicas: 2
-      restart_policy:
-        condition: on-failure
-      update_config:
-        parallelism: 1
-        delay: 10s
-      placement:
-        constraints: 
-          - node.labels.size == small
-    environment:
-      - RABBITMQ_ERLANG_COOKIE=abc
-      - RABBITMQ_USE_LONGNAME=true
-      - RABBITMQ_MNESIA_DIR=/var/lib/rabbitmq/mnesia
-      - RABBITMQ_PLUGINS_EXPAND_DIR=/var/lib/rabbitmq/mnesia/plugins-expand
-      - SERVICE_NAME={{.Service.Name}}
-      - SLOT={{.Task.Slot}}
-      - MASTER_SLOT=1
+  rabbit1:
+    image: rabbitmq:3.6.9-management-alpine
+    hostname: rabbit1
     ports:
-      - "5672:5672"   # amqp
-      - "15672:15672" # web ui
+      - "5672:5672"
+      - "8000:15672"
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=mycookie
+      - RABBITMQ_DEFAULT_USER=myuser
+      - RABBITMQ_DEFAULT_PASS=mypass
+    networks:
+      - elk_elk
+
+  rabbit2:
+    image: rabbitmq:3.6.9-management-alpine
+    hostname: rabbit2
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=mycookie
+      - CLUSTERED=true
+      - CLUSTER_WITH=rabbit1
+      - RAM_NODE=true
+    ports:
+      - "5673:5672"
+      - "8001:15672"
+    networks:
+      - elk_elk
+
+  rabbit3:
+    image: rabbitmq:3.6.9-management-alpine
+    hostname: rabbit3
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=mycookie
+      - CLUSTERED=true
+      - CLUSTER_WITH=rabbit1
+    ports:
+      - "5674:5672"
+      - "8002:15672"
     networks:
       - elk_elk
 networks:
