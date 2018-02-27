@@ -15,7 +15,7 @@ services:
         delay: 10s
       placement:
         constraints: 
-          - node.labels.size == large
+          - node.labels.size == medium
     environment:
       - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
@@ -36,7 +36,7 @@ services:
         delay: 10s
       placement:
         constraints: 
-          - node.labels.size == medium
+          - node.labels.size == small
     environment:
       - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
       - CLUSTERED=true
