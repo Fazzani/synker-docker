@@ -17,7 +17,7 @@ services:
     networks:
       - elk_elk
     volumes:
-      - mysql-data:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     deploy:
      mode: replicated
      replicas: 1
@@ -33,7 +33,7 @@ services:
       - MYSQL_PASSWORD
       - MYSQL_ROOT_PASSWORD
 volumes:
-  config:
+  mariadb_data:
     driver_opts:
       type: "nfs"
       o: "nolock,soft,rw,addr=18.194.42.216"
