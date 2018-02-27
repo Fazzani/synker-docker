@@ -10,6 +10,9 @@ services:
       update_config:
         parallelism: 1
         delay: 10s
+      placement:
+        constraints: 
+          - node.labels.size == small
     environment:
       - RABBITMQ_ERLANG_COOKIE=abc
       - RABBITMQ_USE_LONGNAME=true
