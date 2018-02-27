@@ -4,7 +4,7 @@
 
 - [ ] Install Vault
 - [ ] [MariaDb][docker_mariadb] and restore data
-- [ ] RabbitMQ scale on 2 instances ([Used Image][RabbitMQ_Image_repo])
+- [x] RabbitMQ scale on 2 instances
 - [ ] Elk and Filebeat (elastic data scaled on 2 instances) [ex 1][ex_elk2] [ex 2][ex_elk] [ex 3][elk_3]
   - [x] [logstash config][link_logstash_config]
   - [ ] [Elastic config][elastic_off_guide] [elastic docker compose example][elastic_compose_ref]
