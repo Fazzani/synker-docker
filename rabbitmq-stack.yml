@@ -31,6 +31,9 @@ services:
       update_config:
         parallelism: 1
         delay: 10s
+      placement:
+        constraints: 
+          - node.labels.size == medium
     environment:
       - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
       - CLUSTERED=true

@@ -22,6 +22,17 @@ services:
       - xtrabackup_password
       - mysql_password
       - mysql_root_password
+     deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 20m
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints: 
+          - node.labels.size == large
 volumes:
   config:
     driver_opts:
