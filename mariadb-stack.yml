@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+
+  synker_db:
+    image: mariadb:${MYSQL_VERSION}
+    restart: always
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: /run/secrets/mysql_root_password
+      MYSQL_USER: pl
+      MYSQL_PASSWORD: /run/secrets/mysql_password
+      MYSQL_DATABASE: playlist
+    ports:
+      - "8889:3306"
+    networks:
+      - elk_elk
+    volumes:
+      - mysql-data:/var/lib/mysql
+    secrets:
+      - xtrabackup_password
+      - mysql_password
+      - mysql_root_password
+volumes:
+  config:
+    driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=18.194.42.216"
+      device: ":/webgrab_volume/mariadb/data"
+secrets:
+  mysql_password:
+    file: .secrets/mysql_password
+  mysql_root_password:
+    file: .secrets/mysql_root_password
+networks:
+  elk_elk:
+    external: true
