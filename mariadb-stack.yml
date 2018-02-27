@@ -19,8 +19,8 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     secrets:
-      - mysql_password
-      - mysql_root_password
+      - MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD
      deploy:
       mode: replicated
       replicas: 1
@@ -39,9 +39,9 @@ volumes:
       o: "nolock,soft,rw,addr=18.194.42.216"
       device: ":/webgrab_volume/mariadb/data"
 secrets:
-  mysql_password:
+  MYSQL_PASSWORD:
     external: true
-  mysql_root_password:
+  MYSQL_ROOT_PASSWORD:
     external: true
 networks:
   elk_elk:
