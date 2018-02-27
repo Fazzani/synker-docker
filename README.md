@@ -57,6 +57,26 @@ docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
 
 ```
 
+## Travis deploy
+
+[example] [travis_example_1]
+
+1. Encrypt [certif file][travis_encrypt_file] of sh connection with travis
+2. Encrypt user@host variable
+3. connect to master machine with ssh
+4. Get Latest version
+5. Deploy stack
+
+`SSH connection and executing remote commands`
+
+```sh
+
+ssh user@host <<'ENDSSH'
+#commands to run on remote host
+ENDSSH
+
+```
+
 [beats]: https://www.elastic.co/products/beats
 [elastic]: https://www.elastic.co/
 [filebeat]: https://www.elastic.co/guide/en/beats/filebeat/current/running-on-docker.html
@@ -75,3 +95,5 @@ docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
 [elastic_compose_ref]:https://github.com/elastic/examples/blob/master/Miscellaneous/docker/full_stack_example/docker-compose-linux.yml
 [docker_mariadb]:https://docs.docker.com/samples/library/mariadb
 [example_travis]:https://www.linux.com/learn/automatically-deploy-build-images-travis
+[travis_encrypt_file]:https://docs.travis-ci.com/user/encrypting-files/
+[travis_example_1]:https://www.linux.com/learn/automatically-deploy-build-images-travis
