@@ -23,6 +23,8 @@ services:
     ports:
       - "5672:5672"   # amqp
       - "15672:15672" # web ui
+    networks:
+      - elk_elk
 volumes:
   rabbit_data:
     driver_opts:
