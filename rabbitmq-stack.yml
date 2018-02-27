@@ -27,7 +27,7 @@ services:
       - "8001:15672"
     networks:
       - elk_elk
-    depend_on:
+    depends_on:
       - rabbit1
 
 networks:
