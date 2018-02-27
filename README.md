@@ -17,7 +17,7 @@
   - [ ] Broker
 - [ ] DNS configuration for all applications
 - [ ] Reverse proxy and LB [traefik][ex_traefik]
-- [ ] Fix auto deploy for appveyor and travis ci [example travis][example_travis]
+- [ ] Fix auto deploy for appveyor and [travis ci](#travis-deploy) [example travis][example_travis] 
 - [ ] Emby
 - [ ] Rancher
 - [ ] Redis
@@ -59,7 +59,7 @@ docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
 
 ## Travis deploy
 
-[example] [travis_example_1]
+[tuto][travis_example_1]
 
 1. Encrypt [certif file][travis_encrypt_file] of sh connection with travis
 2. Encrypt user@host variable
