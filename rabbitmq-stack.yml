@@ -27,18 +27,6 @@ services:
     networks:
       - elk_elk
 
-  rabbit3:
-    image: rabbitmq:3.6.9-management-alpine
-    hostname: rabbit3
-    environment:
-      - RABBITMQ_ERLANG_COOKIE=mycookie
-      - CLUSTERED=true
-      - CLUSTER_WITH=rabbit1
-    ports:
-      - "5674:5672"
-      - "8002:15672"
-    networks:
-      - elk_elk
 networks:
   elk_elk:
     external: true
