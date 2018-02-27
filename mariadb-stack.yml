@@ -21,17 +21,17 @@ services:
     secrets:
       - MYSQL_PASSWORD
       - MYSQL_ROOT_PASSWORD
-     deploy:
-      mode: replicated
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-        delay: 20m
-        max_attempts: 3
-        window: 120s
-      placement:
-        constraints: 
-          - node.labels.size == large
+    deploy:
+     mode: replicated
+     replicas: 1
+     restart_policy:
+       condition: on-failure
+       delay: 20m
+       max_attempts: 3
+       window: 120s
+     placement:
+       constraints: 
+         - node.labels.size == large
 volumes:
   config:
     driver_opts:
