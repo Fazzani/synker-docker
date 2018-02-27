@@ -18,9 +18,6 @@ services:
       - elk_elk
     volumes:
       - mysql-data:/var/lib/mysql
-    secrets:
-      - MYSQL_PASSWORD
-      - MYSQL_ROOT_PASSWORD
     deploy:
      mode: replicated
      replicas: 1
@@ -32,6 +29,9 @@ services:
      placement:
        constraints: 
          - node.labels.size == large
+    secrets:
+      - MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD
 volumes:
   config:
     driver_opts:
