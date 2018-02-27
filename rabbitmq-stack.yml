@@ -1,11 +1,18 @@
 version: "3.3"
 services:
   rabbit1:
-    image: rabbitmq:${RABBIT_TAG}-management-alpine
+    image: harbur/rabbitmq-cluster
     hostname: rabbit1
     ports:
       - "5672:5672"
       - "8000:15672"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 1
+        delay: 10s
     environment:
       - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
@@ -15,8 +22,15 @@ services:
       - elk_elk
 
   rabbit2:
-    image: rabbitmq:${RABBIT_TAG}-management-alpine
+    image: harbur/rabbitmq-cluster
     hostname: rabbit2
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 1
+        delay: 10s
     environment:
       - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
       - CLUSTERED=true
