@@ -83,7 +83,7 @@ services:
       - traefik
 
 networks:
-  webgateway:
+  elk_elk:
     driver: overlay
     external: true
   traefik:
