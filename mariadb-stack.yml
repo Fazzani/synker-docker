@@ -10,7 +10,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "/run/secrets/MYSQL_ROOT_PASSWORD"
       MYSQL_USER: "${MYSQL_USER}"
-      MYSQL_PASSWORD: "/run/secrets/MYSQL_PASSWORD"f
+      MYSQL_PASSWORD: "/run/secrets/MYSQL_PASSWORD"
       MYSQL_DATABASE: playlist
       MYSQL_ROOT_HOST: "%"
     ports:
