@@ -5,7 +5,7 @@ services:
   synker_db:
     image: mariadb:${MYSQL_VERSION}
     environment:
-      MYSQL_ROOT_PASSWORD: /run/secrets/mysql_root_password
+      MYSQL_ROOT_PASSWORD: "/run/secrets/mysql_root_password"
       MYSQL_USER: "${MYSQL_USER}"
       MYSQL_PASSWORD: /run/secrets/mysql_password
       MYSQL_DATABASE: playlist
@@ -14,7 +14,7 @@ services:
     networks:
       - elk_elk
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql:rw
     deploy:
      mode: replicated
      replicas: 1
