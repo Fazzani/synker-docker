@@ -5,10 +5,11 @@ services:
   synker_db:
     image: mariadb:${MYSQL_VERSION}
     environment:
-      MYSQL_ROOT_PASSWORD: "/run/secrets/mysql_root_password"
+      MYSQL_ROOT_PASSWORD: /run/secrets/mysql_root_password
       MYSQL_USER: "${MYSQL_USER}"
       MYSQL_PASSWORD: /run/secrets/mysql_password
       MYSQL_DATABASE: playlist
+      MYSQL_ROOT_HOST: "%"
     ports:
       - "8889:3306"
     networks:
