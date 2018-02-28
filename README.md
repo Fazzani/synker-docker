@@ -2,7 +2,6 @@
 
 ## Swarm services to install
 
-- [ ] Install Vault
 - [x] [MariaDb][docker_mariadb] see [official registry][mariadb_registry]
   - [x] Compose file
   - [x] Resotre data
@@ -20,6 +19,7 @@
 - [ ] DNS configuration for all applications
 - [ ] Reverse proxy and LB [traefik][ex_traefik]
 - [ ] Fix auto deploy for appveyor and [travis ci](#travis-deploy) [example travis][example_travis]
+- [ ] Install Vault
 - [ ] Emby
 - [ ] Rancher
 - [ ] Redis
