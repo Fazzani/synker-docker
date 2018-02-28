@@ -3,7 +3,9 @@
 ## Swarm services to install
 
 - [ ] Install Vault
-- [ ] [MariaDb][docker_mariadb] and restore data
+- [ ] [MariaDb][docker_mariadb]
+  - [x] Compose file
+  - [ ] Resotre data
 - [x] RabbitMQ scale on 2 instances [Image to upgrade version][RabbitMQ_Image_repo]
 - [ ] Elk and Filebeat (elastic data scaled on 2 instances) [ex 1][ex_elk2] [ex 2][ex_elk] [ex 3][elk_3]
   - [x] [logstash config][link_logstash_config]
