@@ -4,9 +4,6 @@ services:
 
   synker_db:
     image: mariadb:${MYSQL_VERSION}
-    restart: always
-    volumes:
-      - ./mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: /run/secrets/mysql_root_password
       MYSQL_USER: "${MYSQL_USER}"
