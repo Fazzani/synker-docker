@@ -8,9 +8,9 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: "root"
-      MYSQL_USER: "pl"
-      MYSQL_PASSWORD: "root"
+      MYSQL_ROOT_PASSWORD: "/run/secrets/MYSQL_ROOT_PASSWORD"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "/run/secrets/MYSQL_PASSWORD"f
       MYSQL_DATABASE: playlist
       MYSQL_ROOT_HOST: "%"
     ports:
