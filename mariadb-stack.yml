@@ -12,7 +12,6 @@ services:
       MYSQL_USER: "${MYSQL_USER}"
       MYSQL_PASSWORD: /run/secrets/mysql_password
       MYSQL_DATABASE: playlist
-      MYSQL_ROOT_HOST: "%"
     ports:
       - "8889:3306"
     networks:
@@ -31,8 +30,8 @@ services:
        constraints: 
          - node.labels.size == large
     secrets:
-      - "mysql_password"
-      - "mysql_root_password"
+      - mysql_password
+      - mysql_root_password
 volumes:
   mariadb_data:
     driver_opts:
@@ -41,9 +40,9 @@ volumes:
       device: ":/webgrab_volume/mariadb/data"
 secrets:
   mysql_password:
-    file: MYSQL_PASSWORD.txt
+    file: mysql_password.txt
   mysql_root_password:
-    file: MYSQL_ROOT_PASSWORD.txt
+    file: mysql_root_password.txt
 networks:
   elk_elk:
     external: true
