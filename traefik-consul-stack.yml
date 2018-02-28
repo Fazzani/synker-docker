@@ -97,6 +97,6 @@ networks:
 volumes:
   consul_data:
     driver_opts:
-    type: "nfs"
-    o: "nolock,soft,rw,addr=18.194.42.216"
-    device: ":/webgrab_volume/consul/data"
+      type: "nfs"
+      o: "nolock,soft,rw,addr=18.194.42.216"
+      device: ":/webgrab_volume/consul/data"
