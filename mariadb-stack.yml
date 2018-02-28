@@ -31,8 +31,8 @@ services:
        constraints: 
          - node.labels.size == large
     secrets:
-      - mysql_password
-      - mysql_root_password
+      - "mysql_password"
+      - "mysql_root_password"
 volumes:
   mariadb_data:
     driver_opts:
