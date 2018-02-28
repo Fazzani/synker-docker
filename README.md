@@ -3,9 +3,9 @@
 ## Swarm services to install
 
 - [ ] Install Vault
-- [ ] [MariaDb][docker_mariadb]
+- [x] [MariaDb][docker_mariadb] see [official registry][mariadb_registry]
   - [x] Compose file
-  - [ ] Resotre data
+  - [x] Resotre data
 - [x] RabbitMQ scale on 2 instances [Image to upgrade version][RabbitMQ_Image_repo]
 - [ ] Elk and Filebeat (elastic data scaled on 2 instances) [ex 1][ex_elk2] [ex 2][ex_elk] [ex 3][elk_3]
   - [x] [logstash config][link_logstash_config]
@@ -100,3 +100,4 @@ ENDSSH
 [travis_encrypt_file]:https://docs.travis-ci.com/user/encrypting-files/
 [travis_example_1]:https://www.linux.com/learn/automatically-deploy-build-images-travis
 [RabbitMQ_Image_repo]:https://github.com/harbur/docker-rabbitmq-cluster
+[mariadb_registry]:https://hub.docker.com/_/mariadb/
