@@ -8,11 +8,11 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD: /run/secrets/MYSQL_ROOT_PASSWORD
-      - MYSQL_USER: ${MYSQL_USER}
-      - MYSQL_PASSWORD: /run/secrets/MYSQL_PASSWORD
-      - MYSQL_DATABASE: ${MYSQL_DATABASE}
-      - MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: /run/secrets/MYSQL_ROOT_PASSWORD
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: /run/secrets/MYSQL_PASSWORD
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_ROOT_HOST: "%"
     ports:
       - "8889:3306"
     networks:
