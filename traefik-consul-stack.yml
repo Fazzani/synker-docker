@@ -41,7 +41,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - webgateway
+      - elk_elk
       - traefik
     ports:
       - target: 80
