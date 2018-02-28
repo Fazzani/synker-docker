@@ -29,6 +29,7 @@ services:
         condition: on-failure
     depends_on:
       - consul
+      
   traefik:
     image: traefik:1.5
     depends_on:
