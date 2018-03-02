@@ -1,7 +1,7 @@
 version: "3.4"
 services:
   traefik_init:
-    image: traefik:1.5
+    image: traefik:v1.5.3
     command:
       - "storeconfig"
       - "--api"
@@ -35,7 +35,7 @@ services:
       - consul
 
   traefik:
-    image: traefik:1.5
+    image: traefik:v1.5.3
     depends_on:
       - traefik_init
       - consul
@@ -73,7 +73,6 @@ services:
     command: agent -server -bootstrap-expect=1 -ui -bootstrap -log-level warn
     volumes:
       - consul_data:/consul/data
-    
     ports:
       - "8500:8500"
       - "8400:8400"
