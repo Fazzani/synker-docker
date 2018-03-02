@@ -67,9 +67,9 @@ services:
 
   consul:
     image: consul
-    command: agent -server -bootstrap-expect=1 -ui-dir /ui
+    command: agent -server -bootstrap-expect=1 -ui-dir /ui -ui 
     labels:
-      - "traefik.backend=restapi"
+      - "traefik.backend=consul"
       - "traefik.frontend.rule=Host:consul.synker.ovh"
       - "traefik.enable=true"
       - "traefik.port=8500"
