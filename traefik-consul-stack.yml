@@ -13,11 +13,12 @@ services:
       - "--acme.entryPoint=https"
       - "--acme.httpChallenge.entryPoint=http"
       - "--acme.OnHostRule=true"
-      - "--acme.onDemand=false"
+      - "--acme.onDemand=true"
+      - "--acme.dnsProvider=ovh"
       - "--acme.email=support@synker.ovh"
       - "--docker"
       - "--docker.swarmmode"
-      - "--docker.domain=synker.ovh"
+      - "--docker.domain=www.synker.ovh"
       - "--docker.watch"
       - "--consul"
       - "--consul.endpoint=consul:8500"
@@ -62,13 +63,19 @@ services:
   consul:
     image: consul
     hostname: consul
-    command: agent -server -bootstrap-expect=1 -ui -client=0.0.0.0
+    command: agent -server -bootstrap-expect=1 -ui -bootstrap -log-level warn
     volumes:
       - consul_data:/consul/data
+    labels:
+     - "traefik.backend=consul"
+     - "traefik.frontend.rule=Host:consul.synker.ovh"
+     - "traefik.enable=true"
+     - "traefik.port=8500"
     ports:
       - "8500:8500"
       - "8600:8600"
-      - "8300:8300"
+      - "8400:8400"
+      - "8600:53/udp"
     environment:
       - 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true, "server":true, "enable_debug":true, "disable_update_check": true}'
       - CONSUL_BIND_INTERFACE=eth0
