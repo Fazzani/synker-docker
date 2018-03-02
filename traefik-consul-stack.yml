@@ -28,6 +28,9 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+      placement:
+        constraints:
+          - node.role == manager
     depends_on:
       - consul
 
