@@ -18,7 +18,7 @@ services:
       - "--acme.email=support@synker.ovh"
       - "--docker"
       - "--docker.swarmmode"
-      - "--docker.domain=www.synker.ovh"
+      - "--docker.domain=*.synker.ovh"
       - "--docker.watch"
       - "--consul"
       - "--consul.endpoint=consul:8500"
