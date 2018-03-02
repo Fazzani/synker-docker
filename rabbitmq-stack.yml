@@ -3,11 +3,11 @@ services:
   rabbit1:
     image: harbur/rabbitmq-cluster
     hostname: rabbit1
-     labels:
-      - "traefik.backend=rabbitmq"
-      - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
-      - "traefik.enable=true"
-      - "traefik.port=8000"
+    labels:
+     - "traefik.backend=rabbitmq"
+     - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
+     - "traefik.enable=true"
+     - "traefik.port=8000"
     ports:
       - "5672:5672"
       - "8000:15672"
