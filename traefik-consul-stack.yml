@@ -23,7 +23,7 @@ services:
       - "--consul.endpoint=consul:8500"
       - "--consul.prefix=traefik"
     networks:
-      - elk_elk
+      - traefik
     deploy:
       restart_policy:
         condition: on-failure
@@ -43,6 +43,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - elk_elk
+      - traefik
     ports:
       - "80:80"
       - "443:443"
@@ -67,6 +68,7 @@ services:
     ports:
       - "8500:8500"
       - "8600:8600"
+      - "8300:8300"
     environment:
       - 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true, "server":true, "enable_debug":true, "disable_update_check": true}'
       - CONSUL_BIND_INTERFACE=eth0
@@ -78,11 +80,13 @@ services:
       restart_policy:
         condition: on-failure
     networks:
-      - elk_elk
+      - traefik
 
 networks:
   elk_elk:
     external: true
+  traefik:
+    driver: overlay
 
 volumes:
   consul_data:
