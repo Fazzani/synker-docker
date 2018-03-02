@@ -50,7 +50,9 @@ services:
       - target: 443
         published: 443
         mode: host
-      - "8088:8080"
+      - target: 8080
+        published: 8088
+        mode: host
     deploy:
       mode: global
       placement:
