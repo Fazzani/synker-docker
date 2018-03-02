@@ -67,7 +67,7 @@ services:
 
   consul:
     image: consul
-    command: agent -server -bootstrap-expect=1 -ui-dir /ui -ui 
+    command: agent -server -bootstrap-expect=1 -ui 
     labels:
       - "traefik.backend=consul"
       - "traefik.frontend.rule=Host:consul.synker.ovh"
