@@ -60,6 +60,7 @@ services:
 
   consul:
     image: consul
+    hostname: consul
     command: agent -server -bootstrap-expect=1 -ui -client=0.0.0.0
     volumes:
       - consul_data:/consul/data
