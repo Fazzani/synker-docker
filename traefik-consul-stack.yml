@@ -97,7 +97,7 @@ networks:
   elk_elk:
     external: true
   traefik:
-    driver: overlay
+    driver: host
 
 volumes:
   consul_data:
