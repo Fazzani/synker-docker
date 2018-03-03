@@ -9,6 +9,8 @@ services:
       - "--api"
       - "--debug=true"
       - "--logLevel=DEBUG"
+      - "--web"
+      - "--web.address=:8080"
       - "--entrypoints=Name:http Address::80 Redirect.EntryPoint:https"
       - "--entrypoints=Name:https Address::443 TLS"
       - "--defaultentrypoints=http,https"
@@ -24,6 +26,7 @@ services:
       - "--docker.swarmmode"
       - "--docker.domain=synker.ovh"
       - "--docker.watch"
+      - "--docker.exposedbydefault"
       - "--consul"
       - "--consul.endpoint=consul:8500"
       - "--consul.prefix=traefik"
@@ -66,14 +69,6 @@ services:
         constraints: [node.role==manager]
       restart_policy:
         condition: on-failure
-        max_attempts: 5
-      resources:
-        limits:
-          cpus: '0.33'
-          memory: 128M
-        reservations:
-          cpus: '0.05'
-          memory: 64M
 
   consul:
     image: progrium/consul
