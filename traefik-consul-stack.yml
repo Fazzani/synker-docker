@@ -47,6 +47,7 @@ services:
 
   visualizer:
     image: dockersamples/visualizer:stable
+    stop_grace_period: 1m30s
     ports:
       - "8081:8080"
     volumes:
