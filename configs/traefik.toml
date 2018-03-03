@@ -5,6 +5,9 @@ InsecureSkipVerify = true
 [entryPoints]
   [entryPoints.http]
   address = ":80"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
 
 [web]
 address = ":8080"
@@ -21,6 +24,7 @@ exposedbydefault = false
 email = "supprt@synker.ovh"
 storageFile = "acme.json"
 entryPoint = "https"
+onHostRule = true
 [[acme.domains]]
   main = "synker.ovh"
   sans = ["consul.synker.ovh","viz.synker.ovh"]
