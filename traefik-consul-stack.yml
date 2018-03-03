@@ -96,7 +96,7 @@ services:
   who2:
     image: emilevauge/whoami
     networks:
-      - ntw_front
+      - traefik
     deploy:
       mode: replicated
       replicas: 2
