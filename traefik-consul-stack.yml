@@ -71,8 +71,8 @@ services:
         condition: on-failure
 
   consul:
-    image: progrium/consul
-    command: -server -bootstrap -log-level debug -ui-dir /ui -client=0.0.0.0 -disable-host-node-id -domain=consul.synker.ovh
+    image: consul
+    command: agent -server -bootstrap-expect=1 -data-dir=/consul/data -ui -client=0.0.0.0 -disable-host-node-id -domain=consul.synker.ovh
     ports:
       - "8400:8400"
       - "8500:8500"
