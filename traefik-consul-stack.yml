@@ -60,7 +60,6 @@ services:
       - "--consul"
       - "--consul.endpoint=consul:8500"
       - "--consul.prefix=traefik"
-      - "--acme.storage=traefik/acme/account"
     deploy:
       mode: global
       update_config:
