@@ -15,7 +15,7 @@ services:
       - "--consul.endpoint=consul:8500"
       - "--consul.prefix=traefik"
     networks:
-      - traefik
+      - ntw_front
     deploy:
       restart_policy:
         condition: on-failure
@@ -38,7 +38,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - elk_elk
-      - traefik
+      - ntw_front
     ports:
       - "80:80"
       - "443:443"
@@ -47,7 +47,7 @@ services:
       mode: global
       labels:
       - "traefik.port=8089"
-      - "traefik.docker.network=traefik"
+      - "traefik.docker.network=ntw_front"
       - "traefik.passHostHeader=true"
       - "traefik.frontend.rule=Host:traefik.synker.ovh"
       - "traefik.frontend.entryPoints=http"
@@ -85,18 +85,18 @@ services:
       - "traefik.backend=consul"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
-      - "traefik.docker.network=traefik"
+      - "traefik.docker.network=ntw_front"
       placement:
         constraints:
           - node.role == manager
       restart_policy:
         condition: on-failure
     networks:
-      - traefik
+      - ntw_front
   who2:
     image: emilevauge/whoami
     networks:
-      - traefik
+      - ntw_front
     deploy:
       mode: replicated
       replicas: 2
@@ -117,15 +117,15 @@ services:
       - "traefik.weight=10"
       - "traefik.enable=true"
       - "traefik.passHostHeader=true"
-      - "traefik.docker.network=traefik"
+      - "traefik.docker.network=ntw_front"
       - "traefik.frontend.entryPoints=http"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
 networks:
   elk_elk:
     external: true
-  traefik:
-    driver: overlay
+  ntw_front:
+    external: true
 
 volumes:
   consul_data:
