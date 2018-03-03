@@ -74,7 +74,7 @@ services:
 
   consul:
     image: consul
-    command: agent -server -bootstrap-expect=1 -data-dir=/consul/data -ui -client=0.0.0.0 -bind='{{ GetAllInterfaces }}' -disable-host-node-id -domain=consul.synker.ovh
+    command: agent -server -bootstrap-expect=1 -data-dir=/consul/data -ui -client=0.0.0.0 -bind='{{ GetDefaultInterfaces }}' -disable-host-node-id -domain=consul.synker.ovh
     ports:
       - "8400:8400"
       - "8500:8500"
@@ -105,6 +105,8 @@ services:
   visualizer:
     image: dockersamples/visualizer:stable
     stop_grace_period: 1m30s
+    depends_on:
+      - traefik
     ports:
       - "8081:8080"
     volumes:
@@ -132,6 +134,8 @@ services:
     image: emilevauge/whoami
     networks:
       - ntw_front
+    depends_on:
+      - traefik
     deploy:
       mode: replicated
       replicas: 3
