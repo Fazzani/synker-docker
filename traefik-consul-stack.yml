@@ -8,7 +8,7 @@ services:
       - "storeconfig"
       - "--api"
       - "--debug=true"
-      - "--logLevel=DEBUG"
+      - "--logLevel=WARN"
       - "--web"
       - "--web.address=:8080"
       - "--entrypoints=Name:http Address::80 Redirect.EntryPoint:https"
