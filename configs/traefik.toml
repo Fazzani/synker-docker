@@ -24,7 +24,10 @@ exposedbydefault = false
 email = "supprt@synker.ovh"
 storageFile = "acme.json"
 entryPoint = "https"
-onHostRule = true
+caServer = "https://acme-staging.api.letsencrypt.org/directory" # Staging Environment
+# onHostRule = true
+[acme.httpChallenge]
+    entryPoint = "http"
 [[acme.domains]]
   main = "synker.ovh"
   sans = ["consul.synker.ovh","viz.synker.ovh"]
