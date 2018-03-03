@@ -11,7 +11,7 @@ services:
       - "--logLevel=WARN"
       - "--web"
       - "--web.address=:8080"
-      - "--entrypoints=Name:http Address::80 Redirect.EntryPoint:https"
+      - "--entrypoints=Name:http Address::80"
       - "--entrypoints=Name:https Address::443 TLS"
       - "--defaultentrypoints=http,https"
       - "--acme"
