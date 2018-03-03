@@ -25,7 +25,6 @@ services:
       --docker.domain=synker.ovh \
       --docker.exposedbydefault \
       --docker.watch \
-      --debug=true \
       --logLevel=WARN \
       --web \
       --web.address=:8080
@@ -87,7 +86,7 @@ services:
     deploy:
       replicas: 1
       labels:
-      - "traefik.backend=lb_consul"
+      - "traefik.backend=consul"
       - "traefik.port=8500"
       - "traefik.frontend.rule=Host:consul.synker.ovh"
       - "traefik.docker.network=ntw_front"
