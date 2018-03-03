@@ -1,29 +1,27 @@
 version: "3.4"
 services:
-  traefik_init:
-    image: traefik:v1.5.3
-    command:
-      - "storeconfig"
-      - "--api"
-      - "--entrypoints=Name:http Address::80"
-      - "--entrypoints=Name:https Address::443 TLS"
-      - "--defaultentrypoints=http,https"
-      - "--docker"
-      - "--docker.domain=synker.ovh"
-      - "--docker.watch"
-      - "--consul"
-      - "--consul.endpoint=consul:8500"
-      - "--consul.prefix=traefik"
-    networks:
-      - ntw_front
+  visualizer:
+    image: dockersamples/visualizer:stable
+    
+    ports:
+      - "8080:8080"
+    stop_grace_period: 1m30s
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
+      labels:
+        # - "traefik.backend=visu"
+        - "traefik.frontend.rule=Host:visu.synker.ovh"
+        - "traefik.enable=true"
+        - "traefik.port=8080"
       restart_policy:
         condition: on-failure
       placement:
-        constraints:
+        constraints: 
           - node.role == manager
-    depends_on:
-      - consul
+          - node.labels.size == small
+    networks:
+      - ntw_front
 
   traefik:
     image: traefik:v1.5.3
@@ -43,7 +41,7 @@ services:
         target: /etc/traefik/traefik.toml
     command: --docker \
       --docker.swarmmode \
-      --docker.domain=traefik \
+      --docker.domain=synker \
       --docker.endpoint=tcp://socat:2375 \
       --docker.watch \
       --debug=true \
