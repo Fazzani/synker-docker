@@ -35,7 +35,7 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-        delay: 5s
+        delay: 30s
         window: 120s
     depends_on:
       - consul
@@ -74,7 +74,7 @@ services:
 
   consul:
     image: consul
-    command: agent -server -bootstrap-expect=1 -data-dir=/consul/data -ui -client=0.0.0.0 -bind='{{ GetInterfaceIP "eth0" }}' -disable-host-node-id -domain=consul.synker.ovh
+    command: agent -server -bootstrap-expect=1 -data-dir=/consul/data -ui -client=0.0.0.0 -bind='{{ GetAllInterfaces }}' -disable-host-node-id -domain=consul.synker.ovh
     ports:
       - "8400:8400"
       - "8500:8500"
