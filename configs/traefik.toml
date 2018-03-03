@@ -9,8 +9,8 @@ defaultEntryPoints = ["http", "https"]
 [entryPoints]
   [entryPoints.http]
   address = ":80"
-    [entryPoints.http.redirect]
-    entryPoint = "https"
+    #[entryPoints.http.redirect]
+    #entryPoint = "https"
   [entryPoints.https]
   address = ":443"
     [entryPoints.https.tls]
@@ -34,6 +34,8 @@ storageFile = "acme.json"
 entryPoint = "https"
 caServer = "https://acme-staging.api.letsencrypt.org/directory" # Staging Environment
 # onHostRule = true
+[acme.httpChallenge]
+    entryPoint = "http"
 [[acme.domains]]
   main = "synker.ovh"
   sans = ["consul.synker.ovh","viz.synker.ovh"]
