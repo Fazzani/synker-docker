@@ -82,6 +82,10 @@ services:
       - CONSUL_BIND_INTERFACE=eth0
     deploy:
       replicas: 1
+      labels:
+        - "traefik.port=8500"
+        - "traefik.docker.network=traefik"
+        - "traefik.frontend.rule=Host:consul.synker.ovh"
       placement:
         constraints:
           - node.role == manager
