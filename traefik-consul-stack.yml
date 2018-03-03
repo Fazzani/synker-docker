@@ -78,7 +78,7 @@ services:
 
   consul:
     image: consul
-    command: agent -server -bootstrap -log-level warn
+    command: agent -server -bootstrap-expect=1
     ports:
       - "8400:8400"
       - "8500:8500"
