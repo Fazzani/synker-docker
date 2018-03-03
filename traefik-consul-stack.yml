@@ -86,7 +86,7 @@ services:
     deploy:
       replicas: 1
       labels:
-      - "traefik.backend=consul"
+      - "traefik.backend=lb_consul"
       - "traefik.port=8500"
       - "traefik.frontend.rule=Host:consul.synker.ovh"
       - "traefik.docker.network=ntw_front"
