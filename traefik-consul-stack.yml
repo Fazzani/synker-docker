@@ -106,7 +106,6 @@ services:
       labels:
       - traefik.backend=consul
       - traefik.port=80
-      - traefik.docker.network=ntw_front
       - traefik.frontend.rule=Host:consul.synker.ovh
       - traefik.docker.network=ntw_front
       placement:
