@@ -26,7 +26,7 @@ services:
       --debug=true \
       --logLevel=WARN \
       --web \
-      --web.address=:8089
+      --web.address=:8080
     deploy:
       mode: global
       update_config:
