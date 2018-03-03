@@ -83,7 +83,7 @@ services:
     deploy:
       replicas: 1
       labels:
-        - "traefik.port=8500"
+        - "traefik.port=80"
         - "traefik.docker.network=traefik"
         - "traefik.frontend.rule=Host:consul.synker.ovh"
       placement:
