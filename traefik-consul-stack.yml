@@ -57,13 +57,6 @@ services:
       - "--acme.storage=traefik/acme/account"
     deploy:
       mode: global
-      labels:
-      - "traefik.backend=traefik"
-      - "traefik.frontend.entryPoints=http,https"
-      - "traefik.frontend.rule=Host:traefik.synker.ovh"
-      - "traefik.enable=true"
-      - "traefik.port=80"
-      - "traefik.docker.network=ntw_front"
       update_config:
         parallelism: 1
         delay: 10s
