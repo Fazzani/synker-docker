@@ -79,8 +79,6 @@ services:
       - traefik.frontend.rule=Host:visu.synker.ovh
       - traefik.enable=true
       - traefik.port=80
-      - traefik.backend.loadbalancer.swarm=true
-      - traefik.backend.loadbalancer.method=drr
       restart_policy:
         condition: on-failure
       placement:
@@ -92,7 +90,6 @@ services:
 
   consul:
     image: consul
-    hostname: consul
     command: agent -server -bootstrap-expect=1 -ui -bootstrap -log-level warn -client 0.0.0.0
     volumes:
       - consul_data:/consul/data
@@ -106,12 +103,9 @@ services:
     deploy:
       replicas: 1
       labels:
-      - "traefik.backend=consul"
+      - traefik.backend=consul
       - traefik.port=80
       - traefik.frontend.rule=Host:consul.synker.ovh
-      - traefik.frontend.entryPoints=http
-      - traefik.backend.loadbalancer.swarm=true
-      - traefik.backend.loadbalancer.method=drr
       - traefik.docker.network=ntw_front
       placement:
         constraints:
