@@ -49,7 +49,7 @@ services:
       --debug=true \
       --logLevel=WARN \
       --web \
-      --web.address=:8080
+      --web.address=:8089
     deploy:
       mode: replicated
       replicas: 1
