@@ -77,16 +77,18 @@ services:
           memory: 64M
 
   consul:
-    image: consul
-    command: agent -server -bootstrap-expect=1 -ui -bootstrap -log-level warn
+    image: progrium/consul
+    command: -server -bootstrap -log-level debug -ui-dir /ui
     ports:
-    - target: 8600
-      protocol: tcp
-      published: 8600
-      mode: ingress
-    - target: 8500
-      published: 8500
-      mode: ingress
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:53/udp"
+    expose:
+      - "8300"
+      - "8301"
+      - "8301/udp"
+      - "8302"
+      - "8302/udp"
     volumes:
       - consul_data:/consul/data
     environment:
