@@ -47,9 +47,13 @@ services:
       mode: global
       labels:
         - "traefik.port=8089"
-        - "traefik.backend=traefik"
         - "traefik.docker.network=traefik"
+        - "traefik.passHostHeader=true"
         - "traefik.frontend.rule=Host:traefik.synker.ovh"
+        - "traefik.frontend.entryPoints=http"
+        - "traefik.backend=traefik"
+        - "traefik.backend.loadbalancer.swarm=true"
+        - "traefik.backend.loadbalancer.method=drr"
       placement:
         constraints:
           - node.role == manager
@@ -76,9 +80,12 @@ services:
       replicas: 1
       labels:
         - "traefik.port=8500"
-        - "traefik.backend=consul"
-        - "traefik.docker.network=traefik"
         - "traefik.frontend.rule=Host:consul.synker.ovh"
+        - "traefik.frontend.entryPoints=http"
+        - "traefik.backend=consul"
+        - "traefik.backend.loadbalancer.swarm=true"
+        - "traefik.backend.loadbalancer.method=drr"
+        - "traefik.docker.network=traefik"
       placement:
         constraints:
           - node.role == manager
@@ -86,7 +93,36 @@ services:
         condition: on-failure
     networks:
       - traefik
-
+  who2:
+    image: emilevauge/whoami
+    networks:
+      - ntw_front
+    deploy:
+      mode: replicated
+      replicas: 2
+      #placement:
+      #  constraints: [node.role==manager]
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+      resources:
+        limits:
+          cpus: '0.20'
+          memory: 9M
+        reservations:
+          cpus: '0.05'
+          memory: 9M
+      labels:
+      - "traefik.frontend.rule=PathPrefixStrip:/who2"
+      - "traefik.backend=who2"
+      - "traefik.port=80"
+      - "traefik.weight=10"
+      - "traefik.enable=true"
+      - "traefik.passHostHeader=true"
+      - "traefik.docker.network=traefik"
+      - "traefik.frontend.entryPoints=http"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
 networks:
   elk_elk:
     external: true
