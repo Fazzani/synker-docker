@@ -92,7 +92,7 @@ services:
       labels:
       - "traefik.backend=consul"
       - "traefik.backend.loadbalancer.swarm=true"
-      - "traefik.frontend.entryPoints=http"
+      - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:consul.synker.ovh"
       - "traefik.docker.network=ntw_front"
       - "traefik.port=8500"
@@ -172,6 +172,3 @@ volumes:
       type: "nfs"
       o: "nolock,soft,rw,addr=35.156.117.97"
       device: ":/webgrab_volume/consul/data"
-configs:
-  traefik.toml:
-    file: ./configs/traefik.toml
