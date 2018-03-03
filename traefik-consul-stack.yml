@@ -4,9 +4,11 @@ services:
 
   traefik_init:
     image: traefik:1.5
-    command:
+    command: 
       - "storeconfig"
       - "--api"
+      - "--debug=true"
+      - "--logLevel=DEBUG"
       - "--entrypoints=Name:http Address::80 Redirect.EntryPoint:https"
       - "--entrypoints=Name:https Address::443 TLS"
       - "--defaultentrypoints=http,https"
@@ -17,6 +19,7 @@ services:
       - "--acme.OnHostRule=true"
       - "--acme.onDemand=false"
       - "--acme.email=support@synker.ovh"
+      - "--acme.caServer=https://acme-staging.api.letsencrypt.org/directory"
       - "--docker"
       - "--docker.swarmmode"
       - "--docker.domain=synker.ovh"
