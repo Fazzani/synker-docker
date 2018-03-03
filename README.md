@@ -18,11 +18,16 @@
   - [ ] Broker
 - [ ] DNS configuration for all applications
 - [ ] Reverse proxy and LB [traefik][ex_traefik] [good example][traefix_good_example]
+  - [ ] Circuit breaker
+  - [ ] Sub domains configuration
+  - [ ] Lets Encrypt certification
+  - [ ] Create internal network for backend services
+  - [ ] LB
 - [ ] Fix auto deploy for appveyor and [travis ci](#travis-deploy) [example travis][example_travis]
-- [ ] Install Vault
 - [ ] Emby
 - [ ] Rancher
 - [ ] Redis
+- [ ] Install Vault
 - [ ] Install [Tvheadend]
 
 ## Others
