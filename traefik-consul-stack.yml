@@ -86,12 +86,12 @@ services:
     deploy:
       replicas: 1
       labels:
-      - traefik.backend=consul
-      - traefik.port=8500
-      - traefik.frontend.rule=Host:consul.synker.ovh
-      - traefik.docker.network=ntw_front
-      - traefik.backend.loadbalancer.swarm=true
-      - traefik.backend.loadbalancer.method=drr
+      - "traefik.backend=consul"
+      - "traefik.port=8500"
+      - "traefik.frontend.rule=Host:consul.synker.ovh"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
       placement:
         constraints:
           - node.role == manager
