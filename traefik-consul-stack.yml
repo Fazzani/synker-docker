@@ -58,7 +58,7 @@ services:
       - "traefik.frontend.entryPoints=http"
       - "traefik.frontend.rule=Host:visu.synker.ovh"
       - "traefik.enable=true"
-      - "traefik.port=80"
+      - "traefik.port=8080"
       - "traefik.docker.network=ntw_front"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
@@ -87,7 +87,7 @@ services:
       replicas: 1
       labels:
       - traefik.backend=consul
-      - traefik.port=80
+      - traefik.port=8500
       - traefik.frontend.rule=Host:consul.synker.ovh
       - traefik.docker.network=ntw_front
       - traefik.backend.loadbalancer.swarm=true
