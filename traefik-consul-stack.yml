@@ -30,6 +30,13 @@ services:
       --web.address=:8080
     deploy:
       mode: global
+      labels:
+      - "traefik.backend=traefik"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:traefik.synker.ovh"
+      - "traefik.enable=true"
+      - "traefik.port=80"
+      - "traefik.docker.network=ntw_front"
       update_config:
         delay: 2s
       placement:
