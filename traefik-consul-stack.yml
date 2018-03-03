@@ -55,7 +55,7 @@ services:
     deploy:
       mode: global
       labels:
-        - "traefik.port=8089"
+        - "traefik.port=80"
         - "traefik.docker.network=traefik"
         - "traefik.frontend.rule=Host:traefik.synker.ovh"
       placement:
