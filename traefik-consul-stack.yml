@@ -53,14 +53,11 @@ services:
         target: /etc/traefik/traefik.toml
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    command: --docker \
-      --docker.swarmmode \
-      --docker.domain=synker.ovh \
-      --docker.exposedbydefault \
-      --docker.watch \
-      --logLevel=WARN \
-      --web \
-      --web.address=:8080
+    command:
+      - "--consul"
+      - "--consul.endpoint=consul:8500"
+      - "--consul.prefix=traefik"
+      - "--acme.storage=traefik/acme/account"
     deploy:
       mode: global
       labels:
