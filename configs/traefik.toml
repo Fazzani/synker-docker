@@ -1,5 +1,6 @@
 accessLogsFile = "/dev/stdout"
 defaultEntryPoints = ["http"]
+InsecureSkipVerify = true
 [entryPoints]
   [entryPoints.http]
   address = ":80"
@@ -7,7 +8,7 @@ defaultEntryPoints = ["http"]
 address = ":8080"
 [docker]
 endpoint = "unix:///var/run/docker.sock"
-domain = "localhost"
+domain = "synker.ovh"
 watch = true
 swarmmode = true
 exposedbydefault = false
