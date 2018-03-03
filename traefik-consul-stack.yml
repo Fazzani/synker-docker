@@ -54,11 +54,11 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       labels:
-      - "traefik.backend=visualizer"
+      - "traefik.backend=lb_visualizer"
       - "traefik.frontend.entryPoints=http"
       - "traefik.frontend.rule=Host:visu.synker.ovh"
       - "traefik.enable=true"
-      - "traefik.port=8080"
+      - "traefik.port=8081"
       - "traefik.docker.network=ntw_front"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
@@ -86,7 +86,7 @@ services:
     deploy:
       replicas: 1
       labels:
-      - "traefik.backend=consul"
+      - "traefik.backend=lb_consul"
       - "traefik.port=8500"
       - "traefik.frontend.rule=Host:consul.synker.ovh"
       - "traefik.docker.network=ntw_front"
