@@ -41,7 +41,7 @@ services:
         target: /etc/traefik/traefik.toml
     command: --docker \
       --docker.swarmmode \
-      --docker.domain=synker \
+      --docker.domain=synker.ovh \
       --docker.endpoint=tcp://socat:2375 \
       --docker.watch \
       --debug=true \
