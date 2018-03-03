@@ -23,6 +23,7 @@ services:
     command: --docker \
       --docker.swarmmode \
       --docker.domain=synker.ovh \
+      --docker.exposedbydefault \
       --docker.watch \
       --debug=true \
       --logLevel=WARN \
