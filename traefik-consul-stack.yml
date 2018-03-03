@@ -34,6 +34,8 @@ services:
       mode: ingress
     networks:
       - ntw_front
+    depends_on:
+      - docker-proxy
     configs:
       - source: traefik.toml
         target: /etc/traefik/traefik.toml
