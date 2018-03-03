@@ -77,7 +77,7 @@ services:
       - traefik.frontend.entryPoints=http
       - traefik.frontend.rule=Host:visu.synker.ovh
       - traefik.enable=true
-      - traefik.port=8081
+      - traefik.port=80
       - traefik.backend.loadbalancer.swarm=true
       - traefik.backend.loadbalancer.method=drr
       restart_policy:
