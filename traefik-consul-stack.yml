@@ -49,8 +49,7 @@ services:
       --web \
       --web.address=:8089
     deploy:
-      mode: replicated
-      replicas: 1
+      mode: global
       update_config:
         delay: 2s
       placement:
