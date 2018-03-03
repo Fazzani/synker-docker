@@ -18,7 +18,7 @@ services:
       - "--acme.email=support@synker.ovh"
       - "--docker"
       - "--docker.swarmmode"
-      - "--docker.domain=*.synker.ovh"
+      - "--docker.domain=synker.ovh"
       - "--docker.watch"
       - "--consul"
       - "--consul.endpoint=consul:8500"
@@ -55,7 +55,8 @@ services:
     deploy:
       mode: global
       labels:
-        - "traefik.port=80"
+        - "traefik.port=8089"
+        - "traefik.backend=traefik"
         - "traefik.docker.network=traefik"
         - "traefik.frontend.rule=Host:traefik.synker.ovh"
       placement:
@@ -83,7 +84,8 @@ services:
     deploy:
       replicas: 1
       labels:
-        - "traefik.port=80"
+        - "traefik.port=8500"
+        - "traefik.backend=consul"
         - "traefik.docker.network=traefik"
         - "traefik.frontend.rule=Host:consul.synker.ovh"
       placement:
