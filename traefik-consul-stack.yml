@@ -22,7 +22,7 @@ services:
       - "--docker.domain=synker.ovh"
       - "--docker.watch"
       - "--consul"
-      - "--consul.endpoint=consul:8500"
+      - "--consul.endpoint=lb_consul:8500"
       - "--consul.prefix=traefik"
     networks:
       - ntw_front
