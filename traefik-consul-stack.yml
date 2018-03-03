@@ -74,11 +74,12 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       labels:
-      - "traefik.backend=visualizer"
+      - traefik.backend=visualizer
       - traefik.frontend.entryPoints=http
       - traefik.frontend.rule=Host:visu.synker.ovh
       - traefik.enable=true
       - traefik.port=80
+      - traefik.docker.network=ntw_front
       restart_policy:
         condition: on-failure
       placement:
@@ -105,6 +106,7 @@ services:
       labels:
       - traefik.backend=consul
       - traefik.port=80
+      - traefik.docker.network=ntw_front
       - traefik.frontend.rule=Host:consul.synker.ovh
       - traefik.docker.network=ntw_front
       placement:
@@ -133,7 +135,7 @@ services:
           cpus: '0.05'
           memory: 9M
       labels:
-      - traefik.backend=consul
+      - traefik.backend=who2
       - "traefik.frontend.rule=PathPrefixStrip:/who2"
       - traefik.port=80
       - traefik.weight=10
