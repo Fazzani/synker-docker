@@ -104,7 +104,7 @@ services:
       - ntw_front
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 3
       restart_policy:
         condition: on-failure
         max_attempts: 5
@@ -119,7 +119,6 @@ services:
       - traefik.backend=who2
       - "traefik.frontend.rule=PathPrefixStrip:/who2"
       - traefik.port=80
-      - traefik.weight=10
       - traefik.enable=true
       - traefik.passHostHeader=true
       - traefik.docker.network=ntw_front
