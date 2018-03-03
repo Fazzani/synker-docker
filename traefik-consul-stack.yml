@@ -77,7 +77,7 @@ services:
           memory: 64M
 
   consul:
-    image: progrium/consul
+    image: consul
     command: -server -bootstrap -log-level warn
     ports:
       - "8400:8400"
