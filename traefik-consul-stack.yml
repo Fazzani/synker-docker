@@ -111,7 +111,7 @@ services:
 
   consul:
     image: consul
-    command: agent -server -bootstrap-expect=1 -ui -bootstrap -log-level warn -client 0.0.0.0
+    command: agent -server -bootstrap-expect=1 -ui -bootstrap -log-level warn
     volumes:
       - consul_data:/consul/data
     ports:
@@ -123,14 +123,6 @@ services:
       - CONSUL_BIND_INTERFACE=eth0
     deploy:
       replicas: 1
-      labels:
-      - "traefik.backend=consul"
-      - "traefik.backend.loadbalancer.swarm=true"
-      - "traefik.frontend.entryPoints=http,https"
-      - "traefik.frontend.rule=Host:consul.synker.ovh"
-      - "traefik.docker.network=ntw_front"
-      - "traefik.port=8500"
-      - "traefik.enable=true"
       placement:
         constraints:
           - node.role == manager
