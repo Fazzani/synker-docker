@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   traefik:
-    image: traefik:v1.5.3
+    image: traefik:1.5
     ports:
     - target: 80
       protocol: tcp
@@ -54,10 +54,12 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       labels:
-      - traefik.backend=visu
       - traefik.frontend.rule=Host:visu.synker.ovh
       - traefik.enable=true
       - traefik.port=80
+      - traefik.frontend.entryPoints=http
+      - traefik.backend.loadbalancer.swarm=true
+      - traefik.backend.loadbalancer.method=drr
       restart_policy:
         condition: on-failure
       placement:
@@ -86,7 +88,6 @@ services:
       - traefik.port=80
       - traefik.frontend.rule=Host:consul.synker.ovh
       - traefik.frontend.entryPoints=http
-      - traefik.backend=consul
       - traefik.backend.loadbalancer.swarm=true
       - traefik.backend.loadbalancer.method=drr
       - traefik.docker.network=ntw_front
@@ -117,7 +118,6 @@ services:
           memory: 9M
       labels:
       - traefik.frontend.rule=PathPrefixStrip:/who2
-      - traefik.backend=who2
       - traefik.port=80
       - traefik.weight=10
       - traefik.enable=true
