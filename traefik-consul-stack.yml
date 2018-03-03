@@ -28,7 +28,7 @@ services:
       - "--docker.watch"
       - "--docker.exposedbydefault"
       - "--consul"
-      - "--consul.endpoint=consul:8500"
+      - "--consul.endpoint=consul.synker.ovh:8500"
       - "--consul.prefix=traefik"
     networks:
       - ntw_front
@@ -72,7 +72,7 @@ services:
 
   consul:
     image: progrium/consul
-    command: -server -bootstrap -log-level debug -ui-dir /ui -client=0.0.0.0
+    command: -server -bootstrap -log-level debug -ui-dir /ui -client=0.0.0.0 -disable-host-node-id -domain=consul.synker.ovh
     ports:
       - "8400:8400"
       - "8500:8500"
@@ -86,7 +86,7 @@ services:
       labels:
       - "traefik.backend=consul"
       - "traefik.backend.loadbalancer.swarm=true"
-      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.entryPoints=http"
       - "traefik.frontend.rule=Host:consul.synker.ovh"
       - "traefik.docker.network=ntw_front"
       - "traefik.port=8500"
