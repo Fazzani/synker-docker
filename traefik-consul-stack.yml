@@ -22,7 +22,7 @@ services:
       - "--docker.domain=synker.ovh"
       - "--docker.watch"
       - "--consul"
-      - "--consul.endpoint=lb_consul:8500"
+      - "--consul.endpoint=consul:8500"
       - "--consul.prefix=traefik"
     networks:
       - ntw_front
@@ -79,6 +79,14 @@ services:
   consul:
     image: consul
     command: agent -server -bootstrap-expect=1 -ui -bootstrap -log-level warn
+    ports:
+    - target: 8600
+      protocol: tcp
+      published: 8600
+      mode: ingress
+    - target: 8500
+      published: 8500
+      mode: ingress
     volumes:
       - consul_data:/consul/data
     environment:
