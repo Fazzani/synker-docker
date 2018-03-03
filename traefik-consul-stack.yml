@@ -2,8 +2,41 @@ version: "3.4"
 
 services:
 
+  traefik_init:
+    image: traefik:1.5
+    command:
+      - "storeconfig"
+      - "--api"
+      - "--entrypoints=Name:http Address::80 Redirect.EntryPoint:https"
+      - "--entrypoints=Name:https Address::443 TLS"
+      - "--defaultentrypoints=http,https"
+      - "--acme"
+      - "--acme.storage=traefik/acme/account"
+      - "--acme.entryPoint=https"
+      - "--acme.httpChallenge.entryPoint=http"
+      - "--acme.OnHostRule=true"
+      - "--acme.onDemand=false"
+      - "--acme.email=support@synker.ovh"
+      - "--docker"
+      - "--docker.swarmmode"
+      - "--docker.domain=synker.ovh"
+      - "--docker.watch"
+      - "--consul"
+      - "--consul.endpoint=consul:8500"
+      - "--consul.prefix=traefik"
+    networks:
+      - ntw_front
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - consul
+
   traefik:
     image: traefik:1.5
+    depends_on:
+      - traefik_init
+      - consul
     ports:
     - target: 80
       protocol: tcp
@@ -38,7 +71,8 @@ services:
       - "traefik.port=80"
       - "traefik.docker.network=ntw_front"
       update_config:
-        delay: 2s
+        parallelism: 1
+        delay: 10s
       placement:
         constraints: [node.role==manager]
       restart_policy:

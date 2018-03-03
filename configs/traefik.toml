@@ -29,13 +29,14 @@ exposedbydefault = false
 
 # Let’s Encrypt configuration
 [acme]
-email = "support@synker.ovh"
-storageFile = "acme.json"
 entryPoint = "https"
+  [acme.httpChallenge]
+  entryPoint = "http"
+email = "support@synker.ovh"
 caServer = "https://acme-staging.api.letsencrypt.org/directory" # Staging Environment
-onHostRule = true
-# [acme.httpChallenge]
-#     entryPoint = "http"
+storageFile = "acme.json"
+# onHostRule = true
+
 [[acme.domains]]
   main = "synker.ovh"
   sans = ["consul.synker.ovh","viz.synker.ovh"]
