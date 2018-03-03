@@ -80,6 +80,8 @@ services:
       - traefik.enable=true
       - traefik.port=80
       - traefik.docker.network=ntw_front
+      - traefik.backend.loadbalancer.swarm=true
+      - traefik.backend.loadbalancer.method=drr
       restart_policy:
         condition: on-failure
       placement:
@@ -108,6 +110,8 @@ services:
       - traefik.port=80
       - traefik.frontend.rule=Host:consul.synker.ovh
       - traefik.docker.network=ntw_front
+      - traefik.backend.loadbalancer.swarm=true
+      - traefik.backend.loadbalancer.method=drr
       placement:
         constraints:
           - node.role == manager
