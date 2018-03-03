@@ -21,7 +21,7 @@ services:
     command: --docker \
       --docker.swarmmode \
       --docker.domain=synker.ovh \
-      --docker.endpoint=tcp://0.0.0.0:2375 \
+      --docker.endpoint=tcp://ntw_front:2375 \
       --docker.watch \
       --debug=true \
       --logLevel=WARN \
