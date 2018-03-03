@@ -74,14 +74,14 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       labels:
-      - traefik.backend=visualizer
-      - traefik.frontend.entryPoints=http
-      - traefik.frontend.rule=Host:visu.synker.ovh
-      - traefik.enable=true
-      - traefik.port=80
-      - traefik.docker.network=ntw_front
-      - traefik.backend.loadbalancer.swarm=true
-      - traefik.backend.loadbalancer.method=drr
+      - "traefik.backend=visualizer"
+      - "traefik.frontend.entryPoints=http"
+      - "traefik.frontend.rule=Host:visu.synker.ovh"
+      - "traefik.enable=true"
+      - "traefik.port=80"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
       restart_policy:
         condition: on-failure
       placement:
