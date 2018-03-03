@@ -98,29 +98,6 @@ services:
     depends_on: 
         - elasticsearch
 
-  visualizer:
-    image: dockersamples/visualizer:stable
-    
-    ports:
-      - "8080:8080"
-    stop_grace_period: 1m30s
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    deploy:
-      labels:
-        # - "traefik.backend=visu"
-        - "traefik.frontend.rule=Host:visu.synker.ovh"
-        - "traefik.enable=true"
-        - "traefik.port=8080"
-      restart_policy:
-        condition: on-failure
-      placement:
-        constraints: 
-          - node.role == manager
-          - node.labels.size == small
-    networks:
-      - elk
-
 volumes:
   elasticsearch_data:
      driver_opts:
