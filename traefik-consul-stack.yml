@@ -28,7 +28,7 @@ services:
       - "--docker.watch"
       - "--docker.exposedbydefault"
       - "--consul"
-      - "--consul.endpoint=consul.synker.ovh:8500"
+      - "--consul.endpoint=consul:8500"
       - "--consul.prefix=traefik"
     networks:
       - ntw_front
@@ -61,7 +61,7 @@ services:
       - ntw_front
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    command: --consul --consul.endpoint=consul.synker.ovh:8500
+    command: --consul --consul.endpoint=consul:8500
     deploy:
       mode: global
       update_config:
@@ -74,7 +74,7 @@ services:
 
   consul:
     image: consul
-    command: agent -server -bootstrap-expect=1 -data-dir=/consul/data -ui -client=0.0.0.0 -disable-host-node-id -domain=consul.synker.ovh
+    command: agent -server -bootstrap-expect=1 -data-dir=/consul/data -ui -client=0.0.0.0 -bind=0.0.0.0 -disable-host-node-id -domain=consul.synker.ovh
     ports:
       - "8400:8400"
       - "8500:8500"
@@ -88,7 +88,7 @@ services:
       labels:
       - "traefik.backend=consul"
       - "traefik.backend.loadbalancer.swarm=true"
-      - "traefik.frontend.entryPoints=http"
+      - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:consul.synker.ovh"
       - "traefik.docker.network=ntw_front"
       - "traefik.port=8500"
