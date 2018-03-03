@@ -55,7 +55,7 @@ services:
     deploy:
       labels:
       - "traefik.backend=visualizer"
-      - "traefik.frontend.entryPoints=http"
+      - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:visu.synker.ovh"
       - "traefik.enable=true"
       - "traefik.port=8080"
@@ -88,7 +88,7 @@ services:
       labels:
       - "traefik.backend=consul"
       - "traefik.backend.loadbalancer.swarm=true"
-      - "traefik.frontend.entryPoints=http"
+      - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:consul.synker.ovh"
       - "traefik.docker.network=ntw_front"
       - "traefik.port=8500"
@@ -121,7 +121,7 @@ services:
       labels:
       - traefik.backend=who2
       - "traefik.frontend.rule=PathPrefixStrip:/who2"
-      - traefik.frontend.entryPoints=http
+      - "traefik.frontend.entryPoints=http,https"
       - traefik.port=80
       - traefik.enable=true
       - traefik.passHostHeader=true

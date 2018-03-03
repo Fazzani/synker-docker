@@ -1,14 +1,26 @@
 accessLogsFile = "/dev/stdout"
-defaultEntryPoints = ["http"]
+defaultEntryPoints = ["http", "https"]
 InsecureSkipVerify = true
+
 [entryPoints]
   [entryPoints.http]
   address = ":80"
+
 [web]
 address = ":8080"
+
 [docker]
 endpoint = "unix:///var/run/docker.sock"
 domain = "synker.ovh"
 watch = true
 swarmmode = true
 exposedbydefault = false
+
+# Let’s Encrypt configuration
+[acme]
+email = "supprt@synker.ovh"
+storageFile = "acme.json"
+entryPoint = "https"
+[[acme.domains]]
+  main = "synker.ovh"
+  sans = ["consul.synker.ovh","viz.synker.ovh"]
