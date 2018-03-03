@@ -17,7 +17,7 @@
   - [ ] Batch
   - [ ] Broker
 - [ ] DNS configuration for all applications
-- [ ] Reverse proxy and LB [traefik][ex_traefik]
+- [ ] Reverse proxy and LB [traefik][ex_traefik] [good example][traefix_good_example]
 - [ ] Fix auto deploy for appveyor and [travis ci](#travis-deploy) [example travis][example_travis]
 - [ ] Install Vault
 - [ ] Emby
@@ -101,3 +101,4 @@ ENDSSH
 [travis_example_1]:https://www.linux.com/learn/automatically-deploy-build-images-travis
 [RabbitMQ_Image_repo]:https://github.com/harbur/docker-rabbitmq-cluster
 [mariadb_registry]:https://hub.docker.com/_/mariadb/
+[traefix_good_example]:https://medium.com/lucjuggery/docker-clouds-swarm-mode-feature-702bfae9bf23
