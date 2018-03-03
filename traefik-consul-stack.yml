@@ -10,7 +10,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       labels:
-        # - "traefik.backend=visu"
+        - "traefik.backend=visu"
         - "traefik.frontend.rule=Host:visu.synker.ovh"
         - "traefik.enable=true"
         - "traefik.port=8080"
