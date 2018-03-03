@@ -78,7 +78,7 @@ services:
 
   consul:
     image: progrium/consul
-    command: -server -bootstrap -ui -bootstrap -log-level warn -ui-dir /ui
+    command: -server -bootstrap -ui -log-level warn -ui-dir /ui
     ports:
       - "8400:8400"
       - "8500:8500"
