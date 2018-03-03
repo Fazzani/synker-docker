@@ -1,25 +1,6 @@
 version: "3.4"
 
 services:
-  docker-proxy:
-    image: rancher/socat-docker
-    networks:
-      - ntw_front
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-          - node.role == manager
-      resources:
-        limits:
-          cpus: '0.10'
-          memory: 8M
-        reservations:
-          cpus: '0.10'
-          memory: 8M
 
   traefik:
     image: traefik:1.5
@@ -34,15 +15,14 @@ services:
       mode: ingress
     networks:
       - ntw_front
-    depends_on:
-      - docker-proxy
     configs:
       - source: traefik.toml
         target: /etc/traefik/traefik.toml
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
     command: --docker \
       --docker.swarmmode \
       --docker.domain=synker.ovh \
-      --docker.endpoint=tcp://docker-proxy:2375 \
       --docker.watch \
       --debug=true \
       --logLevel=WARN \
