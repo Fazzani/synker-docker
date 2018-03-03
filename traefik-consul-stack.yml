@@ -1,27 +1,6 @@
 version: "3.4"
+
 services:
-  visualizer:
-    image: dockersamples/visualizer:stable
-    
-    ports:
-      - "8080:8080"
-    stop_grace_period: 1m30s
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    deploy:
-      labels:
-        - "traefik.backend=visu"
-        - "traefik.frontend.rule=Host:visu.synker.ovh"
-        - "traefik.enable=true"
-        - "traefik.port=8080"
-      restart_policy:
-        condition: on-failure
-      placement:
-        constraints: 
-          - node.role == manager
-          - node.labels.size == small
-    networks:
-      - ntw_front
 
   traefik:
     image: traefik:v1.5.3
@@ -32,7 +11,7 @@ services:
       mode: ingress
     - target: 8080
       protocol: tcp
-      published: 8089
+      published: 8080
       mode: ingress
     networks:
       - ntw_front
@@ -65,6 +44,29 @@ services:
           cpus: '0.05'
           memory: 64M
 
+  visualizer:
+    image: dockersamples/visualizer:stable
+    
+    ports:
+      - "8081:8080"
+    stop_grace_period: 1m30s
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      labels:
+        - "traefik.backend=visu"
+        - "traefik.frontend.rule=Host:visu.synker.ovh"
+        - "traefik.enable=true"
+        - "traefik.port=8081"
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: 
+          - node.role == manager
+          - node.labels.size == small
+    networks:
+      - ntw_front
+
   consul:
     image: consul
     hostname: consul
@@ -95,6 +97,7 @@ services:
         condition: on-failure
     networks:
       - ntw_front
+
   who2:
     image: emilevauge/whoami
     networks:
@@ -123,6 +126,7 @@ services:
       - "traefik.frontend.entryPoints=http"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
+
 networks:
   elk_elk:
     external: true
