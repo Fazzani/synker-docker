@@ -1,5 +1,8 @@
 sudo: required
 
+services:
+  - docker
+
 language: generic
 
 env:
@@ -25,9 +28,10 @@ before_script:
 
 script:
   - ls
-  - cd synker-docker
-  - docker-compose build
-  - docker-compose up -d
+  - chmod +x runup.sh
+  - ./runup.sh
+  #- docker-compose build
+  #- docker-compose up -d
 
   # Verifications
   - sleep 90
