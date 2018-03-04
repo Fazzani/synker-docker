@@ -8,7 +8,7 @@ echo "Install stacks ..."
 set -euox
 
 
-cd /home/$User/synker-docker/
+cd /home/$USER/synker-docker/
 ls -la
 
 docker network create --driver overlay ntw_front || true
