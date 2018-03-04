@@ -13,6 +13,6 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: ~/synker-docker/runup.sh
+  script: ssh $USER@SERVER_IP chmod +x ~/synker-docker/runup.sh && ~/synker-docker/runup.sh
   on:
     branch: master
