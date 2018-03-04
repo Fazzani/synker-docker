@@ -137,5 +137,5 @@ configs:
     file: $PWD/logstash/config/logstash.yml
 
 networks:
-  elk:
+  elk_elk:
     external: true
