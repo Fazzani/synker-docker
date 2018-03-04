@@ -18,7 +18,6 @@ docker network create --driver overlay ntw_front \
   --ingress || true
 
 docker network create --driver overlay ingress_net_backend \
-  --attachable \
   --ingress \
   --subnet=70.28.0.0/16 \
   --opt com.docker.network.driver.mtu=9216 \
