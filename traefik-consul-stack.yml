@@ -61,7 +61,7 @@ services:
       - ntw_front
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    command: --consul --consul.endpoint=consul:8500
+    command: --consul --consul.endpoint=consul.synker.ovh:8500
     deploy:
       mode: global
       update_config:
