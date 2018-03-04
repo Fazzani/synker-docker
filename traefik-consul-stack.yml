@@ -80,9 +80,7 @@ services:
     hostname: consul
     command: agent -server -bootstrap-expect=1 -data-dir=/consul/data -ui -client=0.0.0.0 -disable-host-node-id -domain=consul.synker.ovh
     ports:
-      - "8400:8400"
       - "8500:8500"
-      - "8600:53/udp"
     volumes:
       - consul_data:/consul/data
     environment:
@@ -98,7 +96,6 @@ services:
       - "traefik.docker.network=ntw_front"
       - "traefik.port=8500"
       - "traefik.enable=true"
-      endpoint_mode: dnsrr
       replicas: 1
       placement:
         constraints:
@@ -143,7 +140,6 @@ services:
     depends_on:
       - traefik
     deploy:
-      endpoint_mode: dnsrr
       mode: replicated
       replicas: 3
       restart_policy:
