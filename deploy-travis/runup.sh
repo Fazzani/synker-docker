@@ -5,9 +5,11 @@
 ### ### ### ### ### ### ### ### ### ### ###
 
 echo "Install stacks ..."
-set -eux
+set -euox
+
 
 cd ..
+ls -la
 
 docker network create --driver overlay ntw_front || true
 
