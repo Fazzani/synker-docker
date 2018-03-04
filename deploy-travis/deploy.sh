@@ -10,4 +10,4 @@ fi
 set -euox
 
 ls
-scp -o "StrictHostKeyChecking no" package.tgz $USER@$SERVER_IP:/home/dockeradmin/synker-docker/package.tgz
+scp -o "StrictHostKeyChecking no" -r $TRAVIS_BUILD_DIR package.tgz $USER@$SERVER_IP:/home/dockeradmin/synker-docker
