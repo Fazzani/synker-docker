@@ -78,7 +78,7 @@ services:
     ports:
       - "8400:8400"
       - "8500:8500"
-      - "8600:53/udp"
+      - "53:53/udp"
     volumes:
       - consul_data:/consul/data
     environment:
