@@ -22,6 +22,6 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: tar -czf package.tgz . && scp package.tgz $USER@$SERVER_I:$REMOTE_APP_DIR
+  script: tar -czf package.tgz . && scp package.tgz $USER@$SERVER_IP:/home/dockeradmin/synker-docker/
   on:
     branch: master
