@@ -8,7 +8,7 @@ services:
       - "8000:15672"
     deploy:
       labels:
-        - "traefik.backend=rabbitmq"
+        - "traefik.backend=rabbit1"
         - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
         - "traefik.frontend.entryPoints=http,https"
         - "traefik.enable=true"
@@ -41,7 +41,7 @@ services:
       - "8001:15672"
     deploy:
       labels:
-        - "traefik.backend=rabbitmq"
+        - "traefik.backend=rabbit2"
         - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
         - "traefik.frontend.entryPoints=http,https"
         - "traefik.enable=true"
