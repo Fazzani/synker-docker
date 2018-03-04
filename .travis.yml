@@ -24,6 +24,8 @@ before_script:
   - docker-compose --version
 
 script:
+  - ls
+  - cd synker-docker
   - docker-compose build
   - docker-compose up -d
 
