@@ -7,9 +7,9 @@ env:
   - secure: hp0sS1g6DjYirQJitzhOYTbA2iE5u9qBM7KFLREAU7Czu5/87i0wzTwxNU4R0NznvUCjmVeLxTa+n0y0vSehAtKn7R1kvqudvHxVixgPUtHAmZRkFeiNbxi2iJGffPEWaYkExJtHbmV6tFpBTYwMyyVRzE2X5NCJ89U9kH2VEJ8GWday4ZSd3UblLwPROWskNapSkLepKyXfKu30XHbeUVbmyQDuzrc8sH9HX3hkHJwpYKduj5lCjOgTcmUPacb1Mt84e8GAhBMGCdxazeEBCsP3SDmYytik488eXSMmM0xfMuaUUNeyYLBG44+Cflg4VEJe6+U5I8DZ27kxNCYgwSE1FELbqvNoqDvhlHRbCxVYjAefZBc4f+pTnhF2Ywmi3/8OpVgj/U0MLsqBNrPI8HpkjUa5OUPxXXSCVZNfYUtdRIFoaHgRqqkRPI7Xacx2OfJnfLa1JQ4u6TkDCbP6WCINxk/qkrBWD2x+jjzhdp2+Dv2Vg8Z48Ywc8NDjDz7PHPPNAhJ/PcHPxPH/Szm2JOqeeh1d1InB+RFqlfGZySmPqBUoAVTMp06AJGxQ5YpJooT8hqZItWX6sEYrEPKu5CNrWYdO+aDXKVWe+kktOFtCorO305aWlHCzIKzKXr3vBA6LsA8kUuPc3AZsM5jGodbf7ECfD4H/coQoRgNSEPw=
 addons:
   ssh_known_hosts:
-  - $SERVER_IP
+  - "$SERVER_IP"
 script:
-  - ls
+- ls
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_2f1f546e9151_key -iv $encrypted_2f1f546e9151_iv
   -in deploy_rsa.enc -out /tmp/deploy_rsa -d
@@ -24,3 +24,6 @@ deploy:
   script: ssh -p22 $USER@SERVER_IP "chmod +x ~/synker-docker/runup.sh && ~/synker-docker/runup.sh"
   on:
     branch: master
+before_install:
+- openssl aes-256-cbc -K $encrypted_2f1f546e9151_key -iv $encrypted_2f1f546e9151_iv
+  -in deploy_rsa.enc -out deploy_rsa -d
