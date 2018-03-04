@@ -1,6 +1,10 @@
-# TODO
+# SYNKER docker deploy stack
 
-## Swarm services to install
+[![Build Status](https://travis-ci.org/Fazzani/synker-docker.svg?branch=master)](https://travis-ci.org/Fazzani/synker-docker)
+
+## TODO
+
+### Swarm services to install
 
 - [x] [MariaDb][docker_mariadb] see [official registry][mariadb_registry]
   - [x] Compose file
@@ -29,7 +33,7 @@
 - [ ] Install Vault
 - [ ] Install [Tvheadend]
 
-## Others
+### Others
 
 - [ ] Restore crontab and incrontab
 - [ ] Rex-ray (google cloud storage 5G, Ceph, GlusterFS, Network File System (NFS))
@@ -37,21 +41,21 @@
 - [x] Restore Filebeat and Logstash configurations
 - [x] Fix [NetShare][NetShare] plugin
 
-### To test
+#### To test
 
 * [filebeat][filebeat]
 * [heartbeat][heartbeat]
 * [metricbeat][metricbeat]
 * [packetbeat][packetbeat]
 
-## Create Swarm by Ansible
+### Create Swarm by Ansible
 
 - [ ] [Create Swarm by Ansible](https://thisendout.com/2016/09/13/deploying-docker-swarm-with-ansible/)
 - [ ] WebGrab
 - [ ] ALL custom scripts and crontab
 - [ ] Auto creating nfs volumes
 
-## Docker Stack
+### Docker Stack
 
 For elasticsearch to not give Out of Memory errors, we need set vm.max_map_count of the kernel of VMs to atleast 262144. To do this, run the following commands.
 
@@ -62,16 +66,6 @@ docker-machine ssh agent1 sudo sysctl -w vm.max_map_count=262144
 docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
 
 ```
-
-## Travis deploy
-
-[tuto][travis_example_1]
-
-1. Encrypt [certif file][travis_encrypt_file] of ssh connection with travis
-2. Encrypt user@host variable
-3. Connect to master machine with ssh
-4. Get Latest version
-5. Deploy stack
 
 `SSH connection and executing remote commands`
 
@@ -100,9 +94,6 @@ ENDSSH
 [elastic_off_guide]:https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 [elastic_compose_ref]:https://github.com/elastic/examples/blob/master/Miscellaneous/docker/full_stack_example/docker-compose-linux.yml
 [docker_mariadb]:https://docs.docker.com/samples/library/mariadb
-[example_travis]:https://www.linux.com/learn/automatically-deploy-build-images-travis
-[travis_encrypt_file]:https://docs.travis-ci.com/user/encrypting-files/
-[travis_example_1]:https://www.linux.com/learn/automatically-deploy-build-images-travis
 [RabbitMQ_Image_repo]:https://github.com/harbur/docker-rabbitmq-cluster
 [mariadb_registry]:https://hub.docker.com/_/mariadb/
 [traefix_good_example]:https://medium.com/lucjuggery/docker-clouds-swarm-mode-feature-702bfae9bf23
