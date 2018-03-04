@@ -20,7 +20,7 @@ services:
       - "--acme.httpChallenge.entryPoint=http"
       - "--acme.OnHostRule=true"
       - "--acme.onDemand=false"
-      - "--acme.email=support@test.ovh"
+      - "--acme.email=support@synker.ovh"
       - "--acme.caServer=https://acme-staging.api.letsencrypt.org/directory"
       - "--docker"
       - "--docker.swarmmode"
