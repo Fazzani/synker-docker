@@ -11,7 +11,7 @@ services:
         - "traefik.backend=rabbitmq"
         - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
         - "traefik.enable=true"
-        - "traefik.port=80"
+        - "traefik.port=8000"
       replicas: 1
       restart_policy:
         condition: on-failure
