@@ -7,11 +7,12 @@
 echo "Install stacks ..."
 set -euox
 
-
-cd /home/$USER/synker-docker/
-ls -la
+cd /home/$REMOTE_USER/synker-docker/
 
 docker network create --driver overlay ntw_front || true
+
+echo $MYSQL_PASSWORD > mysql_root_password.txt
+echo $MYSQL_ROOT_PASSWORD > mysql_password.txt
 
 export $(cat .env)
 

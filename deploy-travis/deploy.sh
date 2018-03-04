@@ -1,13 +1,19 @@
 #!/bin/bash
+set -euxo
 
-set -euox
+echo "Remove deployed script"
+ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST "rm -R /home/$REMOTE_USER/synker-docker" || true
 
-scp -o "StrictHostKeyChecking no" -r $TRAVIS_BUILD_DIR $USER@$SERVER_IP:/home/$USER
+echo "Copy scripts to remote host"
+scp -o "StrictHostKeyChecking no" -r $TRAVIS_BUILD_DIR $REMOTE_USER@$REMOTE_HOST:/home/$USER
 
 sleep 1
 
-ssh -o "StrictHostKeyChecking no" $USER@$SERVER_IP "chmod +x /home/$USER/synker-docker/deploy-travis/*.sh"
+echo "Make excutable script"
+ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST "chmod +x /home/$REMOTE_USER/synker-docker/deploy-travis/*.sh"
 
-ssh -o "StrictHostKeyChecking no" $USER@$SERVER_IP 'bash -s' < ./deploy-travis/runup.sh
+echo "Run up docker stack script"
+ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST 'bash -s' < ./deploy-travis/runup.sh
+
 
 exit 0
