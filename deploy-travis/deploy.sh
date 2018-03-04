@@ -6,8 +6,8 @@ scp -o "StrictHostKeyChecking no" -r $TRAVIS_BUILD_DIR $USER@$SERVER_IP:/home/$U
 
 sleep 1
 
-ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST chmod +x /home/$USER/synker-docker/deploy-travis/*.sh
+ssh -o "StrictHostKeyChecking no" $USER@$SERVER_IP "chmod +x /home/$USER/synker-docker/deploy-travis/*.sh"
 
-ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST 'bash -s' < ./deploy-travis/runup.sh
+ssh -o "StrictHostKeyChecking no" $USER@$SERVER_IP 'bash -s' < ./deploy-travis/runup.sh
 
 exit 0
