@@ -16,13 +16,12 @@
   - [ ] WebClient    scaled on 2 instances
   - [ ] Batch
   - [ ] Broker
-- [ ] DNS configuration for all applications
 - [ ] Reverse proxy and LB [traefik][ex_traefik] [good example][traefix_good_example]
   - [ ] Circuit breaker
   - [ ] Sub domains configuration
-  - [ ] Lets Encrypt certification
+  - [x] Lets Encrypt certification (broken => has an issue on that)
   - [ ] Create internal network for backend services
-  - [ ] LB
+  - [x] LB
 - [ ] Fix auto deploy for appveyor and [travis ci](#travis-deploy) [example travis][example_travis]
 - [ ] Emby
 - [ ] Rancher
