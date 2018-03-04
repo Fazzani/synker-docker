@@ -7,7 +7,7 @@ services:
     command: 
       - "storeconfig"
       - "--api"
-      - "--debug=true"
+     # - "--debug=true"
       - "--logLevel=WARN"
       - "--web"
       - "--web.address=:8080"
