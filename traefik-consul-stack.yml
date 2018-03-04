@@ -20,7 +20,7 @@ services:
       - "--acme"
       - "--acme.storage=traefik/acme/account"
       - "--acme.entryPoint=https"
-      - "--acme.httpChallenge.entryPoint=http"
+      # - "--acme.httpChallenge.entryPoint=http"
       - "--acme.OnHostRule=true"
       - "--acme.onDemand=false"
       - "--acme.email=support@synker.ovh"
