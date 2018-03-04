@@ -22,6 +22,6 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: ssh -o "StrictHostKeyChecking no" $USER@$SERVER_IP "chmod +x ~/synker-docker/runup.sh && ~/synker-docker/runup.sh"
+  script: tar -czf package.tgz . && scp package.tgz $USER@$SERVER_I:$REMOTE_APP_DIR
   on:
     branch: master
