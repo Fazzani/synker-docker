@@ -45,7 +45,7 @@ services:
       - elk
     deploy:
       labels:
-      #  - "traefik.backend=kibana"
+       - "traefik.backend=kibana"
        - "traefik.frontend.rule=Host:kibana.synker.ovh"
        - "traefik.enable=true"
        - "traefik.port=5601"
