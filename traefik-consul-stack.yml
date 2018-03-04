@@ -28,7 +28,7 @@ services:
       - "--docker.watch"
       - "--docker.exposedbydefault"
       - "--consul"
-      - "--consul.endpoint=consul:8500"
+      - "--consul.endpoint=consul.synker.ovh:8500"
       - "--consul.prefix=traefik"
     networks:
       - ntw_front
@@ -79,7 +79,7 @@ services:
     ports:
       - "8400:8400"
       - "8500:8500"
-      - "53:53/udp"
+      - "8600:53/udp"
     volumes:
       - consul_data:/consul/data
     environment:
