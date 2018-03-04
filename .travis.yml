@@ -22,6 +22,6 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: cd .. && ls -l && tar -czf package.tgz . && ls && scp -o "StrictHostKeyChecking no" package.tgz $USER@$SERVER_IP:/home/dockeradmin/synker-docker/
+  script: tar -czf package.tgz $TRAVIS_BUILD_DIR && ls && scp -o "StrictHostKeyChecking no" package.tgz $USER@$SERVER_IP:/home/dockeradmin/synker-docker/
   on:
     branch: master
