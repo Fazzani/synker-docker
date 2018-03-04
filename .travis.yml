@@ -19,9 +19,10 @@ before_deploy:
 - cp deploy_rsa ~/.ssh/id_rsa
 - eval "$(ssh-agent -s)"
 - ssh-add deploy_rsa
+- chmod +x ./deploy-travis/deploy.sh
 deploy:
   provider: script
   skip_cleanup: true
-  script: tar -czf package.tgz $TRAVIS_BUILD_DIR && ls && scp package.tgz $USER@$SERVER_IP:/home/dockeradmin/synker-docker/packge.tgz
+  script: ./deploy-travis/deploy.sh
   on:
     branch: master
