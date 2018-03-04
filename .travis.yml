@@ -17,6 +17,8 @@ before_deploy:
 - cp deploy_rsa ~/.ssh/id_rsa
 - eval "$(ssh-agent -s)"
 - ssh-add deploy_rsa
+- echo $SERVER_IP
+- echo $USER
 - ssh -o "StrictHostKeyChecking no" -q $USER@$SERVER_IP "chmod +x ~/synker-docker/runup.sh && ~/synker-docker/runup.sh"
 deploy:
   provider: script
