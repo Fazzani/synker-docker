@@ -7,7 +7,7 @@
 echo "Install stacks ..."
 set -eux
 
-git pull
+cd ..
 
 docker network create --driver overlay ntw_front || true
 
