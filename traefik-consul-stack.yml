@@ -19,7 +19,7 @@ services:
       - "--acme.entryPoint=https"
       - "--acme.httpChallenge.entryPoint=http"
       - "--acme.OnHostRule=true"
-      - "--acme.onDemand=true"
+      - "--acme.onDemand=false"
       - "--acme.email=support@test.ovh"
       - "--acme.caServer=https://acme-staging.api.letsencrypt.org/directory"
       - "--docker"
