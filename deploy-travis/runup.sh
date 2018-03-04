@@ -13,7 +13,16 @@ set -euox
 
 cd /home/$REMOTE_USER/synker-docker/
 
-docker network create --driver overlay ntw_front || true
+docker network create --driver overlay ntw_front \
+  --attachable \
+  --ingress || true
+  
+docker network create --driver overlay elk_elk \
+  --attachable \
+  --ingress \
+  --subnet=70.28.0.0/16 \
+  --opt com.docker.network.driver.mtu=9216 \
+  --opt encrypted=true \ || true
 
 echo $MYSQL_PASSWORD > mysql_root_password.txt
 echo $MYSQL_ROOT_PASSWORD > mysql_password.txt
