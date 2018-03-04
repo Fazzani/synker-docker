@@ -6,7 +6,7 @@ services:
     image: traefik:1.5
     command: 
       - "storeconfig"
-      - "--api"
+      # - "--api"
      # - "--debug=true"
       - "--logLevel=WARN"
       - "--web"
@@ -14,6 +14,9 @@ services:
       - "--entrypoints=Name:http Address::80"
       - "--entrypoints=Name:https Address::443 TLS"
       - "--defaultentrypoints=http,https"
+      - --consulcatalog=true
+      - --consulcatalog.endpoint=consul.synker.ovh:8500
+      # - --consulcatalog.constraints="tag==public
       - "--acme"
       - "--acme.storage=traefik/acme/account"
       - "--acme.entryPoint=https"
