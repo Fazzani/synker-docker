@@ -4,7 +4,6 @@ addons:
   - $SERVER_IP
 script:
   - ls
-  - chmod +x runup.sh
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_<...>_key -iv $encrypted_<...>_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
 - eval "$(ssh-agent -s)"
