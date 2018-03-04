@@ -48,6 +48,7 @@ services:
     depends_on:
       - traefik_init
       - consul
+      - elk_elk
     ports:
     - target: 80
       protocol: tcp
@@ -133,35 +134,35 @@ services:
     networks:
       - ntw_front
 
-  who2:
-    image: emilevauge/whoami
-    networks:
-      - ntw_front
-    depends_on:
-      - traefik
-    deploy:
-      mode: replicated
-      replicas: 3
-      restart_policy:
-        condition: on-failure
-        max_attempts: 5
-      resources:
-        limits:
-          cpus: '0.20'
-          memory: 9M
-        reservations:
-          cpus: '0.05'
-          memory: 9M
-      labels:
-      - traefik.backend=who2
-      - "traefik.frontend.rule=PathPrefixStrip:/who2"
-      - "traefik.frontend.entryPoints=http,https"
-      - traefik.port=80
-      - traefik.enable=true
-      - traefik.passHostHeader=true
-      - traefik.docker.network=ntw_front
-      - traefik.backend.loadbalancer.swarm=true
-      - traefik.backend.loadbalancer.method=drr
+  # who2:
+  #   image: emilevauge/whoami
+  #   networks:
+  #     - ntw_front
+  #   depends_on:
+  #     - traefik
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 3
+  #     restart_policy:
+  #       condition: on-failure
+  #       max_attempts: 5
+  #     resources:
+  #       limits:
+  #         cpus: '0.20'
+  #         memory: 9M
+  #       reservations:
+  #         cpus: '0.05'
+  #         memory: 9M
+  #     labels:
+  #     - traefik.backend=who2
+  #     - "traefik.frontend.rule=PathPrefixStrip:/who2"
+  #     - "traefik.frontend.entryPoints=http,https"
+  #     - traefik.port=80
+  #     - traefik.enable=true
+  #     - traefik.passHostHeader=true
+  #     - traefik.docker.network=ntw_front
+  #     - traefik.backend.loadbalancer.swarm=true
+  #     - traefik.backend.loadbalancer.method=drr
 
 networks:
   elk_elk:
