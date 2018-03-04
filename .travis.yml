@@ -1,47 +1,10 @@
-sudo: required
-
-services:
-  - docker
-
 language: generic
 addons:
   ssh_known_hosts:
   - $SERVER_IP
-env:
-  - DOCKER_COMPOSE_VERSION=1.14.0
-
-install:
-  # Installing docker
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-  - sudo apt-get update
-  - sudo apt-get -y install docker-ce
-
-  # Installing docker-compose
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-
-before_script:
-  # Check docker & docker-compose versions
-  - docker --version
-  - docker-compose --version
-
 script:
   - ls
   - chmod +x runup.sh
-  - docker network create --driver overlay ntw_front
-  - docker swarm init
-  - ./runup.sh
-  #- docker-compose build
-  #- docker-compose up -d
-
-  # Verifications
-  - sleep 90
-  - docker-compose logs
-  - curl --retry 10 --retry-delay 5 -D- http://localhost:9200/ -u elastic:changeme
-  - curl --retry 10 --retry-delay 5 -D- http://localhost:5601/api/status -u elastic:changeme
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_<...>_key -iv $encrypted_<...>_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
 - eval "$(ssh-agent -s)"
