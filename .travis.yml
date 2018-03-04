@@ -15,8 +15,8 @@ before_install:
   -in deploy_rsa.enc -out deploy_rsa -d
 - chmod 600 deploy_rsa
 - mv deploy_rsa ~/.ssh/id_rsa
-- eval "$(ssh-agent -s)"
-- ssh-add deploy_rsa
+# - eval "$(ssh-agent -s)"
+# - ssh-add deploy_rsa
 deploy:
   provider: script
   skip_cleanup: true
