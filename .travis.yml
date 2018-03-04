@@ -14,9 +14,9 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_2f1f546e9151_key -iv $encrypted_2f1f546e9151_iv
   -in deploy_rsa.enc -out deploy_rsa -d
 - chmod 600 deploy_rsa
-- mv deploy_rsa ~/.ssh/id_rsa
-# - eval "$(ssh-agent -s)"
-# - ssh-add deploy_rsa
+- cp deploy_rsa ~/.ssh/id_rsa
+- eval "$(ssh-agent -s)"
+- ssh-add deploy_rsa
 deploy:
   provider: script
   skip_cleanup: true
