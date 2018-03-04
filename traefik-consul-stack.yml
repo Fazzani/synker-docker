@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   traefik_init:
-    image: traefik:1.4
+    image: traefik:1.5
     command: 
       - "storeconfig"
       # - "--api"
@@ -20,7 +20,7 @@ services:
       - "--acme"
       - "--acme.storage=traefik/acme/account"
       - "--acme.entryPoint=https"
-      # - "--acme.httpChallenge.entryPoint=http"
+      - "--acme.httpChallenge.entryPoint=http"
       - "--acme.OnHostRule=true"
       - "--acme.onDemand=false"
       - "--acme.email=support@synker.ovh"
@@ -44,7 +44,7 @@ services:
       - consul
 
   traefik:
-    image: traefik:1.4
+    image: traefik:1.5
     depends_on:
       - traefik_init
       - consul
