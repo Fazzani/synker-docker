@@ -62,6 +62,7 @@ services:
       mode: ingress
     networks:
       - ntw_front
+      - ingress_net_backend
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     command: --consul --consul.endpoint=consul.synker.ovh:8500

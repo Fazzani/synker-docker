@@ -47,8 +47,12 @@ services:
       labels:
        - "traefik.backend=kibana"
        - "traefik.frontend.rule=Host:kibana.synker.ovh"
+       - "traefik.frontend.entryPoints=http,https"
+       - "traefik.backend.loadbalancer.swarm=true"
+       - "traefik.backend.loadbalancer.method=drr"
        - "traefik.enable=true"
        - "traefik.port=5601"
+       - "traefik.docker.network=ingress_net_backend"
       mode: replicated
       replicas: 1
       placement:

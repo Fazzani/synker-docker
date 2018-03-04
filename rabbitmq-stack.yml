@@ -10,8 +10,12 @@ services:
       labels:
         - "traefik.backend=rabbitmq"
         - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
+        - "traefik.frontend.entryPoints=http,https"
         - "traefik.enable=true"
         - "traefik.port=8000"
+        - "traefik.docker.network=ingress_net_backend"
+        - "traefik.backend.loadbalancer.swarm=true"
+        - "traefik.backend.loadbalancer.method=drr"
       replicas: 1
       restart_policy:
         condition: on-failure
@@ -32,7 +36,19 @@ services:
   rabbit2:
     image: harbur/rabbitmq-cluster
     hostname: rabbit2
+    ports:
+      - "5673:5672"
+      - "8001:15672"
     deploy:
+      labels:
+        - "traefik.backend=rabbitmq"
+        - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
+        - "traefik.frontend.entryPoints=http,https"
+        - "traefik.enable=true"
+        - "traefik.port=8001"
+        - "traefik.docker.network=ingress_net_backend"
+        - "traefik.backend.loadbalancer.swarm=true"
+        - "traefik.backend.loadbalancer.method=drr"
       replicas: 1
       restart_policy:
         condition: on-failure
@@ -51,9 +67,6 @@ services:
       - CLUSTERED=true
       - CLUSTER_WITH=rabbit1
       - RAM_NODE=true
-    ports:
-      - "5673:5672"
-      - "8001:15672"
     networks:
       - ingress_net_backend
     depends_on:
