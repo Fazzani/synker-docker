@@ -27,7 +27,7 @@ services:
       - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
       - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST}
     networks:
-      - elk_elk
+      - ingress_net_backend
 
   rabbit2:
     image: harbur/rabbitmq-cluster
@@ -55,10 +55,10 @@ services:
       - "5673:5672"
       - "8001:15672"
     networks:
-      - elk_elk
+      - ingress_net_backend
     depends_on:
       - rabbit1
 
 networks:
-  elk_elk:
+  ingress_net_backend:
     external: true

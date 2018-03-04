@@ -13,7 +13,7 @@ services:
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     networks:
-      - elk
+      - ingress_net_backend
     ports:
       - ${ELASTICSEARCH_PORT}:9200
     deploy:
@@ -42,7 +42,7 @@ services:
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
       - ELASTICSEARCH_PASSWORD=${ELASTIC_PASSWORD}
     networks:
-      - elk
+      - ingress_net_backend
     deploy:
       labels:
        - "traefik.backend=kibana"
@@ -80,7 +80,7 @@ services:
       - "12201:12201/udp"
       - "9600:9600"
     networks:
-      - elk
+      - ingress_net_backend
     volumes:
       - logstash_config:/usr/share/logstash/config
       - logstash_pipeline:/usr/share/logstash/pipeline
@@ -137,5 +137,5 @@ configs:
     file: $PWD/logstash/config/logstash.yml
 
 networks:
-  elk_elk:
+  ingress_net_backend:
     external: true

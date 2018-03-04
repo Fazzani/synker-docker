@@ -16,8 +16,8 @@ cd /home/$REMOTE_USER/synker-docker/
 docker network create --driver overlay ntw_front \
   --attachable \
   --ingress || true
-  
-docker network create --driver overlay elk_elk \
+
+docker network create --driver overlay ingress_net_backend \
   --attachable \
   --ingress \
   --subnet=70.28.0.0/16 \

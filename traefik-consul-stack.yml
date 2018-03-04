@@ -48,7 +48,6 @@ services:
     depends_on:
       - traefik_init
       - consul
-      - elk_elk
     ports:
     - target: 80
       protocol: tcp
@@ -165,7 +164,7 @@ services:
   #     - traefik.backend.loadbalancer.method=drr
 
 networks:
-  elk_elk:
+  ingress_net_backend:
     external: true
   ntw_front:
     external: true
