@@ -94,6 +94,9 @@ ENDSSH
 [elastic_off_guide]:https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 [elastic_compose_ref]:https://github.com/elastic/examples/blob/master/Miscellaneous/docker/full_stack_example/docker-compose-linux.yml
 [docker_mariadb]:https://docs.docker.com/samples/library/mariadb
+[example_travis]:https://www.linux.com/learn/automatically-deploy-build-images-travis
+[travis_encrypt_file]:https://docs.travis-ci.com/user/encrypting-files/
+[travis_example_1]:https://www.linux.com/learn/automatically-deploy-build-images-travis
 [RabbitMQ_Image_repo]:https://github.com/harbur/docker-rabbitmq-cluster
 [mariadb_registry]:https://hub.docker.com/_/mariadb/
 [traefix_good_example]:https://medium.com/lucjuggery/docker-clouds-swarm-mode-feature-702bfae9bf23
