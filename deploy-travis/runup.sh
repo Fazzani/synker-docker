@@ -1,10 +1,14 @@
 #!/bin/bash
 
 ### ### ### ### ### ### ### ### ### ### ###
-# Functions
+# Deploy script for Synker docker stack
 ### ### ### ### ### ### ### ### ### ### ###
 
-echo "Install stacks ..."
+echo "Installing stacks ..."
+REMOTE_USER=$1
+MYSQL_PASSWORD=$2
+MYSQL_ROOT_PASSWORD=$3
+
 set -euox
 
 cd /home/$REMOTE_USER/synker-docker/
