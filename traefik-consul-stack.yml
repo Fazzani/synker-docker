@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   traefik_init:
-    image: traefik:1.5
+    image: traefik:1.4
     command: 
       - "storeconfig"
       # - "--api"
@@ -44,7 +44,7 @@ services:
       - consul
 
   traefik:
-    image: traefik:1.5
+    image: traefik:1.4
     depends_on:
       - traefik_init
       - consul
