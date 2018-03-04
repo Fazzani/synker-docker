@@ -4,7 +4,9 @@ services:
   - docker
 
 language: generic
-
+addons:
+  ssh_known_hosts:
+  - $SERVER_IP
 env:
   - DOCKER_COMPOSE_VERSION=1.14.0
 
@@ -29,6 +31,7 @@ before_script:
 script:
   - ls
   - chmod +x runup.sh
+  - docker swarm init
   - ./runup.sh
   #- docker-compose build
   #- docker-compose up -d
