@@ -42,3 +42,14 @@ script:
   - docker-compose logs
   - curl --retry 10 --retry-delay 5 -D- http://localhost:9200/ -u elastic:changeme
   - curl --retry 10 --retry-delay 5 -D- http://localhost:5601/api/status -u elastic:changeme
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_<...>_key -iv $encrypted_<...>_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/deploy_rsa
+- ssh-add /tmp/deploy_rsa
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: ~/synker-docker/runup.sh
+  on:
+    branch: master

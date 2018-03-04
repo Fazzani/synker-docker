@@ -5,7 +5,12 @@
 ### ### ### ### ### ### ### ### ### ### ###
 
 echo "Install stacks ..."
-set -euox
+set -eux
+
+git pull
+
+docker network create --driver overlay ntw_front || true
+
 export $(cat .env)
 
 docker stack deploy -c elk-stack.yml elk
