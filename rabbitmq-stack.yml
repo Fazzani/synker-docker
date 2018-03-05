@@ -23,7 +23,7 @@ services:
         parallelism: 1
         delay: 10s
       placement:
-        constraints: 
+        constraints:
           - node.labels.size == medium
     environment:
       - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
@@ -44,7 +44,7 @@ services:
         - "traefik.backend=rabbit2"
         - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
         - "traefik.frontend.entryPoints=http,https"
-        - "traefik.enable=true"
+        - "traefik.enable=false"
         - "traefik.port=8001"
         - "traefik.docker.network=ingress_net_backend"
         - "traefik.backend.loadbalancer.swarm=true"
@@ -56,7 +56,7 @@ services:
         parallelism: 1
         delay: 10s
       placement:
-        constraints: 
+        constraints:
           - node.role == manager
           - node.labels.size == small
     environment:
