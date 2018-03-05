@@ -9,6 +9,7 @@
 - [x] [MariaDb][docker_mariadb] see [official registry][mariadb_registry]
   - [x] Compose file
   - [x] Resotre data
+  - [ ] Test galera version (distributed version)
 - [x] RabbitMQ scale on 2 instances [Image to upgrade version][RabbitMQ_Image_repo]
 - [ ] Elk and Filebeat (elastic data scaled on 2 instances) [ex 1][ex_elk2] [ex 2][ex_elk] [ex 3][elk_3]
   - [x] [logstash config][link_logstash_config]
@@ -23,7 +24,7 @@
 - [ ] Reverse proxy and LB [traefik][ex_traefik] [good example][traefix_good_example]
   - [ ] Circuit breaker
   - [ ] Sub domains configuration
-  - [x] Lets Encrypt certification (broken => has an issue on that)
+  - [x] Lets Encrypt certification (broken => there is an issue on that)
   - [ ] Create internal network for backend services
   - [x] LB
 - [ ] Fix auto deploy for appveyor and [travis ci](#travis-deploy) [example travis][example_travis]

@@ -18,7 +18,7 @@ services:
       - ${ELASTICSEARCH_PORT}:9200
     deploy:
       labels:
-        # - "traefik.backend=elastic"
+        - "traefik.backend=elastic"
         - "traefik.frontend.rule=Host:elastic.synker.ovh"
         - "traefik.enable=true"
         - "traefik.port=9200"
