@@ -8,7 +8,7 @@ services:
     environment:
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
       - discovery.zen.minimum_master_nodes=1
-      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD}
       - node.name=elasticsearch
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
@@ -18,7 +18,7 @@ services:
       - ${ELASTICSEARCH_PORT}:9200
     deploy:
       labels:
-        - "traefik.backend=elastic"
+        - "traefik.backend=elasticsearch"
         - "traefik.frontend.rule=Host:elastic.synker.ovh"
         - "traefik.enable=true"
         - "traefik.port=9200"
