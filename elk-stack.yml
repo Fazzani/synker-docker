@@ -22,6 +22,10 @@ services:
         - "traefik.frontend.rule=Host:elastic.synker.ovh"
         - "traefik.enable=true"
         - "traefik.port=9200"
+        - "traefik.frontend.entryPoints=http,https"
+        - "traefik.docker.network=ingress_net_backend"
+        - "traefik.backend.loadbalancer.swarm=true"
+        - "traefik.backend.loadbalancer.method=drr"
       mode: replicated
       replicas: 1
       restart_policy:
