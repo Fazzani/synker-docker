@@ -27,6 +27,7 @@
   - [ ] Create internal network for backend services
   - [x] LB
 - [ ] Fix auto deploy for appveyor and [travis ci](#travis-deploy) [example travis][example_travis]
+- [ ] Monitoring/alerting all the cluster (Prometheus)
 - [ ] Emby
 - [ ] Rancher
 - [ ] Redis
