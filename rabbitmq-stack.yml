@@ -30,6 +30,8 @@ services:
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
       - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
       - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
     networks:
       - ingress_net_backend
 
@@ -71,7 +73,12 @@ services:
       - ingress_net_backend
     depends_on:
       - rabbit1
-
+volumes:
+  rabbitmq_data:
+    driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=35.156.117.97"
+      device: ":/webgrab_volume/rabbitmq/data"
 networks:
   ingress_net_backend:
     external: true
