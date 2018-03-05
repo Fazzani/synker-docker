@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   rabbit1:
-    image: harbur/rabbitmq-cluster
+    image: bijukunjummen/rabbitmq-cluster
     hostname: rabbit1
     ports:
       - "5672:5672"
@@ -34,7 +34,7 @@ services:
       - ingress_net_backend
 
   rabbit2:
-    image: harbur/rabbitmq-cluster
+    image: bijukunjummen/rabbitmq-cluster
     hostname: rabbit2
     ports:
       - "5673:5672"
