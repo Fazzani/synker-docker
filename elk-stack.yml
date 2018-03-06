@@ -20,9 +20,9 @@ services:
       labels:
         - "traefik.backend=elasticsearch"
         - "traefik.frontend.rule=Host:elastic.synker.ovh"
-        - "traefik.enable=true"
-        - "traefik.port=9200"
         - "traefik.frontend.entryPoints=http,https"
+        - "traefik.port=9200"
+        - "traefik.enable=true"
         - "traefik.docker.network=ingress_net_backend"
         - "traefik.backend.loadbalancer.swarm=true"
         - "traefik.backend.loadbalancer.method=drr"
