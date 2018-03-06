@@ -1,0 +1,92 @@
+version: "3.3"
+
+services:
+
+  webgrab:
+    image: linuxserver/webgrabplus
+    environment:
+      - PGID=0
+      - PUID=0
+    volumes:
+      - "config:/config"
+      - "data:/data"
+    deploy:
+      placement:
+        constraints: 
+          - node.role == worker
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:${TAG}
+     # Need to override user so we can access the log files, and docker.sock
+    user: root
+    # disable strict permission checks
+    command: ["--strict.perms=false"]
+    ports:
+      - "5555:8080"
+    volumes:
+      - filebeat_webgrab_sitepack:/usr/share/sitepack/:ro
+      - filebeat_logs:/usr/share/filebeat/logs/
+      - filebeat_data:/usr/share/filebeat/data/
+      #- /var/run/docker.sock:/var/run/docker.sock
+      # This is needed for filebeat to load container log path as specified in filebeat.yml
+      #- /var/lib/docker/containers/:/var/lib/docker/containers/:ro
+
+      # # This is needed for filebeat to load jenkins build log path as specified in filebeat.yml
+      # - /var/lib/docker/volumes/jenkins_home/_data/jobs/:/var/lib/docker/volumes/jenkins_home/_data/jobs/:ro
+
+      # This is needed for filebeat to load logs for system and auth modules
+      #- /var/log/:/var/log/:ro
+      # This is needed for filebeat to load logs for auditd module
+      # - /var/log/audit/:/var/log/audit/:ro
+    # disable strict permission checks
+    configs:
+     - source: fb_config
+       target: /usr/share/filebeat/filebeat.yml
+    networks:
+      - ingress_net_backend
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5m
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.labels.provider == ovh
+    depends_on: 
+        - elasticsearch
+        - logstash
+
+volumes:
+  config:
+    driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=35.156.117.97"
+      device: ":/webgrab_volume/webgrab/config"
+  data:
+    driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=35.156.117.97"
+      device: ":/webgrab_volume/webgrab/data"
+  filebeat_webgrab_sitepack:
+    driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=35.156.117.97"
+      device: ":/webgrab_volume/webgrab/config/siteini.pack"
+  filebeat_data:
+    driver_opts:
+      type: "nfs"
+      o: "addr=35.156.117.97,nolock,soft,rw"
+      device: ":/webgrab_volume/filebeat/data"
+  filebeat_logs:
+    driver_opts:
+      type: "nfs"
+      o: "addr=35.156.117.97,nolock,soft,rw"
+      device: ":/webgrab_volume/filebeat/logs"
+networks:
+  ingress_net_backend:
+    external: true
+
+configs:
+  fb_config:
+    file: filebeat.yml
