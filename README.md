@@ -37,6 +37,9 @@
 
 ### Others
 
+- [ ] Test dokcer remote api
+- [ ] [Appveyor for linux CI/CD][appveyor_linux]
+- [ ] Replace npm by Yarn
 - [ ] Restore crontab and incrontab
 - [ ] Rex-ray (google cloud storage 5G, Ceph, GlusterFS, Network File System (NFS))
 - [ ] SSL Elk communication AND [keystore][keystore_logstash]
@@ -102,3 +105,4 @@ ENDSSH
 [RabbitMQ_Image_repo]:https://github.com/harbur/docker-rabbitmq-cluster
 [mariadb_registry]:https://hub.docker.com/_/mariadb/
 [traefix_good_example]:https://medium.com/lucjuggery/docker-clouds-swarm-mode-feature-702bfae9bf23
+[appveyor_linux]:https://www.appveyor.com/docs/getting-started-with-appveyor-for-linux/
