@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
 
-  elasticsearch:
+  elastic:
     image: docker.elastic.co/elasticsearch/elasticsearch-platinum:${TAG}
     hostname: elastic
     environment:
@@ -18,7 +18,7 @@ services:
       - ${ELASTICSEARCH_PORT}:9200
     deploy:
       labels:
-        - "traefik.backend=elasticsearch"
+        - "traefik.backend=elastic"
         - "traefik.frontend.rule=Host:elastic.synker.ovh"
         - "traefik.frontend.entryPoints=http,https"
         - "traefik.port=9200"
