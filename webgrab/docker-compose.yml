@@ -25,7 +25,7 @@ services:
       - "5555:8080"
     volumes:
       - filebeat_webgrab_sitepack:/usr/share/sitepack/:ro
-      - filebeat_logs:/usr/share/filebeat/logs/
+      #- filebeat_logs:/usr/share/filebeat/logs/
       - filebeat_data:/usr/share/filebeat/data/
       #- /var/run/docker.sock:/var/run/docker.sock
       # This is needed for filebeat to load container log path as specified in filebeat.yml
