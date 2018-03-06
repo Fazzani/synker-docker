@@ -23,12 +23,6 @@ docker network create --driver overlay ingress_net_backend \
   --opt com.docker.network.driver.mtu=9216 \
   --opt encrypted=true || true
 
-# docker network create --driver overlay ingress_net_backend \
-#   --ingress \
-#   --subnet=70.28.0.0/16 \
-#   --opt com.docker.network.driver.mtu=9216 \
-#   --opt encrypted=true || true
-
 echo $MYSQL_PASSWORD > mysql_root_password.txt
 echo $MYSQL_ROOT_PASSWORD > mysql_password.txt
 
@@ -38,5 +32,6 @@ docker stack deploy -c elk-stack.yml elk
 docker stack deploy -c traefik-consul-stack.yml lb
 docker stack deploy -c mariadb-stack.yml mariadb
 docker stack deploy -c rabbitmq-stack.yml rabbit
+docker stack deploy -c ./webgrab/docker-compose.yml webgrab
 
 exit 0
