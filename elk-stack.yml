@@ -14,8 +14,6 @@ services:
       - elasticsearch_data:/usr/share/elasticsearch/data
     networks:
       - ingress_net_backend
-    ports:
-      - ${ELASTICSEARCH_PORT}:9200
     deploy:
       labels:
         - "traefik.backend=elasticsearch"
