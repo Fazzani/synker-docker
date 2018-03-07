@@ -106,7 +106,7 @@ services:
     networks:
       - ntw_front
 
-  visualizer:
+  visu:
     image: dockersamples/visualizer:stable
     stop_grace_period: 1m30s
     depends_on:
@@ -117,7 +117,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       labels:
-      - "traefik.backend=visualizer"
+      - "traefik.backend=visu"
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:visu.synker.ovh"
       - "traefik.enable=true"
