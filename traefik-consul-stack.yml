@@ -132,7 +132,7 @@ services:
           - node.role == manager
           - node.labels.size == small
     networks:
-      - ntw_front
+      - ingress_net_backend
 
   # who2:
   #   image: emilevauge/whoami
