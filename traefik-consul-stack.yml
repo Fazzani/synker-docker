@@ -122,7 +122,7 @@ services:
       - "traefik.frontend.rule=Host:visu.synker.ovh"
       - "traefik.enable=true"
       - "traefik.port=8080"
-      - "traefik.docker.network=ntw_front"
+      - "traefik.docker.network=ingress_net_backend"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
       restart_policy:
