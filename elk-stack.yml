@@ -39,7 +39,7 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana:${TAG:-6.2}
     ports:
-      - 5601:5601
+      - "5601:5601"
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:${ELASTICSEARCH_PORT:-9200}
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
