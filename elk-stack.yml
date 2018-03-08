@@ -56,7 +56,6 @@ services:
        - "traefik.enable=true"
        - "traefik.port=5601"
        - "traefik.docker.network=ingress_net_backend"
-      endpoint_mode: dnsrr
       mode: replicated
       replicas: 1
       placement:
