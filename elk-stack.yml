@@ -3,7 +3,7 @@ version: "3.3"
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-platinum:${TAG}
+    image: docker.elastic.co/elasticsearch/elasticsearch-platinum:${TAG:-6.2}
     environment:
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
       - discovery.zen.minimum_master_nodes=1
@@ -14,7 +14,7 @@ services:
     networks:
       - ingress_net_backend
     ports:
-      - ${ELASTICSEARCH_PORT}:9200
+      - ${ELASTICSEARCH_PORT:-9200}:9200
     deploy:
       labels:
         - "traefik.backend=elasticsearch"
@@ -37,13 +37,13 @@ services:
           - node.labels.size == large
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:${TAG}
+    image: docker.elastic.co/kibana/kibana:${TAG:-6.2}
     ports:
       - 5601:5601
     environment:
-      - ELASTICSEARCH_URL=http://elasticsearch:${ELASTICSEARCH_PORT}
-      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
-      - ELASTICSEARCH_PASSWORD=${ELASTIC_PASSWORD}
+      - ELASTICSEARCH_URL=http://elasticsearch:${ELASTICSEARCH_PORT:-9200}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
+      - ELASTICSEARCH_PASSWORD=${ELASTIC_PASSWORD:-changeme}
     networks:
       - ingress_net_backend
     deploy:
@@ -70,15 +70,15 @@ services:
       - kibana_data:/usr/share/kibana/data
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:${TAG}
+    image: docker.elastic.co/logstash/logstash:${TAG:-6.2}
     # configs: # https://docs.docker.com/compose/compose-file/#long-syntax
     #   - source: ls_config
     #     target: /usr/share/logstash/config/logstash.yml
     #     mode: 0440
     environment:
-      - ELASTICSEARCH_URL=http://elasticsearch:${ELASTICSEARCH_PORT}
-      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
-      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - ELASTICSEARCH_URL=http://elasticsearch:${ELASTICSEARCH_PORT:-9200}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD:-changeme}
     #   - 'xpack.monitoring.elasticsearch.password=${ELASTIC_PASSWORD}'
     #   - 'xpack.monitoring.elasticsearch.username=${ELASTICSEARCH_USERNAME}'
     #   - 'xpack.monitoring.elasticsearch.url="http://elasticsearch:9200"'

@@ -27,15 +27,15 @@ services:
       - filebeat_webgrab_sitepack:/usr/share/sitepack/:ro
       - filebeat_logs:/usr/share/filebeat/logs/
       - filebeat_data:/usr/share/filebeat/data/
-      #- /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
       # This is needed for filebeat to load container log path as specified in filebeat.yml
-      #- /var/lib/docker/containers/:/var/lib/docker/containers/:ro
+      - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
 
       # # This is needed for filebeat to load jenkins build log path as specified in filebeat.yml
       # - /var/lib/docker/volumes/jenkins_home/_data/jobs/:/var/lib/docker/volumes/jenkins_home/_data/jobs/:ro
 
       # This is needed for filebeat to load logs for system and auth modules
-      #- /var/log/:/var/log/:ro
+      - /var/log/:/var/log/:ro
       # This is needed for filebeat to load logs for auditd module
       # - /var/log/audit/:/var/log/audit/:ro
     # disable strict permission checks
@@ -86,4 +86,4 @@ networks:
 
 configs:
   fb_config:
-    file: filebeat.yml
+    file: filebeat-docker.yml

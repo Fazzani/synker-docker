@@ -1,0 +1,122 @@
+filebeat.prospectors:
+- type: log
+  enabled: true
+  paths:
+    - '/var/lib/docker/containers/*/*.log'
+  json.message_key: log
+  json.add_error_key: true
+  json.keys_under_root: true
+  processors:
+    - add_docker_metadata:
+        host: "unix:///var/run/docker.sock"
+    - add_cloud_metadata: ~
+    - add_locale: ~
+  multiline.pattern: "^\t|^[[:space:]]+(at|...)|^Caused by:"
+  multiline.match: after
+- type: log
+ # Change to true to enable this input configuration.
+  enabled: true
+  paths:
+    - /usr/share/sitepack/**/*.xml
+  tags: ["sitepack"]
+  tail_files: false
+  scan_frequency: 10s
+  multiline:
+    pattern: '<channel'
+    negate: true
+    match: after
+
+#==========================  Modules configuration ============================
+filebeat.modules:
+
+#------------------------------- System Module -------------------------------
+- module: system
+  # Syslog
+  syslog:
+    enabled: true
+    var.paths: ["/var/log/syslog*"]
+  auth:
+    enabled: true
+    var.paths: ["/var/log/auth.log*"]
+
+#------------------------------- Auditd Module -------------------------------
+# Does not look like Auditd is supported in Alpine linux: https://github.com/linuxkit/linuxkit/issues/52
+- module: auditd
+  log:
+    enabled: false
+
+#-------------------------- Elasticsearch output ------------------------------
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  username: elastic
+  password: changeme
+
+#============================== Dashboards =====================================
+setup.dashboards.enabled: true
+setup.kibana:
+  host: "kibana:5601"
+  username: elastic
+  password: changeme
+#----------------------------- Logstash output --------------------------------
+output.logstash:
+    hosts: ["logstash:5045"]
+    worker: 1
+    bulk_max_size: 1024
+#================================ Logging ======================================
+# There are three options for the log output: syslog, file, stderr.
+# Under Windows systems, the log files are per default sent to the file output,
+# under all other system per default to syslog.
+
+# Sets log level. The default log level is info.
+# Available log levels are: critical, error, warning, info, debug
+#logging.level: info
+logging.level: info
+
+# Enable debug output for selected components. To enable all selectors use ["*"]
+# Other available selectors are "beat", "publish", "service"
+# Multiple selectors can be chained.
+#logging.selectors: [ ]
+
+# Send all logging output to syslog. The default is false.
+#logging.to_syslog: true
+logging.to_syslog: false
+
+# If enabled, filebeat periodically logs its internal metrics that have changed
+# in the last period. For each metric that changed, the delta from the value at
+# the beginning of the period is logged. Also, the total values for
+# all non-zero internal metrics are logged on shutdown. The default is true.
+logging.metrics.enabled: true
+
+# The period after which to log the internal metrics. The default is 30s.
+#logging.metrics.period: 30s
+
+# Logging to rotating files files. Set logging.to_files to false to disable logging to
+# files.
+logging.to_files: true
+logging.files:
+  # Configure the path where the logs are written. The default is the logs directory
+  # under the home path (the binary location).
+  #path: /var/log/filebeat
+  path: /var/log/filebeat
+
+  # The name of the files where the logs are written to.
+  #name: filebeat
+  name: filebeat.log
+
+  # Configure log file size limit. If limit is reached, log file will be
+  # automatically rotated
+  #rotateeverybytes: 10485760 # = 10MB
+  rotateeverybytes: 10485760 # = 10MB
+
+  # Number of rotated log files to keep. Oldest files will be deleted first.
+  #keepfiles: 7
+  keepfiles: 7
+
+  # The permissions mask to apply when rotating log files. The default value is 0600.
+  # Must be a valid Unix-style file permissions mask expressed in octal notation.
+  #permissions: 0600
+
+# Set to true to log messages in json format.
+#logging.json: false
+console:
+    pretty: true
