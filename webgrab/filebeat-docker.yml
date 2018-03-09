@@ -45,18 +45,18 @@ filebeat.modules:
   log:
     enabled: false
 
-#-------------------------- Elasticsearch output ------------------------------
-output.elasticsearch:
-  hosts: ["elasticsearch:9200"]
-  username: elastic
-  password: changeme
+# #-------------------------- Elasticsearch output ------------------------------
+# output.elasticsearch:
+#   hosts: ["elasticsearch:9200"]
+#   username: elastic
+#   password: changeme
 
-#============================== Dashboards =====================================
-setup.dashboards.enabled: true
-setup.kibana:
-  host: "kibana:5601"
-  username: elastic
-  password: changeme
+# #============================== Dashboards =====================================
+# setup.dashboards.enabled: true
+# setup.kibana:
+#   host: "kibana:5601"
+#   username: elastic
+#   password: changeme
 #----------------------------- Logstash output --------------------------------
 output.logstash:
     hosts: ["logstash:5045"]
