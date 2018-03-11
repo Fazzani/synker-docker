@@ -9,7 +9,7 @@ services:
     configs:
       - source: webclient_config
         target: /app/appsettings.Production.json
-        mode: 0777
+        mode: 0444
     ports:
       - "88:80"
     networks:
@@ -43,8 +43,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
       - source: webapi_config
-        target: /app/appsettings.json
-        mode: 0744
+        target: /app/appsettings.Production.json
+        mode: 0444
     ports:
       - "89:80"
     networks:
