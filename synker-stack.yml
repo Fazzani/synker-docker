@@ -7,7 +7,7 @@ services:
     ports:
     - target: 80
       protocol: tcp
-      published: 89
+      published: 88
       mode: ingress
     networks:
       - ingress_net_backend
@@ -18,7 +18,7 @@ services:
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:synker.ovh"
       - "traefik.docker.network=ingress_net_backend"
-      - "traefik.port=89"
+      - "traefik.port=88"
       - "traefik.enable=true"
       replicas: 1
       update_config:
