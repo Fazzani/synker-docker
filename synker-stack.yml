@@ -1,4 +1,4 @@
-version: "3"
+version: "3.3"
 
 services:
 
@@ -7,8 +7,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
-      - source: webapi_config
-        target: /home/synker/webapi/appsettings.production.json
+      - source: webclient_config
+        target: /home/synker/webclient/appsettings.production.json
         mode: 0440
     ports:
       - "88:80"
