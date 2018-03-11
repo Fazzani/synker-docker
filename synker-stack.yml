@@ -30,7 +30,7 @@ services:
       placement:
         constraints: [node.role==manager]
       restart_policy:
-        condition: on-failure
+        condition: unless-stopped
     depends_on:
       - webapi
 
@@ -62,7 +62,7 @@ services:
       placement:
         constraints: [node.role==manager]
       restart_policy:
-        condition: on-failure
+        condition: unless-stopped
 
   brokers:
     image: synker/brokers:${SYNKER_VERSION:-latest}
@@ -74,7 +74,7 @@ services:
         constraints:
           - node.role == manager
       restart_policy:
-        condition: on-failure
+        condition: unless-stopped
     networks:
       - ingress_net_backend
 
@@ -84,7 +84,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     deploy:
       restart_policy:
-        condition: on-failure
+        condition: unless-stopped
       placement:
         constraints: 
           - node.role == manager
