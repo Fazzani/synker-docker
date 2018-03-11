@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.5"
 
 services:
 
@@ -104,6 +104,52 @@ services:
     networks:
       - ingress_net_backend
 
+  synkerdb:
+    image: mariadb:${MYSQL_VERSION}
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+      MYSQL_PASSWORD: /run/secrets/mysql_password
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_DATABASE: playlist
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - "8889:3306"
+    networks:
+      - ingress_net_backend
+    volumes:
+      - mariadb_data:/var/lib/mysql:rw
+    deploy:
+     mode: replicated
+     replicas: 1
+     restart_policy:
+       condition: on-failure
+       delay: 20m
+       max_attempts: 3
+       window: 120s
+     placement:
+       constraints: 
+         - node.labels.size == large
+    secrets:
+      - mysql_password
+      - mysql_root_password
+
+volumes:
+  mariadb_data:
+    driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=35.156.117.97"
+      device: ":/webgrab_volume/mariadb/data"
+  synker_data:
+    driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=35.156.117.97"
+      device: ":/webgrab_volume/synker/data"
+      
+secrets:
+  mysql_password:
+    file: mysql_password.txt
+  mysql_root_password:
+    file: mysql_root_password.txt
 networks:
   ingress_net_backend:
     external: true
@@ -113,10 +159,3 @@ configs:
     file: $PWD/synker/appsettings.webapi.json
   webclient_config:
     file: $PWD/synker/appsettings.webclient.json
-
-volumes:
-  synker_data:
-    driver_opts:
-      type: "nfs"
-      o: "nolock,soft,rw,addr=35.156.117.97"
-      device: ":/webgrab_volume/synker/data"
