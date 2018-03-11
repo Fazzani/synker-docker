@@ -30,7 +30,10 @@ services:
       placement:
         constraints: [node.role==manager]
       restart_policy:
-        condition: unless-stopped
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     depends_on:
       - webapi
 
@@ -62,7 +65,10 @@ services:
       placement:
         constraints: [node.role==manager]
       restart_policy:
-        condition: unless-stopped
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   brokers:
     image: synker/brokers:${SYNKER_VERSION:-latest}
@@ -74,7 +80,10 @@ services:
         constraints:
           - node.role == manager
       restart_policy:
-        condition: unless-stopped
+        condition: on-failure
+        delay: 15s
+        max_attempts: 5
+        window: 60s
     networks:
       - ingress_net_backend
 
@@ -84,7 +93,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     deploy:
       restart_policy:
-        condition: unless-stopped
+        condition: on-failure
+        delay: 15s
+        max_attempts: 5
+        window: 60s
       placement:
         constraints: 
           - node.role == manager
