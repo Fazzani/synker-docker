@@ -5,10 +5,7 @@ services:
   webclient:
     image: synker/webclient:${SYNKER_VERSION:-latest}
     ports:
-    - target: 80
-      protocol: tcp
-      published: 88
-      mode: ingress
+      - "88:80"
     networks:
       - ingress_net_backend
     deploy:
@@ -34,10 +31,7 @@ services:
   webapi:
     image: synker/webapi:${SYNKER_VERSION:-latest}
     ports:
-    - target: 80
-      protocol: tcp
-      published: 89
-      mode: ingress
+      - "89:80"
     networks:
       - ingress_net_backend
     deploy:
