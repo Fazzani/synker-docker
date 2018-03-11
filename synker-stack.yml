@@ -8,7 +8,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
       - source: webclient_config
-        target: /home/synker/webclient/appsettings.Production.json
+        target: /app/appsettings.Production.json
         mode: 0744
         uid: '1000'
         gid: '1000'
@@ -45,7 +45,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
       - source: webapi_config
-        target: /home/synker/webapi/appsettings.Production.json
+        target: /app/appsettings.Production.json
         mode: 0744
         uid: '1000'
         gid: '1000'
