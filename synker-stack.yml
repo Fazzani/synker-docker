@@ -9,7 +9,9 @@ services:
     configs:
       - source: webclient_config
         target: /home/synker/webclient/appsettings.Production.json
-        mode: 0440
+        mode: 0744
+        uid: '1000'
+        gid: '1000'
     ports:
       - "88:80"
     networks:
@@ -44,7 +46,9 @@ services:
     configs:
       - source: webapi_config
         target: /home/synker/webapi/appsettings.Production.json
-        mode: 0440
+        mode: 0744
+        uid: '1000'
+        gid: '1000'
     ports:
       - "89:80"
     networks:
