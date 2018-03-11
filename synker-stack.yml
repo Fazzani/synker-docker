@@ -38,12 +38,12 @@ services:
       - webapi
 
   webapi:
-    image: synker/webapi:latest
+    image: synker/webapi:${SYNKER_VERSION:-latest}
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
       - source: webapi_config
-        target: /app/appsettings.Production.json
+        target: /app/appsettings.json
         mode: 0744
         uid: '1000'
         gid: '1000'
