@@ -11,7 +11,7 @@ services:
         target: /app/appsettings.Production.json
         mode: 0444
     ports:
-      - "88:80"
+      - "56801:56801"
     networks:
       - ingress_net_backend
     deploy:
@@ -21,7 +21,7 @@ services:
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:synker.ovh"
       - "traefik.docker.network=ingress_net_backend"
-      - "traefik.port=88"
+      - "traefik.port=56801"
       - "traefik.enable=true"
       replicas: 1
       update_config:
@@ -46,7 +46,7 @@ services:
         target: /app/appsettings.Production.json
         mode: 0444
     ports:
-      - "89:80"
+      - "56800:56800"
     networks:
       - ingress_net_backend
     deploy:
@@ -56,7 +56,7 @@ services:
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:api.synker.ovh"
       - "traefik.docker.network=ingress_net_backend"
-      - "traefik.port=89"
+      - "traefik.port=56800"
       - "traefik.enable=true"
       replicas: 1
       update_config:
