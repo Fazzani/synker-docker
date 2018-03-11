@@ -33,5 +33,6 @@ docker stack deploy -c elk-stack.yml elk
 docker stack deploy -c mariadb-stack.yml mariadb
 docker stack deploy -c rabbitmq-stack.yml rabbit
 docker stack deploy -c ./webgrab/docker-compose.yml webgrab
+docker stack deploy -c synker-stack.yml synker
 
 exit 0
