@@ -63,7 +63,8 @@ services:
         parallelism: 1
         delay: 10s
       placement:
-        constraints: [node.role==manager]
+        constraints:
+          - node.labels.provider == ovh
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -144,7 +145,7 @@ volumes:
       type: "nfs"
       o: "nolock,soft,rw,addr=35.156.117.97"
       device: ":/webgrab_volume/synker/data"
-      
+
 secrets:
   mysql_password:
     file: mysql_password.txt
