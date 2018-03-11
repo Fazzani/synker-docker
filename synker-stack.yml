@@ -110,9 +110,9 @@ networks:
 
 configs:
   webapi_config:
-    file: $PWD/appsettings.webapi.json
+    file: $PWD/synker/appsettings.webapi.json
   webclient_config:
-    file: $PWD/appsettings.webclient.json
+    file: $PWD/synker/appsettings.webclient.json
 
 volumes:
   synker_data:
