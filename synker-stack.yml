@@ -45,8 +45,6 @@ services:
       - source: webapi_config
         target: /app/appsettings.json
         mode: 0744
-        uid: '1000'
-        gid: '1000'
     ports:
       - "89:80"
     networks:
