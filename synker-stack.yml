@@ -8,7 +8,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
       - source: webclient_config
-        target: /home/synker/webclient/appsettings.production.json
+        target: /home/synker/webclient/appsettings.Production.json
         mode: 0440
     ports:
       - "88:80"
@@ -43,7 +43,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
       - source: webapi_config
-        target: /home/synker/webapi/appsettings.production.json
+        target: /home/synker/webapi/appsettings.Production.json
         mode: 0440
     ports:
       - "89:80"
