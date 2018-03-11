@@ -9,9 +9,7 @@ services:
     configs:
       - source: webclient_config
         target: /app/appsettings.Production.json
-        mode: 0744
-        uid: '1000'
-        gid: '1000'
+        mode: 0777
     ports:
       - "88:80"
     networks:
@@ -40,7 +38,7 @@ services:
       - webapi
 
   webapi:
-    image: synker/webapi:${SYNKER_VERSION:-latest}
+    image: synker/webapi:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
