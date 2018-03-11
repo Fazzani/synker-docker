@@ -35,4 +35,7 @@ docker stack deploy -c rabbitmq-stack.yml rabbit
 docker stack deploy -c ./webgrab/docker-compose.yml webgrab
 docker stack deploy -c synker-stack.yml synker
 
+echo "Clean up ..."
+docker system prune -f
+
 exit 0

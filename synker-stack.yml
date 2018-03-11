@@ -4,6 +4,12 @@ services:
 
   webclient:
     image: synker/webclient:${SYNKER_VERSION:-latest}
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    configs:
+      - source: webapi_config
+        target: /home/synker/webapi/appsettings.production.json
+        mode: 0440
     ports:
       - "88:80"
     networks:
@@ -30,6 +36,12 @@ services:
 
   webapi:
     image: synker/webapi:${SYNKER_VERSION:-latest}
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    configs:
+      - source: webapi_config
+        target: /home/synker/webapi/appsettings.production.json
+        mode: 0440
     ports:
       - "89:80"
     networks:
@@ -54,6 +66,8 @@ services:
 
   brokers:
     image: synker/brokers:${SYNKER_VERSION:-latest}
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
     deploy:
       replicas: 1
       placement:
@@ -66,8 +80,8 @@ services:
 
   batch:
     image: synker/batch:${SYNKER_VERSION:-latest}
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
     deploy:
       restart_policy:
         condition: on-failure
@@ -81,6 +95,12 @@ services:
 networks:
   ingress_net_backend:
     external: true
+
+configs:
+  webapi_config:
+    file: $PWD/appsettings.webapi.json
+  webclient_config:
+    file: $PWD/appsettings.webclient.json
 
 volumes:
   synker_data:
