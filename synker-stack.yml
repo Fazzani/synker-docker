@@ -54,7 +54,7 @@ services:
       - "traefik.backend=webapi"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.frontend.entryPoints=http,https"
-      - "traefik.frontend.rule=Host:webapi.synker.ovh"
+      - "traefik.frontend.rule=Host:api.synker.ovh"
       - "traefik.docker.network=ingress_net_backend"
       - "traefik.port=89"
       - "traefik.enable=true"
@@ -110,9 +110,9 @@ networks:
 
 configs:
   webapi_config:
-    file: $PWD/appsettings.webapi.json
+    file: $PWD/synker/appsettings.webapi.json
   webclient_config:
-    file: $PWD/appsettings.webclient.json
+    file: $PWD/synker/appsettings.webclient.json
 
 volumes:
   synker_data:
