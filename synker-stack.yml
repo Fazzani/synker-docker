@@ -18,6 +18,7 @@ services:
       labels:
       - "traefik.backend=webclient"
       - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:synker.ovh"
       - "traefik.docker.network=ingress_net_backend"
@@ -53,6 +54,7 @@ services:
       labels:
       - "traefik.backend=webapi"
       - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:api.synker.ovh"
       - "traefik.docker.network=ingress_net_backend"
