@@ -1,6 +1,35 @@
 version: "3.4"
 
 services:
+   consul:
+    image: consul:${CONSUL_VERSION:-latest}
+    hostname: consul
+    command: agent -server -bootstrap-expect=1 -data-dir=/consul/data -ui -client=0.0.0.0 -disable-host-node-id -domain=consul.synker.ovh
+    ports:
+      - "8500:8500"
+    volumes:
+      - consul_data:/consul/data
+    environment:
+      - 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true, "server":true, "enable_debug":true, "disable_update_check": true}'
+      #- CONSUL_CLIENT_INTERFACE=eth0
+      - CONSUL_BIND_INTERFACE=eth0
+    deploy:
+      labels:
+      - "traefik.backend=consul"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:consul.synker.ovh"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.port=8500"
+      - "traefik.enable=true"
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+    networks:
+      - ntw_front
 
   traefik_init:
     image: traefik:${TRAEFIK_VERSION:-latest}
@@ -66,7 +95,7 @@ services:
       - ingress_net_backend
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    command: --consul --consul.endpoint=consul.synker.ovh:8500
+    command: --consul --consul.endpoint=consul:8500
     deploy:
       mode: global
       update_config:
@@ -76,37 +105,7 @@ services:
         constraints: [node.role==manager]
       restart_policy:
         condition: on-failure
-
-  consul:
-    image: consul:${CONSUL_VERSION:-latest}
-    hostname: consul
-    command: agent -server -bootstrap-expect=1 -data-dir=/consul/data -ui -client=0.0.0.0 -disable-host-node-id -domain=consul.synker.ovh
-    ports:
-      - "8500:8500"
-    volumes:
-      - consul_data:/consul/data
-    environment:
-      - 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true, "server":true, "enable_debug":true, "disable_update_check": true}'
-      #- CONSUL_CLIENT_INTERFACE=eth0
-      - CONSUL_BIND_INTERFACE=eth0
-    deploy:
-      labels:
-      - "traefik.backend=consul"
-      - "traefik.backend.loadbalancer.swarm=true"
-      - "traefik.frontend.entryPoints=http,https"
-      - "traefik.frontend.rule=Host:consul.synker.ovh"
-      - "traefik.docker.network=ntw_front"
-      - "traefik.port=8500"
-      - "traefik.enable=true"
-      replicas: 1
-      placement:
-        constraints:
-          - node.role == manager
-      restart_policy:
-        condition: on-failure
-    networks:
-      - ntw_front
-
+ 
   visu:
     image: dockersamples/visualizer:stable
     stop_grace_period: 1m30s
