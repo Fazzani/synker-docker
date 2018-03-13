@@ -1,7 +1,7 @@
 version: "3.4"
 
 services:
-   consul:
+  consul:
     image: consul:${CONSUL_VERSION:-latest}
     hostname: consul
     command: agent -server -bootstrap-expect=1 -data-dir=/consul/data -ui -client=0.0.0.0 -disable-host-node-id -domain=consul.synker.ovh
