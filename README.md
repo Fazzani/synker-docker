@@ -40,7 +40,7 @@
 - [ ] xlf files (Internationalisation)
 - [ ] Test dokcer remote api
 - [ ] [Appveyor for linux CI/CD][appveyor_linux]
-- [ ] Replace npm by Yarn
+- [x] Replace npm by [Yarn][vs2017_yarn]
 - [ ] Restore crontab and incrontab
 - [ ] Rex-ray (google cloud storage 5G, Ceph, GlusterFS, Network File System (NFS))
 - [ ] SSL Elk communication AND [keystore][keystore_logstash]
@@ -107,3 +107,4 @@ ENDSSH
 [mariadb_registry]:https://hub.docker.com/_/mariadb/
 [traefix_good_example]:https://medium.com/lucjuggery/docker-clouds-swarm-mode-feature-702bfae9bf23
 [appveyor_linux]:https://www.appveyor.com/docs/getting-started-with-appveyor-for-linux/
+[vs2017_yarn]:https://elanderson.net/2018/01/change-asp-net-core-from-npm-to-yarn/
