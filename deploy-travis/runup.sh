@@ -29,6 +29,7 @@ echo $MYSQL_ROOT_PASSWORD > mysql_password.txt
 export $(cat .env)
 
 docker stack deploy -c traefik-consul-stack.yml lb
+sleep 20
 docker stack deploy -c elk-stack.yml elk
 docker stack deploy -c rabbitmq-stack.yml rabbit
 docker stack deploy -c ./webgrab/docker-compose.yml webgrab
