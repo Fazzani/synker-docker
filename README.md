@@ -17,15 +17,15 @@
 - [x] WebGrab Synker from commands [docker version](https://github.com/linuxserver/docker-webgrabplus)
 - [ ] [Dockbeat](https://github.com/Ingensi/dockbeat) to monitor and log docker deamon into elasticsearch
 - [ ] Synker
-  - [ ] WebApi       scaled on 2 instances
-  - [ ] WebClient    scaled on 2 instances
+  - [x] WebApi       scaled on 2 instances
+  - [x] WebClient    scaled on 2 instances
   - [ ] Batch
   - [ ] Broker
 - [ ] Reverse proxy and LB [traefik][ex_traefik] [good example][traefix_good_example]
   - [ ] Circuit breaker
   - [ ] Sub domains configuration
   - [x] Lets Encrypt certification (broken => there is an issue on that)
-  - [ ] Create internal network for backend services
+  - [x] Create internal network for backend services
   - [x] LB
 - [ ] Fix auto deploy for appveyor and [travis ci](#travis-deploy) [example travis][example_travis]
 - [ ] Monitoring/alerting all the cluster (Prometheus)
@@ -37,6 +37,7 @@
 
 ### Others
 
+- [ ] xlf files (Internationalisation)
 - [ ] Test dokcer remote api
 - [ ] [Appveyor for linux CI/CD][appveyor_linux]
 - [ ] Replace npm by Yarn
