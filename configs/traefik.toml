@@ -44,6 +44,6 @@ storageFile = "acme.json"
 
   
 [consul]
-endpoint = "consul.local:8500"
+endpoint = "consul:8500"
 prefix = "traefik"
 watch = true
