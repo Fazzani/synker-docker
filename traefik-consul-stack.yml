@@ -40,13 +40,13 @@ services:
     ports:
       - target: 80
         published: 80
-        mode: host
+        mode: ingress
       - target: 443
         published: 443
-        mode: host
+        mode: ingress
       - target: 8080
-        published: 8082
-        mode: host
+        published: 8080
+        mode: ingress
     networks:
       - ntw_front
       - ingress_net_backend
@@ -58,7 +58,7 @@ services:
       --docker.watch \
       --logLevel=WARN \
       --web \
-      --web.address=:8082
+      --web.address=:8080
     configs:
       - source: traefik.toml
         target: /etc/traefik/traefik.toml
