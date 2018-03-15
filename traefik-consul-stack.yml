@@ -14,6 +14,9 @@ services:
       - 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true, "server":true, "enable_debug":true, "disable_update_check": true}'
       #- CONSUL_CLIENT_INTERFACE=eth0
       - CONSUL_BIND_INTERFACE=eth0
+    configs:
+      - source: traefik.toml
+        target: /etc/traefik/traefik.toml
     deploy:
       labels:
       - "traefik.backend=consul"
@@ -103,3 +106,6 @@ volumes:
       type: "nfs"
       o: "nolock,soft,rw,addr=35.156.117.97"
       device: ":/webgrab_volume/consul/data"
+configs:
+  traefik.toml:
+    file: ./configs/traefik.toml
