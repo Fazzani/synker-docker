@@ -14,9 +14,6 @@ services:
       - 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true, "server":true, "enable_debug":true, "disable_update_check": true}'
       #- CONSUL_CLIENT_INTERFACE=eth0
       - CONSUL_BIND_INTERFACE=eth0
-    configs:
-      - source: traefik.toml
-        target: /etc/traefik/traefik.toml
     deploy:
       labels:
       - "traefik.backend=consul"
@@ -62,6 +59,9 @@ services:
       --logLevel=WARN \
       --web \
       --web.address=:8080
+    configs:
+      - source: traefik.toml
+        target: /etc/traefik/traefik.toml
     deploy:
       mode: global
       update_config:
