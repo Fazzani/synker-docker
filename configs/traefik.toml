@@ -18,7 +18,7 @@ defaultEntryPoints = ["http", "https"]
 [retry]
 
 [web]
-  address = ":8081"
+  address = ":8082"
 
 [docker]
 endpoint = "unix:///var/run/docker.sock"
