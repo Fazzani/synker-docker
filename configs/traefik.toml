@@ -35,7 +35,7 @@ entryPoint = "https"
 email = "support@synker.ovh"
 caServer = "https://acme-staging.api.letsencrypt.org/directory" # Staging Environment
 storage = "traefik/acme/account"
-storageFile = "acme.json"
+#storageFile = "acme.json"
 onHostRule = true
 
 [[acme.domains]]
@@ -43,6 +43,6 @@ onHostRule = true
   sans = ["consul.synker.ovh","vizu.synker.ovh", "kibana.synker.ovh", "elastic.synker.ovh", "www.synker.ovh", "api.synker.ovh"]
 
 [consul]
-endpoint = "consul:8500"
-prefix = "traefik"
-watch = true
+  endpoint = "consul:8500"
+  prefix = "traefik"
+  watch = true
