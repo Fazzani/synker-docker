@@ -52,13 +52,6 @@ services:
       - ingress_net_backend
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    command: --docker \
-      --docker.swarmmode \
-      --docker.domain=synker.ovh \
-      --docker.watch \
-      --logLevel=WARN \
-      --web \
-      --web.address=:8080
     configs:
       - source: traefik.toml
         target: /etc/traefik/traefik.toml
