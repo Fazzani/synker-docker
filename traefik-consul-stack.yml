@@ -76,35 +76,6 @@ services:
           cpus: '0.05'
           memory: 64M
 
- 
-  visu:
-    image: dockersamples/visualizer:stable
-    stop_grace_period: 1m30s
-    depends_on:
-      - traefik
-    ports:
-      - "8081:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    deploy:
-      labels:
-      - "traefik.backend=visu"
-      - "traefik.frontend.entryPoints=http,https"
-      - "traefik.frontend.rule=Host:visu.synker.ovh"
-      - "traefik.enable=true"
-      - "traefik.port=8080"
-      - "traefik.docker.network=ingress_net_backend"
-      - "traefik.backend.loadbalancer.swarm=true"
-      - "traefik.backend.loadbalancer.method=drr"
-      restart_policy:
-        condition: on-failure
-      placement:
-        constraints: 
-          - node.role == manager
-          - node.labels.size == small
-    networks:
-      - ingress_net_backend
-
 networks:
   ingress_net_backend:
     external: true
