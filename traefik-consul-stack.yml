@@ -34,7 +34,7 @@ services:
       - ntw_front
 
   traefik:
-    image: traefik:1.5
+    image: traefik:${TRAEFIK_VERSION:-latest}
     ports:
     - target: 80
       protocol: tcp
