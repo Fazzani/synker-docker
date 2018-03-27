@@ -19,6 +19,6 @@ docker network rm ingress_net_backend
 
 echo "Clean up ..."
 docker system prune --force
-docker system volume --force
+docker volume prune --force
 
 exit 0
