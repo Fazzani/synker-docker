@@ -4,7 +4,7 @@ services:
   consul:
     image: consul:${CONSUL_VERSION:-latest}
     hostname: consul
-    command: agent -server -bootstrap-expect=1 -ui -client=0.0.0.0 -disable-host-node-id debug 
+    command: agent -server -bootstrap-expect=1 -ui -client=0.0.0.0 -disable-host-node-id 
     ports:
       - "8500:8500"
       - "53:53/udp"
@@ -164,7 +164,6 @@ services:
   #     - traefik.backend.loadbalancer.swarm=true
   #     - traefik.backend.loadbalancer.method=drr
 
-  
 networks:
   ingress_net_backend:
     external: true
