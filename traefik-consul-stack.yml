@@ -4,10 +4,10 @@ services:
   consul:
     image: consul:${CONSUL_VERSION:-latest}
     hostname: consul
-    command: agent -server -bootstrap-expect=1 -data-dir=/consul/data -ui -client=0.0.0.0 -disable-host-node-id -domain=consul.synker.ovh
+    command: agent -server -bootstrap-expect=1 -ui -client=0.0.0.0 -disable-host-node-id debug 
     ports:
       - "8500:8500"
-      - "53:53"
+      - "53:53/udp"
     volumes:
       - consul_data:/consul/data
     environment:
@@ -95,7 +95,7 @@ services:
       - ingress_net_backend
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    command: --consul --consul.endpoint="consul.synker.ovh:8500"
+    command: --consul --consul.endpoint=consul:8500
     deploy:
       mode: global
       update_config:
