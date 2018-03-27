@@ -60,7 +60,7 @@ services:
       - "--docker.watch"
       - "--docker.exposedbydefault"
       - "--consul"
-      - "--consul.endpoint=consul:8500"
+      - "--consul.endpoint=consul.synker.ovh:8500"
       - "--consul.prefix=traefik"
       #- --consulcatalog=true
       #- --consulcatalog.endpoint=consul.synker.ovh:8500

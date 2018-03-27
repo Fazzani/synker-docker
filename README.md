@@ -35,6 +35,7 @@
 - [ ] Install Vault
 - [ ] Install [Tvheadend]
 - [ ] Uprading Docker
+- [ ] Gluster fs
 
 ### Others
 
