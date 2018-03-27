@@ -34,6 +34,7 @@
 - [ ] Redis
 - [ ] Install Vault
 - [ ] Install [Tvheadend]
+- [ ] Uprading Docker
 
 ### Others
 
