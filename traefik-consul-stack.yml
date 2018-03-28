@@ -164,6 +164,8 @@ services:
   #     - traefik.backend.loadbalancer.method=drr
 
 networks:
+  ingress_net_backend:
+    external: true
   ntw_front:
     external: true
 
