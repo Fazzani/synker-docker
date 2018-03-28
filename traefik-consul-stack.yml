@@ -3,7 +3,6 @@ version: "3.4"
 services:
   consul:
     image: consul:${CONSUL_VERSION:-latest}
-    hostname: consul
     command: agent -server -bootstrap-expect=1 -ui -disable-host-node-id 
     volumes:
       - consul_data:/consul/data
@@ -57,7 +56,7 @@ services:
       - "--docker.watch"
       - "--docker.exposedbydefault"
       - "--consul"
-      - "--consul.endpoint=consul:8500"
+      - "--consul.endpoint=consul.synker.ovh:8500"
       - "--consul.prefix=traefik"
       #- --consulcatalog=true
       #- --consulcatalog.endpoint=consul.synker.ovh:8500
@@ -91,7 +90,7 @@ services:
       - ntw_front
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    command: --consul --consul.endpoint=consul:8500
+    command: --consul --consul.endpoint=consul.synker.ovh:8500
     deploy:
       mode: global
       update_config:
