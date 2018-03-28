@@ -20,7 +20,7 @@ services:
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
       - "traefik.frontend.entryPoints=http,https"
-      - "traefik.frontend.rule=Host:www.synker.ovh"
+      - "traefik.frontend.rule=Host:synker.ovh"
       - "traefik.docker.network=ntw_front"
       - "traefik.port=56801"
       - "traefik.enable=true"
