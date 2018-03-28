@@ -88,7 +88,7 @@ services:
         max_attempts: 5
         window: 60s
     networks:
-      - ingress_net_backend
+      - ntw_front
 
   batch:
     image: synker/batch:${SYNKER_VERSION:-latest}
@@ -105,7 +105,7 @@ services:
           - node.role == manager
           - node.labels.size == small
     networks:
-      - ingress_net_backend
+      - ntw_front
 
   synkerdb:
     image: mariadb:${MYSQL_VERSION}
@@ -118,7 +118,7 @@ services:
     ports:
       - "8889:3306"
     networks:
-      - ingress_net_backend
+      - ntw_front
     volumes:
       - mariadb_data:/var/lib/mysql:rw
     deploy:
