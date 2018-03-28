@@ -100,7 +100,7 @@ services:
         constraints: [node.role==manager]
       restart_policy:
         condition: on-failure
- 
+
   visu:
     image: dockersamples/visualizer:stable
     stop_grace_period: 1m30s
