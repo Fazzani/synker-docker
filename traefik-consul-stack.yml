@@ -85,15 +85,9 @@ services:
       - traefik_init
       - consul
     ports:
-      - target: 80
-        published: 80
-        mode: host
-      - target: 443
-        published: 443
-        mode: host
-      - target: 8080
-        published: 8080
-        mode: host
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
     networks:
       - ntw_front
     volumes:
