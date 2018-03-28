@@ -13,7 +13,7 @@ services:
         - "traefik.frontend.entryPoints=http,https"
         - "traefik.enable=true"
         - "traefik.port=15672"
-        - "traefik.docker.network=ingress_net_backend"
+        - "traefik.docker.network=ntw_front"
         - "traefik.backend.loadbalancer.swarm=true"
         - "traefik.backend.loadbalancer.method=drr"
       replicas: 1
@@ -33,7 +33,7 @@ services:
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     networks:
-      - ingress_net_backend
+      - ntw_front
 
   rabbit2:
     image: bijukunjummen/rabbitmq-server
@@ -48,7 +48,7 @@ services:
         - "traefik.frontend.entryPoints=http,https"
         - "traefik.enable=false"
         - "traefik.port=8001"
-        - "traefik.docker.network=ingress_net_backend"
+        - "traefik.docker.network=ntw_front"
         - "traefik.backend.loadbalancer.swarm=true"
         - "traefik.backend.loadbalancer.method=drr"
       replicas: 1
@@ -70,7 +70,7 @@ services:
       - CLUSTER_WITH=rabbit1
       - RAM_NODE=true
     networks:
-      - ingress_net_backend
+      - ntw_front
     depends_on:
       - rabbit1
 volumes:
@@ -80,5 +80,5 @@ volumes:
       o: "nolock,soft,rw,addr=35.156.117.97"
       device: ":/webgrab_volume/rabbitmq/data"
 networks:
-  ingress_net_backend:
+  ntw_front:
     external: true

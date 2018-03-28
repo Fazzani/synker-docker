@@ -13,7 +13,7 @@ services:
     ports:
       - "8889:3306"
     networks:
-      - ingress_net_backend
+      - ntw_front
     volumes:
       - mariadb_data:/var/lib/mysql:rw
     deploy:
@@ -42,5 +42,5 @@ secrets:
   mysql_root_password:
     file: mysql_root_password.txt
 networks:
-  ingress_net_backend:
+  ntw_front:
     external: true

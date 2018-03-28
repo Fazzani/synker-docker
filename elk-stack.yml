@@ -12,7 +12,7 @@ services:
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     networks:
-      - ingress_net_backend
+      - ntw_front
     ports:
       - ${ELASTICSEARCH_PORT:-9200}:9200
     deploy:
@@ -22,7 +22,7 @@ services:
         - "traefik.frontend.entryPoints=http,https"
         - "traefik.port=9200"
         - "traefik.enable=true"
-        - "traefik.docker.network=ingress_net_backend"
+        - "traefik.docker.network=ntw_front"
         - "traefik.backend.loadbalancer.swarm=true"
         - "traefik.backend.loadbalancer.method=drr"
       mode: replicated
@@ -45,7 +45,7 @@ services:
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
       - ELASTICSEARCH_PASSWORD=${ELASTIC_PASSWORD:-changeme}
     networks:
-      - ingress_net_backend
+      - ntw_front
     deploy:
       labels:
        - "traefik.backend=kibana"
@@ -55,7 +55,7 @@ services:
        - "traefik.backend.loadbalancer.method=drr"
        - "traefik.enable=true"
        - "traefik.port=5601"
-       - "traefik.docker.network=ingress_net_backend"
+       - "traefik.docker.network=ntw_front"
       mode: replicated
       replicas: 1
       placement:
@@ -88,7 +88,7 @@ services:
       - "9600:9600"
       - "5045:5045"
     networks:
-      - ingress_net_backend
+      - ntw_front
     volumes:
       - logstash_config:/usr/share/logstash/config
       - logstash_pipeline:/usr/share/logstash/pipeline
@@ -145,5 +145,5 @@ configs:
     file: $PWD/logstash/config/logstash.yml
 
 networks:
-  ingress_net_backend:
+  ntw_front:
     external: true

@@ -13,7 +13,7 @@ services:
     ports:
       - "56801:56801"
     networks:
-      - ingress_net_backend
+      - ntw_front
     deploy:
       labels:
       - "traefik.backend=webclient"
@@ -21,7 +21,7 @@ services:
       - "traefik.backend.loadbalancer.method=drr"
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:synker.ovh"
-      - "traefik.docker.network=ingress_net_backend"
+      - "traefik.docker.network=ntw_front"
       - "traefik.port=56801"
       - "traefik.enable=true"
       replicas: 1
@@ -49,7 +49,7 @@ services:
     ports:
       - "56800:56800"
     networks:
-      - ingress_net_backend
+      - ntw_front
     deploy:
       labels:
       - "traefik.backend=webapi"
@@ -57,7 +57,7 @@ services:
       - "traefik.backend.loadbalancer.method=drr"
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:api.synker.ovh"
-      - "traefik.docker.network=ingress_net_backend"
+      - "traefik.docker.network=ntw_front"
       - "traefik.port=56800"
       - "traefik.enable=true"
       replicas: 1
@@ -154,7 +154,7 @@ secrets:
   mysql_root_password:
     file: mysql_root_password.txt
 networks:
-  ingress_net_backend:
+  ntw_front:
     external: true
 
 configs:
