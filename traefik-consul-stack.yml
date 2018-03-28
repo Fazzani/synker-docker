@@ -6,6 +6,9 @@ services:
     command: agent -server -bootstrap-expect=1 -ui -disable-host-node-id 
     volumes:
       - consul_data:/consul/data
+    ports:
+      - "8500:8500"
+      - "53:53/udp"
     environment:
       - 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true, "server":true, "enable_debug":true, "disable_update_check": true}'
       - CONSUL_CLIENT_INTERFACE=eth0
