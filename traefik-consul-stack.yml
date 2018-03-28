@@ -6,12 +6,7 @@ services:
     hostname: consul
     command: agent -server -bootstrap-expect=1 -ui -client=0.0.0.0
     ports:
-      - "8300:8300"
-      - "8301:8301"
-      - "8302:8302"
-      - "8400:8400"
       - "8500:8500"
-      - "8600:53/udp"
     volumes:
       - consul_data:/consul/data
     environment:
