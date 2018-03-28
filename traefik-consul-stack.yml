@@ -4,11 +4,14 @@ services:
   consul:
     image: consul:${CONSUL_VERSION:-latest}
     hostname: consul
-    command: agent -server -bootstrap-expect=1 -ui -client=0.0.0.0 -disable-host-node-id 
+    command: agent -server -bootstrap-expect=1 -ui -client=0.0.0.0
     ports:
-      - "8500:8500"
       - "8300:8300"
-      - "53:53/udp"
+      - "8301:8301"
+      - "8302:8302"
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:53/udp"
     volumes:
       - consul_data:/consul/data
     environment:
