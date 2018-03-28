@@ -109,6 +109,7 @@ services:
 
   synkerdb:
     image: mariadb:${MYSQL_VERSION}
+    hostname: synkerdb
     environment:
       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
       MYSQL_PASSWORD: /run/secrets/mysql_password
