@@ -41,8 +41,12 @@ services:
       - "--logLevel=WARN"
       - "--web"
       - "--web.address=:8080"
-      - "--entrypoints=Name:http Address::80"
-      - "--entrypoints=Name:https Address::443 TLS"
+      - --web.readonly
+      - --checknewversion=true
+      - --insecureskipverify=true
+      - --web.statistics
+      - "--entrypoints=Name:http Address::80 ProxyProtocol:true Compress:true"
+      - "--entrypoints=Name:https Address::443 TLS Compress:true ProxyProtocol:true"
       - "--defaultentrypoints=http,https"
       - "--acme"
       - "--acme.domains=synker.ovh,www.synker.ovh,api.synker.ovh,visu.synker.ovh,kibana.synker.ovh,elastic.synker.ovh,rabbitmq.synker.ovh"
