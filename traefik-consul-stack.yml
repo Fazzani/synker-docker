@@ -57,7 +57,7 @@ services:
       - "--docker.swarmmode"
       - "--docker.domain=synker.ovh"
       - "--docker.watch"
-      - "--docker.exposedbydefault"
+      - "--docker.exposedbydefault=false"
       - "--consul"
       - "--consul.endpoint=consul.synker.ovh:8500"
       - "--consul.prefix=traefik"
@@ -164,8 +164,10 @@ services:
 
 networks:
   ingress_net_backend:
+    driver: overlay
     external: true
   ntw_front:
+    driver: overlay
     external: true
 
 volumes:
