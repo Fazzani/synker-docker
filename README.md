@@ -37,6 +37,10 @@
 - [ ] Uprading Docker
 - [x] Gluster fs
 - [ ] Fix rabbitmq docker service not go on when running rundown.sh script
+- [ ] ansible enhancements
+  - [ ] sudo su && echo "vm.max_map_count=262144" >> /etc/sysctl.conf && sudo sysctl -w vm.max_map_count=262144
+  - [ ] add label on node when init swarm
+  - [ ] Creating and mounting nfs volume (/mnt/nfs)
 
 ### Others
 
