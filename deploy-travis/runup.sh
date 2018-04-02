@@ -4,6 +4,29 @@
 # Deploy script for Synker docker stack
 ### ### ### ### ### ### ### ### ### ### ###
 
+set +e
+mkdir /mnt/nfs/elastic ||
+mkdir /mnt/nfs/elastic/data ||
+mkdir /mnt/nfs/consul        ||
+mkdir /mnt/nfs/consul/data ||
+mkdir /mnt/nfs/synker ||
+mkdir /mnt/nfs/synker/data ||
+mkdir /mnt/nfs/mariadb/data ||
+mkdir /mnt/nfs/mariadb ||
+mkdir /mnt/nfs/mariadb/data ||
+mkdir /mnt/nfs/rabbitmq ||
+mkdir /mnt/nfs/rabbitmq/data ||
+mkdir /mnt/nfs/logstash ||
+mkdir /mnt/nfs/kibana ||
+mkdir /mnt/nfs/kibana/data ||
+mkdir /mnt/nfs/filebeat ||
+mkdir /mnt/nfs/filebeat/data ||
+mkdir /mnt/nfs/filebeat/logs ||
+mkdir /mnt/nfs/webgrab ||
+mkdir /mnt/nfs/webgrab/config ||
+mkdir /mnt/nfs/webgrab/data ||
+echo "echo"
+
 echo "Installing stacks ..."
 REMOTE_USER=$1
 MYSQL_PASSWORD=$2

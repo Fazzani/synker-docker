@@ -84,6 +84,14 @@ ENDSSH
 
 ```
 
+### Docker node labels
+
+docker node update --label-add size=large --label-add provider=ovh vps448126
+docker node update --label-add size=medium --label-add provider=ovh vps507934
+docker node update --label-add size=small --label-add provider=arub arub1
+docker node update --label-add size=small --label-add provider=arub arub2
+docker node update --label-add size=small --label-add provider=arub arub3
+
 ### travis encrypt file
 
 ```sh
