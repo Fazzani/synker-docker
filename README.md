@@ -88,7 +88,7 @@ ENDSSH
 
 ```sh
 travis login fazzani
-tar cvf secrets.tar deploy_rsa.pub synker && travis encrypt-file secrets.tar --add
+tar cvf secrets.tar deploy_rsa synker && travis encrypt-file secrets.tar --add
 ```
 
 [beats]: https://www.elastic.co/products/beats
