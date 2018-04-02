@@ -112,33 +112,33 @@ volumes:
       type: "nfs"
       #o: "rw,relatime,vers=4.1,rsize=65536,wsize=65536,namlen=255,nolock,soft,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,local_lock=none,no_root_squash,addr=35.156.117.97"
       o: "nolock,soft,rw,addr=35.156.117.97"
-      device: ":/webgrab_volume/elastic/data"
+      device: ":/mnt/nfs/elastic/data"
   kibana_data:
      driver_opts:
       type: "nfs"
       o: "nolock,soft,rw,addr=35.156.117.97"
-      device: ":/webgrab_volume/kibana/data"
+      device: ":/mnt/nfs/kibana/data"
   
   logstash_config:
     driver_opts:
       type: "nfs"
       o: "addr=35.156.117.97,nolock,soft,rw"
-      device: ":/webgrab_volume/logstash/config"
+      device: ":/mnt/nfs/logstash/config"
   logstash_pipeline:
     driver_opts:
       type: "nfs"
       o: "addr=35.156.117.97,nolock,soft,rw"
-      device: ":/webgrab_volume/logstash/pipeline"
+      device: ":/mnt/nfs/logstash/pipeline"
   logstash_data:
     driver_opts:
       type: "nfs"
       o: "addr=35.156.117.97,nolock,soft,rw"
-      device: ":/webgrab_volume/logstash/data"
+      device: ":/mnt/nfs/logstash/data"
   logstash_log:
     driver_opts:
       type: "nfs"
       o: "addr=35.156.117.97,nolock,soft,rw"
-      device: ":/webgrab_volume/logstash/log"
+      device: ":/mnt/nfs/logstash/log"
 
 configs:
   ls_config:

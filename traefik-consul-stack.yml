@@ -179,4 +179,4 @@ volumes:
     driver_opts:
       type: "nfs"
       o: "nolock,soft,rw,addr=35.156.117.97"
-      device: ":/webgrab_volume/consul/data"
+      device: ":/mnt/nfs/consul/data"

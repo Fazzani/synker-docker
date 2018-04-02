@@ -78,7 +78,7 @@ volumes:
     driver_opts:
       type: "nfs"
       o: "nolock,soft,rw,addr=35.156.117.97"
-      device: ":/webgrab_volume/rabbitmq/data"
+      device: ":/mnt/nfs/rabbitmq/data"
 networks:
   ntw_front:
     external: true

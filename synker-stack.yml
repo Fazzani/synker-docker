@@ -142,12 +142,12 @@ volumes:
     driver_opts:
       type: "nfs"
       o: "nolock,soft,rw,addr=35.156.117.97"
-      device: ":/webgrab_volume/mariadb/data"
+      device: ":/mnt/nfs/mariadb/data"
   synker_data:
     driver_opts:
       type: "nfs"
       o: "nolock,soft,rw,addr=35.156.117.97"
-      device: ":/webgrab_volume/synker/data"
+      device: ":/mnt/nfs/synker/data"
 
 secrets:
   mysql_password:

@@ -35,7 +35,7 @@ volumes:
     driver_opts:
       type: "nfs"
       o: "nolock,soft,rw,addr=35.156.117.97"
-      device: ":/webgrab_volume/mariadb/data"
+      device: ":/mnt/nfs/mariadb/data"
 secrets:
   mysql_password:
     file: mysql_password.txt
