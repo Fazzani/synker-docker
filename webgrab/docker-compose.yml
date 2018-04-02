@@ -58,27 +58,27 @@ volumes:
   config:
     driver_opts:
       type: "nfs"
-      o: "nolock,soft,rw,addr=35.156.117.97"
+      o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/webgrab/config"
   data:
     driver_opts:
       type: "nfs"
-      o: "nolock,soft,rw,addr=35.156.117.97"
+      o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/webgrab/data"
   filebeat_webgrab_sitepack:
     driver_opts:
       type: "nfs"
-      o: "nolock,soft,rw,addr=35.156.117.97"
+      o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/webgrab/config/siteini.pack"
   filebeat_data:
     driver_opts:
       type: "nfs"
-      o: "addr=35.156.117.97,nolock,soft,rw"
+      o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/filebeat/data"
   filebeat_logs:
     driver_opts:
       type: "nfs"
-      o: "addr=35.156.117.97,nolock,soft,rw"
+      o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/filebeat/logs"
 networks:
   ingress_net_backend:

@@ -34,7 +34,7 @@ volumes:
   mariadb_data:
     driver_opts:
       type: "nfs"
-      o: "nolock,soft,rw,addr=35.156.117.97"
+      o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/mariadb/data"
 secrets:
   mysql_password:
