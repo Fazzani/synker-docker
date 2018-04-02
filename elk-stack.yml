@@ -142,7 +142,7 @@ volumes:
 
 configs:
   ls_config:
-    file: $PWD/logstash/config/logstash.yml
+    file: logstash/config/logstash.yml
 
 networks:
   ntw_front:
