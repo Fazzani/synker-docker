@@ -25,7 +25,7 @@ mkdir /mnt/nfs/filebeat/logs ||
 mkdir /mnt/nfs/webgrab ||
 mkdir /mnt/nfs/webgrab/config ||
 mkdir /mnt/nfs/webgrab/data ||
-echo "echo"
+echo "creating directories ok..."
 
 echo "Installing stacks ..."
 REMOTE_USER=$1
