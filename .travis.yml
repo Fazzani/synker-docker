@@ -9,6 +9,8 @@ branches:
   - master
 before_install:
 - openssl aes-256-cbc -K $encrypted_085cb5f542b9_key -iv $encrypted_085cb5f542b9_iv
+  -in deploy_rsa.pub.enc -out deploy_rsa.pub -d
+- openssl aes-256-cbc -K $encrypted_085cb5f542b9_key -iv $encrypted_085cb5f542b9_iv
   -in secret.tar.enc -out secret.tar -d
 - tar xvf secret.tar
 env:
