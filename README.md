@@ -78,11 +78,17 @@ docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
 `SSH connection and executing remote commands`
 
 ```sh
-
 ssh user@host <<'ENDSSH'
 #commands to run on remote host
 ENDSSH
 
+```
+
+### travis encrypt file
+
+```sh
+travis login fazzani
+tar cvf secrets.tar deploy_rsa.pub synker && travis encrypt-file secrets.tar
 ```
 
 [beats]: https://www.elastic.co/products/beats
