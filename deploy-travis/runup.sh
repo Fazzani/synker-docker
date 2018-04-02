@@ -11,7 +11,6 @@ mkdir /mnt/nfs/consul        ||
 mkdir /mnt/nfs/consul/data ||
 mkdir /mnt/nfs/synker ||
 mkdir /mnt/nfs/synker/data ||
-mkdir /mnt/nfs/mariadb/data ||
 mkdir /mnt/nfs/mariadb ||
 mkdir /mnt/nfs/mariadb/data ||
 mkdir /mnt/nfs/rabbitmq ||
@@ -25,7 +24,7 @@ mkdir /mnt/nfs/filebeat/logs ||
 mkdir /mnt/nfs/webgrab ||
 mkdir /mnt/nfs/webgrab/config ||
 mkdir /mnt/nfs/webgrab/data ||
-echo "creating directories ok..."
+echo "Creating directories ok..."
 
 echo "Installing stacks ..."
 REMOTE_USER=$1
