@@ -58,10 +58,15 @@ services:
        - "traefik.docker.network=ntw_front"
       mode: replicated
       replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 3m
+        max_attempts: 3
+        window: 120s
       placement:
         constraints: 
           - node.role == worker
-          - node.labels.size == medium
+         # - node.labels.size == medium
     # healthcheck:
     #   test: wget -qO- http://kibana:5601 > /dev/null
     #   interval: 20m
