@@ -36,6 +36,7 @@
 - [ ] Install [Tvheadend]
 - [ ] Uprading Docker
 - [x] Gluster fs
+- [ ] Fix rabbitmq docker service not go on when running rundown.sh script
 
 ### Others
 
