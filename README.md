@@ -94,9 +94,12 @@ docker node update --label-add size=small --label-add provider=arub arub3
 
 ### travis encrypt file
 
+In bash windows
+
 ```sh
-travis login fazzani
-tar cvf secrets.tar deploy_rsa synker && travis encrypt-file secrets.tar --add
+cd /mnt/c/Users/Heni/Source/Repos/synker-docker
+tar cvf secret.tar ./synker/* deploy_rsa
+travis encrypt-file secret.tar --add
 ```
 
 [beats]: https://www.elastic.co/products/beats

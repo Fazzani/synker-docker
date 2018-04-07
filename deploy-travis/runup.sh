@@ -30,6 +30,7 @@ echo "Installing stacks ..."
 REMOTE_USER=${1:-pl}
 MYSQL_PASSWORD=${2:-password}
 MYSQL_ROOT_PASSWORD=${3:-root}
+MYSQL_DATABASE=${4:-playlist}
 
 set -euox
 
@@ -59,5 +60,12 @@ docker stack deploy -c synker-stack.yml synker
 
 echo "Clean up ..."
 docker system prune -f
+
+# Restoring maridb data 
+# Must be running on mariadb host container
+SERVICE_ID=$(docker service ps -q -f desired-state=running  synker_synkerdb | head -1)
+CONTAINER_ID=$(docker inspect --format "{{.Status.ContainerStatus.ContainerID}}" $SERVICE_ID | head -1)
+docker exec -e MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD" -it $CONTAINER_ID \
+mysql -u root --password=$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE --force < ./synker/playlist.dump-2018-02-28.sql
 
 exit 0
