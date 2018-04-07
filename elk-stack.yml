@@ -21,7 +21,7 @@ services:
     deploy:
       labels:
         - "traefik.backend=elasticsearch"
-        - "traefik.frontend.rule=Host:elastic.synker.ovh"
+        - "traefik.frontend.rule=Host:elasticsearch.synker.ovh,elastic.synker.ovh"
         - "traefik.frontend.entryPoints=http,https"
         - "traefik.port=${ELASTICSEARCH_PORT:-9200}"
         - "traefik.enable=true"
