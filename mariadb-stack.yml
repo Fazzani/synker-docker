@@ -9,7 +9,7 @@ services:
       MYSQL_PASSWORD: /run/secrets/mysql_password
       MYSQL_USER: "${MYSQL_USER}"
       MYSQL_DATABASE: playlist
-      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_HOST: %
     ports:
       - "8889:3306"
     networks:
