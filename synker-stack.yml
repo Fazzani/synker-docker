@@ -24,12 +24,13 @@ services:
       - "traefik.docker.network=ntw_front"
       - "traefik.port=56801"
       - "traefik.enable=true"
-      replicas: 1
+      replicas: 2
       update_config:
         parallelism: 1
         delay: 10s
       placement:
-        constraints: [node.role==manager]
+        constraints:
+          - node.labels.provider == ovh
       restart_policy:
         condition: on-failure
         delay: 2m
@@ -60,7 +61,7 @@ services:
       - "traefik.docker.network=ntw_front"
       - "traefik.port=56800"
       - "traefik.enable=true"
-      replicas: 1
+      replicas: 2
       update_config:
         parallelism: 1
         delay: 10s
