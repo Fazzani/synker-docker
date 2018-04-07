@@ -36,6 +36,9 @@
 - [ ] Uprading Docker
 - [x] Gluster fs
 - [ ] Fix rabbitmq docker service not go on when running rundown.sh script
+- [ ] Auto backup/Restore database
+  - [x] Restore
+  - [ ] Daily Backup
 
 ### Others
 
