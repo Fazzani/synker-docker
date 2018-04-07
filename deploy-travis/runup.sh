@@ -25,6 +25,7 @@ mkdir /mnt/nfs/webgrab ||
 mkdir /mnt/nfs/webgrab/config ||
 mkdir /mnt/nfs/webgrab/data ||
 mkdir /mnt/nfs/logstash/pipeline ||
+mkdir /mnt/nfs/logstash/data ||
 echo "Creating directories ok..."
 
 echo "Installing stacks ..."
