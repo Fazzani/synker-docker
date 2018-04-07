@@ -101,7 +101,7 @@ In bash windows
 
 ```sh
 cd /mnt/c/Users/Heni/Source/Repos/synker-docker
-tar cvf secret.tar ./synker/* deploy_rsa
+tar cvf secret.tar ./synker/* deploy_rsa .env
 travis encrypt-file secret.tar --add
 ```
 
