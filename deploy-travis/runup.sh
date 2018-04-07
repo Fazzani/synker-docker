@@ -31,6 +31,7 @@ REMOTE_USER=${1:-pl}
 MYSQL_PASSWORD=${2:-password}
 MYSQL_ROOT_PASSWORD=${3:-root}
 MYSQL_DATABASE=${4:-playlist}
+MYSQL_RESET_DATABASE=${MYSQL_RESET_DATABASE:-true}
 
 set -euox
 
@@ -63,10 +64,13 @@ docker system prune -f
 
 # Restoring maridb data 
 # Must be running on mariadb host container
+if [ "$MYSQL_RESET_DATABASE" = true ] ; then
+  sudo rm  -rf /mnt/nfs/mariadb/data/*
+fi
 SERVICE_ID=$(docker service ps -q -f desired-state=running  synker_synkerdb | head -1)
 CONTAINER_ID=$(docker inspect --format "{{.Status.ContainerStatus.ContainerID}}" $SERVICE_ID | head -1)
 cat ./synker/playlist.dump-2018-02-28.sql | \
-docker exec -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} -e MYSQL_DATABASE=${MYSQL_DATABASE} -i $CONTAINER_ID \
+docker exec -i -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" -e MYSQL_DATABASE="${MYSQL_DATABASE}" $CONTAINER_ID \
 mysql -u root -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} --force
 
 exit 0
