@@ -21,7 +21,7 @@ services:
         - "traefik.backend=elasticsearch"
         - "traefik.frontend.rule=Host:elastic.synker.ovh"
         - "traefik.frontend.entryPoints=http,https"
-        - "traefik.port=9200"
+        - "traefik.port=${ELASTICSEARCH_PORT:-9200}"
         - "traefik.enable=true"
         - "traefik.docker.network=ntw_front"
         - "traefik.backend.loadbalancer.swarm=true"
