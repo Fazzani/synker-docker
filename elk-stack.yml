@@ -9,6 +9,7 @@ services:
       - discovery.zen.minimum_master_nodes=1
       - ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD}
       - node.name=elasticsearch
+      - script.painless.regex.enabled=true
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     networks:
