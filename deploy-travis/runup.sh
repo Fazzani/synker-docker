@@ -57,7 +57,7 @@ docker network create --driver overlay ingress_net_backend \
 echo $MYSQL_PASSWORD > mysql_password.txt
 echo $MYSQL_ROOT_PASSWORD > mysql_root_password.txt
 
-export $(cat .env)
+export $(echo -e $(cat .env))
 
 docker stack deploy -c traefik-consul-stack.yml lb
 sleep 10
