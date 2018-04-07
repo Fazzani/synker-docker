@@ -27,9 +27,9 @@ mkdir /mnt/nfs/webgrab/data ||
 echo "Creating directories ok..."
 
 echo "Installing stacks ..."
-REMOTE_USER=$1
-MYSQL_PASSWORD=$2
-MYSQL_ROOT_PASSWORD=$3
+REMOTE_USER=${1:-pl}
+MYSQL_PASSWORD=${2:-password}
+MYSQL_ROOT_PASSWORD=${3:-root}
 
 set -euox
 
