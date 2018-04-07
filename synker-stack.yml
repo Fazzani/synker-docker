@@ -111,9 +111,9 @@ services:
     image: mariadb:${MYSQL_VERSION}
     hostname: synkerdb
     environment:
-      MYSQL_ROOT_PASSWORD: "root"
-      MYSQL_PASSWORD: "password"
-      MYSQL_USER: "pl"
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: password
+      MYSQL_USER: pl
       MYSQL_DATABASE: playlist
       MYSQL_ROOT_HOST: "%"
     ports:
