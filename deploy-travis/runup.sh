@@ -74,7 +74,7 @@ sleep 15
 SERVICE_ID=$(docker service ps -q -f desired-state=running  synker_synkerdb | head -1)
 CONTAINER_ID=$(docker inspect --format "{{.Status.ContainerStatus.ContainerID}}" $SERVICE_ID | head -1)
 cat ./synker/playlist.dump-2018-02-28.sql | \
-docker exec -i -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" -e MYSQL_DATABASE="${MYSQL_DATABASE}" $CONTAINER_ID \
+sudo docker exec -i -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" -e MYSQL_DATABASE="${MYSQL_DATABASE}" $CONTAINER_ID \
 mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE}" --force
 
 exit 0
