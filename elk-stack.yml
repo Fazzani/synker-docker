@@ -10,6 +10,8 @@ services:
       - ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD}
       - node.name=elasticsearch
       - script.painless.regex.enabled=true
+      - http.cors.enabled=true
+      - http.cors.allow-origin="*"
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     networks:
@@ -103,7 +105,7 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-        delay: 3m
+        delay: 5m
         max_attempts: 3
         window: 120s
       placement:

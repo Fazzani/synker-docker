@@ -1,0 +1,17 @@
+hd
+fhd
+sd
+1080p
+720p
+tn
+ca
+ca:
+fr
+ar
+tnt
+dvdrip
+bdrip
+webrip
+french
+tv
+
