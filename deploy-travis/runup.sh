@@ -28,11 +28,10 @@ echo "Creating directories ok..."
 
 echo "Installing stacks ..."
 REMOTE_USER=${1:-pl}
-MYSQL_PASSWORD=${2:-password}
-MYSQL_ROOT_PASSWORD=${3:-root}
+MYSQL_PASSWORD=${2}
+MYSQL_ROOT_PASSWORD=${3}
 MYSQL_DATABASE=${4:-playlist}
-# MYSQL_RESET_DATABASE=${5:-true}
-MYSQL_RESET_DATABASE=true
+MYSQL_RESET_DATABASE=${5:-true}
 
 set -euox
 
@@ -71,10 +70,11 @@ docker system prune -f
 # Must be running on mariadb host container
 sleep 15
 
-SERVICE_ID=$(docker service ps -q -f desired-state=running  synker_synkerdb | head -1)
-CONTAINER_ID=$(docker inspect --format "{{.Status.ContainerStatus.ContainerID}}" $SERVICE_ID | head -1)
-cat ./synker/playlist.dump-2018-02-28.sql | \
-sudo docker exec -i -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" -e MYSQL_DATABASE="${MYSQL_DATABASE}" $CONTAINER_ID \
-mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE}" --force
-
+if [ "$MYSQL_RESET_DATABASE" = true ] ; then
+   SERVICE_ID=$(docker service ps -q -f desired-state=running  synker_synkerdb | head -1)
+   CONTAINER_ID=$(docker inspect --format "{{.Status.ContainerStatus.ContainerID}}" $SERVICE_ID | head -1)
+   cat ./synker/playlist.dump-2018-02-28.sql | \
+   sudo docker exec -i -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" -e MYSQL_DATABASE="${MYSQL_DATABASE}" $CONTAINER_ID \
+   mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE}" --force
+fi
 exit 0
