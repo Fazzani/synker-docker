@@ -58,7 +58,7 @@ echo $MYSQL_ROOT_PASSWORD > mysql_password.txt
 export $(cat .env)
 
 docker stack deploy -c traefik-consul-stack.yml lb
-sleep 15
+sleep 10
 docker stack deploy -c elk-stack.yml elk
 docker stack deploy -c rabbitmq-stack.yml rabbit
 docker stack deploy -c ./webgrab/docker-compose.yml webgrab
@@ -69,6 +69,7 @@ docker system prune -f
 
 # Restoring maridb data 
 # Must be running on mariadb host container
+sleep 15
 
 SERVICE_ID=$(docker service ps -q -f desired-state=running  synker_synkerdb | head -1)
 CONTAINER_ID=$(docker inspect --format "{{.Status.ContainerStatus.ContainerID}}" $SERVICE_ID | head -1)
