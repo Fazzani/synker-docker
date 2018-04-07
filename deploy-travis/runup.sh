@@ -38,6 +38,10 @@ set -euox
 
 cd /home/$REMOTE_USER/synker-docker/
 
+if [ "$MYSQL_RESET_DATABASE" = true ] ; then
+  sudo rm  -rf /mnt/nfs/mariadb/data/*
+fi
+
 docker network create --driver overlay ntw_front \
   --attachable || true \
   --opt encrypted=true || true
@@ -65,9 +69,7 @@ docker system prune -f
 
 # Restoring maridb data 
 # Must be running on mariadb host container
-if [ "$MYSQL_RESET_DATABASE" = true ] ; then
-  sudo rm  -rf /mnt/nfs/mariadb/data/*
-fi
+
 SERVICE_ID=$(docker service ps -q -f desired-state=running  synker_synkerdb | head -1)
 CONTAINER_ID=$(docker inspect --format "{{.Status.ContainerStatus.ContainerID}}" $SERVICE_ID | head -1)
 cat ./synker/playlist.dump-2018-02-28.sql | \
