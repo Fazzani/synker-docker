@@ -59,7 +59,7 @@ services:
       - "--acme.caServer=https://acme-staging.api.letsencrypt.org/directory"
       - "--docker"
       - "--docker.swarmmode"
-      - "--docker.domain=synker.ovh"
+      - "--docker.domain=docker.localhost"
       - "--docker.watch"
       - "--docker.exposedbydefault=false"
       - "--consul"
