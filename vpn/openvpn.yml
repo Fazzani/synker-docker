@@ -2,14 +2,17 @@ version: '3.5'
 
 services:
   openvpn:
-    cap_add:
-     - NET_ADMIN
-    image: kylemanna/openvpn
+    image: hwdsl2/ipsec-vpn-server
     ports:
-     - "1194:1194/udp"
+      - "500:500/udp"
+      - "4500:4500/udp"
     restart: always
     volumes:
-     - openvpn_data:/etc/openvpn
+      - /lib/modules:/lib/modules:ro
+    environment:
+      - VPN_IPSEC_PSK=blahblah
+      - VPN_USER=sahputra
+      - VPN_PASSWORD=password
     deploy:
       labels:
         - "traefik.backend=openvpn"
@@ -26,16 +29,8 @@ services:
       placement:
         constraints:
           - node.labels.size == small
-    volumes:
-      - openvpn_data:/etc/openvpn
     networks:
       - ntw_front
-volumes:
-  openvpn_data:
-    driver_opts:
-      type: "nfs"
-      o: "nolock,soft,rw,addr=151.80.235.155"
-      device: ":/mnt/nfs/openvpn/data"
 networks:
   ntw_front:
     external: true
