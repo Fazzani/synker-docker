@@ -75,7 +75,7 @@ logging.level: info
 
 # Send all logging output to syslog. The default is false.
 #logging.to_syslog: true
-logging.to_syslog: false
+logging.to_syslog: true
 
 # If enabled, filebeat periodically logs its internal metrics that have changed
 # in the last period. For each metric that changed, the delta from the value at
