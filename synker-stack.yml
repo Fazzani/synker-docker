@@ -34,7 +34,6 @@ services:
       restart_policy:
         condition: on-failure
         delay: 2m
-        max_attempts: 5
         window: 120s
     depends_on:
       - webapi
@@ -71,7 +70,6 @@ services:
       restart_policy:
         condition: on-failure
         delay: 2m
-        max_attempts: 5
         window: 120s
 
   brokers:
@@ -86,7 +84,6 @@ services:
       restart_policy:
         condition: on-failure
         delay: 2m
-        max_attempts: 5
         window: 60s
     networks:
       - ntw_front
@@ -99,8 +96,6 @@ services:
       restart_policy:
         condition: on-failure
         delay: 15s
-        max_attempts: 5
-        window: 60s
       placement:
         constraints: 
           - node.role == manager
