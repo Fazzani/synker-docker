@@ -28,6 +28,8 @@ mkdir /mnt/nfs/logstash ||
 mkdir /mnt/nfs/logstash/pipeline ||
 mkdir /mnt/nfs/logstash/data ||
 mkdir /mnt/nfs/logstash/log ||
+mkdir /mnt/nfs/logstash/logs_usr_share ||
+
 echo "Creating directories ok..."
 
 sudo chmod 777 -R /mnt/nfs

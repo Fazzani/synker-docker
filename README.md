@@ -105,6 +105,10 @@ tar cvf secret.tar ./synker/* deploy_rsa .env
 travis encrypt-file secret.tar --add
 ```
 
+## NOTES
+
+>To backup mysql database we have to set `MYSQL_RESET_DATABASE` to true in travis build
+
 [beats]: https://www.elastic.co/products/beats
 [elastic]: https://www.elastic.co/
 [filebeat]: https://www.elastic.co/guide/en/beats/filebeat/current/running-on-docker.html
