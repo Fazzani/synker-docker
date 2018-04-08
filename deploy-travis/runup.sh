@@ -31,11 +31,6 @@ mkdir /mnt/nfs/logstash/pipeline || true
 mkdir /mnt/nfs/logstash/data || true
 mkdir /mnt/nfs/logstash/log || true
 
-echo "Creating directories ok..."
-
-sudo chmod 777 -R /mnt/nfs
-
-echo "Installing stacks ..."
 REMOTE_USER=${1:-pl}
 MYSQL_PASSWORD=${2}
 MYSQL_ROOT_PASSWORD=${3}
@@ -51,6 +46,8 @@ yes | cp elastic/stopwords.txt /mnt/nfs/elastic/synkerconfig
 yes | cp elastic/mapping_synker.txt /mnt/nfs/elastic/config
 # copy some logstash config
 yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
+
+sudo chmod 777 -R /mnt/nfs
 
 if [ "$MYSQL_RESET_DATABASE" = true ] ; then
   sudo rm  -rf /mnt/nfs/mariadb/data/*
