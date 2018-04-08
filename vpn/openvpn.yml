@@ -1,0 +1,41 @@
+version: '3.5'
+
+services:
+  openvpn:
+    cap_add:
+     - NET_ADMIN
+    image: kylemanna/openvpn
+    ports:
+     - "1194:1194/udp"
+    restart: always
+    volumes:
+     - openvpn_data:/etc/openvpn
+    deploy:
+      labels:
+        - "traefik.backend=openvpn"
+        - "traefik.frontend.rule=Host:openvpn.synker.ovh"
+        - "traefik.frontend.entryPoints=http"
+        - "traefik.enable=true"
+        - "traefik.port=1194"
+        - "traefik.docker.network=ntw_front"
+        - "traefik.backend.loadbalancer.swarm=true"
+        - "traefik.backend.loadbalancer.method=drr"
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.labels.size == small
+    volumes:
+      - openvpn_data:/etc/openvpn
+    networks:
+      - ntw_front
+volumes:
+  openvpn_data:
+    driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=151.80.235.155"
+      device: ":/mnt/nfs/openvpn/data"
+networks:
+  ntw_front:
+    external: true
