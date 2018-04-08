@@ -7,6 +7,8 @@
 set +e
 mkdir /mnt/nfs/elastic || true
 mkdir /mnt/nfs/elastic/data || true
+mkdir /mnt/nfs/elastic/config || true
+mkdir /mnt/nfs/elastic/synkerconfig || true
 mkdir /mnt/nfs/consul        || true
 mkdir /mnt/nfs/consul/data || true
 mkdir /mnt/nfs/synker || true
@@ -45,8 +47,8 @@ set -euox
 cd /home/$REMOTE_USER/synker-docker/
 
 # copy some elastic config
-yes | cp elastic/stopwords.txt /mnt/nfs/elastic/
-yes | cp elastic/mapping_synker.txt /mnt/nfs/elastic/
+yes | cp elastic/stopwords.txt /mnt/nfs/elastic/config
+yes | cp elastic/mapping_synker.txt /mnt/nfs/elastic/synkerconfig
 
 
 if [ "$MYSQL_RESET_DATABASE" = true ] ; then
