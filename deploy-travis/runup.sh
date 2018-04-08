@@ -5,30 +5,30 @@
 ### ### ### ### ### ### ### ### ### ### ###
 
 set +e
-mkdir /mnt/nfs/elastic ||
-mkdir /mnt/nfs/elastic/data ||
-mkdir /mnt/nfs/consul        ||
-mkdir /mnt/nfs/consul/data ||
-mkdir /mnt/nfs/synker ||
-mkdir /mnt/nfs/synker/data ||
-mkdir /mnt/nfs/mariadb ||
-mkdir /mnt/nfs/mariadb/data ||
-mkdir /mnt/nfs/rabbitmq ||
-mkdir /mnt/nfs/rabbitmq/data ||
-mkdir /mnt/nfs/logstash ||
-mkdir /mnt/nfs/kibana ||
-mkdir /mnt/nfs/kibana/data ||
-mkdir /mnt/nfs/filebeat ||
-mkdir /mnt/nfs/filebeat/data ||
-mkdir /mnt/nfs/filebeat/logs ||
-mkdir /mnt/nfs/webgrab ||
-mkdir /mnt/nfs/webgrab/config ||
-mkdir /mnt/nfs/webgrab/data ||
-mkdir /mnt/nfs/logstash ||
-mkdir /mnt/nfs/logstash/pipeline ||
-mkdir /mnt/nfs/logstash/data ||
-mkdir /mnt/nfs/logstash/log ||
-mkdir /mnt/nfs/logstash/logs_usr_share ||
+mkdir /mnt/nfs/elastic || true
+mkdir /mnt/nfs/elastic/data || true
+mkdir /mnt/nfs/consul        || true
+mkdir /mnt/nfs/consul/data || true
+mkdir /mnt/nfs/synker || true
+mkdir /mnt/nfs/synker/data || true
+mkdir /mnt/nfs/mariadb || true
+mkdir /mnt/nfs/mariadb/data || true
+mkdir /mnt/nfs/rabbitmq || true
+mkdir /mnt/nfs/rabbitmq/data || true
+mkdir /mnt/nfs/logstash || true
+mkdir /mnt/nfs/kibana || true
+mkdir /mnt/nfs/kibana/data || true
+mkdir /mnt/nfs/filebeat || true
+mkdir /mnt/nfs/filebeat/data || true
+mkdir /mnt/nfs/filebeat/logs || true
+mkdir /mnt/nfs/webgrab || true
+mkdir /mnt/nfs/webgrab/config || true
+mkdir /mnt/nfs/webgrab/data || true
+mkdir /mnt/nfs/logstash || true
+mkdir /mnt/nfs/logstash/pipeline || true
+mkdir /mnt/nfs/logstash/data || true
+mkdir /mnt/nfs/logstash/log || true
+mkdir /mnt/nfs/logstash/logs_usr_share || true
 
 echo "Creating directories ok..."
 
