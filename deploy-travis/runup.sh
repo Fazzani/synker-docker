@@ -15,12 +15,12 @@ mkdir /mnt/nfs/mariadb || true
 mkdir /mnt/nfs/mariadb/data || true
 mkdir /mnt/nfs/rabbitmq || true
 mkdir /mnt/nfs/rabbitmq/data || true
-mkdir /mnt/nfs/logstash || true
 mkdir /mnt/nfs/kibana || true
 mkdir /mnt/nfs/kibana/data || true
 mkdir /mnt/nfs/filebeat || true
 mkdir /mnt/nfs/filebeat/data || true
 mkdir /mnt/nfs/filebeat/logs || true
+mkdir /mnt/nfs/filebeat/logs_usr_share || true
 mkdir /mnt/nfs/webgrab || true
 mkdir /mnt/nfs/webgrab/config || true
 mkdir /mnt/nfs/webgrab/data || true
@@ -28,7 +28,6 @@ mkdir /mnt/nfs/logstash || true
 mkdir /mnt/nfs/logstash/pipeline || true
 mkdir /mnt/nfs/logstash/data || true
 mkdir /mnt/nfs/logstash/log || true
-mkdir /mnt/nfs/logstash/logs_usr_share || true
 
 echo "Creating directories ok..."
 
