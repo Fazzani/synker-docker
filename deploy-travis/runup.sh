@@ -33,6 +33,10 @@ echo "Creating directories ok..."
 
 sudo chmod 777 -R /mnt/nfs
 
+# copy some elastic config
+yes | cp ../elastic/stopwords.txt /mnt/nfs/elastic/
+yes | cp ../elastic/mapping_synker.txt /mnt/nfs/elastic/
+
 echo "Installing stacks ..."
 REMOTE_USER=${1:-pl}
 MYSQL_PASSWORD=${2}
