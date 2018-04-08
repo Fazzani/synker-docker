@@ -30,6 +30,8 @@ mkdir /mnt/nfs/logstash/data ||
 mkdir /mnt/nfs/logstash/log ||
 echo "Creating directories ok..."
 
+sudo chmod 777 -R /mnt/nfs
+
 echo "Installing stacks ..."
 REMOTE_USER=${1:-pl}
 MYSQL_PASSWORD=${2}
