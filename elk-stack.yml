@@ -14,8 +14,8 @@ services:
       - http.cors.allow-origin="*"
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
-      - elasticsearch_stopwords:/etc/elasticsearch/stopwords.txt
-      - elasticsearch_mapping_synker:/etc/elasticsearch/mapping_synker.txt
+      - /mnt/nfs/elastic/stopwords.txt:/etc/elasticsearch/stopwords.txt
+      - /mnt/nfs/elastic/mapping_synker.txt:/etc/elasticsearch/mapping_synker.txt
     networks:
       - ntw_front
     ports:
@@ -133,17 +133,7 @@ volumes:
       #o: "rw,relatime,vers=4.1,rsize=65536,wsize=65536,namlen=255,nolock,soft,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,local_lock=none,no_root_squash,addr=151.80.235.155"
       o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/elastic/data"
-  elasticsearch_stopwords:
-     driver_opts:
-      type: "nfs"
-      o: "nolock,soft,rw,addr=151.80.235.155"
-      device: ":/mnt/nfs/elastic/stopwords.txt"
-  elasticsearch_mapping_synker:
-     driver_opts:
-      type: "nfs"
-      o: "nolock,soft,rw,addr=151.80.235.155"
-      device: ":/mnt/nfs/elastic/mapping_synker.txt"
-
+  
   kibana_data:
      driver_opts:
       type: "nfs"
