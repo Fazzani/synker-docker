@@ -39,7 +39,7 @@ filebeat.config.modules:
 
 #----------------------------- Logstash output --------------------------------
 output.logstash:
-    hosts: ["elk_logstash:5045"]
+    hosts: ["logstash.elk:5045"]
     worker: 1
     bulk_max_size: 1024
     # Optional SSL. By default is off.
