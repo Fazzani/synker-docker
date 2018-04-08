@@ -47,8 +47,8 @@ set -euox
 cd /home/$REMOTE_USER/synker-docker/
 
 # copy some elastic config
-yes | cp elastic/stopwords.txt /mnt/nfs/elastic/config
-yes | cp elastic/mapping_synker.txt /mnt/nfs/elastic/synkerconfig
+yes | cp elastic/stopwords.txt /mnt/nfs/elastic/synkerconfig
+yes | cp elastic/mapping_synker.txt /mnt/nfs/elastic/config
 
 
 if [ "$MYSQL_RESET_DATABASE" = true ] ; then
