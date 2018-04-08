@@ -11,9 +11,11 @@ services:
       - "config:/config"
       - "data:/data"
     deploy:
+      labels:
+      - "app.role=webgrab"
       placement:
         constraints: 
-          - node.role == worker
+          - node.hostname=arub1
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:${TAG:-6.2}
@@ -53,7 +55,9 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.role == worker
+          - node.hostname=arub1
+    depends_on:
+      - webgrab
 
 volumes:
   config:
