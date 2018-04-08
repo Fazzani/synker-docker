@@ -81,10 +81,10 @@ services:
 
   logstash:
     image: docker.elastic.co/logstash/logstash:${TAG:-6.2}
-    # configs: # https://docs.docker.com/compose/compose-file/#long-syntax
-    #   - source: ls_config
-    #     target: /usr/share/logstash/config/logstash.yml
-    #     mode: 0440
+    configs: # https://docs.docker.com/compose/compose-file/#long-syntax
+      - source: ls_config
+        target: /usr/share/logstash/config/logstash.yml
+        mode: 0440
     environment:
       ELASTICSEARCH_URL: "http://elasticsearch:${ELASTICSEARCH_PORT:-9200}"
       ELASTICSEARCH_USERNAME: "${ELASTICSEARCH_USERNAME:-elastic}"
@@ -93,7 +93,7 @@ services:
       xpack.monitoring.elasticsearch.username: "${ELASTICSEARCH_USERNAME:-elastic}"
       xpack.monitoring.elasticsearch.url: "http://elasticsearch:${ELASTICSEARCH_PORT:-9200}"
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-    #   - 'path.config="/usr/share/logstash/config"'
+      path.config: "/usr/share/logstash/config"
     ports:
       - "12201:12201/udp"
       - "9600:9600"
