@@ -169,3 +169,5 @@ configs:
 networks:
   ntw_front:
     external: true
+  ingress_net_backend:
+    external: true
