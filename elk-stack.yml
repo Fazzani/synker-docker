@@ -15,7 +15,7 @@ services:
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
       - elasticsearch_stopwords:/etc/elasticsearch/stopwords.txt
-      - elastic/mapping_synker.txt:/etc/elasticsearch/mapping_synker.txt
+      - elasticsearch_mapping_synker:/etc/elasticsearch/mapping_synker.txt
     networks:
       - ntw_front
     ports:
