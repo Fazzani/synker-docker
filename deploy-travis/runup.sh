@@ -67,7 +67,7 @@ docker stack deploy -c rabbitmq-stack.yml rabbit
 docker stack deploy -c ./webgrab/docker-compose.yml webgrab
 docker stack deploy -c synker-stack.yml synker
 
-docker stack deploy -c vpn/openvpn.yml openvpn
+#docker stack deploy -c vpn/openvpn.yml openvpn
 
 echo "Clean up ..."
 docker system prune -f
