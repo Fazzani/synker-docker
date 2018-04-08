@@ -3,10 +3,10 @@ version: '3.5'
 services:
   openvpn:
     image: hwdsl2/ipsec-vpn-server
+    privileged: true
     ports:
       - "500:500/udp"
       - "4500:4500/udp"
-    restart: always
     volumes:
       - /lib/modules:/lib/modules:ro
     environment:
