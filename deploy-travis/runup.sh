@@ -33,10 +33,6 @@ echo "Creating directories ok..."
 
 sudo chmod 777 -R /mnt/nfs
 
-# copy some elastic config
-yes | cp ../elastic/stopwords.txt /mnt/nfs/elastic/
-yes | cp ../elastic/mapping_synker.txt /mnt/nfs/elastic/
-
 echo "Installing stacks ..."
 REMOTE_USER=${1:-pl}
 MYSQL_PASSWORD=${2}
@@ -47,6 +43,11 @@ MYSQL_RESET_DATABASE=${5:-true}
 set -euox
 
 cd /home/$REMOTE_USER/synker-docker/
+
+# copy some elastic config
+yes | cp ../elastic/stopwords.txt /mnt/nfs/elastic/
+yes | cp ../elastic/mapping_synker.txt /mnt/nfs/elastic/
+
 
 if [ "$MYSQL_RESET_DATABASE" = true ] ; then
   sudo rm  -rf /mnt/nfs/mariadb/data/*
