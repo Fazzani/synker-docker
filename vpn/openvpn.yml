@@ -14,7 +14,7 @@ services:
       labels:
         - "traefik.backend=openvpn"
         - "traefik.frontend.rule=Host:openvpn.synker.ovh"
-        - "traefik.frontend.entryPoints=http"
+        - "traefik.frontend.entryPoints=http,https"
         - "traefik.enable=true"
         - "traefik.port=1194"
         - "traefik.docker.network=ntw_front"
