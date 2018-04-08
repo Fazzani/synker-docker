@@ -49,7 +49,8 @@ cd /home/$REMOTE_USER/synker-docker/
 # copy some elastic config
 yes | cp elastic/stopwords.txt /mnt/nfs/elastic/synkerconfig
 yes | cp elastic/mapping_synker.txt /mnt/nfs/elastic/config
-
+# copy some logstash config
+yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
 
 if [ "$MYSQL_RESET_DATABASE" = true ] ; then
   sudo rm  -rf /mnt/nfs/mariadb/data/*
