@@ -14,8 +14,8 @@ services:
       - http.cors.allow-origin="*"
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
-      - /mnt/nfs/elastic/synkerconfig/stopwords.txt:/etc/elasticsearch/synkerconfig/stopwords.txt
-      - /mnt/nfs/elastic/config/mapping_synker.txt:/etc/elasticsearch/config/mapping_synker.txt
+      - /mnt/nfs/elastic/synkerconfig/stopwords.txt:/usr/share/elasticsearch/synkerconfig/stopwords.txt
+      - /mnt/nfs/elastic/config/mapping_synker.txt:/usr/share/elasticsearch/config/mapping_synker.txt
     networks:
       - ntw_front
     ports:
