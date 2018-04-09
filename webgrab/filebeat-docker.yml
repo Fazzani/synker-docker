@@ -22,7 +22,7 @@ filebeat.prospectors:
   tail_files: false
   scan_frequency: 10s
   multiline:
-    pattern: '<channel'
+    pattern: '<channel[[:space:]]'
     negate: true
     match: after
 
