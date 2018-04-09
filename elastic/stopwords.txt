@@ -2,6 +2,7 @@ hd
 fhd
 sd
 1080p
+1080i
 720p
 tn
 ca
@@ -14,4 +15,5 @@ bdrip
 webrip
 french
 tv
-
+hevc
+HEVC
