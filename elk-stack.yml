@@ -12,6 +12,7 @@ services:
       - script.painless.regex.enabled=true
       - http.cors.enabled=true
       - http.cors.allow-origin="*"
+      - node.ingest=true
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
       - /mnt/nfs/elastic/synkerconfig/stopwords.txt:/usr/share/elasticsearch/synkerconfig/stopwords.txt
