@@ -91,7 +91,7 @@ volumes:
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/filebeat/logs"
 networks:
-  ingress_net_backend:
+  ntw_front:
     external: true
 
 configs:

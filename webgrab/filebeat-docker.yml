@@ -59,7 +59,7 @@ filebeat.modules:
 #   password: changeme
 #----------------------------- Logstash output --------------------------------
 output.logstash:
-    hosts: ["logstash.elk:5045"]
+    hosts: ["logstash:5045"]
     worker: 1
     bulk_max_size: 1024
 #================================ Logging ======================================
