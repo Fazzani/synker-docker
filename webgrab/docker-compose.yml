@@ -17,7 +17,7 @@ services:
         constraints: 
           - node.hostname==arub1
     networks:
-      - ingress
+      - ingress_net_backend
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:${TAG:-6.2}
@@ -95,7 +95,7 @@ volumes:
 networks:
   ntw_front:
     external: true
-  ingress:
+  ingress_net_backend:
     external: true
 
 configs:
