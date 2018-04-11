@@ -81,6 +81,7 @@ services:
       - kibana_data:/usr/share/kibana/data
 
   logstash:
+    hostname: logstash
     image: docker.elastic.co/logstash/logstash:${TAG:-6.2}
     # configs: # https://docs.docker.com/compose/compose-file/#long-syntax
     #   - source: ls_config
@@ -126,7 +127,7 @@ services:
         com.docker.stack.namespace: "logging"
         com.docker.service.name: "logstash"
     depends_on: 
-        - elasticsearch
+      - elasticsearch
 
 volumes:
   elasticsearch_data:
