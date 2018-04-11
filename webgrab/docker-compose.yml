@@ -95,6 +95,8 @@ volumes:
 networks:
   ntw_front:
     external: true
+  ingress:
+    external: true
 
 configs:
   fb_config:
