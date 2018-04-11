@@ -46,7 +46,7 @@ services:
      - source: fb_config
        target: /usr/share/filebeat/filebeat.yml
     networks:
-      - ingress_net_backend
+      - ntw_front
     deploy:
       restart_policy:
         condition: on-failure
