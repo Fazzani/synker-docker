@@ -16,6 +16,8 @@ services:
       placement:
         constraints: 
           - node.hostname==arub1
+    networks:
+      - ingress
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:${TAG:-6.2}
