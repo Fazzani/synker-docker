@@ -140,7 +140,7 @@ services:
     image: "synker/rabbitmq-autocluster:latest"
     labels:
       - "app=amqp-rabbitmq"
-      - "traefik.backend=rabbit1"
+      - "traefik.backend=rabbitmq"
       - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.enable=true"
