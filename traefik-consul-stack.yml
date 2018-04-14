@@ -138,7 +138,33 @@ services:
   
   rabbitmq:
     image: pivotalrabbitmq/rabbitmq-autocluster:3.7-consul
-    labels:
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    tty: true
+    networks:
+      - ntw_front
+    depends_on:
+      - traefik_init
+      - consul
+    environment:
+      - TCP_PORTS=15672, 5672
+      - AUTOCLUSTER_TYPE=consul
+      - AUTOCLUSTER_CLEANUP=true
+      - AUTOCLUSTER_DELAY=60
+      - CLEANUP_WARN_ONLY=false
+      - CONSUL_HOST=consul.synker.ovh
+      - CONSUL_PORT=8500
+      - CONSUL_SVC=rabbitmq
+      - CONSUL_SVC_ADDR_AUTO=true
+      - CONSUL_DEREGISTER_AFTER=60 
+      - "RABBIMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE:-synker-rabbit-cookie}"
+      - "RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST:-synker-host}"
+      - "RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}"
+      - "RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-synker}"
+    deploy:
+      replicas: 2
+      labels:
       - "app=amqp-rabbitmq"
       - "traefik.backend=rabbitmq"
       - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
@@ -148,28 +174,6 @@ services:
       - "traefik.docker.network=ntw_front"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    networks:
-      - ntw_front
-    depends_on:
-      - traefik_init
-      - consul
-    environment:
-      - AUTOCLUSTER_TYPE=consul
-      - AUTOCLUSTER_CLEANUP=true
-      - CLEANUP_WARN_ONLY=false
-      - CONSUL_HOST=consul.synker.ovh
-      - CONSUL_PORT=8500
-      - CONSUL_SVC=rabbitmq
-      - CONSUL_SVC_ADDR_AUTO=true
-      - "RABBIMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE:-synker-rabbit-cookie}"
-      - "RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST:-synker-host}"
-      - "RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}"
-      - "RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-synker}"
-    deploy:
-      replicas: 2
       resources:
         reservations:
           memory: 256M
