@@ -36,6 +36,7 @@
 - [ ] Uprading Docker
 - [x] Gluster fs
 - [ ] Fix rabbitmq docker service not go on when running rundown.sh script
+- [ ] Dockerfile manifest
 - [ ] Auto backup/Restore database
   - [x] Restore
   - [ ] Daily Backup
@@ -61,7 +62,7 @@
 
 ### Create Swarm by Ansible
 
-- [ ] [Create Swarm by Ansible](https://thisendout.com/2016/09/13/deploying-docker-swarm-with-ansible/)
+- [x] [Create Swarm by Ansible](https://thisendout.com/2016/09/13/deploying-docker-swarm-with-ansible/)
 - [ ] WebGrab
 - [ ] ALL custom scripts and crontab
 - [ ] Auto creating nfs volumes
@@ -119,12 +120,12 @@ travis encrypt-file secret.tar --add
 [ex_traefik]:https://zerokspot.com/weblog/2017/09/03/docker-stacks-for-local-development/
 [ex_elk]:https://github.com/elastic/stack-docker/blob/master/docker-compose.yml
 [ex_elk2]:https://github.com/ahromis/swarm-elk
+[elk_3]:https://github.com/elastic/examples/blob/master/Miscellaneous/docker/full_stack_example/docker-compose-linux.yml
+[elastic_compose_ref]:https://github.com/elastic/examples/blob/master/Miscellaneous/docker/full_stack_example/docker-compose-linux.yml
+[elastic_off_guide]:https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 [link_logstash_config]:https://www.elastic.co/guide/en/logstash/5.5/docker.html
 [keystore_logstash]:https://www.elastic.co/guide/en/logstash/current/keystore.html
 [NetShare]:http://netshare.containx.io/docs/getting-started
-[elk_3]:https://github.com/elastic/examples/blob/master/Miscellaneous/docker/full_stack_example/docker-compose-linux.yml
-[elastic_off_guide]:https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
-[elastic_compose_ref]:https://github.com/elastic/examples/blob/master/Miscellaneous/docker/full_stack_example/docker-compose-linux.yml
 [docker_mariadb]:https://docs.docker.com/samples/library/mariadb
 [example_travis]:https://www.linux.com/learn/automatically-deploy-build-images-travis
 [travis_encrypt_file]:https://docs.travis-ci.com/user/encrypting-files/
