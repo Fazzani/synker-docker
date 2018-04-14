@@ -160,14 +160,14 @@ services:
       - AUTOCLUSTER_TYPE=consul
       - AUTOCLUSTER_CLEANUP=true
       - CLEANUP_WARN_ONLY=false
-      - CONSUL_HOST=consul
+      - CONSUL_HOST=consul.synker.ovh
       - CONSUL_PORT=8500
       - CONSUL_SVC=rabbitmq
       - CONSUL_SVC_ADDR_AUTO=true
-      - RABBIMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE:-synker-rabbit-cookie}
-      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST:-synker-host}
-      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
-      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-synker}
+      - "RABBIMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE:-synker-rabbit-cookie}"
+      - "RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST:-synker-host}"
+      - "RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}"
+      - "RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-synker}"
     deploy:
       replicas: 2
       resources:
