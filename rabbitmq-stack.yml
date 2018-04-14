@@ -30,6 +30,8 @@ services:
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
       - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-synker}
       - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST:-synker-host}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
     networks:
       - ntw_front
 
