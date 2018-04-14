@@ -78,7 +78,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
       - source: batch_config
-        target: /app/appsettings.json
+        target: /app/appsettings.Production.json
         mode: 0444
     deploy:
       replicas: 1
@@ -98,7 +98,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
       - source: batch_config
-        target: /app/appsettings.json
+        target: /app/appsettings.Production.json
         mode: 0444
     deploy:
       restart_policy:
