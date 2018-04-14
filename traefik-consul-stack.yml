@@ -137,7 +137,7 @@ services:
       - ntw_front
   
   rabbitmq:
-    image: "synker/rabbitmq-autocluster:latest"
+    image: pivotalrabbitmq/rabbitmq-autocluster:3.7-consul
     labels:
       - "app=amqp-rabbitmq"
       - "traefik.backend=rabbitmq"
