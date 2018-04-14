@@ -15,8 +15,8 @@ mkdir /mnt/nfs/synker || true
 mkdir /mnt/nfs/synker/data || true
 mkdir /mnt/nfs/mariadb || true
 mkdir /mnt/nfs/mariadb/data || true
-mkdir /mnt/nfs/rabbitmq || true
-mkdir /mnt/nfs/rabbitmq/data || true
+# mkdir /mnt/nfs/rabbitmq || true
+# mkdir /mnt/nfs/rabbitmq/data || true
 mkdir /mnt/nfs/kibana || true
 mkdir /mnt/nfs/kibana/data || true
 mkdir /mnt/nfs/filebeat || true
@@ -71,7 +71,7 @@ export $(cat env)
 docker stack deploy -c traefik-consul-stack.yml lb
 sleep 10
 docker stack deploy -c elk-stack.yml elk
-docker stack deploy -c rabbitmq-stack.yml rabbit
+#docker stack deploy -c rabbitmq-stack.yml rabbit
 docker stack deploy -c ./webgrab/docker-compose.yml webgrab
 docker stack deploy -c synker-stack.yml synker
 
