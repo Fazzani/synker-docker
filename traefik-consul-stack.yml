@@ -135,7 +135,53 @@ services:
           - node.labels.size == small
     networks:
       - ntw_front
-
+  
+  rabbitmq:
+    image: "synker/rabbitmq-autocluster:latest"
+    labels:
+      - "app=amqp-rabbitmq"
+      - "traefik.backend=rabbit1"
+      - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.enable=true"
+      - "traefik.port=15672"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - ntw_front
+    depends_on:
+      - traefik_init
+      - consul
+    environment:
+      - AUTOCLUSTER_TYPE=consul
+      - AUTOCLUSTER_CLEANUP=true
+      - CLEANUP_WARN_ONLY=false
+      - CONSUL_HOST=consul
+      - CONSUL_PORT=8500
+      - CONSUL_SVC=rabbitmq
+      - CONSUL_SVC_ADDR_AUTO=true
+      - RABBIMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE:-synker-rabbit-cookie}
+      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST:-synker-host}
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-synker}
+    deploy:
+      replicas: 2
+      resources:
+        reservations:
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+        delay: 15s
+        max_attempts: 3
+        window: 120s
+      update_config:
+        parallelism: 2
+        delay: 20s
+        failure_action: continue
   # who2:
   #   image: emilevauge/whoami
   #   networks:
