@@ -76,6 +76,10 @@ services:
     image: synker/brokers:${SYNKER_VERSION:-latest}
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+    configs:
+      - source: batch_config
+        target: /app/appsettings.json
+        mode: 0444
     deploy:
       replicas: 1
       placement:
@@ -92,6 +96,10 @@ services:
     image: synker/batch:${SYNKER_VERSION:-latest}
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+    configs:
+      - source: batch_config
+        target: /app/appsettings.json
+        mode: 0444
     deploy:
       restart_policy:
         condition: on-failure
@@ -158,3 +166,5 @@ configs:
     file: $PWD/synker/appsettings.webapi.json
   webclient_config:
     file: $PWD/synker/appsettings.webclient.json
+  batch_config:
+    file: $PWD/synker/appsettings.json
