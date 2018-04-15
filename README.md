@@ -20,7 +20,7 @@
   - [x] WebApi       scaled on 2 instances
   - [x] WebClient    scaled on 2 instances
   - [ ] Batch
-  - [ ] Broker
+  - [x] Broker
 - [ ] Reverse proxy and LB [traefik][ex_traefik] [good example][traefix_good_example]
   - [ ] Circuit breaker
   - [ ] Sub domains configuration
