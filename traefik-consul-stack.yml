@@ -162,7 +162,7 @@ services:
       - "RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}"
       - "RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-synker}"
     deploy:
-      replicas: 1
+      replicas: 2
       labels:
       - "app=amqp-rabbitmq"
       - "traefik.backend=rabbitmq"
