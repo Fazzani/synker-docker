@@ -182,8 +182,8 @@ services:
         max_attempts: 3
         window: 120s
       update_config:
-        parallelism: 2
-        delay: 20s
+        parallelism: 1
+        delay: 15s
         failure_action: continue
   # who2:
   #   image: emilevauge/whoami
