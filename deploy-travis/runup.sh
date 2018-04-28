@@ -48,6 +48,8 @@ yes | cp elastic/mapping_synker.txt /mnt/nfs/elastic/config
 # copy some logstash config
 yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
 
+sudo su
+
 sudo chmod 777 -R /mnt/nfs
 
 if [ "$MYSQL_RESET_DATABASE" = true ] ; then
