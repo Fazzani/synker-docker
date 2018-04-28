@@ -141,6 +141,8 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
     depends_on:
       - traefik_init
       - consul
@@ -233,3 +235,8 @@ volumes:
       type: "nfs"
       o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/consul/data"
+  rabbitmq_data:
+    driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=151.80.235.155"
+      device: ":/mnt/nfs/crabbitmqonsul/data"
