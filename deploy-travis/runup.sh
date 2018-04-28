@@ -3,7 +3,7 @@
 ### ### ### ### ### ### ### ### ### ### ###
 # Deploy script for Synker docker stack
 ### ### ### ### ### ### ### ### ### ### ###
-
+sudo su
 set +e
 mkdir /mnt/nfs/elastic || true
 mkdir /mnt/nfs/elastic/data || true
