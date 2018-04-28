@@ -3,7 +3,8 @@
 ### ### ### ### ### ### ### ### ### ### ###
 # Deploy script for Synker docker stack
 ### ### ### ### ### ### ### ### ### ### ###
-sudo su
+pwd
+
 set +e
 mkdir /mnt/nfs/elastic || true
 mkdir /mnt/nfs/elastic/data || true
@@ -37,9 +38,9 @@ MYSQL_ROOT_PASSWORD=${3}
 MYSQL_DATABASE=${4}
 MYSQL_RESET_DATABASE=${5}
 
-set -euox
+set -euo
 
-cd /home/$REMOTE_USER/synker-docker/
+cd /home/${REMOTE_USER}/synker-docker/
 
 # copy some elastic config
 yes | cp elastic/stopwords.txt /mnt/nfs/elastic/synkerconfig
