@@ -139,12 +139,8 @@ services:
   rabbitmq:
     image: pivotalrabbitmq/rabbitmq-autocluster:3.7-consul
     ports:
-      - target: 5672
-        published: 5672
-        mode: host
-      - target: 15672
-        published: 15672
-        mode: host
+      - "5672:5672"
+      - "15672:15672"
     depends_on:
       - traefik_init
       - consul

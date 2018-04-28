@@ -35,10 +35,10 @@ mkdir /mnt/nfs/logstash/log || true
 REMOTE_USER=${1}
 MYSQL_PASSWORD=${2}
 MYSQL_ROOT_PASSWORD=${3}
-MYSQL_DATABASE=${4}
-MYSQL_RESET_DATABASE=${5}
+MYSQL_DATABASE=${4:-playlist}
+MYSQL_RESET_DATABASE=${5:-true}
 
-set -euo
+set -euox
 
 cd /home/${REMOTE_USER}/synker-docker/
 
@@ -50,10 +50,10 @@ yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
 
 sudo su
 
-sudo chmod 777 -R /mnt/nfs
+chmod 777 -R /mnt/nfs
 
 if [ "$MYSQL_RESET_DATABASE" = true ] ; then
-  sudo rm  -rf /mnt/nfs/mariadb/data/*
+  rm  -rf /mnt/nfs/mariadb/data/*
 fi
 
 docker network create --driver overlay ntw_front \
@@ -91,7 +91,7 @@ if [ "$MYSQL_RESET_DATABASE" = true ] ; then
    SERVICE_ID=$(docker service ps -q -f desired-state=running  synker_synkerdb | head -1)
    CONTAINER_ID=$(docker inspect --format "{{.Status.ContainerStatus.ContainerID}}" $SERVICE_ID | head -1)
    cat ./synker/playlist.dump-2018-02-28.sql | \
-   sudo docker exec -i -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" -e MYSQL_DATABASE="${MYSQL_DATABASE}" $CONTAINER_ID \
+   docker exec -i -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" -e MYSQL_DATABASE="${MYSQL_DATABASE}" $CONTAINER_ID \
    mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE}" --force
 fi
 exit 0
