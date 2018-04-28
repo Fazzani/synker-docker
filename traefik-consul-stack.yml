@@ -139,10 +139,12 @@ services:
   rabbitmq:
     image: pivotalrabbitmq/rabbitmq-autocluster:3.7-consul
     ports:
-      - "5672:5672"
-      - "15672:15672"
-    networks:
-      - ntw_front
+      - target: 5672
+        published: 5672
+        mode: host
+      - target: 15672
+        published: 15672
+        mode: host
     depends_on:
       - traefik_init
       - consul
@@ -185,6 +187,12 @@ services:
         parallelism: 1
         delay: 15s
         failure_action: continue
+      placement:
+        constraints: 
+          - node.role == manager
+          - node.labels.size == small
+    networks:
+      - ntw_front
   # who2:
   #   image: emilevauge/whoami
   #   networks:

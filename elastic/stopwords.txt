@@ -17,3 +17,10 @@ french
 tv
 hevc
 HEVC
+usa
+mi:
+my:
+osn
+TH
+ACM/VCM
+

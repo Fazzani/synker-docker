@@ -1,0 +1,83 @@
+version: "3.3"
+services:
+  rabbit1:
+    image: bijukunjummen/rabbitmq-server
+    hostname: rabbit1
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    deploy:
+      labels:
+        - "traefik.backend=rabbit1"
+        - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
+        - "traefik.frontend.entryPoints=http,https"
+        - "traefik.enable=true"
+        - "traefik.port=15672"
+        - "traefik.docker.network=ntw_front"
+        - "traefik.backend.loadbalancer.swarm=true"
+        - "traefik.backend.loadbalancer.method=drr"
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 1
+        delay: 10s
+      placement:
+        constraints:
+          - node.labels.size == small
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE:-synker-rabbit-cookie}
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-synker}
+      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST:-synker-host}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - ntw_front
+
+  rabbit2:
+    image: bijukunjummen/rabbitmq-server
+    hostname: rabbit2
+    ports:
+      - "5673:5672"
+      - "8001:15672"
+    deploy:
+      labels:
+        - "traefik.backend=rabbit2"
+        - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
+        - "traefik.frontend.entryPoints=http,https"
+        - "traefik.enable=false"
+        - "traefik.port=8001"
+        - "traefik.docker.network=ntw_front"
+        - "traefik.backend.loadbalancer.swarm=true"
+        - "traefik.backend.loadbalancer.method=drr"
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 1
+        delay: 10s
+      placement:
+        constraints:
+          - node.labels.size == medium
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE:-synker-rabbit-cookie}
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-synker}
+      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST:-synker-host}
+      - CLUSTERED=true
+      - CLUSTER_WITH=rabbit1
+      - RAM_NODE=true
+    networks:
+      - ntw_front
+    depends_on:
+      - rabbit1
+volumes:
+  rabbitmq_data:
+    driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=151.80.235.155"
+      device: ":/mnt/nfs/rabbitmq/data"
+networks:
+  ntw_front:
+    external: true
