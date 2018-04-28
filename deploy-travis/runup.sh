@@ -18,6 +18,7 @@ mkdir /mnt/nfs/mariadb || true
 mkdir /mnt/nfs/mariadb/data || true
 mkdir /mnt/nfs/rabbitmq || true
 mkdir /mnt/nfs/rabbitmq/data || true
+mkdir /mnt/nfs/rabbitmq/data/mnesia || true
 mkdir /mnt/nfs/kibana || true
 mkdir /mnt/nfs/kibana/data || true
 mkdir /mnt/nfs/filebeat || true
