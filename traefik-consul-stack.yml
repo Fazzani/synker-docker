@@ -142,7 +142,7 @@ services:
       - "5672:5672"
       - "15672:15672"
     volumes:
-      - rabbit_mnesia:/var/lib/rabbitmq/mnesia
+      - rabbit_database:/var/lib/rabbitmq/mnesia
     depends_on:
       - traefik_init
       - consul
@@ -235,7 +235,7 @@ volumes:
       type: "nfs"
       o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/consul/data"
-  rabbit_mnesia:
+  rabbit_database:
     driver_opts:
       type: "nfs"
       o: "nolock,soft,rw,addr=151.80.235.155"

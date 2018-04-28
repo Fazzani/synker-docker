@@ -49,9 +49,8 @@ yes | cp elastic/mapping_synker.txt /mnt/nfs/elastic/config
 # copy some logstash config
 yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
 
+sudo chmod 777 -R /mnt/nfs
 sudo su
-
-chmod 777 -R /mnt/nfs
 
 if [ "$MYSQL_RESET_DATABASE" = true ] ; then
   rm  -rf /mnt/nfs/mariadb/data/*
