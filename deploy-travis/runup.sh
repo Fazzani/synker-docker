@@ -31,11 +31,11 @@ mkdir /mnt/nfs/logstash/pipeline || true
 mkdir /mnt/nfs/logstash/data || true
 mkdir /mnt/nfs/logstash/log || true
 
-REMOTE_USER=${1:-pl}
+REMOTE_USER=${1}
 MYSQL_PASSWORD=${2}
 MYSQL_ROOT_PASSWORD=${3}
 MYSQL_DATABASE=${4:-playlist}
-MYSQL_RESET_DATABASE=${5:-true}
+MYSQL_RESET_DATABASE=${5}
 
 set -euox
 
