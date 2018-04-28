@@ -16,10 +16,10 @@
   - [ ] [Elastic config][elastic_off_guide] [elastic docker compose example][elastic_compose_ref]
 - [x] WebGrab Synker from commands [docker version](https://github.com/linuxserver/docker-webgrabplus)
 - [ ] [Dockbeat](https://github.com/Ingensi/dockbeat) to monitor and log docker deamon into elasticsearch
-- [ ] Synker
+- [x] Synker
   - [x] WebApi       scaled on 2 instances
   - [x] WebClient    scaled on 2 instances
-  - [ ] Batch
+  - [x] Batch
   - [x] Broker
 - [ ] Reverse proxy and LB [traefik][ex_traefik] [good example][traefix_good_example]
   - [ ] Circuit breaker
@@ -33,18 +33,19 @@
 - [ ] Redis
 - [ ] Install Vault
 - [ ] Install [Tvheadend]
-- [ ] Uprading Docker
+- [x] Upgrading Docker
 - [x] Gluster fs
-- [ ] Fix rabbitmq docker service not go on when running rundown.sh script
+- [x] Fix rabbitmq docker service not go on when running rundown.sh script
 - [ ] Dockerfile manifest
 - [ ] Auto backup/Restore database
   - [x] Restore
   - [ ] Daily Backup
+- [ ] Auto backup/Restore nfs share storage
 
 ### Others
 
 - [ ] xlf files (Internationalisation)
-- [ ] Test dokcer remote api
+- [x] Test dokcer remote api
 - [ ] [Appveyor for linux CI/CD][appveyor_linux]
 - [x] Replace npm by [Yarn][vs2017_yarn]
 - [ ] Restore crontab and incrontab
