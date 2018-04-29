@@ -3,7 +3,10 @@
 ### ### ### ### ### ### ### ### ### ### ###
 # Deploy script for Synker docker stack
 ### ### ### ### ### ### ### ### ### ### ###
-set -e
+set -euox
+sleep 10
+
+echo $4
 
 REMOTE_USER=$1
 MYSQL_PASSWORD=$2
