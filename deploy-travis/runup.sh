@@ -5,6 +5,8 @@
 ### ### ### ### ### ### ### ### ### ### ###
 set -e
 
+echo $1
+
 REMOTE_USER=$1
 MYSQL_PASSWORD=$2
 MYSQL_ROOT_PASSWORD=$3
