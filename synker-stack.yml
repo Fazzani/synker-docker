@@ -143,8 +143,8 @@ networks:
 
 configs:
   webapi_config:
-    file: $PWD/synker/appsettings.webapi.json
+    file: ./synker/appsettings.webapi.json
   webclient_config:
-    file: $PWD/synker/appsettings.webclient.json
+    file: ./synker/appsettings.webclient.json
   batch_config:
-    file: $PWD/synker/appsettings.json
+    file: ./synker/appsettings.json

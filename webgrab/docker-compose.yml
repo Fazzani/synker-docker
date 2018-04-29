@@ -20,7 +20,7 @@ services:
       - ingress_net_backend
 
   filebeat:
-    image: docker.elastic.co/beats/filebeat:${TAG:-6.2}
+    image: docker.elastic.co/beats/filebeat:${TAG:-6.2.4}
      # Need to override user so we can access the log files, and docker.sock
     user: root
     # disable strict permission checks
