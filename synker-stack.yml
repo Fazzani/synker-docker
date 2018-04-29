@@ -26,8 +26,10 @@ services:
       - "traefik.enable=true"
       replicas: 2
       update_config:
-        parallelism: 1
+        parallelism: 2
         delay: 10s
+        failure_action: rollback
+        order: start-first
       placement:
         constraints:
           - node.labels.provider == ovh
@@ -62,8 +64,10 @@ services:
       - "traefik.enable=true"
       replicas: 2
       update_config:
-        parallelism: 1
+        parallelism: 2
         delay: 10s
+        failure_action: rollback
+        order: start-first
       placement:
         constraints:
           - node.labels.provider == ovh
