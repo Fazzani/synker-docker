@@ -71,11 +71,10 @@ export $(cat env)
 
 sudo docker stack deploy --resolve-image=always --with-registry-auth -c traefik-consul-stack.yml lb
 sleep 10
-sudo docker stack deploy --resolve-image=always --with-registry-auth -c elk-stack.yml elk
-#docker stack deploy --resolve-image=always --with-registry-auth -c rabbitmq-stack.yml rabbit
 sudo docker stack deploy --resolve-image=always --with-registry-auth -c ./webgrab/docker-compose.yml webgrab
 sudo docker stack deploy --resolve-image=always --with-registry-auth -c synker-stack.yml synker
-
+sudo docker stack deploy --resolve-image=always --with-registry-auth -c elk-stack.yml elk
+#docker stack deploy --resolve-image=always --with-registry-auth -c rabbitmq-stack.yml rabbit
 #docker stack deploy -c vpn/openvpn.yml openvpn
 
 echo "Clean up ..."
