@@ -71,6 +71,7 @@ docker network create --driver overlay ingress_net_backend \
 
 echo $MYSQL_PASSWORD > mysql_password.txt
 echo $MYSQL_ROOT_PASSWORD > mysql_root_password.txt
+echo $MYSQL_RESET_DATABASE > MYSQL_RESET_DATABASE.txt
 awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 
