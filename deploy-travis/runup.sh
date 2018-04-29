@@ -5,14 +5,11 @@
 ### ### ### ### ### ### ### ### ### ### ###
 set -e
 
-echo $1
-echo $2
-echo $3
-
 REMOTE_USER=$1
 MYSQL_PASSWORD=$2
 MYSQL_ROOT_PASSWORD=$3
 MYSQL_DATABASE=${4:-playlist}
+MYSQL_RESET_DATABASE=${5:-false}
 
 mkdir /mnt/nfs/elastic || true
 mkdir /mnt/nfs/elastic/data || true
@@ -54,7 +51,7 @@ yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
 sudo chmod 777 -R /mnt/nfs
 sudo su
 
-if [ "$MYSQL_RESET_DATABASE" = true ] ; then
+if [ "$MYSQL_RESET_DATABASE" = true ]; then
   rm  -rf /mnt/nfs/mariadb/data/*
 fi
 
@@ -70,7 +67,6 @@ docker network create --driver overlay ingress_net_backend \
 
 echo $MYSQL_PASSWORD > mysql_password.txt
 echo $MYSQL_ROOT_PASSWORD > mysql_root_password.txt
-echo $MYSQL_RESET_DATABASE > MYSQL_RESET_DATABASE.txt
 awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 
