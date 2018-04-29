@@ -13,7 +13,6 @@ REMOTE_USER=$1
 MYSQL_PASSWORD=$2
 MYSQL_ROOT_PASSWORD=$3
 MYSQL_DATABASE=${4:-playlist}
-MYSQL_RESET_DATABASE=${5:-false}
 
 mkdir /mnt/nfs/elastic || true
 mkdir /mnt/nfs/elastic/data || true
