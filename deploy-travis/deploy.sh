@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euxo
+set -e
 
 echo "Remove deployed script"
 ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST "rm -R /home/$REMOTE_USER/synker-docker" || true
@@ -14,7 +14,7 @@ ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST "chmod +x /home/$REM
 
 echo "Run up docker stack script"
 echo "$MYSQL_PASSWORD" > /home/$REMOTE_USER/tmp.txt
-echo "MYSQL_ROOT_PASSWORD" >> /home/$REMOTE_USER/tmp.txt
+echo "$MYSQL_ROOT_PASSWORD" > /home/$REMOTE_USER/tmp2.txt
 ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST 'bash -s' < ./deploy-travis/runup.sh $REMOTE_USER $MYSQL_PASSWORD $MYSQL_ROOT_PASSWORD $MYSQL_DATABASE $MYSQL_RESET_DATABASE
 
 exit 0
