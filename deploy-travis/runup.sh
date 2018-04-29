@@ -69,12 +69,13 @@ echo $MYSQL_ROOT_PASSWORD > mysql_root_password.txt
 awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 
-sudo docker stack deploy --resolve-image=always --with-registry-auth -c traefik-consul-stack.yml lb
+sudo docker stack deploy -c traefik-consul-stack.yml lb
 sleep 10
-sudo docker stack deploy --resolve-image=always --with-registry-auth -c ./webgrab/docker-compose.yml webgrab
-sudo docker stack deploy --resolve-image=always --with-registry-auth -c synker-stack.yml synker
-sudo docker stack deploy --resolve-image=always --with-registry-auth -c elk-stack.yml elk
-#docker stack deploy --resolve-image=always --with-registry-auth -c rabbitmq-stack.yml rabbit
+sudo docker stack deploy -c elk-stack.yml elk
+#docker stack deploy -c rabbitmq-stack.yml rabbit
+sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
+sudo docker stack deploy -c synker-stack.yml synker
+
 #docker stack deploy -c vpn/openvpn.yml openvpn
 
 echo "Clean up ..."
