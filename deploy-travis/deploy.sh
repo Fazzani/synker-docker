@@ -14,7 +14,7 @@ ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST "chmod +x /home/$REM
 
 echo "Run up docker stack script"
 if [ $MYSQL_PASSWORD = "pl" ]; then echo "pl"; else echo "not pl"; fi
-if [ $MYSQL_ROOT_PASSWORD = "pl" ]; then echo "pl"; else echo "not pl"; fi
+if [ $MYSQL_ROOT_PASSWORD = "" ]; then echo "empty"; else echo "not pl"; fi
 ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST 'bash -s' < ./deploy-travis/runup.sh $REMOTE_USER $MYSQL_PASSWORD $MYSQL_ROOT_PASSWORD $MYSQL_DATABASE $MYSQL_RESET_DATABASE
 
 exit 0
