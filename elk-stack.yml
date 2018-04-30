@@ -7,12 +7,17 @@ services:
     environment:
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
       - discovery.zen.minimum_master_nodes=1
-      - ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD}
+      #- ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD}
       - node.name=elasticsearch
       - script.painless.regex.enabled=true
       - http.cors.enabled=true
       - http.cors.allow-origin="*"
       - node.ingest=true
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - xpack.ml.enabled=false
+      - xpack.graph.enabled=false
+      - xpack.watcher.enabled=false
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
       - /mnt/nfs/elastic/synkerconfig/stopwords.txt:/usr/share/elasticsearch/synkerconfig/stopwords.txt
@@ -48,8 +53,8 @@ services:
       - 5601:5601
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:${ELASTICSEARCH_PORT:-9200}
-      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
-      - ELASTICSEARCH_PASSWORD=${ELASTIC_PASSWORD:-changeme}
+      # - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
+      # - ELASTICSEARCH_PASSWORD=${ELASTIC_PASSWORD:-changeme}
     networks:
       - ntw_front
     deploy:
@@ -89,11 +94,11 @@ services:
     #     mode: 0440
     environment:
       ELASTICSEARCH_URL: "http://elasticsearch:${ELASTICSEARCH_PORT:-9200}"
-      ELASTICSEARCH_USERNAME: "${ELASTICSEARCH_USERNAME:-elastic}"
-      ELASTIC_PASSWORD: "${ELASTIC_PASSWORD:-changeme}"
-      xpack.monitoring.elasticsearch.password: "${ELASTIC_PASSWORD:-changeme}"
-      xpack.monitoring.elasticsearch.username: "${ELASTICSEARCH_USERNAME:-elastic}"
-      xpack.monitoring.elasticsearch.url: "http://elasticsearch:${ELASTICSEARCH_PORT:-9200}"
+      # ELASTICSEARCH_USERNAME: "${ELASTICSEARCH_USERNAME:-elastic}"
+      # ELASTIC_PASSWORD: "${ELASTIC_PASSWORD:-changeme}"
+      # xpack.monitoring.elasticsearch.password: "${ELASTIC_PASSWORD:-changeme}"
+      # xpack.monitoring.elasticsearch.username: "${ELASTICSEARCH_USERNAME:-elastic}"
+      # xpack.monitoring.elasticsearch.url: "http://elasticsearch:${ELASTICSEARCH_PORT:-9200}"
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     #   - 'path.config="/usr/share/logstash/config"'
       path.config: "/usr/share/logstash/config/*.conf"
