@@ -141,8 +141,8 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-    volumes:
-      - rabbit_database:/var/lib/rabbitmq/mnesia
+    #volumes:
+      #- rabbit_database:/var/lib/rabbitmq/mnesia
     depends_on:
       - traefik_init
       - consul
@@ -156,7 +156,7 @@ services:
       - CONSUL_PORT=8500
       - CONSUL_SVC=rabbitmq
       - CONSUL_SVC_ADDR_AUTO=true
-      - CONSUL_DEREGISTER_AFTER=60 
+      - CONSUL_DEREGISTER_AFTER=60
       - "RABBIMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE:-synker-rabbit-cookie}"
       - "RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST:-synker-host}"
       - "RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}"
