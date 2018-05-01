@@ -178,7 +178,7 @@ services:
           memory: 256M
       restart_policy:
         condition: on-failure
-        delay: 15s
+        delay: 60s
         max_attempts: 3
         window: 120s
       update_config:
