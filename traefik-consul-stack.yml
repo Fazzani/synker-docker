@@ -177,7 +177,7 @@ services:
         reservations:
           memory: 256M
       restart_policy:
-        condition: on-failure
+        condition: always
         delay: 15s
         max_attempts: 3
         window: 120s
