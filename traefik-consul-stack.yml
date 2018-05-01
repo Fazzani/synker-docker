@@ -79,7 +79,7 @@ services:
       - consul
 
   traefik:
-    image: traefik:1.6.0
+    image: traefik:${TRAEFIK_VERSION:-latest}
     depends_on:
       - traefik_init
       - consul
