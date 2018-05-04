@@ -11,7 +11,7 @@ services:
       - "8920:8920"
     networks:
       - ntw_front
-    volume:
+    volumes:
       - emby_config:/config
     deploy:
       labels:
