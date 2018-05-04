@@ -1,0 +1,38 @@
+version: "3.5"
+
+services:
+
+  emby:
+    image: emby/embyserver:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8096:8096"
+      - "8920:8920"
+    networks:
+      - ntw_front
+    volume:
+      - "/mnt/nfs/emby/config:/config"
+    deploy:
+      labels:
+      - "traefik.backend=emby"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:emby.synker.ovh"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.port=8096"
+      - "traefik.enable=true"
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
+        failure_action: rollback
+        order: start-first
+      placement:
+        constraints:
+          - node.labels.provider == ovh
+      restart_policy:
+        condition: on-failure
+        delay: 2m
+        window: 120s

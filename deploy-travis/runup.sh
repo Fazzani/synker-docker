@@ -37,6 +37,8 @@ mkdir /mnt/nfs/logstash || true
 mkdir /mnt/nfs/logstash/pipeline || true
 mkdir /mnt/nfs/logstash/data || true
 mkdir /mnt/nfs/logstash/log || true
+mkdir /mnt/nfs/emby || true
+mkdir /mnt/nfs/emby/config || true
 
 set -euox
 
@@ -75,6 +77,7 @@ sudo docker stack deploy -c elk-stack.yml elk
 #docker stack deploy -c rabbitmq-stack.yml rabbit
 sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
 sudo docker stack deploy -c synker-stack.yml synker
+sudo docker stack deploy -c ./others/others-stack.yml others
 
 #docker stack deploy -c vpn/openvpn.yml openvpn
 
