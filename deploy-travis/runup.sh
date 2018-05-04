@@ -5,19 +5,19 @@
 ### ### ### ### ### ### ### ### ### ### ###
 
 function set_folder_permission {
- sudo chmod 777 -R /mnt/nfs/elastic
- sudo chmod 777 -R /mnt/nfs/consul
- sudo chmod 777 -R /mnt/nfs/synker
- sudo chmod 777 -R /mnt/nfs/mariadb
- sudo chmod 777 -R /mnt/nfs/rabbitmq
- sudo chmod 777 -R /mnt/nfs/kibana
- sudo chmod 777 -R /mnt/nfs/filebeat
- sudo chmod 777 -R /mnt/nfs/webgrab
- sudo chmod 777 -R /mnt/nfs/logstash
- sudo chmod 777 -R /mnt/nfs/emby
+  sudo chmod 777 -R /mnt/nfs/elastic
+  sudo chmod 777 -R /mnt/nfs/consul
+  sudo chmod 777 -R /mnt/nfs/synker
+  sudo chmod 777 -R /mnt/nfs/mariadb
+  sudo chmod 777 -R /mnt/nfs/rabbitmq
+  sudo chmod 777 -R /mnt/nfs/kibana
+  sudo chmod 777 -R /mnt/nfs/filebeat
+  sudo chmod 777 -R /mnt/nfs/webgrab
+  sudo chmod 777 -R /mnt/nfs/logstash
+  sudo chmod 777 -R /mnt/nfs/emby
 }
 
-function create_shares{
+function create_shares {
   mkdir /mnt/nfs/elastic || true
   mkdir /mnt/nfs/elastic/data || true
   mkdir /mnt/nfs/elastic/config || true
