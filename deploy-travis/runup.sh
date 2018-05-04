@@ -39,6 +39,7 @@ mkdir /mnt/nfs/logstash/data || true
 mkdir /mnt/nfs/logstash/log || true
 mkdir /mnt/nfs/emby || true
 mkdir /mnt/nfs/emby/config || true
+mkdir /mnt/nfs/emby/data || true
 
 set -euox
 
