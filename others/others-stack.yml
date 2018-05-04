@@ -14,8 +14,7 @@ services:
     volumes:
       - emby_config:/config
       - emby_data:/mnt/share1
-      - emby_freebox_films:/mnt/share2
-      - emby_freebox_series:/mnt/share3
+      - emby_freebox:/mnt/share2
     deploy:
       labels:
       - "traefik.backend=emby"
@@ -44,16 +43,11 @@ volumes:
       type: "nfs"
       o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/emby/data"
-  emby_freebox_films:
+  emby_freebox:
     driver_opts:
       type: "nfs"
       o: "nolock,soft,rw,addr=151.80.235.155"
-      device: ":/mnt/nfs/freebox/TOSHIBA\ EXT/vidéos/Films"
-  emby_freebox_series:
-    driver_opts:
-      type: "nfs"
-      o: "nolock,soft,rw,addr=151.80.235.155"
-      device: ":/mnt/nfs/freebox/TOSHIBA\ EXT/vidéos/Series"
+      device: ":/mnt/nfs/freebox"
 networks:
   ntw_front:
     driver: overlay
