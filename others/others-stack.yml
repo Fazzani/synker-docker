@@ -12,7 +12,7 @@ services:
     networks:
       - ntw_front
     volume:
-      - "/mnt/nfs/emby/config:/config"
+      - emby_config:/config
     deploy:
       labels:
       - "traefik.backend=emby"
@@ -23,12 +23,6 @@ services:
       - "traefik.docker.network=ntw_front"
       - "traefik.port=8096"
       - "traefik.enable=true"
-      replicas: 2
-      update_config:
-        parallelism: 2
-        delay: 10s
-        failure_action: rollback
-        order: start-first
       placement:
         constraints:
           - node.labels.provider == ovh
@@ -36,3 +30,9 @@ services:
         condition: on-failure
         delay: 2m
         window: 120s
+volumes:
+  emby_config:
+    driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=151.80.235.155"
+      device: ":/mnt/nfs/emby/config"
