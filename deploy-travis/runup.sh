@@ -3,6 +3,53 @@
 ### ### ### ### ### ### ### ### ### ### ###
 # Deploy script for Synker docker stack
 ### ### ### ### ### ### ### ### ### ### ###
+
+function set_folder_permission {
+ sudo chmod 777 -R /mnt/nfs/elastic
+ sudo chmod 777 -R /mnt/nfs/consul
+ sudo chmod 777 -R /mnt/nfs/synker
+ sudo chmod 777 -R /mnt/nfs/mariadb
+ sudo chmod 777 -R /mnt/nfs/rabbitmq
+ sudo chmod 777 -R /mnt/nfs/kibana
+ sudo chmod 777 -R /mnt/nfs/filebeat
+ sudo chmod 777 -R /mnt/nfs/webgrab
+ sudo chmod 777 -R /mnt/nfs/logstash
+ sudo chmod 777 -R /mnt/nfs/emby
+}
+
+function create_shares{
+  mkdir /mnt/nfs/elastic || true
+  mkdir /mnt/nfs/elastic/data || true
+  mkdir /mnt/nfs/elastic/config || true
+  mkdir /mnt/nfs/elastic/synkerconfig || true
+  mkdir /mnt/nfs/consul        || true
+  mkdir /mnt/nfs/consul/data || true
+  mkdir /mnt/nfs/synker || true
+  mkdir /mnt/nfs/synker/data || true
+  mkdir /mnt/nfs/mariadb || true
+  mkdir /mnt/nfs/mariadb/data || true
+  mkdir /mnt/nfs/rabbitmq || true
+  mkdir /mnt/nfs/rabbitmq/data || true
+  mkdir /mnt/nfs/rabbitmq/data/mnesia || true
+  mkdir /mnt/nfs/kibana || true
+  mkdir /mnt/nfs/kibana/data || true
+  mkdir /mnt/nfs/filebeat || true
+  mkdir /mnt/nfs/filebeat/data || true
+  mkdir /mnt/nfs/filebeat/logs || true
+  mkdir /mnt/nfs/filebeat/logs_usr_share || true
+  mkdir /mnt/nfs/webgrab || true
+  mkdir /mnt/nfs/webgrab/config || true
+  mkdir /mnt/nfs/webgrab/data || true
+  mkdir /mnt/nfs/logstash || true
+  mkdir /mnt/nfs/logstash/pipeline || true
+  mkdir /mnt/nfs/logstash/data || true
+  mkdir /mnt/nfs/logstash/log || true
+  mkdir /mnt/nfs/emby || true
+  mkdir /mnt/nfs/emby/config || true
+  mkdir /mnt/nfs/emby/data || true
+  mkdir /mnt/nfs/freebox || true
+}
+
 set +e
 
 REMOTE_USER=$1
@@ -11,35 +58,7 @@ MYSQL_ROOT_PASSWORD=$3
 MYSQL_DATABASE=${4:-playlist}
 MYSQL_RESET_DATABASE=${5:-false}
 
-mkdir /mnt/nfs/elastic || true
-mkdir /mnt/nfs/elastic/data || true
-mkdir /mnt/nfs/elastic/config || true
-mkdir /mnt/nfs/elastic/synkerconfig || true
-mkdir /mnt/nfs/consul        || true
-mkdir /mnt/nfs/consul/data || true
-mkdir /mnt/nfs/synker || true
-mkdir /mnt/nfs/synker/data || true
-mkdir /mnt/nfs/mariadb || true
-mkdir /mnt/nfs/mariadb/data || true
-mkdir /mnt/nfs/rabbitmq || true
-mkdir /mnt/nfs/rabbitmq/data || true
-mkdir /mnt/nfs/rabbitmq/data/mnesia || true
-mkdir /mnt/nfs/kibana || true
-mkdir /mnt/nfs/kibana/data || true
-mkdir /mnt/nfs/filebeat || true
-mkdir /mnt/nfs/filebeat/data || true
-mkdir /mnt/nfs/filebeat/logs || true
-mkdir /mnt/nfs/filebeat/logs_usr_share || true
-mkdir /mnt/nfs/webgrab || true
-mkdir /mnt/nfs/webgrab/config || true
-mkdir /mnt/nfs/webgrab/data || true
-mkdir /mnt/nfs/logstash || true
-mkdir /mnt/nfs/logstash/pipeline || true
-mkdir /mnt/nfs/logstash/data || true
-mkdir /mnt/nfs/logstash/log || true
-mkdir /mnt/nfs/emby || true
-mkdir /mnt/nfs/emby/config || true
-mkdir /mnt/nfs/emby/data || true
+create_shares
 
 set -euox
 
@@ -51,7 +70,7 @@ yes | cp elastic/mapping_synker.txt /mnt/nfs/elastic/config
 # copy some logstash config
 yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
 
-sudo chmod 777 -R /mnt/nfs
+set_folder_permission
 
 if [ "$MYSQL_RESET_DATABASE" = true ]; then
   rm  -rf /mnt/nfs/mariadb/data/*
