@@ -36,3 +36,7 @@ volumes:
       type: "nfs"
       o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/emby/config"
+networks:
+  ntw_front:
+    driver: overlay
+    external: true
