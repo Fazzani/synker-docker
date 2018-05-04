@@ -14,7 +14,7 @@ services:
     volumes:
       - emby_config:/config
       - emby_data:/mnt/share1
-      - emby_freebox:/mnt/share2
+      - emby_freebox:/mnt/share2:ro
     deploy:
       labels:
       - "traefik.backend=emby"
@@ -46,7 +46,7 @@ volumes:
   emby_freebox:
     driver_opts:
       type: "nfs"
-      o: "nolock,soft,rw,addr=151.80.235.155"
+      o: "nolock,soft,ro,addr=151.80.235.155"
       device: ":/mnt/nfs/freebox"
 networks:
   ntw_front:
