@@ -89,13 +89,20 @@ ENDSSH
 
 ```
 
-### Docker node labels
+### Create ansible user and add permissions
 
-docker node update --label-add size=large --label-add provider=ovh vps448126
-docker node update --label-add size=medium --label-add provider=ovh vps507934
-docker node update --label-add size=small --label-add provider=arub arub1
-docker node update --label-add size=small --label-add provider=arub arub2
-docker node update --label-add size=small --label-add provider=arub arub3
+```sh
+visudo
+# add ansible    ALL=(ALL) NOPASSWD:ALL
+```
+
+### Docker node labels (on manager node)
+
+sudo docker node update --label-add size=large --label-add provider=ovh vps448126
+sudo docker node update --label-add size=medium --label-add provider=ovh vps507934
+sudo docker node update --label-add size=small --label-add provider=arub arub1
+sudo docker node update --label-add size=small --label-add provider=arub arub2
+sudo docker node update --label-add size=small --label-add provider=arub arub3
 
 ### travis encrypt file
 

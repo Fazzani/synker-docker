@@ -5,16 +5,16 @@
 ### ### ### ### ### ### ### ### ### ### ###
 
 function set_folder_permission {
-  chmod 777 -R /mnt/nfs/elastic
-  chmod 777 -R /mnt/nfs/consul
-  chmod 777 -R /mnt/nfs/synker
-  chmod 777 -R /mnt/nfs/mariadb
-  chmod 777 -R /mnt/nfs/rabbitmq
-  chmod 777 -R /mnt/nfs/kibana
-  chmod 777 -R /mnt/nfs/filebeat
-  chmod 777 -R /mnt/nfs/webgrab
-  chmod 777 -R /mnt/nfs/logstash
-  chmod 777 -R /mnt/nfs/emby
+  sudo chmod 777 -R /mnt/nfs/elastic
+  sudo chmod 777 -R /mnt/nfs/consul
+  sudo chmod 777 -R /mnt/nfs/synker
+  sudo chmod 777 -R /mnt/nfs/mariadb
+  sudo chmod 777 -R /mnt/nfs/rabbitmq
+  sudo chmod 777 -R /mnt/nfs/kibana
+  sudo chmod 777 -R /mnt/nfs/filebeat
+  sudo chmod 777 -R /mnt/nfs/webgrab
+  sudo chmod 777 -R /mnt/nfs/logstash
+  sudo chmod 777 -R /mnt/nfs/emby
 }
 
 function create_shares {
@@ -77,11 +77,11 @@ if [ "$MYSQL_RESET_DATABASE" = true ]; then
   rm  -rf /mnt/nfs/mariadb/data/*
 fi
 
-docker network create --driver overlay ntw_front \
+sudo docker network create --driver overlay ntw_front \
   --attachable || true \
   --opt encrypted=true || true
 
-docker network create --driver overlay ingress_net_backend \
+sudo docker network create --driver overlay ingress_net_backend \
   --attachable || true \
   --subnet=70.28.0.0/16 \
   --opt com.docker.network.driver.mtu=9216 \
@@ -92,18 +92,18 @@ echo $MYSQL_ROOT_PASSWORD > mysql_root_password.txt
 awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 echo $TAG
-docker stack deploy -c traefik-consul-stack.yml lb
+sudo docker stack deploy -c traefik-consul-stack.yml lb
 sleep 10
-docker stack deploy -c elk-stack.yml elk
+sudo docker stack deploy -c elk-stack.yml elk
 #docker stack deploy -c rabbitmq-stack.yml rabbit
-docker stack deploy -c ./webgrab/docker-compose.yml webgrab
-docker stack deploy -c synker-stack.yml synker
-docker stack deploy -c ./others/others-stack.yml others
+sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
+sudo docker stack deploy -c synker-stack.yml synker
+sudo docker stack deploy -c ./others/others-stack.yml others
 
 #docker stack deploy -c vpn/openvpn.yml openvpn
 
 echo "Clean up ..."
-docker system prune -f
+sudo docker system prune -f
 
 # Restoring maridb data 
 # Must be running on mariadb host container
@@ -113,7 +113,7 @@ if [ "$MYSQL_RESET_DATABASE" = true ] ; then
    SERVICE_ID=$(docker service ps -q -f desired-state=running  synker_synkerdb | head -1)
    CONTAINER_ID=$(docker inspect --format "{{.Status.ContainerStatus.ContainerID}}" $SERVICE_ID | head -1)
    cat ./synker/playlist.dump-2018-02-28.sql | \
-   docker exec -i -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" -e MYSQL_DATABASE="${MYSQL_DATABASE}" $CONTAINER_ID \
+   sudo docker exec -i -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" -e MYSQL_DATABASE="${MYSQL_DATABASE}" $CONTAINER_ID \
    mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE}" --force
 fi
 exit 0
