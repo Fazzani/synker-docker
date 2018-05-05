@@ -93,7 +93,8 @@ ENDSSH
 
 ```sh
 visudo
-# add ansible    ALL=(ALL) NOPASSWD:ALL
+# Put the line after all other lines in the sudoers file
+ansible    ALL=(ALL) NOPASSWD:ALL
 ```
 
 ### Docker node labels (on manager node)
