@@ -5,16 +5,16 @@
 ### ### ### ### ### ### ### ### ### ### ###
 
 function set_folder_permission {
-  sudo chmod 777 -R /mnt/nfs/elastic
-  sudo chmod 777 -R /mnt/nfs/consul
-  sudo chmod 777 -R /mnt/nfs/synker
-  sudo chmod 777 -R /mnt/nfs/mariadb
-  sudo chmod 777 -R /mnt/nfs/rabbitmq
-  sudo chmod 777 -R /mnt/nfs/kibana
-  sudo chmod 777 -R /mnt/nfs/filebeat
-  sudo chmod 777 -R /mnt/nfs/webgrab
-  sudo chmod 777 -R /mnt/nfs/logstash
-  sudo chmod 777 -R /mnt/nfs/emby
+  chmod 777 -R /mnt/nfs/elastic
+  chmod 777 -R /mnt/nfs/consul
+  chmod 777 -R /mnt/nfs/synker
+  chmod 777 -R /mnt/nfs/mariadb
+  chmod 777 -R /mnt/nfs/rabbitmq
+  chmod 777 -R /mnt/nfs/kibana
+  chmod 777 -R /mnt/nfs/filebeat
+  chmod 777 -R /mnt/nfs/webgrab
+  chmod 777 -R /mnt/nfs/logstash
+  chmod 777 -R /mnt/nfs/emby
 }
 
 function create_shares {
