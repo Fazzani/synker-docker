@@ -28,6 +28,7 @@ services:
       placement:
         constraints:
           - node.labels.provider == ovh
+          - node.labels.size == large
       restart_policy:
         condition: on-failure
         delay: 2m
