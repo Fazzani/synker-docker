@@ -113,6 +113,9 @@ In bash windows
 cd /mnt/c/Users/Heni/Source/Repos/synker-docker
 tar cvf secret.tar ./synker/* deploy_rsa .env
 travis encrypt-file secret.tar --add
+
+# Copy public key to deployment host (ovh1)
+ssh ansible@ovh1 "cat  >> ~/.ssh/authorized_keys" < ../synker-docker/deploy_rsa.pub
 ```
 
 ## NOTES

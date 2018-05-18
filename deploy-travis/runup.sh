@@ -60,6 +60,7 @@ MYSQL_DATABASE=${4:-playlist}
 MYSQL_RESET_DATABASE=${5:-false}
 
 create_shares
+set_folder_permission
 
 set -euox
 
