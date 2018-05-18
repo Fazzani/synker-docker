@@ -5,50 +5,50 @@
 ### ### ### ### ### ### ### ### ### ### ###
 
 function set_folder_permission {
-  chmod 777 -R /mnt/nfs/elastic
-  chmod 777 -R /mnt/nfs/consul
-  chmod 777 -R /mnt/nfs/synker
-  chmod 777 -R /mnt/nfs/mariadb
-  chmod 777 -R /mnt/nfs/rabbitmq
-  chmod 777 -R /mnt/nfs/kibana
-  chmod 777 -R /mnt/nfs/filebeat
-  chmod 777 -R /mnt/nfs/webgrab
-  chmod 777 -R /mnt/nfs/logstash
-  chmod 777 /mnt/nfs/emby
+  sudo chmod 777 -R /mnt/nfs/elastic
+  sudo chmod 777 -R /mnt/nfs/consul
+  sudo chmod 777 -R /mnt/nfs/synker
+  sudo chmod 777 -R /mnt/nfs/mariadb
+  sudo chmod 777 -R /mnt/nfs/rabbitmq
+  sudo chmod 777 -R /mnt/nfs/kibana
+  sudo chmod 777 -R /mnt/nfs/filebeat
+  sudo chmod 777 -R /mnt/nfs/webgrab
+  sudo chmod 777 -R /mnt/nfs/logstash
+  sudo chmod 777 /mnt/nfs/emby
 }
 
 function create_shares {
-  mkdir /mnt/nfs/elastic || true
-  mkdir /mnt/nfs/elastic/data || true
-  mkdir /mnt/nfs/elastic/config || true
-  mkdir /mnt/nfs/elastic/synkerconfig || true
-  mkdir /mnt/nfs/consul        || true
-  mkdir /mnt/nfs/consul/data || true
-  mkdir /mnt/nfs/synker || true
-  mkdir /mnt/nfs/synker/data || true
-  mkdir /mnt/nfs/mariadb || true
-  mkdir /mnt/nfs/mariadb/data || true
-  mkdir /mnt/nfs/rabbitmq || true
-  mkdir /mnt/nfs/rabbitmq/data || true
-  mkdir /mnt/nfs/rabbitmq/data/mnesia || true
-  mkdir /mnt/nfs/kibana || true
-  mkdir /mnt/nfs/kibana/data || true
-  mkdir /mnt/nfs/filebeat || true
-  mkdir /mnt/nfs/filebeat/data || true
-  mkdir /mnt/nfs/filebeat/logs || true
-  mkdir /mnt/nfs/filebeat/logs_usr_share || true
-  mkdir /mnt/nfs/webgrab || true
-  mkdir /mnt/nfs/webgrab/config || true
-  mkdir /mnt/nfs/webgrab/data || true
-  mkdir /mnt/nfs/logstash || true
-  mkdir /mnt/nfs/logstash/pipeline || true
-  mkdir /mnt/nfs/logstash/data || true
-  mkdir /mnt/nfs/logstash/log || true
-  mkdir /mnt/nfs/logstash/config || true
-  mkdir /mnt/nfs/emby || true
-  mkdir /mnt/nfs/emby/config || true
-  mkdir /mnt/nfs/emby/data || true
-  mkdir /mnt/nfs/freebox || true
+  sudo mkdir /mnt/nfs/elastic || true
+  sudo mkdir /mnt/nfs/elastic/data || true
+  sudo mkdir /mnt/nfs/elastic/config || true
+  sudo mkdir /mnt/nfs/elastic/synkerconfig || true
+  sudo mkdir /mnt/nfs/consul        || true
+  sudo mkdir /mnt/nfs/consul/data || true
+  sudo mkdir /mnt/nfs/synker || true
+  sudo mkdir /mnt/nfs/synker/data || true
+  sudo mkdir /mnt/nfs/mariadb || true
+  sudo mkdir /mnt/nfs/mariadb/data || true
+  sudo mkdir /mnt/nfs/rabbitmq || true
+  sudo mkdir /mnt/nfs/rabbitmq/data || true
+  sudo mkdir /mnt/nfs/rabbitmq/data/mnesia || true
+  sudo mkdir /mnt/nfs/kibana || true
+  sudo mkdir /mnt/nfs/kibana/data || true
+  sudo mkdir /mnt/nfs/filebeat || true
+  sudo mkdir /mnt/nfs/filebeat/data || true
+  sudo mkdir /mnt/nfs/filebeat/logs || true
+  sudo mkdir /mnt/nfs/filebeat/logs_usr_share || true
+  sudo mkdir /mnt/nfs/webgrab || true
+  sudo mkdir /mnt/nfs/webgrab/config || true
+  sudo mkdir /mnt/nfs/webgrab/data || true
+  sudo mkdir /mnt/nfs/logstash || true
+  sudo mkdir /mnt/nfs/logstash/pipeline || true
+  sudo mkdir /mnt/nfs/logstash/data || true
+  sudo mkdir /mnt/nfs/logstash/log || true
+  sudo mkdir /mnt/nfs/logstash/config || true
+  sudo mkdir /mnt/nfs/emby || true
+  sudo mkdir /mnt/nfs/emby/config || true
+  sudo mkdir /mnt/nfs/emby/data || true
+  sudo mkdir /mnt/nfs/freebox || true
 }
 
 set +e
