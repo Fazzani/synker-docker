@@ -71,6 +71,7 @@ yes | cp elastic/stopwords.txt /mnt/nfs/elastic/synkerconfig
 yes | cp elastic/mapping_synker.txt /mnt/nfs/elastic/config
 # copy some logstash config
 yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
+yes | cp logstash/config/*.yml /mnt/nfs/logstash/config/
 
 set_folder_permission
 
