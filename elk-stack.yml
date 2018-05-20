@@ -139,14 +139,14 @@ volumes:
      driver_opts:
       type: "nfs"
       #o: "rw,relatime,vers=4.1,rsize=65536,wsize=65536,namlen=255,nolock,soft,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,local_lock=none,no_root_squash,addr=151.80.235.155"
-      o: "nolock,soft,rw,addr=151.80.235.155"
+      o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/elastic/data"
   
   kibana_data:
      driver: local
      driver_opts:
       type: "nfs"
-      o: "nolock,soft,rw,addr=151.80.235.155"
+      o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/kibana/data"
   
   logstash_config:
