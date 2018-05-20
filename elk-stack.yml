@@ -99,9 +99,9 @@ services:
       # xpack.monitoring.elasticsearch.password: "${ELASTIC_PASSWORD:-changeme}"
       # xpack.monitoring.elasticsearch.username: "${ELASTICSEARCH_USERNAME:-elastic}"
       # xpack.monitoring.elasticsearch.url: "http://elasticsearch:${ELASTICSEARCH_PORT:-9200}"
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-    #   - 'path.config="/usr/share/logstash/config"'
-      path.config: "/usr/share/logstash/config/*.conf"
+      #LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      # - 'path.config="/usr/share/logstash/config"'
+      #path.config: "/usr/share/logstash/config/*.conf"
     ports:
       - "12201:12201/udp"
       - "9600:9600"
