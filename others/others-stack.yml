@@ -13,8 +13,8 @@ services:
       - emby_config:/config
       - emby_data:/mnt/share1
       - "/mnt/freebox:/mnt/share2:ro"
-      - "/mnt/freebox/TOSHIBA EXT/vidéos/Series:/mnt/series_freebox:ro"
-      - "/mnt/freebox/TOSHIBA EXT/vidéos/Films:/mnt/films_freebox:ro"
+      - "/mnt/freebox/TOSHIBA EXT/vidéos/Series:/mnt/share3:ro"
+      - "/mnt/freebox/TOSHIBA EXT/vidéos/Films:/mnt/share4:ro"
     deploy:
       labels:
       - "traefik.backend=emby"
