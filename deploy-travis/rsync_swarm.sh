@@ -6,8 +6,13 @@
 #      To execute on rasp1
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
 
-NOW=$(date +"%d-%m-%Y")
-echo "[$NOW] rsync batch started"
+script=$(basename "$0")
+
+function log {
+   echo -e "[$(date +"%d-%m-%Y %H:%M:%S") $HOSTNAME $USER $script] $1" 
+}
+
+log "rsync batch started"
 
 dest="/home/pi/toshiba/backup/swarm";
 src_host="ansible@ovh1";
@@ -26,7 +31,6 @@ croncmd="rsync -avz -e ssh --stats --progress --exclude-from="${dest}/exclude_sw
 cronjob="${cron} ${croncmd}"
 ( crontab -l | grep -v -F "$croncmd" ; echo -e "#rsync swarm \n${cronjob}" ) | crontab -
 
-NOW=$(date +"%d-%m-%Y")
-echo "[$NOW] rsync batch finished"
+log "rsync batch finished"
 
 exit 0

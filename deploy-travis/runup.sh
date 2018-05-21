@@ -4,6 +4,12 @@
 # Deploy script for Synker docker stack
 ### ### ### ### ### ### ### ### ### ### ###
 
+script=$(basename "$0")
+
+function log {
+   echo -e "[$(date +"%d-%m-%Y %H:%M:%S") $HOSTNAME $USER $script] $1" 
+}
+
 function set_folder_permission {
   sudo chmod 777 -R /mnt/nfs/elastic
   sudo chmod 777 -R /mnt/nfs/consul
@@ -104,7 +110,7 @@ sudo docker stack deploy -c ./others/others-stack.yml others
 
 #docker stack deploy -c vpn/openvpn.yml openvpn
 
-echo "Clean up ..."
+log "Clean up ..."
 sudo docker system prune -f
 
 # Restoring maridb data 

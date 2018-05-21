@@ -6,8 +6,13 @@
 
 # TODO: Move all this script to ansible role
 
-NOW=$(date +"%d-%m-%Y")
-echo "[$NOW] batch started"
+script=$(basename "$0")
+
+function log {
+   echo -e "[$(date +"%d-%m-%Y %H:%M:%S") $HOSTNAME $USER $script] $1" 
+}
+
+log "batch started"
 
 # On nfs server
 mkdir -p /mnt/nfs && chmod -R /mnt/nfs
@@ -27,7 +32,6 @@ sudo apt-get install curlftpfs
 echo "curlftpfs#freebox:Fezzeni82@heni.freeboxos.fr:58002/  /mnt/nfs/freebox    fuse  ssl_control,ssl,user=freebox:Fezzeni82,uid=1000,gid=1000,umask=003,no_verify_peer,utf8,no_verify_hostname 0 0" >> /etc/fstab
 mount -a 
 
-NOW=$(date +"%d-%m-%Y")
-echo "[$NOW] batch finished"
+log "batch finished"
 
 exit 0
