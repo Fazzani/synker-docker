@@ -12,7 +12,7 @@ services:
     volumes:
       - emby_config:/config
       - emby_data:/mnt/share1
-      - "/mnt/nfs/freebox:/mnt/share2:ro"
+      - "/mnt/freebox:/mnt/share2:ro"
     deploy:
       labels:
       - "traefik.backend=emby"

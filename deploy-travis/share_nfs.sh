@@ -28,9 +28,10 @@ ls /mnt/nfs
 
 # Freebox volume share 
 
+sudo mkdir -p /mnt/freebox && sudo chmod 777 /mnt/freebox
 sudo apt-get install curlftpfs
-echo "curlftpfs#freebox:Fezzeni82@heni.freeboxos.fr:58002/  /mnt/nfs/freebox    fuse  ssl_control,ssl,user=freebox:Fezzeni82,uid=1000,gid=1000,umask=003,no_verify_peer,utf8,no_verify_hostname 0 0" >> /etc/fstab
-mount -a 
+echo "curlftpfs#freebox:Fezzeni82@heni.freeboxos.fr:58002/  /mnt/freebox/test/    fuse  rw,ssl_control,ssl,allow_other,uid=1000,_netdev 0 0" | sudo tee /etc/fstab > /dev/null
+mount -av
 
 log "batch finished"
 
