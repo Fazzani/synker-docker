@@ -10,13 +10,13 @@ NOW=$(date +"%d-%m-%Y")
 echo "[$NOW] batch started"
 
 # On nfs server
-mkdir /mnt/nfs && chmod -R /mnt/nfs
+mkdir -p /mnt/nfs && chmod -R /mnt/nfs
 echo "/mnt/nfs        *(rw,sync,root_squash,fsid=0,no_subtree_check)" >> /etc/exports
 /etc/init.d/nfs-kernel-server reload
 
 # For all others nodes
 set -e
-[ -d /mnt/nfs ] || mkdir /mnt/nfs
+[ -d /mnt/nfs ] || -p mkdir /mnt/nfs
 chmod 777 -R /mnt/nfs;
 echo "151.80.235.155:/mnt/nfs /mnt/nfs nfs rw,nosuid 0 0" >> /etc/fstab && mount -a;
 ls /mnt/nfs
