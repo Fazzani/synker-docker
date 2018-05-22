@@ -19,7 +19,7 @@ src_host="ansible@ovh1";
 src_host_alias="151.80.235.155 ovh1";
 cron="0 6 * * 0,3";
 
-exclude_swarm_terms_array=('*.bak' '*.log' '/mnt/nfs/freebox' '/mnt/nfs/webgrab')
+exclude_swarm_terms_array=('*.bak' '*.log' '/mnt/nfs/freebox' '/mnt/nfs/webgrab','/mnt/nfs/emby/config/cache','/mnt/nfs/emby/config/siteini.pack')
 exclude_swarm_terms=$(printf "%s\n" "${exclude_swarm_terms_array[@]}")
 
 [ -d $dest ] || mkdir -p ${dest}

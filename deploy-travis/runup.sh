@@ -20,7 +20,7 @@ function set_folder_permission {
   sudo chmod 777 -R /mnt/nfs/filebeat
   sudo chmod 777 -R /mnt/nfs/webgrab
   sudo chmod 777 -R /mnt/nfs/logstash
-  sudo chmod 777 /mnt/nfs/emby
+  # sudo chmod 777 /mnt/nfs/emby
 }
 
 function create_shares {
@@ -51,9 +51,9 @@ function create_shares {
   sudo mkdir /mnt/nfs/logstash/data || true
   sudo mkdir /mnt/nfs/logstash/log || true
   sudo mkdir /mnt/nfs/logstash/config || true
-  sudo mkdir /mnt/nfs/emby || true
-  sudo mkdir /mnt/nfs/emby/config || true
-  sudo mkdir /mnt/nfs/emby/data || true
+  # sudo mkdir /mnt/nfs/emby || true
+  # sudo mkdir /mnt/nfs/emby/config || true
+  # sudo mkdir /mnt/nfs/emby/data || true
   sudo mkdir /mnt/nfs/freebox || true
 }
 
@@ -106,7 +106,7 @@ sudo docker stack deploy -c elk-stack.yml elk
 #docker stack deploy -c rabbitmq-stack.yml rabbit
 sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
 sudo docker stack deploy -c synker-stack.yml synker
-sudo docker stack deploy -c ./others/others-stack.yml others
+# sudo docker stack deploy -c ./others/others-stack.yml others
 
 #docker stack deploy -c vpn/openvpn.yml openvpn
 
