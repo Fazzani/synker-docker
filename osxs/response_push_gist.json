@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/gists/4d516ed46c8213489201464f946b5f80",
+  "forks_url": "https://api.github.com/gists/4d516ed46c8213489201464f946b5f80/forks",
+  "commits_url": "https://api.github.com/gists/4d516ed46c8213489201464f946b5f80/commits",
+  "id": "4d516ed46c8213489201464f946b5f80",
+  "git_pull_url": "https://gist.github.com/4d516ed46c8213489201464f946b5f80.git",
+  "git_push_url": "https://gist.github.com/4d516ed46c8213489201464f946b5f80.git",
+  "html_url": "https://gist.github.com/4d516ed46c8213489201464f946b5f80",
+  "files": {
+    "main": {
+      "filename": "main",
+      "type": "text/plain",
+      "language": null,
+      "raw_url": "https://gist.githubusercontent.com/Fazzani/4d516ed46c8213489201464f946b5f80/raw/58fbbfe2db03232085aaa382202e32986f24f006/main",
+      "size": 1498,
+      "truncated": false,
+      "content": "#! \"netcoreapp2.1\"\n#r \"nuget: PushBulletSharp, 3.1.0\"\n\n//#############################################################################################################################\n// dotnet script : pushbullet example\n// example: \n// dotnet script https://tinyurl.com/ya5chql8 -- o.tZCHwg4A9C124ba2tFiiZDf1SaHzxJzC test \"message to phone\"  1>&2 || echo \"no\"\n//#############################################################################################################################\n\n\nusing PushbulletSharp;\nusing PushbulletSharp.Filters;\nusing PushbulletSharp.Models.Requests;\nusing PushbulletSharp.Models.Responses;\n\nif (Args.Count() < 3)\n{\n    Console.WriteLine($\"Example to use : {Environment.NewLine} dotnet script https://tinyurl.com/osx-pushbullet -- o.tZCHwg4A9C124ba2tFiiZDfs1sSaHzsxJsdzC test \\\"message to phone\\\"\");\n}\n\nvar token = Args[0];\nvar title = Args[1];\nvar message = Args[2];\n\nvar client = new PushbulletClient(token);\n\ntry\n{\n    //If you don't know your device_iden, you can always query your devices\n    var devices = client.CurrentUsersDevices();\n\n    var device = devices.Devices.Where(o => o.Icon == \"phone\").FirstOrDefault();\n\n    if (device != null)\n    {\n        var request = new PushNoteRequest\n        {\n            Title = title,\n            Body = message\n        };\n\n        var response = client.PushNote(request);\n        Console.WriteLine($\"{response.Iden}\");\n        return response.Dismissed ? -1 : 0;\n    }\n}\ncatch (System.Exception)\n{\n    return -1;\n}\n"
+    }
+  },
+  "public": true,
+  "created_at": "2018-05-26T13:04:04Z",
+  "updated_at": "2018-05-26T13:04:04Z",
+  "description": null,
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/4d516ed46c8213489201464f946b5f80/comments",
+  "owner": {
+    "login": "Fazzani",
+    "id": 2669070,
+    "avatar_url": "https://avatars0.githubusercontent.com/u/2669070?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/Fazzani",
+    "html_url": "https://github.com/Fazzani",
+    "followers_url": "https://api.github.com/users/Fazzani/followers",
+    "following_url": "https://api.github.com/users/Fazzani/following{/other_user}",
+    "gists_url": "https://api.github.com/users/Fazzani/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/Fazzani/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/Fazzani/subscriptions",
+    "organizations_url": "https://api.github.com/users/Fazzani/orgs",
+    "repos_url": "https://api.github.com/users/Fazzani/repos",
+    "events_url": "https://api.github.com/users/Fazzani/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/Fazzani/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "forks": [
+
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "Fazzani",
+        "id": 2669070,
+        "avatar_url": "https://avatars0.githubusercontent.com/u/2669070?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/Fazzani",
+        "html_url": "https://github.com/Fazzani",
+        "followers_url": "https://api.github.com/users/Fazzani/followers",
+        "following_url": "https://api.github.com/users/Fazzani/following{/other_user}",
+        "gists_url": "https://api.github.com/users/Fazzani/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/Fazzani/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/Fazzani/subscriptions",
+        "organizations_url": "https://api.github.com/users/Fazzani/orgs",
+        "repos_url": "https://api.github.com/users/Fazzani/repos",
+        "events_url": "https://api.github.com/users/Fazzani/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/Fazzani/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "21e1dedbfb12030df8b6eb151f51afbc2d947b65",
+      "committed_at": "2018-05-26T13:04:03Z",
+      "change_status": {
+        "total": 50,
+        "additions": 50,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/4d516ed46c8213489201464f946b5f80/21e1dedbfb12030df8b6eb151f51afbc2d947b65"
+    }
+  ],
+  "truncated": false
+}
