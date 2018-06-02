@@ -32,7 +32,7 @@ services:
     restart: always
     ports:
       - "8080:8080"
-	  deploy:
+    deploy:
       labels:
       - "traefik.backend=adminer"
       - "traefik.backend.loadbalancer.swarm=true"
