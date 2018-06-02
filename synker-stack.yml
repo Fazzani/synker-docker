@@ -145,7 +145,7 @@ services:
     networks:
       - ntw_front
 
-  synkerdb:
+  synkerdb_mysql:
     image: mariadb:${MYSQL_VERSION:-10.3}
     environment:
       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
