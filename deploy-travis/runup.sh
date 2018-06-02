@@ -109,8 +109,8 @@ sudo docker stack deploy -c elk-stack.yml elk
 #docker stack deploy -c rabbitmq-stack.yml rabbit
 sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
 sudo docker stack deploy -c synker-stack.yml synker
-#sudo docker stack deploy -c postre-stack.yml postresql
-# sudo docker stack deploy -c ./others/others-stack.yml others
+#sudo docker stack deploy -c postgres-stack.yml postresql
+#sudo docker stack deploy -c ./others/others-stack.yml others
 
 #docker stack deploy -c vpn/openvpn.yml openvpn
 
