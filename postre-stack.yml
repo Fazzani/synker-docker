@@ -10,22 +10,22 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: pl
     deploy:
-     labels:
-     - "traefik.backend=synker_db2"
-     - "traefik.backend.loadbalancer.swarm=true"
-     - "traefik.backend.loadbalancer.method=drr"
-     - "traefik.frontend.entryPoints=http,https"
-     - "traefik.frontend.rule=Host:db.synker.ovh"
-     - "traefik.docker.network=ntw_front"
-     - "traefik.port=5432"
-     - "traefik.enable=true"
-     placement:
-       constraints:
-         - node.labels.provider == ovh
-     restart_policy:
-       condition: on-failure
-       delay: 2m
-       window: 120s
+      labels:
+      - "traefik.backend=synker_db2"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:db.synker.ovh"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.port=5432"
+      - "traefik.enable=true"
+      placement:
+        constraints:
+          - node.labels.provider == ovh
+      restart_policy:
+        condition: on-failure
+        delay: 2m
+        window: 120s
 
   adminer:
     image: adminer
