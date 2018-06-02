@@ -104,7 +104,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data:rw
     environment:
-      POSTGRES_PASSWORD_FILE: /run/secrets/mysql_password
+      POSTGRES_DB_PASSWORD_FILE: /run/secrets/mysql_password
       POSTGRES_USER: "pl"
       POSTGRES_DB: "playlist"
     deploy:
