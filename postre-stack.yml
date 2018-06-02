@@ -1,0 +1,56 @@
+version: '3.4'
+
+services:
+  
+  synker_db2:
+    image: postgres
+    networks:
+      - ntw_front
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: pl
+    deploy:
+     labels:
+     - "traefik.backend=synker_db2"
+     - "traefik.backend.loadbalancer.swarm=true"
+     - "traefik.backend.loadbalancer.method=drr"
+     - "traefik.frontend.entryPoints=http,https"
+     - "traefik.frontend.rule=Host:db.synker.ovh"
+     - "traefik.docker.network=ntw_front"
+     - "traefik.port=5432"
+     - "traefik.enable=true"
+     placement:
+       constraints:
+         - node.labels.provider == ovh
+     restart_policy:
+       condition: on-failure
+       delay: 2m
+       window: 120s
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+	deploy:
+     labels:
+     - "traefik.backend=adminer"
+     - "traefik.backend.loadbalancer.swarm=true"
+     - "traefik.backend.loadbalancer.method=drr"
+     - "traefik.frontend.entryPoints=http,https"
+     - "traefik.frontend.rule=Host:adminer.synker.ovh"
+     - "traefik.docker.network=ntw_front"
+     - "traefik.port=8080"
+     - "traefik.enable=true"
+     placement:
+       constraints:
+         - node.labels.provider == ovh
+     restart_policy:
+       condition: on-failure
+       delay: 2m
+       window: 120s
+    networks:
+      - ntw_front
+networks:
+  ntw_front:
+    external: true
