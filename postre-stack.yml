@@ -31,8 +31,8 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
-	deploy:
+     - 8080:8080
+	  deploy:
      labels:
      - "traefik.backend=adminer"
      - "traefik.backend.loadbalancer.swarm=true"
