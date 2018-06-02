@@ -63,10 +63,9 @@ function create_shares {
 set +e
 
 REMOTE_USER=$1
-MYSQL_PASSWORD=$2
-MYSQL_ROOT_PASSWORD=$3
-MYSQL_DATABASE=${4:-playlist}
-MYSQL_RESET_DATABASE=${5:-false}
+POSTGRES_PASSWORD=$2
+MYSQL_DATABASE=${3:-playlist}
+MYSQL_RESET_DATABASE=${4:-false}
 
 create_shares
 set_folder_permission
