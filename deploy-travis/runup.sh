@@ -63,9 +63,11 @@ function create_shares {
 set +e
 
 REMOTE_USER=$1
+MYSQL_PASSWORD=$2
 POSTGRES_PASSWORD=$2
-MYSQL_DATABASE=${3:-playlist}
-MYSQL_RESET_DATABASE=${4:-false}
+MYSQL_ROOT_PASSWORD=$3
+MYSQL_DATABASE=${4:-playlist}
+MYSQL_RESET_DATABASE=${5:-false}
 
 create_shares
 set_folder_permission
@@ -98,6 +100,8 @@ sudo docker network create --driver overlay ingress_net_backend \
   --opt encrypted=true || true
 
 echo $POSTGRES_PASSWORD > postgres_password.txt
+echo $MYSQL_PASSWORD > mysql_password.txt
+echo $MYSQL_ROOT_PASSWORD > mysql_root_password.txt
 awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 echo $TAG
