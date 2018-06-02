@@ -98,8 +98,7 @@ sudo docker network create --driver overlay ingress_net_backend \
   --opt com.docker.network.driver.mtu=9216 \
   --opt encrypted=true || true
 
-echo $MYSQL_PASSWORD > mysql_password.txt
-echo $MYSQL_ROOT_PASSWORD > mysql_root_password.txt
+echo $POSTGRES_PASSWORD > postgres_password.txt
 awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 echo $TAG

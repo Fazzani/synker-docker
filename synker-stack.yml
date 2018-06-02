@@ -104,7 +104,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data:rw
     environment:
-      POSTGRES_DB_PASSWORD_FILE: /run/secrets/mysql_password
+      POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
       POSTGRES_USER: "pl"
       POSTGRES_DB: "playlist"
     deploy:
@@ -119,8 +119,7 @@ services:
         constraints: 
           - node.labels.size == large
     secrets:
-      - mysql_password
-      - mysql_root_password
+      - postgres_password
 
   adminer:
     image: adminer
@@ -159,10 +158,9 @@ volumes:
       device: ":/mnt/nfs/synker/data"
 
 secrets:
-  mysql_password:
-    file: mysql_password.txt
-  mysql_root_password:
-    file: mysql_root_password.txt
+  postgres_password:
+    file: postgres_password.txt
+  
 networks:
   ntw_front:
     external: true
