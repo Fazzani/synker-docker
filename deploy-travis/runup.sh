@@ -14,12 +14,13 @@ function set_folder_permission {
   sudo chmod 777 -R /mnt/nfs/elastic
   sudo chmod 777 -R /mnt/nfs/consul
   sudo chmod 777 -R /mnt/nfs/synker
-  sudo chmod 777 -R /mnt/nfs/mariadb
+  #sudo chmod 777 -R /mnt/nfs/mariadb
   sudo chmod 777 -R /mnt/nfs/rabbitmq
   sudo chmod 777 -R /mnt/nfs/kibana
   sudo chmod 777 -R /mnt/nfs/filebeat
   sudo chmod 777 -R /mnt/nfs/webgrab
   sudo chmod 777 -R /mnt/nfs/logstash
+  sudo chmod 777 -R /mnt/nfs/postgres
   # sudo chmod 777 /mnt/nfs/emby
 }
 
@@ -32,8 +33,10 @@ function create_shares {
   sudo mkdir /mnt/nfs/consul/data || true
   sudo mkdir /mnt/nfs/synker || true
   sudo mkdir /mnt/nfs/synker/data || true
-  sudo mkdir /mnt/nfs/mariadb || true
-  sudo mkdir /mnt/nfs/mariadb/data || true
+  sudo mkdir /mnt/nfs/postgres || true
+  sudo mkdir /mnt/nfs/postgres/data || true
+#  sudo mkdir /mnt/nfs/mariadb || true
+#  sudo mkdir /mnt/nfs/mariadb/data || true
   sudo mkdir /mnt/nfs/rabbitmq || true
   sudo mkdir /mnt/nfs/rabbitmq/data || true
   sudo mkdir /mnt/nfs/rabbitmq/data/mnesia || true
@@ -106,7 +109,7 @@ sudo docker stack deploy -c elk-stack.yml elk
 #docker stack deploy -c rabbitmq-stack.yml rabbit
 sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
 sudo docker stack deploy -c synker-stack.yml synker
-sudo docker stack deploy -c postre-stack.yml postresql
+#sudo docker stack deploy -c postre-stack.yml postresql
 # sudo docker stack deploy -c ./others/others-stack.yml others
 
 #docker stack deploy -c vpn/openvpn.yml openvpn

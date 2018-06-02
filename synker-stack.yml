@@ -96,40 +96,62 @@ services:
       - ntw_front
 
   synkerdb:
-    image: mariadb:${MYSQL_VERSION:-10.3}
-    environment:
-      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
-      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
-      MYSQL_USER: "pl"
-      MYSQL_DATABASE: "playlist"
-      MYSQL_ROOT_HOST: "%"
+    image: postgres
     ports:
-      - "8889:3306"
+      - "5432:5432"
     networks:
       - ntw_front
     volumes:
-      - mariadb_data:/var/lib/mysql:rw
+      - postgres_data:/var/lib/postgresql/data:rw
+    environment:
+      POSTGRES_PASSWORD: /run/secrets/mysql_password
+      POSTGRES_USER: "pl"
+      POSTGRES_DB: "playlist"
     deploy:
-     mode: replicated
-     replicas: 1
-     restart_policy:
-       condition: on-failure
-       delay: 5m
-       max_attempts: 3
-       window: 120s
-     placement:
-       constraints: 
-         - node.labels.size == large
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5m
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints: 
+          - node.labels.size == large
     secrets:
       - mysql_password
       - mysql_root_password
 
+  adminer:
+    image: adminer
+    ports:
+      - "8088:8080"
+    deploy:
+      labels:
+      - "traefik.backend=adminer"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:adminer.synker.ovh"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.port=8080"
+      - "traefik.enable=true"
+      placement:
+        constraints:
+          - node.labels.provider == ovh
+      restart_policy:
+        condition: on-failure
+        delay: 2m
+        window: 120s
+    networks:
+      - ntw_front
+
 volumes:
-  mariadb_data:
+  postgres_data:
     driver_opts:
       type: "nfs"
       o: "nolock,soft,rw,addr=151.80.235.155"
-      device: ":/mnt/nfs/mariadb/data"
+      device: ":/mnt/nfs/postgres/data"
   synker_data:
     driver_opts:
       type: "nfs"
