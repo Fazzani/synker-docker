@@ -4,6 +4,8 @@ services:
   
   synker_db2:
     image: postgres
+    ports:
+      - "5432:5432"
     networks:
       - ntw_front
     environment:
