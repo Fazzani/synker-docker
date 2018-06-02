@@ -29,9 +29,8 @@ services:
 
   adminer:
     image: adminer
-    restart: always
     ports:
-      - "8080:8080"
+      - "8088:8080"
     deploy:
       labels:
       - "traefik.backend=adminer"
