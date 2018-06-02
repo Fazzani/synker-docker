@@ -145,35 +145,6 @@ services:
     networks:
       - ntw_front
 
-  synkerdb_mysql:
-    image: mariadb:${MYSQL_VERSION:-10.3}
-    environment:
-      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
-      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
-      MYSQL_USER: "pl"
-      MYSQL_DATABASE: "playlist"
-      MYSQL_ROOT_HOST: "%"
-    ports:
-      - "8889:3306"
-    networks:
-      - ntw_front
-    volumes:
-      - mariadb_data:/var/lib/mysql:rw
-    deploy:
-     mode: replicated
-     replicas: 1
-     restart_policy:
-       condition: on-failure
-       delay: 5m
-       max_attempts: 3
-       window: 120s
-     placement:
-       constraints: 
-         - node.labels.size == large
-    secrets:
-      - mysql_password
-      - mysql_root_password
-
 volumes:
   postgres_data:
     driver_opts:
@@ -185,19 +156,10 @@ volumes:
       type: "nfs"
       o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/synker/data"
-  mariadb_data:
-    driver_opts:
-      type: "nfs"
-      o: "nolock,soft,rw,addr=151.80.235.155"
-      device: ":/mnt/nfs/mariadb/data"
-
+ 
 secrets:
   postgres_password:
     file: postgres_password.txt
-  mysql_password:
-    file: mysql_password.txt
-  mysql_root_password:
-    file: mysql_root_password.txt
   
 networks:
   ntw_front:
