@@ -11,7 +11,7 @@ services:
         target: /app/appsettings.Production.json
         mode: 0444
     ports:
-      - "56801:56801"
+      - "56801:80"
     networks:
       - ntw_front
     deploy:
