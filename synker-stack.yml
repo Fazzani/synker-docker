@@ -6,7 +6,7 @@ services:
     image: synker/webclient:${SYNKER_VERSION:-latest}
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS="http://localhost:56801"
+      - ASPNETCORE_URLS=http://0.0.0.0:80
     configs:
       - source: webclient_config2
         target: /app/appsettings.Production.json
