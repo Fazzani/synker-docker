@@ -68,6 +68,7 @@ POSTGRES_PASSWORD=$2
 MYSQL_ROOT_PASSWORD=$3
 MYSQL_DATABASE=${4:-playlist}
 MYSQL_RESET_DATABASE=${5:-false}
+SYNKER_VERSION=${6:-0.0.75}
 
 create_shares
 set_folder_permission
@@ -103,6 +104,7 @@ echo $POSTGRES_PASSWORD > postgres_password.txt
 awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 echo $TAG
+export SYNKER_VERSION=$SYNKER_VERSION
 sudo docker stack deploy -c traefik-consul-stack.yml lb
 sleep 10
 sudo docker stack deploy -c elk-stack.yml elk
