@@ -10,6 +10,7 @@ services:
     volumes:
       - "config:/config"
       - "data:/data"
+      - "webgrab_log:/var/log"
     deploy:
       labels:
       - "app.role=webgrab"
@@ -72,6 +73,11 @@ volumes:
       type: "nfs"
       o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/webgrab/data"
+  webgrab_log:
+    driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=151.80.235.155"
+      device: ":/mnt/nfs/webgrab/log"
   filebeat_webgrab_sitepack:
     driver_opts:
       type: "nfs"

@@ -49,6 +49,7 @@ function create_shares {
   sudo mkdir /mnt/nfs/webgrab || true
   sudo mkdir /mnt/nfs/webgrab/config || true
   sudo mkdir /mnt/nfs/webgrab/data || true
+  sudo mkdir /mnt/nfs/webgrab/log || true
   sudo mkdir /mnt/nfs/logstash || true
   sudo mkdir /mnt/nfs/logstash/pipeline || true
   sudo mkdir /mnt/nfs/logstash/data || true
