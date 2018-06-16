@@ -69,7 +69,7 @@ POSTGRES_PASSWORD=$2
 MYSQL_ROOT_PASSWORD=$3
 MYSQL_DATABASE=${4:-playlist}
 MYSQL_RESET_DATABASE=${5:-false}
-SYNKER_VERSION=${6:-0.0.75}
+SYNKER_VERSION=${6:-0.0.77}
 
 create_shares
 set_folder_permission
