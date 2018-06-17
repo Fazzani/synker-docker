@@ -93,11 +93,12 @@ if [ "$MYSQL_RESET_DATABASE" = true ]; then
 fi
 
 sudo docker network create --driver overlay ntw_front \
-  --attachable || true \
+  --attachable \
+  --subnet=10.0.0.0/24 \
   --opt encrypted=true || true
 
 sudo docker network create --driver overlay ingress_net_backend \
-  --attachable || true \
+  --attachable \
   --subnet=70.28.0.0/16 \
   --opt com.docker.network.driver.mtu=9216 \
   --opt encrypted=true || true
