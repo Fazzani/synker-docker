@@ -12,7 +12,7 @@ services:
       - ntw_front
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    command: --consul --consul.watch --consul.endpoint=consul:8500
+    command: --consul --consul.watch --consul.endpoint=consul.sd:8500
     deploy:
       labels:
         - "traefik.docker.network=infra_traefik"

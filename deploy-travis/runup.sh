@@ -107,7 +107,7 @@ awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 echo $TAG
 export SYNKER_VERSION=$SYNKER_VERSION
-sudo docker stack deploy -c 1-consul-stack.yml consul
+sudo docker stack deploy -c 1-consul-stack.yml sd
 sleep 15
 sudo docker stack deploy -c 2-traefik-init-stack.yml traefik-init
 sleep 10

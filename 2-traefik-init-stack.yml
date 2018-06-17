@@ -35,7 +35,7 @@ services:
       - "--docker.watch"
       - "--docker.exposedbydefault=false"
       - "--consul"
-      - "--consul.endpoint=consul:8500"
+      - "--consul.endpoint=consul.sd:8500"
       - "--consul.prefix=traefik"
       #- --consulcatalog=true
       #- --consulcatalog.endpoint=consul.synker.ovh:8500
@@ -48,10 +48,6 @@ services:
         delay: 30s
         window: 120s
 
-networks:
-  ingress_net_backend:
-    driver: overlay
-    external: true
   ntw_front:
     driver: overlay
     external: true
