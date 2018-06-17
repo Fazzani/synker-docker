@@ -69,6 +69,7 @@ POSTGRES_PASSWORD=$2
 MYSQL_ROOT_PASSWORD=$3
 MYSQL_DATABASE=${4:-playlist}
 MYSQL_RESET_DATABASE=${5:-false}
+echo "script param 6 => $6"
 SYNKER_VERSION=${6:-0.0.77}
 
 create_shares
