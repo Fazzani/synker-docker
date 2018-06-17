@@ -1,0 +1,57 @@
+version: "3.4"
+
+services:
+
+  traefik_init:
+    image: traefik:${TRAEFIK_VERSION:-1.6.4-alpine}
+    command:
+      - "traefik"
+      - "storeconfig"
+      # - "--api"
+      - "--debug"
+      - "--logLevel=WARN"
+      - "--web"
+      - "--web.address=:8080"
+      - --web.readonly
+      - --checknewversion=true
+      - --insecureskipverify=true
+      - --web.statistics
+      - "--entrypoints=Name:http Address::80 ProxyProtocol:true Compress:true Redirect.EntryPoint:https"
+      - "--entrypoints=Name:https Address::443 TLS Compress:true ProxyProtocol:true"
+      - "--defaultentrypoints=http,https"
+      - "--acme"
+      - "--acme.domains=www.synker.ovh,synker.ovh,api.synker.ovh,visu.synker.ovh,kibana.synker.ovh,elastic.synker.ovh,elasticsearch.synker.ovh,rabbitmq.synker.ovh,consul.synker.ovh"
+      - "--acme.storage=traefik/acme/account"
+      - "--acme.entryPoint=https"
+      - "--acme.httpChallenge.entryPoint=http"
+      - "--acme.acmelogging=true"
+      - "--acme.OnHostRule=true"
+      - "--acme.onDemand=false"
+      - "--acme.email=support@synker.ovh"
+      #- "--acme.caServer=https://acme-staging.api.letsencrypt.org/directory"
+      - "--docker"
+      - "--docker.swarmmode"
+      - "--docker.domain=docker.localhost"
+      - "--docker.watch"
+      - "--docker.exposedbydefault=false"
+      - "--consul"
+      - "--consul.endpoint=consul.synker.ovh:8500"
+      - "--consul.prefix=traefik"
+      #- --consulcatalog=true
+      #- --consulcatalog.endpoint=consul.synker.ovh:8500
+      # - --consulcatalog.constraints="tag==public
+    networks:
+      - ntw_front
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        window: 120s
+
+networks:
+  ingress_net_backend:
+    driver: overlay
+    external: true
+  ntw_front:
+    driver: overlay
+    external: true

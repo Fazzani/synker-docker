@@ -1,90 +1,9 @@
 version: "3.4"
 
 services:
-  consul:
-    image: consul:${CONSUL_VERSION:-1.0.6}
-    command: agent -server -bootstrap-expect=1 -ui -disable-host-node-id 
-    volumes:
-      - consul_data:/consul/data
-    ports:
-      - "8500:8500"
-      - "53:53/udp"
-    environment:
-      - 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true, "server":true, "enable_debug":true, "disable_update_check": true}'
-      - CONSUL_CLIENT_INTERFACE=eth0
-      - CONSUL_BIND_INTERFACE=eth0
-    deploy:
-      labels:
-      - "traefik.backend=consul"
-      - "traefik.backend.loadbalancer.swarm=true"
-      - "traefik.backend.loadbalancer.method=drr"
-      - "traefik.frontend.entryPoints=http,https"
-      - "traefik.frontend.rule=Host:consul.synker.ovh"
-      - "traefik.docker.network=ntw_front"
-      - "traefik.port=8500"
-      - "traefik.enable=true"
-      replicas: 1
-      placement:
-        constraints:
-          - node.role == manager
-      restart_policy:
-        condition: on-failure
-    networks:
-      - ntw_front
-
-  traefik_init:
-    image: traefik:1.6.4-alpine
-    command:
-      - "traefik"
-      - "storeconfig"
-      # - "--api"
-      - "--debug"
-      - "--logLevel=WARN"
-      - "--web"
-      - "--web.address=:8080"
-      - --web.readonly
-      - --checknewversion=true
-      - --insecureskipverify=true
-      - --web.statistics
-      - "--entrypoints=Name:http Address::80 ProxyProtocol:true Compress:true Redirect.EntryPoint:https"
-      - "--entrypoints=Name:https Address::443 TLS Compress:true ProxyProtocol:true"
-      - "--defaultentrypoints=http,https"
-      - "--acme"
-      - "--acme.domains=www.synker.ovh,synker.ovh,api.synker.ovh,visu.synker.ovh,kibana.synker.ovh,elastic.synker.ovh,elasticsearch.synker.ovh,rabbitmq.synker.ovh,consul.synker.ovh"
-      - "--acme.storage=traefik/acme/account"
-      - "--acme.entryPoint=https"
-      - "--acme.httpChallenge.entryPoint=http"
-      - "--acme.acmelogging=true"
-      - "--acme.OnHostRule=true"
-      - "--acme.onDemand=true"
-      - "--acme.email=support@synker.ovh"
-      #- "--acme.caServer=https://acme-staging.api.letsencrypt.org/directory"
-      - "--docker"
-      - "--docker.swarmmode"
-      - "--docker.domain=docker.localhost"
-      - "--docker.watch"
-      - "--docker.exposedbydefault=false"
-      - "--consul"
-      - "--consul.endpoint=consul.synker.ovh:8500"
-      - "--consul.prefix=traefik"
-      #- --consulcatalog=true
-      #- --consulcatalog.endpoint=consul.synker.ovh:8500
-      # - --consulcatalog.constraints="tag==public
-    networks:
-      - ntw_front
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 30s
-        window: 120s
-    depends_on:
-      - consul
 
   traefik:
-    image: traefik:1.6.4-alpine
-    depends_on:
-      - traefik_init
-      - consul
+    image: traefik:${TRAEFIK_VERSION:-1.6.4-alpine}
     ports:
       - 80:80
       - 443:443
@@ -147,9 +66,6 @@ services:
       - "15672:15672"
     #volumes:
       #- rabbit_database:/var/lib/rabbitmq/mnesia
-    depends_on:
-      - traefik_init
-      - consul
     environment:
       - TCP_PORTS=15672, 5672
       - AUTOCLUSTER_TYPE=consul
@@ -234,11 +150,6 @@ networks:
     external: true
 
 volumes:
-  consul_data:
-    driver_opts:
-      type: "nfs"
-      o: "nolock,soft,rw,addr=151.80.235.155"
-      device: ":/mnt/nfs/consul/data"
   rabbit_database:
     driver_opts:
       type: "nfs"

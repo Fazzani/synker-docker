@@ -106,12 +106,14 @@ awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 echo $TAG
 export SYNKER_VERSION=$SYNKER_VERSION
-sudo docker stack deploy -c traefik-consul-stack.yml lb
+sudo docker stack deploy -c 1-consul-stack.yml consul
+sleep 15
+sudo docker stack deploy -c 2-traefik-init-stack.yml lb
 sleep 10
-sudo docker stack deploy -c elk-stack.yml elk
-#docker stack deploy -c rabbitmq-stack.yml rabbit
+sudo docker stack deploy -c 3-traefik-stack.yml lb
+sudo docker stack deploy -c 4-elk-stack.yml elk
 sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
-sudo docker stack deploy -c synker-stack.yml synker
+sudo docker stack deploy -c 5-synker-stack.yml synker
 #sudo docker stack deploy -c postgres-stack.yml postresql
 #sudo docker stack deploy -c ./others/others-stack.yml others
 
