@@ -1,18 +1,18 @@
 filebeat.prospectors:
-- type: log
-  enabled: true
-  paths:
-    - '/var/lib/docker/containers/*/*.log'
-  json.message_key: log
-  json.add_error_key: true
-  json.keys_under_root: true
-  processors:
-    - add_docker_metadata:
-        host: "unix:///var/run/docker.sock"
-    - add_cloud_metadata: ~
-    - add_locale: ~
-  multiline.pattern: "^\t|^[[:space:]]+(at|...)|^Caused by:"
-  multiline.match: after
+# - type: log
+#   enabled: true
+#   paths:
+#     - '/var/lib/docker/containers/*/*.log'
+#   json.message_key: log
+#   json.add_error_key: true
+#   json.keys_under_root: true
+#   processors:
+#     - add_docker_metadata:
+#         host: "unix:///var/run/docker.sock"
+#     - add_cloud_metadata: ~
+#     - add_locale: ~
+#   multiline.pattern: "^\t|^[[:space:]]+(at|...)|^Caused by:"
+#   multiline.match: after
 - type: log
  # Change to true to enable this input configuration.
   enabled: true
