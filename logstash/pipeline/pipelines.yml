@@ -4,3 +4,7 @@
 
 - pipeline.id: main
   path.config: "/usr/share/logstash/config/*.conf"
+  queue.type: persisted
+  queue.max_bytes: 2gb
+  queue.page_capacity: 500mb
+  queue.max_events: 0
