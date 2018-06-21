@@ -3,7 +3,7 @@ version: "3.3"
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${TAG:-6.3.0}
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:${TAG:-6.3.0}
     environment:
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
       - discovery.zen.minimum_master_nodes=1
@@ -48,7 +48,7 @@ services:
           - node.labels.size == large
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:${TAG:-6.3.0}
+    image: docker.elastic.co/kibana/kibana-oss:${TAG:-6.3.0}
     ports:
       - 5601:5601
     environment:
@@ -87,7 +87,7 @@ services:
 
   logstash:
     hostname: logstash
-    image: docker.elastic.co/logstash/logstash:${TAG:-6.3.0}
+    image: docker.elastic.co/logstash/logstash-oss:${TAG:-6.3.0}
     # configs: # https://docs.docker.com/compose/compose-file/#long-syntax
     #   - source: ls_config
     #     target: /usr/share/logstash/config/logstash.yml
