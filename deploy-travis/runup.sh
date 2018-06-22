@@ -128,7 +128,6 @@ sudo docker system prune -f
 # Must be running on mariadb host container
 sleep 15
 log "add sitepack.ini pipeline to elasticsearch"
-cat webgrab/sitepack_pipeline.json
 curl -H 'Content-Type: application/json' -XPUT 'https://elastic.synker.ovh/_ingest/pipeline/sitepack_pipeline' -d "@webgrab/sitepack_pipeline.json"
 
 if [ "$MYSQL_RESET_DATABASE" = true ] ; then
