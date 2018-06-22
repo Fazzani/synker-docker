@@ -18,6 +18,8 @@ filebeat.prospectors:
   enabled: true
   paths:
     - /usr/share/sitepack/**/*.xml
+  fields:
+    type: sitepack
   tags: ["sitepack"]
   tail_files: false
   scan_frequency: 10s
@@ -48,9 +50,12 @@ filebeat.modules:
 # #-------------------------- Elasticsearch output ------------------------------
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
-  index: 'sitepack'
+ # index: 'sitepack'
+  indices:
+    - index: "%{[type]"
+      when.equals:
+        index._type: "sitepack"
   pipeline: sitepack_pipeline
-  protocol: "https"
   
   # username: elastic
   # password: changeme
