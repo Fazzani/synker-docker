@@ -52,7 +52,7 @@ output.elasticsearch:
   hosts: ["elasticsearch:9200"]
  # index: 'sitepack'
   indices:
-    - index: "%{[type]"
+    - index: "%{[type]}"
       pipeline: sitepack_pipeline
       when.equals:
         type: "sitepack"
