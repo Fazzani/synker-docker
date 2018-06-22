@@ -114,7 +114,6 @@ sudo docker stack deploy -c 2-traefik-init-stack.yml traefik-init
 sleep 10
 sudo docker stack deploy -c 3-traefik-stack.yml lb
 sudo docker stack deploy -c 4-elk-stack.yml elk
-curl -H 'Content-Type: application/json' -XPUT 'http://elastic.synker.ovh/_ingest/pipeline/sitepack_pipeline' -d @../webgrab/sitepack_pipeline.json
 sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
 sudo docker stack deploy -c 5-synker-stack.yml synker
 #sudo docker stack deploy -c postgres-stack.yml postresql
@@ -128,6 +127,8 @@ sudo docker system prune -f
 # Restoring maridb data 
 # Must be running on mariadb host container
 sleep 15
+log "add sitepack.ini pipeline to elasticsearch"
+curl -H 'Content-Type: application/json' -XPUT 'http://elastic.synker.ovh/_ingest/pipeline/sitepack_pipeline' -d @../webgrab/sitepack_pipeline.json
 
 if [ "$MYSQL_RESET_DATABASE" = true ] ; then
    SERVICE_ID=$(sudo docker service ps -q -f desired-state=running  synker_synkerdb | head -1)

@@ -5,7 +5,7 @@
       "grok": {
         "field": "message",
         "patterns": [
-          """<channel update="i" site="%{DATA:site}" site_id="%{DATA:site_id}" xmltv_id="%{DATA:xmltv_id}">%{DATA:channel_name}</channel>"""
+          "<channel update=\"i\" site=\"%{DATA:site}\" site_id=\"%{DATA:site_id}\" xmltv_id=\"%{DATA:xmltv_id}\">%{DATA:channel_name}</channel>"
         ],
         "ignore_missing": true
       }
