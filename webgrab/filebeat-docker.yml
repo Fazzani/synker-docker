@@ -20,6 +20,7 @@ filebeat.inputs:
     - /usr/share/sitepack/**/*.xml
   fields:
     type: "sitepack"
+    host: "${beat.hostname:dhost}"
   fields_under_root: true
   tags: ["sitepack"]
   tail_files: false
