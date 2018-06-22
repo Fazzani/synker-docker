@@ -57,7 +57,7 @@ output.elasticsearch:
     - index: "%{[type]}"
       pipeline: sitepack_pipeline
       when.equals:
-        type: "sitepack"
+        type: "sitepackini"
   
   # username: elastic
   # password: changeme
