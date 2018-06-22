@@ -50,11 +50,11 @@ function create_shares {
   sudo mkdir /mnt/nfs/webgrab/config || true
   sudo mkdir /mnt/nfs/webgrab/data || true
   sudo mkdir /mnt/nfs/webgrab/log || true
-  sudo mkdir /mnt/nfs/logstash || true
-  sudo mkdir /mnt/nfs/logstash/pipeline || true
-  sudo mkdir /mnt/nfs/logstash/data || true
-  sudo mkdir /mnt/nfs/logstash/log || true
-  sudo mkdir /mnt/nfs/logstash/config || true
+  #sudo mkdir /mnt/nfs/logstash || true
+  #sudo mkdir /mnt/nfs/logstash/pipeline || true
+  #sudo mkdir /mnt/nfs/logstash/data || true
+  #sudo mkdir /mnt/nfs/logstash/log || true
+  #sudo mkdir /mnt/nfs/logstash/config || true
   # sudo mkdir /mnt/nfs/emby || true
   # sudo mkdir /mnt/nfs/emby/config || true
   # sudo mkdir /mnt/nfs/emby/data || true
@@ -70,7 +70,7 @@ MYSQL_ROOT_PASSWORD=$3
 MYSQL_DATABASE=${4:-playlist}
 MYSQL_RESET_DATABASE=${5:-false}
 echo "script param 6 => $6"
-SYNKER_VERSION=${6:-0.0.77}
+SYNKER_VERSION=${6:-0.0.93}
 
 create_shares
 set_folder_permission
@@ -114,6 +114,7 @@ sudo docker stack deploy -c 2-traefik-init-stack.yml traefik-init
 sleep 10
 sudo docker stack deploy -c 3-traefik-stack.yml lb
 sudo docker stack deploy -c 4-elk-stack.yml elk
+curl -H 'Content-Type: application/json' -XPUT 'http://elastic.synker.ovh/_ingest/pipeline/sitepack_pipeline' -d @../webgrab/sitepack_pipeline.json
 sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
 sudo docker stack deploy -c 5-synker-stack.yml synker
 #sudo docker stack deploy -c postgres-stack.yml postresql

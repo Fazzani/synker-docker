@@ -46,10 +46,12 @@ filebeat.modules:
     enabled: false
 
 # #-------------------------- Elasticsearch output ------------------------------
-# output.elasticsearch:
-#   hosts: ["elasticsearch:9200"]
-#   username: elastic
-#   password: changeme
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  index: 'sitepack'
+  pipeline: sitepack_pipeline
+  # username: elastic
+  # password: changeme
 
 # #============================== Dashboards =====================================
 # setup.dashboards.enabled: true
@@ -58,10 +60,10 @@ filebeat.modules:
 #   username: elastic
 #   password: changeme
 #----------------------------- Logstash output --------------------------------
-output.logstash:
-    hosts: ["logstash:5045"]
-    worker: 1
-    bulk_max_size: 1024
+# output.logstash:
+#     hosts: ["logstash:5045"]
+#     worker: 1
+#     bulk_max_size: 1024
 #================================ Logging ======================================
 # There are three options for the log output: syslog, file, stderr.
 # Under Windows systems, the log files are per default sent to the file output,
