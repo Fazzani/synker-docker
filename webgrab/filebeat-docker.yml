@@ -50,6 +50,8 @@ output.elasticsearch:
   hosts: ["elasticsearch:9200"]
   index: 'sitepack'
   pipeline: sitepack_pipeline
+  protocol: "https"
+  
   # username: elastic
   # password: changeme
 
@@ -122,3 +124,8 @@ logging.files:
 #logging.json: false
 console:
     pretty: true
+setup.template:
+  name: 'sitepack'
+  pattern: 'sitepack*'
+  enabled: true
+  overwrite: true
