@@ -54,7 +54,7 @@ output.elasticsearch:
   indices:
     - index: "%{[type]"
       when.equals:
-        index._type: "sitepack"
+        type: "sitepack"
   pipeline: sitepack_pipeline
   
   # username: elastic
@@ -129,8 +129,8 @@ logging.files:
 #logging.json: false
 console:
     pretty: true
-setup.template:
-  name: 'sitepack'
-  pattern: 'sitepack*'
-  enabled: true
-  overwrite: true
+# setup.template:
+#   name: 'sitepack'
+#   pattern: 'sitepack*'
+#   enabled: true
+#   overwrite: true
