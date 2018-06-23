@@ -49,7 +49,7 @@
     {
       "set": {
         "field": "_source.displayNames",
-        "value": "{{_source.channel_name}}"
+        "value": ["{{_source.channel_name}}"]
       }
     }
   ]
