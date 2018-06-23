@@ -23,7 +23,8 @@ filebeat.inputs:
   fields_under_root: true
   tags: ["sitepack"]
   tail_files: false
-  scan_frequency: 10s
+  scan_frequency: 30s
+  pipeline: "sitepack_pipeline"
   multiline:
     pattern: '<channel[[:space:]]'
     negate: true
