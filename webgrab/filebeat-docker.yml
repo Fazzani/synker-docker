@@ -19,7 +19,7 @@ filebeat.inputs:
   paths:
     - /usr/share/sitepack/**/*.xml
   fields:
-    type: "sitepackini"
+    type: "sitepackini2"
   fields_under_root: true
   tags: ["sitepack"]
   tail_files: false
@@ -57,7 +57,7 @@ output.elasticsearch:
     - index: "%{[type]}"
       pipeline: "sitepack_pipeline"
       when.equals:
-        type: "sitepackini"
+        type: "sitepackini2"
   
   # username: elastic
   # password: changeme
