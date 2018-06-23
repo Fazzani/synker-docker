@@ -45,6 +45,12 @@
       "script": {
         "inline": "if(ctx.source != null) { ctx.country =  /\\//.split(ctx.source)[4]; } else { ctx.country = '' }"
       }
+    },
+    {
+      "set": {
+        "field": "_source.displayNames",
+        "value": "{{_source.channel_name}}"
+      }
     }
   ]
 }
