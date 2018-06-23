@@ -1,5 +1,24 @@
 {
   "description": "sitepack.ini webgrab",
+  "on_failure": [
+    {
+      "grok": {
+        "field": "message",
+        "patterns": [
+          "%{MULTILINEDATA:catchall}"
+        ],
+        "pattern_definitions": {
+          "MULTILINEDATA": "(.|\\r|\\n)*"
+        }
+      }
+    },
+    {
+      "set": {
+        "field": "update_date",
+        "value": "{{_ingest.timestamp}}"
+      }
+    }
+  ],
   "processors": [
     {
       "grok": {
