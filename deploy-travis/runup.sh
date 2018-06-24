@@ -19,7 +19,7 @@ function set_folder_permission {
   sudo chmod 777 -R /mnt/nfs/kibana
   sudo chmod 777 -R /mnt/nfs/filebeat
   sudo chmod 777 -R /mnt/nfs/webgrab
-  sudo chmod 777 -R /mnt/nfs/logstash
+  #sudo chmod 777 -R /mnt/nfs/logstash
   sudo chmod 777 -R /mnt/nfs/postgres
   # sudo chmod 777 /mnt/nfs/emby
 }
