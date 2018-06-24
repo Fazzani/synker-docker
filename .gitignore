@@ -1,5 +1,5 @@
 *_password.txt
-appsettings.*.json
+appsettings*.json
 **/appsettings.json
 secret.tar
 deploy_rsa
@@ -7,3 +7,4 @@ deploy_rsa.pub
 *.env
 *.sql
 .vscode
+synker/appsettings.json
