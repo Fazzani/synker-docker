@@ -7,7 +7,8 @@
         "patterns": [
           "<channel update=\"i\" site=\"%{DATA:site}\" site_id=\"%{DATA:site_id}\" xmltv_id=\"%{DATA:xmltv_id}\">%{DATA:channel_name}</channel>"
         ],
-        "ignore_missing": true
+        "ignore_missing": true,
+        "ignore_failure" : true
       }
     },
     {
@@ -25,7 +26,8 @@
     {
       "script": {
         "inline": "if(ctx.source != null) { ctx.country =  /\\//.split(ctx.source)[4]; } else { ctx.country = '' }"
-      }
+      },
+      "ignore_failure" : true
     },
     {
       "set": {
