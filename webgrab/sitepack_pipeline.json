@@ -1,19 +1,18 @@
 {
   "description": "sitepack.ini webgrab",
-  "processors": [
-    {
+  "processors": [{
       "grok": {
         "field": "message",
         "patterns": [
           "<channel update=\"i\" site=\"%{DATA:site}\" site_id=\"%{DATA:site_id}\" xmltv_id=\"%{DATA:xmltv_id}\">%{DATA:channel_name}</channel>"
         ],
         "ignore_missing": true,
-        "ignore_failure" : true
+        "ignore_failure": true
       }
     },
     {
       "set": {
-        "field": "_source.unique",
+        "field": "_id",
         "value": "{{_source.site_id}}-_-{{_source.xmltv_id}}"
       }
     },
@@ -25,13 +24,11 @@
     },
     {
       "script": {
-        "inline": "if(ctx.source != null) { ctx.country =  /\\//.split(ctx.source)[4]; } else { ctx.country = '' }"
+        "source": "if(ctx.source != null) { ctx.country =  /\\//.split(ctx.source)[4]; } else { ctx.country = '' }"
       }
-    },
-    {
-      "set": {
-        "field": "_source.displayNames",
-        "value": ["{{_source.channel_name}}"]
+    }, {
+      "script": {
+        "source": "if(ctx.displayNames == null) { ctx.displayNames =  [ ctx.channel_name ]; }"
       }
     }
   ]
