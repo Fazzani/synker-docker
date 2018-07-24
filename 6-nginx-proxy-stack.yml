@@ -6,7 +6,7 @@ services:
     ports:
       - "88:80"
     configs:
-      - source: nginx_config
+      - source: nginx_config2
         target: /etc/nginx/nginx.conf
         mode: 0444
     deploy:
