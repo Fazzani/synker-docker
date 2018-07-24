@@ -36,8 +36,6 @@ function create_shares {
   sudo mkdir /mnt/nfs/synker/data || true
   sudo mkdir /mnt/nfs/postgres || true
   sudo mkdir /mnt/nfs/postgres/data || true
-#  sudo mkdir /mnt/nfs/mariadb || true
-#  sudo mkdir /mnt/nfs/mariadb/data || true
   sudo mkdir /mnt/nfs/rabbitmq || true
   sudo mkdir /mnt/nfs/rabbitmq/data || true
   sudo mkdir /mnt/nfs/rabbitmq/data/mnesia || true

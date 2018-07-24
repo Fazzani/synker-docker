@@ -28,8 +28,7 @@ services:
         - "traefik.enable=true"
     volumes:
       - nginx_html:/usr/share/nginx/html
-      - nginx_log:/var/log/nginx:ro
-      - ./nginx-proxy/default.conf:/etc/nginx/nginx.conf:ro
+      - nginx_log:/var/log/nginx
 volumes:
   nginx_html:
     driver_opts:
