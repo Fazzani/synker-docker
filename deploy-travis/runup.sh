@@ -21,6 +21,7 @@ function set_folder_permission {
   sudo chmod 777 -R /mnt/nfs/webgrab
   #sudo chmod 777 -R /mnt/nfs/logstash
   sudo chmod 777 -R /mnt/nfs/postgres
+  sudo chmod 777 -R /mnt/nfs/media
   # sudo chmod 777 /mnt/nfs/emby
 }
 
@@ -59,6 +60,9 @@ function create_shares {
   # sudo mkdir /mnt/nfs/emby/config || true
   # sudo mkdir /mnt/nfs/emby/data || true
   sudo mkdir /mnt/nfs/freebox || true
+  sudo mkdir /mnt/nfs/media || true
+  sudo mkdir /mnt/nfs/media/certs || true
+  sudo mkdir /mnt/nfs/media/html || true
 }
 
 set +e
