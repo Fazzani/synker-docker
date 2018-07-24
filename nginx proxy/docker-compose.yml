@@ -1,0 +1,10 @@
+version: "3"
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "3000:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./default.conf:/etc/nginx/nginx.conf:ro
