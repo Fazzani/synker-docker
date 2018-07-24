@@ -146,32 +146,6 @@ services:
     networks:
       - ntw_front
 
-  nginx-proxy:
-    image: nginx:${NGINX_VERSION:-1.15-alpine}
-    ports:
-      - "88:80"
-    configs:
-      - source: nginx_config
-        target: /etc/nginx/nginx.conf
-        mode: 0444
-    deploy:
-      mode: replicated
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-        delay: 5m
-        max_attempts: 3
-        window: 120s
-      labels:
-        - "traefik.backend=nginx-proxy"
-        - "traefik.backend.loadbalancer.swarm=true"
-        - "traefik.backend.loadbalancer.method=drr"
-        - "traefik.frontend.entryPoints=http,https"
-        - "traefik.frontend.rule=Host:media.synker.ovh"
-        - "traefik.docker.network=ntw_front"
-        - "traefik.port=88"
-        - "traefik.enable=true"
-
 volumes:
   postgres_data:
     driver_opts:
@@ -198,5 +172,3 @@ configs:
     file: ./synker/appsettings.webclient.json
   batch_config2:
     file: ./synker/appsettings.json
-  nginx_config:
-    file: ./nginx-proxy/default.conf

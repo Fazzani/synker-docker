@@ -21,6 +21,7 @@ function set_folder_permission {
   sudo chmod 777 -R /mnt/nfs/webgrab
   #sudo chmod 777 -R /mnt/nfs/logstash
   sudo chmod 777 -R /mnt/nfs/postgres
+  sudo chmod 777 -R /mnt/nfs/nginx-proxy
   # sudo chmod 777 /mnt/nfs/emby
 }
 
@@ -59,6 +60,8 @@ function create_shares {
   # sudo mkdir /mnt/nfs/emby/config || true
   # sudo mkdir /mnt/nfs/emby/data || true
   sudo mkdir /mnt/nfs/freebox || true
+  sudo mkdir /mnt/nfs/nginx-proxy || true
+  sudo mkdir /mnt/nfs/nginx-proxy/html || true
 }
 
 set +e
@@ -116,6 +119,7 @@ sudo docker stack deploy -c 3-traefik-stack.yml lb
 sudo docker stack deploy -c 4-elk-stack.yml elk
 sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
 sudo docker stack deploy -c 5-synker-stack.yml synker
+sudo docker stack deploy -c 6-nginx-proxy-stack.yml proxy
 #sudo docker stack deploy -c postgres-stack.yml postresql
 #sudo docker stack deploy -c ./others/others-stack.yml others
 
