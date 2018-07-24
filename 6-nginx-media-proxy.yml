@@ -1,25 +1,36 @@
 version: "3.5"
 
 services:
-  nginx-proxy-letsencrypt:
-    image: jwilder/nginx-proxy
+  # Let's Encrypt Companion
+  letsencrypt-companion:
+    image: hamburml/docker-flow-letsencrypt:latest
+    environment:
+      - DOMAIN_1=('media.synker.ovh')
+      - CERTBOT_EMAIL=tunisineheni@gmail.com
+      - PROXY_ADDRESS=proxy
+      - CERTBOT_CRON_RENEW=('0 3 * * *' '0 15 * * *')
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - nginx_certs:/etc/nginx/certs
+      - nginx_certs:/etc/letsencrypt
+    networks:
+      - ntw_front
     deploy:
-      mode: replicated
+      labels:
+        - com.df.servicePath=/.well-known/acme-challenge
+        - com.df.notify=true
+        - com.df.distribute=true
+        - com.df.port=80
+      placement:
+        constraints: [node.id == <nodeId>]
       replicas: 1
 
   nginx-proxy:
-    image: jwilder/nginx-proxy
+    image: nginx:latest
     ports:
-      - "80:80"
-      - "443:443"
+      - "88:80"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./nginx-proxy/default.conf:/etc/nginx/nginx.conf:ro
       - nginx_html:/usr/share/nginx/html
-      - nginx_certs:/etc/nginx/certs:ro
     deploy:
       mode: replicated
       replicas: 1
@@ -28,11 +39,15 @@ services:
         delay: 5m
         max_attempts: 3
         window: 120s
-      placement:
-        constraints: 
-          - node.labels.size == large
       labels:
-         com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+        - "traefik.backend=nginx-proxy"
+        - "traefik.backend.loadbalancer.swarm=true"
+        - "traefik.backend.loadbalancer.method=drr"
+        - "traefik.frontend.entryPoints=http,https"
+        - "traefik.frontend.rule=Host:media.synker.ovh"
+        - "traefik.docker.network=ntw_front"
+        - "traefik.port=88"
+        - "traefik.enable=true"
 
 volumes:
   nginx_certs:
