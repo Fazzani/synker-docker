@@ -62,6 +62,7 @@ function create_shares {
   sudo mkdir /mnt/nfs/freebox || true
   sudo mkdir /mnt/nfs/nginx-proxy || true
   sudo mkdir /mnt/nfs/nginx-proxy/html || true
+  sudo mkdir /mnt/nfs/nginx-proxy/log || true
 }
 
 set +e

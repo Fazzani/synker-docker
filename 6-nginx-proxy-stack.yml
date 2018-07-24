@@ -6,7 +6,7 @@ services:
     ports:
       - "88:80"
     configs:
-      - source: nginx_config2
+      - source: nginx_config
         target: /etc/nginx/nginx.conf
         mode: 0444
     deploy:
@@ -27,18 +27,25 @@ services:
         - "traefik.port=88"
         - "traefik.enable=true"
     volumes:
-      - nginx_html:/usr/share/nginx/html:ro
+      - nginx_html:/usr/share/nginx/html
+      - nginx_log:/var/log/nginx:ro
+      - ./nginx-proxy/default.conf:/etc/nginx/nginx.conf:ro
 volumes:
   nginx_html:
     driver_opts:
       type: "nfs"
       o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/nginx-proxy/html"
+  nginx_log:
+    driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=151.80.235.155"
+      device: ":/mnt/nfs/nginx-proxy/log"
  
 networks:
   ntw_front:
     external: true
 
 configs:
-  nginx_config2:
+  nginx_config:
     file: ./nginx-proxy/default.conf
