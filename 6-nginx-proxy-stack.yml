@@ -16,10 +16,8 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-        delay: 3m
-        max_attempts: 3
-        window: 120s
       labels:
+        - "traefik.tags=proxy"
         - "traefik.backend=nginx-proxy"
         - "traefik.backend.loadbalancer.swarm=true"
         - "traefik.backend.loadbalancer.method=drr"
@@ -28,6 +26,7 @@ services:
         - "traefik.docker.network=ntw_front"
         - "traefik.port=88"
         - "traefik.enable=true"
+        - "traefik.frontend.passTLSCert=false"
     volumes:
       - nginx_html:/usr/share/nginx/html
       - nginx_log:/var/log/nginx
