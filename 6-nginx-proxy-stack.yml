@@ -23,6 +23,7 @@ services:
       - "traefik.backend.loadbalancer.method=drr"
       - "traefik.frontend.entryPoints=http"
       - "traefik.frontend.rule=Host:media.synker.ovh"
+      - "traefik.frontend.passHostHeader=true"
       - "traefik.docker.network=ntw_front"
       - "traefik.port=88"
       - "traefik.enable=true"
