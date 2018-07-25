@@ -1,7 +1,7 @@
 version: "3.5"
 
 services:
-  nginx-proxy:
+  nginx_proxy:
     image: nginx:${NGINX_VERSION:-1.15-alpine}
     networks:
       - ntw_front
@@ -18,7 +18,7 @@ services:
         condition: on-failure
       labels:
       - "traefik.tags=proxy"
-      - "traefik.backend=nginx-proxy"
+      - "traefik.backend=nginx_proxy"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
       - "traefik.frontend.entryPoints=http,https"
