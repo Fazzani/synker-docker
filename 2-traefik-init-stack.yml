@@ -20,7 +20,7 @@ services:
       - "--entrypoints=Name:https Address::443 TLS Compress:true ProxyProtocol:true"
       - "--defaultentrypoints=http,https"
       - "--acme"
-      - "--acme.domains=synker.ovh,www.synker.ovh,api.synker.ovh,visu.synker.ovh,kibana.synker.ovh,elastic.synker.ovh,rabbitmq.synker.ovh,consul.synker.ovh,adminer.synker.ovh,media.synker.ovh"
+      - "--acme.domains=synker.ovh,api.synker.ovh,visu.synker.ovh,kibana.synker.ovh,elastic.synker.ovh,rabbitmq.synker.ovh,consul.synker.ovh,adminer.synker.ovh,media.synker.ovh"
       - "--acme.storage=traefik/acme/account"
       - "--acme.entryPoint=https"
       - "--acme.httpChallenge.entryPoint=http"
