@@ -12,11 +12,13 @@ services:
       - "--logLevel=INFO"
       - "traefikLog.filePath=/log/traefik"
       - "--web"
+      - "--web.dashboard=true"
+      - "--web.debug=true"
       - "--web.address=:8080"
       - --web.readonly
+      - --web.statistics
       - "--checknewversion=true"
       - "--insecureskipverify=true"
-      - --web.statistics
       - "--entrypoints=Name:http Address::80 ProxyProtocol:true Compress:true Redirect.EntryPoint:https"
       - "--entrypoints=Name:https Address::443 TLS Compress:true ProxyProtocol:true"
       - "--defaultentrypoints=http,https"
