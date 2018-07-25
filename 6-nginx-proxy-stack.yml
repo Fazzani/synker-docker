@@ -17,16 +17,16 @@ services:
       restart_policy:
         condition: on-failure
       labels:
-        - "traefik.tags=proxy"
-        - "traefik.backend=nginx-proxy"
-        - "traefik.backend.loadbalancer.swarm=true"
-        - "traefik.backend.loadbalancer.method=drr"
-        - "traefik.frontend.entryPoints=http,https"
-        - "traefik.frontend.rule=Host:media.synker.ovh"
-        - "traefik.docker.network=ntw_front"
-        - "traefik.port=88"
-        - "traefik.enable=true"
-        - "traefik.frontend.passTLSCert=false"
+      - "traefik.tags=proxy"
+      - "traefik.backend=nginx-proxy"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:media.synker.ovh"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.port=88"
+      - "traefik.enable=true"
+      - "traefik.frontend.passTLSCert=false"
     volumes:
       - nginx_html:/usr/share/nginx/html
       - nginx_log:/var/log/nginx
