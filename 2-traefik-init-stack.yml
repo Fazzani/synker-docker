@@ -13,8 +13,8 @@ services:
       - "--traefikLog.filePath=/log/traefik/log.json"
       - "--web"
       - "--web.address=:8080"
-      - --web.readonly
-      - --web.statistics
+      - "--web.readonly"
+      - "--web.statistics"
       - "--checknewversion=true"
       - "--insecureskipverify=true"
       - "--entrypoints=Name:http Address::80 ProxyProtocol:true Compress:true"
