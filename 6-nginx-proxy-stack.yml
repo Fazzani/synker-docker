@@ -21,7 +21,7 @@ services:
       - "traefik.backend=nginx-proxy"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
-      - "traefik.frontend.entryPoints=http"
+      - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:media.synker.ovh"
       - "traefik.frontend.passHostHeader=true"
       - "traefik.docker.network=ntw_front"
