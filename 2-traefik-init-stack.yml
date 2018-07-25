@@ -12,7 +12,6 @@ services:
       - "--logLevel=INFO"
       - "traefikLog.filePath=/log/traefik"
       - "--web"
-      - "--web.dashboard=true"
       - "--web.debug=true"
       - "--web.address=:8080"
       - --web.readonly
