@@ -10,7 +10,7 @@ services:
       # - "--api"
       - "--debug"
       - "--logLevel=WARN"
-      - "traefikLog.filePath=/log/traefik"
+      - "traefikLog.filePath=/log/traefik/log.json"
       - "--web"
       - "--web.address=:8080"
       - --web.readonly
