@@ -12,6 +12,7 @@ services:
       - ntw_front
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
+    - traefik_log:/log/traefik
     command: --consul --consul.watch --consul.endpoint=consul.synker.ovh:8500
     deploy:
       labels:
@@ -154,3 +155,8 @@ volumes:
       type: "nfs"
       o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/rabbitmq/data/mnesia"
+  traefik_log:
+    driver_ops:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=151.80.235.155"
+      device: ":/mnt/nfs/traefik/log"

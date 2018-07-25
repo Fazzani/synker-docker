@@ -22,6 +22,7 @@ function set_folder_permission {
   #sudo chmod 777 -R /mnt/nfs/logstash
   sudo chmod 777 -R /mnt/nfs/postgres
   sudo chmod 777 -R /mnt/nfs/nginx-proxy
+  sudo chmod 777 -R /mnt/nfs/traefik
   # sudo chmod 777 /mnt/nfs/emby
 }
 
@@ -61,6 +62,8 @@ function create_shares {
   sudo mkdir /mnt/nfs/nginx-proxy || true
   sudo mkdir /mnt/nfs/nginx-proxy/html || true
   sudo mkdir /mnt/nfs/nginx-proxy/log || true
+  sudo mkdir /mnt/nfs/traefik || true
+  sudo mkdir /mnt/nfs/traefik/log || true
 }
 
 set +e
