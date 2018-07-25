@@ -19,7 +19,7 @@ services:
       - --web.statistics
       - "--checknewversion=true"
       - "--insecureskipverify=true"
-      - "--entrypoints=Name:proxy_media Address::80 ProxyProtocol:true Compress:true Redirect.Regex:^https?://media.synker.ovh/?url=(.*) Redirect.Replacement:$1 Redirect.Permanent:true"
+      - "--entrypoints=Name:proxy_media Address::80 ProxyProtocol:true Compress:true Redirect.Regex:^https?://media.synker.ovh/?url=(.*) Redirect.Replacement:$$1 Redirect.Permanent:true"
       - "--entrypoints=Name:http Address::80 ProxyProtocol:true Compress:true Redirect.EntryPoint:https"
       - "--entrypoints=Name:https Address::443 TLS Compress:true ProxyProtocol:true"
       - "--defaultentrypoints=http,https"
