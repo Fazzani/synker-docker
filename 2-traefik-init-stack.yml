@@ -9,7 +9,7 @@ services:
       - "storeconfig"
       # - "--api"
       - "--debug"
-      - "--logLevel=INFO"
+      - "--logLevel=WARN"
       - "traefikLog.filePath=/log/traefik"
       - "--web"
       - "--web.address=:8080"

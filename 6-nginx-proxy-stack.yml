@@ -25,7 +25,7 @@ services:
       - "traefik.frontend.rule=Host:media.synker.ovh"
       - "traefik.frontend.passHostHeader=true"
       - "traefik.docker.network=ntw_front"
-      - "traefik.port=88"
+      - "traefik.port=80"
       - "traefik.enable=true"
     volumes:
       - nginx_html:/usr/share/nginx/html
