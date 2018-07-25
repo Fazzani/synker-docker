@@ -4,4 +4,7 @@
         ".vscode": true,
     },
     "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\bash.exe"
+	"travis.repository": "synker-docker",
+    "travis.username": "fazzani",
+	"travis.statusPollingInterval": 30
 }
