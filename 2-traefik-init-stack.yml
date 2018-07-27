@@ -14,7 +14,7 @@ services:
       - "--web"
       - "--web.address=:8080"
       - "--web.auth.basic"
-      - "--web.auth.basic.users=['admin:$apr1$8Dlf//P1$aE5beYa7YLUDWZ16D9F6b1']"
+      - "--web.auth.basic.users=['admin:$$apr1$8Dlf//P1$aE5beYa7YLUDWZ16D9F6b1']"
       - "--web.readonly"
       - "--web.statistics"
       - "--checknewversion=true"
