@@ -50,7 +50,7 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:${TAG:-6.3.0}
     ports:
-      - 5601:5601
+      - 5601
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:${ELASTICSEARCH_PORT:-9200}
       # - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
@@ -62,6 +62,7 @@ services:
        - "traefik.backend=kibana"
        - "traefik.frontend.rule=Host:kibana.synker.ovh"
        - "traefik.frontend.entryPoints=http,https"
+       - "traefik.frontend.auth.basic=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
        - "traefik.backend.loadbalancer.swarm=true"
        - "traefik.backend.loadbalancer.method=drr"
        - "traefik.enable=true"
