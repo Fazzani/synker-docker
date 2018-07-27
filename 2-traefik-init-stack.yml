@@ -36,7 +36,7 @@ services:
       - "--acme.OnHostRule=true"
       - "--acme.onDemand=false"
       - "--acme.email=support@synker.ovh"
-      #- "--acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory"
       - "--docker"
       - "--docker.swarmmode"
       - "--docker.domain=docker.localhost"
