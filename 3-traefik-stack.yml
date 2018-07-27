@@ -16,14 +16,14 @@ services:
     command: --consul --consul.watch --consul.endpoint=consul.synker.ovh:8500
     deploy:
       labels:
-        - "traefik.port=8080"
-        - "traefik.tags=monitoring"
-        - "traefik.backend.loadbalancer.stickiness=true"
-        - "traefik.frontend.auth.basic=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
-        - "traefik.frontend.passHostHeader=true"
-        - "traefik.frontend.rule=Host:traefik.synker.ovh"
-        - "traefik.docker.network=ntw_front"
-        - "traefik.enable=true"
+      - "traefik.port=8080"
+      - "traefik.tags=monitoring"
+      - "traefik.backend.loadbalancer.stickiness=true"
+      - "traefik.frontend.auth.basic=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
+      - "traefik.frontend.passHostHeader=true"
+      - "traefik.frontend.rule=Host:traefik.synker.ovh"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.enable=true"
       mode: global
       update_config:
         parallelism: 1
