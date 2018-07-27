@@ -21,6 +21,7 @@ services:
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
       - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.auth.basic=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
       - "traefik.frontend.rule=Host:synker.ovh,www.synker.ovh"
       - "traefik.docker.network=ntw_front"
       - "traefik.port=56801"
