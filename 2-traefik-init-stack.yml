@@ -26,7 +26,8 @@ services:
       - "--defaultentrypoints=http,https"
       - "--acme"
       # - "--acme.domains=synker.ovh,api.synker.ovh,visu.synker.ovh,kibana.synker.ovh,elastic.synker.ovh,rabbitmq.synker.ovh,consul.synker.ovh,adminer.synker.ovh,media.synker.ovh"
-      - "--acme.domains=*.synker.ovh,synker.ovh"
+      - "--acme.domains=*.synker.ovh"
+      - "--acme.domains=synker.ovh"
       - "--acme.storage=etc/traefik/acme/acme.json"
       - "--acme.entryPoint=https"
       - "--acme.httpChallenge.entryPoint=http"
@@ -52,10 +53,10 @@ services:
     networks:
       - ntw_front
     environment:
-      - OVH_ENDPOINT=ovh-eu
-      - OVH_APPLICATION_KEY=jEncYct1dwXs3Muq
-      - OVH_APPLICATION_SECRET=MvW4JHaARs5IoLxvajIQ6L2cMkh7gqgm
-      - OVH_CONSUMER_KEY=q9J6pT9IDHUL0YZx1R3aYYwGK3BC07j1
+      - OVH_ENDPOINT=${OVH_ENDPOINT:-ovh-eu}
+      - OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY:-jEncYct1dwXs3Muq}
+      - OVH_APPLICATION_SECRET=${OVH_APPLICATION_SECRET:-MvW4JHaARs5IoLxvajIQ6L2cMkh7gqgm}
+      - OVH_CONSUMER_KEY=${OVH_CONSUMER_KEY:q9J6pT9IDHUL0YZx1R3aYYwGK3BC07j1}
     deploy:
       restart_policy:
         condition: on-failure
