@@ -9,10 +9,12 @@ services:
       - "storeconfig"
       # - "--api"
       - "--debug"
-      - "--logLevel=WARN"
+      - "--logLevel=INFO"
       - "--traefikLog.filePath=/log/traefik/log.json"
       - "--web"
       - "--web.address=:8080"
+      - "--web.auth.basic"
+      - --web.auth.basic.users=["admin:$apr1$8Dlf//P1$aE5beYa7YLUDWZ16D9F6b1"]
       - "--web.readonly"
       - "--web.statistics"
       - "--checknewversion=true"
@@ -22,10 +24,13 @@ services:
       - "--entrypoints=Name:https Address::443 TLS Compress:true ProxyProtocol:true"
       - "--defaultentrypoints=http,https"
       - "--acme"
-      - "--acme.domains=synker.ovh,api.synker.ovh,visu.synker.ovh,kibana.synker.ovh,elastic.synker.ovh,rabbitmq.synker.ovh,consul.synker.ovh,adminer.synker.ovh,media.synker.ovh"
+      # - "--acme.domains=synker.ovh,api.synker.ovh,visu.synker.ovh,kibana.synker.ovh,elastic.synker.ovh,rabbitmq.synker.ovh,consul.synker.ovh,adminer.synker.ovh,media.synker.ovh"
       - "--acme.storage=traefik/acme/account"
       - "--acme.entryPoint=https"
       - "--acme.httpChallenge.entryPoint=http"
+      - "--acme.dnschallenge"
+      - "--acme.dnsChallenge.provider=ovh"
+      - "--acme.dnsChallenge.delayBeforeCheck=0"
       - "--acme.acmelogging=true"
       - "--acme.OnHostRule=true"
       - "--acme.onDemand=false"
@@ -44,6 +49,11 @@ services:
       # - --consulcatalog.constraints="tag==public
     networks:
       - ntw_front
+    environment:
+      - OVH_ENDPOINT=ovh-eu
+      - OVH_APPLICATION_KEY=jEncYct1dwXs3Muq
+      - OVH_APPLICATION_SECRET=MvW4JHaARs5IoLxvajIQ6L2cMkh7gqgm
+      - OVH_CONSUMER_KEY=Apyv5abNEVToRsrLM54sKrqN1IRRwRpJ
     deploy:
       restart_policy:
         condition: on-failure
