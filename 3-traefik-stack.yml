@@ -45,6 +45,7 @@ services:
       - "traefik.tags=monitoring"
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:visu.synker.ovh"
+      - "traefik.frontend.auth.basic=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
       - "traefik.enable=true"
       - "traefik.port=8080"
       - "traefik.docker.network=ntw_front"
