@@ -22,6 +22,8 @@ services:
         - "traefik.frontend.auth.basic=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
         - "traefik.frontend.passHostHeader=true"
         - "traefik.frontend.rule=Host:traefik.synker.ovh"
+        - "traefik.docker.network=ntw_front"
+        - "traefik.enable=true"
       mode: global
       update_config:
         parallelism: 1
