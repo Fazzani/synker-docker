@@ -17,7 +17,7 @@ services:
       - "--web.statistics"
       - "--checknewversion=true"
       - "--insecureskipverify=true"
-      - "--entrypoints=Name:http Address::80 ProxyProtocol:true Compress:true"
+      - "--entrypoints=Name:http Address::80 ProxyProtocol:true Compress:true Redirect.EntryPoint:https"
       - "--entrypoints=Name:https Address::443 TLS Compress:true ProxyProtocol:true"
       - "--defaultentrypoints=http,https"
       - "--acme"
