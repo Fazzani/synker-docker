@@ -26,7 +26,7 @@ services:
       - "--defaultentrypoints=http,https"
       - "--acme"
       # - "--acme.domains=synker.ovh,api.synker.ovh,visu.synker.ovh,kibana.synker.ovh,elastic.synker.ovh,rabbitmq.synker.ovh,consul.synker.ovh,adminer.synker.ovh,media.synker.ovh"
-      - "--acme.domains=synker.ovh,*.synker.ovh"
+      - "--acme.domains=*.synker.ovh,synker.ovh"
       - "--acme.storage=etc/traefik/acme/acme.json"
       - "--acme.entryPoint=https"
       - "--acme.httpChallenge.entryPoint=http"
