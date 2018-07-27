@@ -14,6 +14,11 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock
     - traefik_log:/log/traefik
     command: --consul --consul.watch --consul.endpoint=consul.synker.ovh:8500
+    environment:
+      - OVH_ENDPOINT=ovh-eu
+      - OVH_APPLICATION_KEY=jEncYct1dwXs3Muq
+      - OVH_APPLICATION_SECRET=MvW4JHaARs5IoLxvajIQ6L2cMkh7gqgm
+      - OVH_CONSUMER_KEY=Apyv5abNEVToRsrLM54sKrqN1IRRwRpJ
     deploy:
       labels:
       - "traefik.port=8080"
