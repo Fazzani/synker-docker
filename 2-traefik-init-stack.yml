@@ -26,7 +26,7 @@ services:
       - "--acme"
       # - "--acme.domains=synker.ovh,api.synker.ovh,visu.synker.ovh,kibana.synker.ovh,elastic.synker.ovh,rabbitmq.synker.ovh,consul.synker.ovh,adminer.synker.ovh,media.synker.ovh"
       - "--acme.domains=*.synker.ovh"
-      - "--acme.storage=traefik/acme/account"
+      - "--acme.storage=/etc/traefik/acme/acme.json"
       - "--acme.entryPoint=https"
       - "--acme.httpChallenge.entryPoint=http"
       - "--acme.dnsprovider=ovh"
