@@ -29,6 +29,7 @@ services:
       - "--acme.storage=traefik/acme/account"
       - "--acme.entryPoint=https"
       - "--acme.httpChallenge.entryPoint=http"
+      - "--acme.dnsprovider=ovh"
       - "--acme.dnschallenge"
       - "--acme.dnsChallenge.provider=ovh"
       - "--acme.dnsChallenge.delayBeforeCheck=0"
