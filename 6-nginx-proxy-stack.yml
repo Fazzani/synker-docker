@@ -36,8 +36,8 @@ services:
     networks:
       - ntw_front
     ports:
-      - 8000:8000
-      - 1935:1935
+      - "8000:8000"
+      - "1935:1935"
     deploy:
       mode: replicated
       replicas: 1
