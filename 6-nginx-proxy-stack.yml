@@ -30,6 +30,37 @@ services:
     volumes:
       - nginx_html:/usr/share/nginx/html
       - nginx_log:/var/log/nginx
+
+  media_server:
+    image: synker/synker-media-server:${MEDIA_SERVER_VERSION:-latest}
+    networks:
+      - ntw_front
+    ports:
+      - "8000"
+      - "1925"
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.labels.provider == ovh
+      labels:
+      - "traefik.tags=media"
+      - "traefik.backend=media_server"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.http.frontend.entryPoints=http,https"
+      - "traefik.http.frontend.entryPoints=rtmp"
+      - "traefik.frontend.passHostHeader=true"
+      - "traefik.frontend.rule=Host:servermedia.synker.ovh"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.rtmp.port=1925"
+      - "traefik.rtmp.protocol=rtmp"
+      - "traefik.http.port=8000"
+      - "traefik.enable=true"
+      
 volumes:
   nginx_html:
     driver_opts:
