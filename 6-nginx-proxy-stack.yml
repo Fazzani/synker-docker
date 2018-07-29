@@ -36,8 +36,8 @@ services:
     networks:
       - ntw_front
     ports:
-      - "8000"
-      - "1925"
+      - "8000:8000"
+      - "1935:1935"
     deploy:
       mode: replicated
       replicas: 1
@@ -56,7 +56,7 @@ services:
       - "traefik.frontend.passHostHeader=true"
       - "traefik.frontend.rule=Host:servermedia.synker.ovh"
       - "traefik.docker.network=ntw_front"
-      - "traefik.rtmp.port=1925"
+      - "traefik.rtmp.port=1935"
       - "traefik.rtmp.protocol=rtmp"
       - "traefik.http.port=8000"
       - "traefik.enable=true"
