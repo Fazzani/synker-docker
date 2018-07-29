@@ -48,11 +48,12 @@ services:
           - node.labels.provider == ovh
       labels:
       - "traefik.tags=media"
-      - "traefik.backend=media_server"
+      - "traefik.http.backend=media_server"
+      - "traefik.rtmp.backend=media_server"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
       - "traefik.http.frontend.entryPoints=http,https"
-      - "traefik.http.frontend.entryPoints=rtmp"
+      - "traefik.rtmp.frontend.entryPoints=rtmp"
       - "traefik.frontend.passHostHeader=true"
       - "traefik.frontend.rule=Host:servermedia.synker.ovh"
       - "traefik.docker.network=ntw_front"
