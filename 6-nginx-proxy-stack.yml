@@ -32,12 +32,12 @@ services:
       - nginx_log:/var/log/nginx
 
   media_server:
-    image: synker/synker-media-server:${MEDIA_SERVER_VERSION:-0.0.12}
+    image: synker/synker-media-server:${MEDIA_SERVER_VERSION:-0.0.13}
     networks:
       - ntw_front
     ports:
-      - "8000:8000"
-      - "1935:1935"
+      - 8000:8000
+      - 1935:1935
     deploy:
       mode: replicated
       replicas: 1
