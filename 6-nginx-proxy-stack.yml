@@ -46,21 +46,16 @@ services:
       placement:
         constraints:
           - node.labels.provider == ovh
+          - node.role==manager
       labels:
       - "traefik.tags=media"
-      - "traefik.http.backend=media_server"
-      - "traefik.rtmp.backend=media_server"
+      - "traefik.backend=media_server"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
-      - "traefik.http.frontend.entryPoints=http,https"
-      - "traefik.rtmp.frontend.entryPoints=rtmp"
-      - "traefik.http.frontend.passHostHeader=true"
-      - "traefik.rtmp.frontend.passHostHeader=true"
-      - "traefik.rtmp.frontend.rule=Host:servermedia.synker.ovh"
-      - "traefik.http.frontend.rule=Host:servermedia.synker.ovh"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.passHostHeader=true"
+      - "traefik.frontend.rule=Host:servermedia.synker.ovh"
       - "traefik.docker.network=ntw_front"
-      - "traefik.rtmp.port=1935"
-      - "traefik.rtmp.protocol=rtmp"
       - "traefik.http.port=8000"
       - "traefik.enable=true"
       
