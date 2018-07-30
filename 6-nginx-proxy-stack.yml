@@ -38,6 +38,7 @@ services:
     ports:
       - "8000:8000"
       - "1935:1935"
+      - "8084:8084"
     deploy:
       mode: replicated
       replicas: 1
