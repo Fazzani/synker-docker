@@ -8,7 +8,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:56801
     configs:
-      - source: webclient_config2
+      - source: webclient_config3
         target: /app/appsettings.Production.json
         mode: 0444
     ports:
@@ -47,7 +47,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
-      - source: webapi_config2
+      - source: webapi_config3
         target: /app/appsettings.Production.json
         mode: 0444
     ports:
@@ -84,7 +84,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
-      - source: batch_config2
+      - source: batch_config3
         target: /app/appsettings.Production.json
         mode: 0444
     deploy:
@@ -168,9 +168,9 @@ networks:
     external: true
 
 configs:
-  webapi_config2:
+  webapi_config3:
     file: ./synker/appsettings.webapi.json
-  webclient_config2:
+  webclient_config3:
     file: ./synker/appsettings.webclient.json
-  batch_config2:
+  batch_config3:
     file: ./synker/appsettings.json
