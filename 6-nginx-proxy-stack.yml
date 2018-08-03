@@ -1,36 +1,6 @@
 version: "3.5"
 
 services:
-  nginx_proxy:
-    image: nginx:${NGINX_VERSION:-1.15-alpine}
-    networks:
-      - ntw_front
-    ports:
-      - "88:80"
-    configs:
-      - source: nginx_config
-        target: /etc/nginx/nginx.conf
-        mode: 0444
-    deploy:
-      mode: replicated
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-      labels:
-      - "traefik.tags=proxy"
-      - "traefik.backend=nginx_proxy"
-      - "traefik.backend.loadbalancer.swarm=true"
-      - "traefik.backend.loadbalancer.method=drr"
-      - "traefik.frontend.entryPoints=http,https"
-      - "traefik.frontend.rule=Host:media.synker.ovh"
-      - "traefik.frontend.passHostHeader=true"
-      - "traefik.docker.network=ntw_front"
-      - "traefik.port=80"
-      - "traefik.enable=true"
-    volumes:
-      - nginx_html:/usr/share/nginx/html
-      - nginx_log:/var/log/nginx
-
   media_server:
     image: synker/synker-media-server:${MEDIA_SERVER_VERSION:-latest}
     networks:
@@ -57,7 +27,7 @@ services:
       - "traefik.frontend.passHostHeader=true"
       - "traefik.frontend.rule=Host:servermedia.synker.ovh"
       - "traefik.docker.network=ntw_front"
-      - "traefik.http.port=8000"
+      - "traefik.http.port=8084"
       - "traefik.enable=true"
       
 volumes:
