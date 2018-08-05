@@ -14,6 +14,10 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
       placement:
         constraints:
           - node.labels.provider == ovh
