@@ -15,8 +15,9 @@ services:
       restart_policy:
         condition: on-failure
       update_config:
+        failure_action: rollback
         parallelism: 1
-        delay: 10s
+        delay: 180s
         order: start-first
       placement:
         constraints:
