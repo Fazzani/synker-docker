@@ -107,6 +107,10 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data:rw
     command: -c 'listen_addresses='*''
+    configs:
+      - source: pg_config_hba
+        target: /var/lib/postgresql/data/pg_hba.conf
+        mode: 0444
     environment:
       POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
       POSTGRES_USER: "pl"
@@ -175,5 +179,7 @@ configs:
     file: ./synker/appsettings.webclient.json
   batch_config_v4:
     file: ./synker/appsettings.json
-  pg_config_2:
+  pg_config:
     file: ./synker/postgresql.conf
+  pg_config_hba:
+    file: ./synker/pg_hba.conf
