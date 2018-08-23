@@ -106,11 +106,7 @@ services:
       - ntw_front
     volumes:
       - postgres_data:/var/lib/postgresql/data:rw
-    command: -c 'config_file=/etc/postgresql/postgresql.conf'
-    configs:
-      - source: pg_config_2
-        target: /etc/postgresql/postgresql.conf
-        mode: 0444
+    command: -c 'listen_addresses='*''
     environment:
       POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
       POSTGRES_USER: "pl"
