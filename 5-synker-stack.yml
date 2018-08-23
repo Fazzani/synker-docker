@@ -106,6 +106,10 @@ services:
       - ntw_front
     volumes:
       - postgres_data:/var/lib/postgresql/data:rw
+    configs:
+      - source: pg_config
+        target: /etc/postgresql/postgresql.conf
+        mode: 0444
     environment:
       POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
       POSTGRES_USER: "pl"
@@ -174,3 +178,5 @@ configs:
     file: ./synker/appsettings.webclient.json
   batch_config_v4:
     file: ./synker/appsettings.json
+  pg_config:
+    file: ./synker/postgresql.conf
