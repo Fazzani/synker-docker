@@ -106,8 +106,9 @@ services:
       - ntw_front
     volumes:
       - postgres_data:/var/lib/postgresql/data:rw
+    command: -c 'config_file=/etc/postgresql/postgresql.conf'
     configs:
-      - source: pg_config
+      - source: pg_config_2
         target: /etc/postgresql/postgresql.conf
         mode: 0444
     environment:
@@ -178,5 +179,5 @@ configs:
     file: ./synker/appsettings.webclient.json
   batch_config_v4:
     file: ./synker/appsettings.json
-  pg_config:
+  pg_config_2:
     file: ./synker/postgresql.conf
