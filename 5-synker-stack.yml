@@ -99,18 +99,14 @@ services:
       - ntw_front
 
   synkerdb:
-    image: postgres
+    image: postgres:${POSTGRES_VERSION:-alpine}
     ports:
       - "5432:5432"
     networks:
       - ntw_front
     volumes:
       - postgres_data:/var/lib/postgresql/data:rw
-    #command: -c 'listen_addresses='*''
-    configs:
-      - source: pg_config_hba2
-        target: /var/lib/postgresql/data/pg_hba.conf
-        mode: 0777
+      - ./synker/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf:rw
     environment:
       POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
       POSTGRES_USER: "pl"
@@ -120,9 +116,11 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-        delay: 5m
-        max_attempts: 3
-        window: 120s
+      update_config:
+        failure_action: rollback
+        parallelism: 1
+        delay: 180s
+        order: start-first
       placement:
         constraints: 
           - node.labels.size == large
@@ -179,7 +177,3 @@ configs:
     file: ./synker/appsettings.webclient.json
   batch_config_v4:
     file: ./synker/appsettings.json
-  pg_config:
-    file: ./synker/postgresql.conf
-  pg_config_hba2:
-    file: ./synker/pg_hba.conf
