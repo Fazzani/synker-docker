@@ -98,7 +98,7 @@ services:
       - "traefik.frontend.rule=Host:rabbitmq.synker.ovh"
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.enable=true"
-      - "traefik.port=15672"
+      - "traefik.port=5672"
       - "traefik.docker.network=ntw_front"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
