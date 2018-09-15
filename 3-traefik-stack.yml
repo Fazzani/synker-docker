@@ -74,9 +74,13 @@ services:
     # map the RabbitMQ standard ports, 5672 is the AMQP port and 15672 is the Management_UI port
       - "5672:5672"
       - "${RABBIT_PORT:-15672}:15672"
-    volumes:
+    # volumes:
     #   - rabbit_database:/var/lib/rabbitmq/mnesia
-        - ./configs/rabbitmq.config:/etc/rabbitmq/rabbitmq
+    #    - ./configs/rabbitmq.config:/etc/rabbitmq/rabbitmq
+    configs:
+      - source: rabbitmq_config
+        target: /etc/rabbitmq/rabbitmq
+        mode: 0444
     environment:
       - TCP_PORTS=${RABBIT_PORT:-15672}, 5672
       - AUTOCLUSTER_TYPE=consul
@@ -172,3 +176,7 @@ volumes:
       type: "nfs"
       o: "nolock,soft,rw,addr=151.80.235.155"
       device: ":/mnt/nfs/traefik/log"
+
+configs:
+  rabbitmq_config:
+    file: ./configs/rabbitmq.config
