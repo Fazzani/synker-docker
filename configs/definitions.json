@@ -3,14 +3,12 @@
     "users": [
      {
       "name": "synkerapi.dev",
-      "password_hash": "F0C3E5BE8F6C6FC9901E95A02145FC09DC0C268594356BAB7CDF2F3C3FDCA93B",
-      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "password_hash": "c3lua2VyYXBpLmRldg==",
       "tags": "synker"
      },
      {
       "name": "synkerapi",
-      "password_hash": "79E744A06FDEC707D168CF0941D11BC65E624E40AE317AA5252A868DC3A0D745",
-      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "password_hash": "c3lua2VyYXBp",
       "tags": "synker"
      }
     ],
