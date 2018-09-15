@@ -96,6 +96,7 @@ services:
       - "RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST:-synker-host}"
       - "RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}"
       - "RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-synker}"
+      - "RABBITMQ_CONFIG_FILE=/etc/rabbitmq/rabbitmq"
     deploy:
       replicas: 2
       labels:
