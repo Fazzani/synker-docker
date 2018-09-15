@@ -73,8 +73,8 @@ services:
     ports:
       - "5672:5672"
       - "${RABBIT_PORT:-15672}:15672"
-    #volumes:
-      #- rabbit_database:/var/lib/rabbitmq/mnesia
+    volumes:
+      - rabbit_database:/var/lib/rabbitmq/mnesia
     environment:
       - TCP_PORTS=${RABBIT_PORT:-15672},5672
       - AUTOCLUSTER_TYPE=consul
