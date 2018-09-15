@@ -86,13 +86,13 @@ set -euox
 cd /home/${REMOTE_USER}/synker-docker/
 
 # copy some elastic config
-yes | cp elastic/stopwords.txt /mnt/nfs/elastic/synkerconfig
-yes | cp elastic/mapping_synker.txt /mnt/nfs/elastic/config
-yes | cp nginx-proxy/index.html /mnt/nfs/nginx-proxy/html
-yes | cp nginx-proxy/favicon.ico /mnt/nfs/nginx-proxy/html
+yes | cp  -rf elastic/stopwords.txt /mnt/nfs/elastic/synkerconfig
+yes | cp  -rf elastic/mapping_synker.txt /mnt/nfs/elastic/config
+yes | cp  -rf nginx-proxy/index.html /mnt/nfs/nginx-proxy/html
+yes | cp  -rf nginx-proxy/favicon.ico /mnt/nfs/nginx-proxy/html
 
-yes | cp ./configs/definitions.json /mnt/nfs/rabbitmq/config
-yes | cp ./configs/rabbitmq.config /mnt/nfs/rabbitmq/config
+yes | cp  -rf ./configs/definitions.json /mnt/nfs/rabbitmq/config
+yes | cp  -rf ./configs/rabbitmq.config /mnt/nfs/rabbitmq/config
 # copy some logstash config
 # yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
 # yes | cp logstash/config/*.yml /mnt/nfs/logstash/config/
