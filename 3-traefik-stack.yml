@@ -78,8 +78,8 @@ services:
     #   - rabbit_database:/var/lib/rabbitmq/mnesia
         - /mnt/nfs/rabbitmq/config/definitions.json:/etc/rabbitmq/definitions.json:ro
     configs:
-      - source: rabbitmq_config_v4
-        target: /etc/rabbitmq/rabbitmq
+      - source: rabbitmq_config_v5
+        target: /etc/rabbitmq/rabbitmq.config
         mode: 0444
     environment:
       - TCP_PORTS=${RABBIT_PORT:-15672}, 5672
@@ -178,5 +178,5 @@ volumes:
       device: ":/mnt/nfs/traefik/log"
 
 configs:
-  rabbitmq_config_v4:
+  rabbitmq_config_v5:
     file: /mnt/nfs/rabbitmq/config/rabbitmq.conf
