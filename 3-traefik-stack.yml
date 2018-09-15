@@ -72,11 +72,10 @@ services:
     image: pivotalrabbitmq/rabbitmq-autocluster:3.7-consul
     ports:
       - "5672:5672"
-      - "15672:15672"
     #volumes:
       #- rabbit_database:/var/lib/rabbitmq/mnesia
     environment:
-      - TCP_PORTS=15672,5672
+      - TCP_PORTS=5672
       - AUTOCLUSTER_TYPE=consul
       - AUTOCLUSTER_CLEANUP=true
       - AUTOCLUSTER_DELAY=60
