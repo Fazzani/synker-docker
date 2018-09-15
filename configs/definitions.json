@@ -1,6 +1,12 @@
 {
     "rabbit_version": "3.7.0",
     "users": [
+        {
+            "name": "admin",
+            "password_hash": "F6C0AF7B3631CA4D217EF39D1D7A61136505EE302C47B22666A6D2331EC9B6D7",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+           },
      {
       "name": "synkerapi.dev",
       "password_hash": "F0C3E5BE8F6C6FC9901E95A02145FC09DC0C268594356BAB7CDF2F3C3FDCA93B",
@@ -36,7 +42,14 @@
         "configure": ".*",
         "write": ".*",
         "read": ".*"
-       }
+       },
+       {
+          "user": "admin",
+          "vhost": "\/",
+          "configure": ".*",
+          "write": ".*",
+          "read": ".*"
+         }
     ],
     "parameters": [],
     "policies": [],
