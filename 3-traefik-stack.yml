@@ -114,10 +114,10 @@ services:
         parallelism: 1
         delay: 15s
         failure_action: continue
-      placement:
-        constraints: 
-          - node.role == manager
-          - node.labels.size == small
+      # placement:
+      #   constraints: 
+      #     - node.role == manager
+      #     - node.labels.size == small
     networks:
       - ntw_front
   # who2:
