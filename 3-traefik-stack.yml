@@ -76,7 +76,7 @@ services:
       - "${RABBIT_PORT:-15672}:15672"
     volumes:
     #   - rabbit_database:/var/lib/rabbitmq/mnesia
-        - ./configs/definitions.json:/etc/rabbitmq/definitions.json:ro
+        - /mnt/nfs/rabbitmq/config/definitions.json:/etc/rabbitmq/definitions.json:ro
     configs:
       - source: rabbitmq_config_v3
         target: /etc/rabbitmq/rabbitmq.conf
@@ -179,4 +179,4 @@ volumes:
 
 configs:
   rabbitmq_config_v3:
-    file: ./configs/rabbitmq.conf
+    file: /mnt/nfs/rabbitmq/config/rabbitmq.conf
