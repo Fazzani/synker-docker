@@ -92,7 +92,7 @@ yes | cp nginx-proxy/index.html /mnt/nfs/nginx-proxy/html
 yes | cp nginx-proxy/favicon.ico /mnt/nfs/nginx-proxy/html
 
 yes | cp ./configs/definitions.json /mnt/nfs/rabbitmq/config
-yes | cp ./configs/rabbitmq.conf /mnt/nfs/rabbitmq/config
+yes | cp ./configs/rabbitmq.config /mnt/nfs/rabbitmq/config
 # copy some logstash config
 # yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
 # yes | cp logstash/config/*.yml /mnt/nfs/logstash/config/
