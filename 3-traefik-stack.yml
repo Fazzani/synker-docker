@@ -78,7 +78,7 @@ services:
     #   - rabbit_database:/var/lib/rabbitmq/mnesia
         - ./configs/definitions.json:/etc/rabbitmq/definitions.json:ro
     configs:
-      - source: rabbitmq_config
+      - source: rabbitmq_config_v3
         target: /etc/rabbitmq/rabbitmq.conf
         mode: 0444
     environment:
@@ -178,5 +178,5 @@ volumes:
       device: ":/mnt/nfs/traefik/log"
 
 configs:
-  rabbitmq_config:
+  rabbitmq_config_v3:
     file: ./configs/rabbitmq.conf
