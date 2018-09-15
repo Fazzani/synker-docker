@@ -2,7 +2,7 @@
     "rabbit_version": "3.7.0",
     "users": [{
             "name": "admin",
-            "password_hash": "ytUIm8s3AnKsXQjptplKFytfVxI=",
+            "password_hash": "F6C0AF7B3631CA4D217EF39D1D7A61136505EE302C47B22666A6D2331EC9B6D7",
             "tags": "administrator"
         },
         {
