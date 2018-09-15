@@ -74,8 +74,9 @@ services:
     # map the RabbitMQ standard ports, 5672 is the AMQP port and 15672 is the Management_UI port
       - "5672:5672"
       - "${RABBIT_PORT:-15672}:15672"
-    # volumes:
+    volumes:
     #   - rabbit_database:/var/lib/rabbitmq/mnesia
+        - ./configs/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
     environment:
       - TCP_PORTS=${RABBIT_PORT:-15672}, 5672
       - AUTOCLUSTER_TYPE=consul
@@ -113,8 +114,9 @@ services:
         window: 120s
       update_config:
         parallelism: 1
-        delay: 15s
-        failure_action: continue
+        delay: 10s
+        failure_action: rollback
+        order: start-first
       # placement:
       #   constraints: 
       #     - node.role == manager
