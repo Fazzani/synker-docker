@@ -71,12 +71,13 @@ services:
   rabbitmq:
     image: pivotalrabbitmq/rabbitmq-autocluster:3.7-consul
     ports:
+    # map the RabbitMQ standard ports, 5672 is the AMQP port and 15672 is the Management_UI port
       - "5672:5672"
       - "${RABBIT_PORT:-15672}:15672"
-    volumes:
-      - rabbit_database:/var/lib/rabbitmq/mnesia
+    # volumes:
+    #   - rabbit_database:/var/lib/rabbitmq/mnesia
     environment:
-      - TCP_PORTS=${RABBIT_PORT:-15672},5672
+      - TCP_PORTS=${RABBIT_PORT:-15672}, 5672
       - AUTOCLUSTER_TYPE=consul
       - AUTOCLUSTER_CLEANUP=true
       - AUTOCLUSTER_DELAY=60
@@ -159,11 +160,11 @@ networks:
     external: true
 
 volumes:
-  rabbit_database:
-    driver_opts:
-      type: "nfs"
-      o: "nolock,soft,rw,addr=151.80.235.155"
-      device: ":/mnt/nfs/rabbitmq/data/mnesia"
+  # rabbit_database:
+  #   driver_opts:
+  #     type: "nfs"
+  #     o: "nolock,soft,rw,addr=151.80.235.155"
+  #     device: ":/mnt/nfs/rabbitmq/data/mnesia"
   traefik_log:
     driver_opts:
       type: "nfs"
