@@ -41,7 +41,7 @@
             "read": ".*"
         },
         {
-            "user": "admin",
+            "user": "guest",
             "vhost": "\/",
             "configure": ".*",
             "write": ".*",
