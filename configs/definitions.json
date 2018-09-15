@@ -8,13 +8,13 @@
         },
         {
             "name": "synkerapi.dev",
-            "password_hash": "f0c3e5be8f6c6fc9901e95a02145fc09dc0c268594356bab7cdf2f3c3fdca93b",
+            "password_hash": "kgPEo2qeDEDQAlqhCMFztGwzFi4WvDNxyeH6/sXbfceeuBJr",
             "hashing_algorithm":"rabbit_password_hashing_sha256",
             "tags": "synker"
         },
         {
             "name": "synkerapi",
-            "password_hash": "79e744a06fdec707d168cf0941d11bc65e624e40ae317aa5252a868dc3a0d745",
+            "password_hash": "ExDWPt3cuChn0lgy3WXGW+Pw4ClqgRToyBArUxwx3+Hx78JY",
             "hashing_algorithm":"rabbit_password_hashing_sha256",
             "tags": "synker"
         }
