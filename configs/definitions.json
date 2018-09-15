@@ -2,17 +2,20 @@
     "rabbit_version": "3.7.0",
     "users": [{
             "name": "admin",
-            "password_hash": "F6C0AF7B3631CA4D217EF39D1D7A61136505EE302C47B22666A6D2331EC9B6D7",
+            "password_hash": "84983c60f7daadc1cb8698621f802c0d9f9a3c3c295c810748fb048115c186ec",
+            "hashing_algorithm":"rabbit_password_hashing_sha256",
             "tags": "administrator"
         },
         {
             "name": "synkerapi.dev",
-            "password_hash": "F0C3E5BE8F6C6FC9901E95A02145FC09DC0C268594356BAB7CDF2F3C3FDCA93B",
+            "password_hash": "f0c3e5be8f6c6fc9901e95a02145fc09dc0c268594356bab7cdf2f3c3fdca93b",
+            "hashing_algorithm":"rabbit_password_hashing_sha256",
             "tags": "synker"
         },
         {
             "name": "synkerapi",
-            "password_hash": "79E744A06FDEC707D168CF0941D11BC65E624E40AE317AA5252A868DC3A0D745",
+            "password_hash": "79e744a06fdec707d168cf0941d11bc65e624e40ae317aa5252a868dc3a0d745",
+            "hashing_algorithm":"rabbit_password_hashing_sha256",
             "tags": "synker"
         }
     ],
