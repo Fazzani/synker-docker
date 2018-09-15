@@ -1,8 +1,8 @@
 {
     "rabbit_version": "3.7.0",
     "users": [{
-            "name": "admin",
-            "password_hash": "84983c60f7daadc1cb8698621f802c0d9f9a3c3c295c810748fb048115c186ec",
+            "name": "guest",
+            "password_hash": "CDsxh6lYKzueplC+1HEZj4VRUDambbF8IaG6UnPffLtZp6Kz",
             "hashing_algorithm":"rabbit_password_hashing_sha256",
             "tags": "administrator"
         },
