@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   traefik:
-    image: traefik:${TRAEFIK_VERSION:-1.6.5-alpine}
+    image: traefik:${TRAEFIK_VERSION:-1.7-alpine}
     ports:
       - 80:80
       - 443:443

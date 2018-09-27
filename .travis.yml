@@ -1,5 +1,6 @@
 sudo: required
 language: generic
+install: skip
 addons:
   apt:
     ssh_known_hosts:
