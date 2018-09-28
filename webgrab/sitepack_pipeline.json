@@ -24,6 +24,7 @@
     },
     {
       "script": {
+        "ignore_failure" : true,
         "source": "if(ctx.source != null){ def tmp = /siteini.pack/.split(ctx.source)[1]; ctx.country =  /\\//.split(tmp)[1]; }"
       }
     }, 
