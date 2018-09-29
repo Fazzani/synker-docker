@@ -4,6 +4,8 @@ sd
 1080p
 1080i
 720p
+uhd
+4k
 tn
 ca
 ca:
@@ -23,4 +25,8 @@ my:
 osn
 TH
 ACM/VCM
-
+arb
+|
+|fr|
+be
+vod
