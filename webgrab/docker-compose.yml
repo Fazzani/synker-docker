@@ -82,7 +82,7 @@ volumes:
     driver_opts:
       type: "nfs"
       o: "nolock,soft,rw,addr=151.80.235.155"
-      device: ":/mnt/nfs/webgrab/config/siteini.pack"
+      device: ":/mnt/nfs/webgrab/config/sitepack"
   filebeat_data:
     driver_opts:
       type: "nfs"
