@@ -1,0 +1,27 @@
+version: "3.5"
+
+services:
+
+  xviewer:
+    image: synker/xviewer:${XVIEWER_VERSION:-latest}
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "5000:5000"
+    networks:
+      - ntw_front
+    deploy:
+      labels:
+      - "traefik.backend=xviewer"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=https"
+      - "traefik.frontend.rule=Host:xviewer.synker.ovh"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.port=5000"
+      - "traefik.enable=true"
+      restart_policy:
+        condition: on-failure
+        delay: 2m
+        window: 120s
+
