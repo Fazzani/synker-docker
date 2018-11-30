@@ -99,7 +99,7 @@ services:
       - ntw_front
 
   synkerdb:
-    image: postgres:${POSTGRES_VERSION:10-alpine}
+    image: postgres:${POSTGRES_VERSION:-10-alpine}
     ports:
       - "5432:5432"
     networks:
