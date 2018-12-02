@@ -16,3 +16,4 @@ notify:
   name: pushbullet
 http:
   api_password: !env_var PASSWORD default_password
+  base_url: domotic.synker.ovh:8123
