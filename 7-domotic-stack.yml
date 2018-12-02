@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
    homeassistant:
-    image: homeassistant/raspberrypi3-homeassistant
+    image: homeassistant/raspberrypi3-homeassistant:latest
     volumes:
       - homeassistant_config:/config
     networks:
