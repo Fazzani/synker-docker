@@ -1,3 +1,15 @@
+###  Global configuration  ###
+homeassistant:
+  name: Home
+  temperature_unit: C
+#introduction: # Show links to resources in log and frontend
+#sun:          # Track the sun
+updater:       # Checks for available updates
+frontend:      # Enables the frontend
+history:       # Enables support for tracking state changes over time.
+logbook:       # View all events in a logbook
+discovery:     # Discover some devices automatically
+conversation:  # Allows you to issue voice commands from the frontend
 notify:
   platform: pushbullet
   api_key: "o.p816re5uWoqrnoucaq44oErDwfj0VMKz"
