@@ -1,19 +1,20 @@
 version: "3.5"
 
 services:
-  media_server:
-    image: synker/synker-media-server:${MEDIA_SERVER_VERSION:-latest}
+   homeassistant:
+    image: homeassistant/raspberrypi3-homeassistant
+    volumes:
+      - homeassistant_config:/config
     networks:
       - ntw_front
     ports:
-      - "8000:8000"
-      - "1935:1935"
-      - "8084:8084"
+      - "8123:8123"
+    environment:
+      - TZ=Europe/Paris
+      - PASSWORD=passwd
     deploy:
       mode: replicated
       replicas: 1
-      restart_policy:
-        condition: on-failure
       update_config:
         failure_action: rollback
         parallelism: 1
@@ -21,20 +22,26 @@ services:
         order: start-first
       placement:
         constraints:
-          - node.labels.provider == ovh
-          - node.role==manager
+          - node.labels.hostname == rasp1
+          - node.role==worker
       labels:
-      - "traefik.tags=media"
-      - "traefik.backend=media_server"
+      - "traefik.tags=homeassistant"
+      - "traefik.backend=homeassistant"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.passHostHeader=true"
-      - "traefik.frontend.rule=Host:holo.synker.ovh"
+      - "traefik.frontend.rule=Host:domotic.synker.ovh"
       - "traefik.docker.network=ntw_front"
-      - "traefik.http.port=8084"
+      - "traefik.http.port=8123"
       - "traefik.enable=true"
- 
+volumes:
+  homeassistant_config:
+     driver_opts:
+      type: "nfs"
+      o: "addr=151.80.235.155,nolock,soft,rw"
+      device: ":/mnt/nfs/domotic/config"
+  
 networks:
   ntw_front:
     external: true

@@ -23,6 +23,7 @@ function set_folder_permission {
   sudo chmod 777 -R /mnt/nfs/postgres
   sudo chmod 777 -R /mnt/nfs/nginx-proxy
   sudo chmod 777 -R /mnt/nfs/traefik
+  sudo chmod 777 -R /mnt/nfs/domotic
   # sudo chmod 777 /mnt/nfs/emby
 }
 
@@ -65,6 +66,8 @@ function create_shares {
   sudo mkdir /mnt/nfs/nginx-proxy/log || true
   sudo mkdir /mnt/nfs/traefik || true
   sudo mkdir /mnt/nfs/traefik/log || true
+  sudo mkdir /mnt/nfs/domotic || true
+  sudo mkdir /mnt/nfs/domotic/config || true
 }
 
 set +e
@@ -93,6 +96,7 @@ yes | cp -rf nginx-proxy/favicon.ico /mnt/nfs/nginx-proxy/html
 
 yes | cp -rf ./configs/definitions.json /mnt/nfs/rabbitmq/config
 yes | cp -rf ./configs/rabbitmq.config /mnt/nfs/rabbitmq/config
+yes | cp -rf ./configs/homeassistant.yml /mnt/nfs/domotic/config
 # copy some logstash config
 # yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
 # yes | cp logstash/config/*.yml /mnt/nfs/logstash/config/
@@ -128,7 +132,7 @@ sudo docker stack deploy -c 4-elk-stack.yml elk
 sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
 sudo docker stack deploy -c 5-synker-stack.yml synker
 sudo docker stack deploy -c 6-xviewer-stack.yml xviewer
-sudo docker stack deploy -c 7-nginx-proxy-stack.yml proxy
+sudo docker stack deploy -c 7-domotic-stack.yml domotic
 #sudo docker stack deploy -c postgres-stack.yml postresql
 #sudo docker stack deploy -c ./others/others-stack.yml others
 

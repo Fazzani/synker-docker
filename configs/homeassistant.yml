@@ -1,0 +1,6 @@
+notify:
+  platform: pushbullet
+  api_key: "o.1234abcd"
+  name: pushbullet
+http:
+  api_password: !env_var PASSWORD default_password
