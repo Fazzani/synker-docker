@@ -33,7 +33,7 @@ services:
       - "traefik.frontend.passHostHeader=true"
       - "traefik.frontend.rule=Host:domotic.synker.ovh"
       - "traefik.docker.network=ntw_front"
-      - "traefik.http.port=8123"
+      - "traefik.port=8123"
       - "traefik.enable=true"
 volumes:
   homeassistant_config:
