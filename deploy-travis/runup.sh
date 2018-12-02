@@ -96,7 +96,7 @@ yes | cp -rf nginx-proxy/favicon.ico /mnt/nfs/nginx-proxy/html
 
 yes | cp -rf ./configs/definitions.json /mnt/nfs/rabbitmq/config
 yes | cp -rf ./configs/rabbitmq.config /mnt/nfs/rabbitmq/config
-yes | cp -rf ./configs/configuration.yml /mnt/nfs/domotic/config
+yes | cp -rf ./configs/configuration.yaml /mnt/nfs/domotic/config
 # copy some logstash config
 # yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
 # yes | cp logstash/config/*.yml /mnt/nfs/logstash/config/
