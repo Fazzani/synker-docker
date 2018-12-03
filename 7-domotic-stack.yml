@@ -27,7 +27,7 @@ services:
       - "traefik.tags=domotic"
 
   jeedom:
-    image: jeedom/jeedom
+    image: jeedom/jeedom:stable
     volumes:
       - jeedom_data:/var/www
     environment:
