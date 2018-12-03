@@ -27,10 +27,12 @@ services:
   jeedom:
     image: jeedom/jeedom:${JEEDOM_VERSION:-latest}
     volumes:
-      - jeedom_data:/var/www
+      - jeedom_data:/var/www/html
+    environment:
+      MYSQL_ROOT_PASSWORD: 'jeedom'
     ports:
-      - "8022:22"
-      - "8099:80"
+      - "9022:22"
+      - "9080:80"
     networks:
       - ntw_front
     deploy:
@@ -43,7 +45,7 @@ services:
         order: start-first
       placement:
         constraints:
-          - node.labels.hostname == rasp1
+          - node.labels.hostname==rasp1
           - node.role==worker
       labels:
       - "traefik.tags=jeedom"
@@ -54,7 +56,7 @@ services:
       - "traefik.frontend.passHostHeader=true"
       - "traefik.frontend.rule=Host:domotic.synker.ovh"
       - "traefik.docker.network=ntw_front"
-      - "traefik.port=8099"
+      - "traefik.port=9080"
       - "traefik.enable=true"
     depends_on:
       - db_jeedom
