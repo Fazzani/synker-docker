@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   mysql:
-    image: jsurf/rpi-mariadb
+    image: mariadb:10
     environment:
       MYSQL_ROOT_PASSWORD: 'jeedom'
       MYSQL_USER: 'jeedom'
@@ -22,7 +22,7 @@ services:
         order: start-first
       placement:
         constraints:
-          - node.labels.hostname==rasp1
+          - node.role==worker
       labels:
       - "traefik.tags=domotic"
 
