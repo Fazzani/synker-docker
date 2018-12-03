@@ -29,7 +29,7 @@ services:
   jeedom:
     image: jeedom/jeedom:stable
     volumes:
-      - jeedom_data:/var/www
+      - jeedom_data:/var/www/html
     environment:
       ROOT_PASSWORD: 'jeedom'
     ports:
