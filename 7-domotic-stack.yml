@@ -45,7 +45,6 @@ services:
         order: start-first
       placement:
         constraints:
-          - node.labels.hostname==rasp1
           - node.role==worker
       labels:
       - "traefik.tags=jeedom"
