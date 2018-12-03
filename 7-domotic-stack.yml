@@ -27,9 +27,9 @@ services:
       - "traefik.tags=domotic"
 
   jeedom:
-    image: codafog/jeedom-rpi
+    image: jeedom/jeedom
     volumes:
-      - jeedom_data:/var/www/html
+      - jeedom_data:/var/www
     environment:
       ROOT_PASSWORD: 'jeedom'
     ports:
