@@ -1,17 +1,38 @@
 version: "3.5"
 
 services:
-   homeassistant:
-    image: homeassistant/raspberrypi3-homeassistant:latest
+  db_jeedom:
+    image: mysql:${JEEDOM_DB_VERSION:-latest}
+    environment:
+      MYSQL_ROOT_PASSWORD: 'jeedom'
+      MYSQL_USER: 'jeedom'
+      MYSQL_PASS: 'jeedom'
     volumes:
-      - homeassistant_config:/config
+      - domotic_db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
     networks:
       - ntw_front
+    deploy:
+      mode: replicated
+      replicas: 1
+      update_config:
+        failure_action: rollback
+        parallelism: 1
+        delay: 180s
+        order: start-first
+      labels:
+      - "traefik.tags=jeedom"
+
+  jeedom:
+    image: jeedom/jeedom:${JEEDOM_VERSION:-latest}
+    volumes:
+      - jeedom_data:/var/www
     ports:
-      - "8123:8123"
-    environment:
-      - TZ=Europe/Paris
-      - PASSWORD=passwd
+      - "8022:22"
+      - "8099:80"
+    networks:
+      - ntw_front
     deploy:
       mode: replicated
       replicas: 1
@@ -25,23 +46,30 @@ services:
           - node.labels.hostname == rasp1
           - node.role==worker
       labels:
-      - "traefik.tags=homeassistant"
-      - "traefik.backend=homeassistant"
+      - "traefik.tags=jeedom"
+      - "traefik.backend=jeedom"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.passHostHeader=true"
       - "traefik.frontend.rule=Host:domotic.synker.ovh"
       - "traefik.docker.network=ntw_front"
-      - "traefik.port=8123"
+      - "traefik.port=8099"
       - "traefik.enable=true"
+    depends_on:
+      - db_jeedom
+
 volumes:
-  homeassistant_config:
+  jeedom_data:
      driver_opts:
       type: "nfs"
       o: "addr=151.80.235.155,nolock,soft,rw"
-      device: ":/mnt/nfs/domotic/config"
-  
+      device: ":/mnt/nfs/domotic/data"
+  domotic_db_data:
+     driver_opts:
+      type: "nfs"
+      o: "addr=151.80.235.155,nolock,soft,rw"
+      device: ":/mnt/nfs/domotic/db/data"
 networks:
   ntw_front:
     external: true

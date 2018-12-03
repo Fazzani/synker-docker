@@ -67,7 +67,9 @@ function create_shares {
   sudo mkdir /mnt/nfs/traefik || true
   sudo mkdir /mnt/nfs/traefik/log || true
   sudo mkdir /mnt/nfs/domotic || true
-  sudo mkdir /mnt/nfs/domotic/config || true
+  sudo mkdir /mnt/nfs/domotic/data || true
+  sudo mkdir /mnt/nfs/domotic/db || true
+  sudo mkdir /mnt/nfs/domotic/db/data || true
 }
 
 set +e
@@ -96,7 +98,6 @@ yes | cp -rf nginx-proxy/favicon.ico /mnt/nfs/nginx-proxy/html
 
 yes | cp -rf ./configs/definitions.json /mnt/nfs/rabbitmq/config
 yes | cp -rf ./configs/rabbitmq.config /mnt/nfs/rabbitmq/config
-yes | cp -rf ./configs/configuration.yaml /mnt/nfs/domotic/config
 # copy some logstash config
 # yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
 # yes | cp logstash/config/*.yml /mnt/nfs/logstash/config/
