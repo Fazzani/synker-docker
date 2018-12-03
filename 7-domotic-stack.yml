@@ -25,7 +25,7 @@ services:
       - "traefik.tags=jeedom"
 
   jeedom:
-    image: jeedom/jeedom:${JEEDOM_VERSION:-latest}
+    image: jeedom/jeedom:${JEEDOM_VERSION:-stable}
     volumes:
       - jeedom_data:/var/www/html
     environment:
