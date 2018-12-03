@@ -1,16 +1,15 @@
 version: "3.5"
 
 services:
-  db_jeedom:
-    image: mysql:${JEEDOM_DB_VERSION:-latest}
+  mysql:
+    image: hypriot/rpi-mysql
     environment:
       MYSQL_ROOT_PASSWORD: 'jeedom'
       MYSQL_USER: 'jeedom'
       MYSQL_PASS: 'jeedom'
+      TZ: 'Europe/Paris'
     volumes:
       - domotic_db_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
     networks:
       - ntw_front
     deploy:
@@ -21,15 +20,18 @@ services:
         parallelism: 1
         delay: 180s
         order: start-first
+      placement:
+        constraints:
+          - node.labels.hostname==rasp1
       labels:
-      - "traefik.tags=jeedom"
+      - "traefik.tags=domotic"
 
   jeedom:
-    image: jeedom/jeedom:${JEEDOM_VERSION:-stable}
+    image: codafog/jeedom-rpi
     volumes:
       - jeedom_data:/var/www/html
     environment:
-      MYSQL_ROOT_PASSWORD: 'jeedom'
+      ROOT_PASSWORD: 'jeedom'
     ports:
       - "9022:22"
       - "9080:80"
@@ -45,9 +47,10 @@ services:
         order: start-first
       placement:
         constraints:
+          - node.labels.hostname==rasp1
           - node.role==worker
       labels:
-      - "traefik.tags=jeedom"
+      - "traefik.tags=domotic"
       - "traefik.backend=jeedom"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
@@ -58,7 +61,7 @@ services:
       - "traefik.port=9080"
       - "traefik.enable=true"
     depends_on:
-      - db_jeedom
+      - mysql
 
 volumes:
   jeedom_data:
