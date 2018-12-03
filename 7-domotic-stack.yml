@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   mysql:
-    image: hypriot/rpi-mysql
+    image: jsurf/rpi-mariadb
     environment:
       MYSQL_ROOT_PASSWORD: 'jeedom'
       MYSQL_USER: 'jeedom'
