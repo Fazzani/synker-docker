@@ -65,15 +65,15 @@ services:
 
 volumes:
   jeedom_data:
-     driver_opts:
+    driver_opts:
       type: "nfs"
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/domotic/data"
   domotic_db_data:
     driver_opts:
-     type: "nfs"
-     o: "addr=151.80.235.155,nolock,soft,rw"
-     device: ":/mnt/nfs/domotic/db/data"
+      type: "nfs"
+      o: "addr=151.80.235.155,nolock,soft,rw"
+      device: ":/mnt/nfs/domotic/db/data"
 networks:
   ntw_front:
     external: true
