@@ -9,7 +9,7 @@ services:
       MYSQL_PASS: 'jeedom'
       TZ: 'Europe/Paris'
     volumes:
-      - domotic_db_data: /var/lib/mysql
+      - domotic_db_data:/var/lib/mysql
     networks:
       - ntw_front
     deploy:
