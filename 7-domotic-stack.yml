@@ -1,7 +1,7 @@
 version: "3.5"
 
 services:
-  mysql:
+  db:
     image: mariadb:10
     environment:
       MYSQL_ROOT_PASSWORD: 'jeedom'
@@ -9,7 +9,7 @@ services:
       MYSQL_PASS: 'jeedom'
       TZ: 'Europe/Paris'
     volumes:
-      - domotic_db_data:/var/lib/mysql
+      - domotic_db_data: /var/lib/mysql
     networks:
       - ntw_front
     deploy:
@@ -27,9 +27,9 @@ services:
       - "traefik.tags=domotic"
 
   jeedom:
-    image: jeedom/jeedom:stable
+    image: jeedom/jeedom:master
     volumes:
-      - jeedom_data:/var/www/html
+      - jeedom_data:/var/www
     environment:
       ROOT_PASSWORD: 'jeedom'
     ports:
@@ -61,7 +61,7 @@ services:
       - "traefik.port=9080"
       - "traefik.enable=true"
     depends_on:
-      - mysql
+      - db
 
 volumes:
   jeedom_data:
@@ -70,10 +70,10 @@ volumes:
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/domotic/data"
   domotic_db_data:
-     driver_opts:
-      type: "nfs"
-      o: "addr=151.80.235.155,nolock,soft,rw"
-      device: ":/mnt/nfs/domotic/db/data"
+    driver_opts:
+     type: "nfs"
+     o: "addr=151.80.235.155,nolock,soft,rw"
+     device: ":/mnt/nfs/domotic/db/data"
 networks:
   ntw_front:
     external: true
