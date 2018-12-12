@@ -39,6 +39,7 @@ services:
         condition: on-failure
         delay: 2m
         window: 120s
+        max_attempts: 5
     depends_on:
       - webapi
 
