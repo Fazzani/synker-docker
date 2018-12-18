@@ -118,6 +118,14 @@ travis encrypt-file secret.tar --add
 ssh ansible@ovh1 "cat  >> ~/.ssh/authorized_keys" < ../synker-docker/deploy_rsa.pub
 ```
 
+## READONLY on all files on linux
+
+this error occured with nfs share
+
+```sh
+sudo mount / -o remount,rw
+```
+
 ## NOTES
 
 >To backup mysql database we have to set `MYSQL_RESET_DATABASE` to true in travis build
