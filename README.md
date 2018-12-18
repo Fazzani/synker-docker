@@ -103,7 +103,8 @@ ssh ansible@ovh1 "sudo docker node update --label-add size=large --label-add pro
 sudo docker node update --label-add size=medium --label-add provider=ovh vps507934 &&
 sudo docker node update --label-add size=small --label-add provider=arub arub1 &&
 sudo docker node update --label-add size=small --label-add provider=arub arub2 &&
-sudo docker node update --label-add size=small --label-add provider=arub arub3"
+sudo docker node update --label-add size=small --label-add provider=arub arub3 &&
+sudo docker node update --label-add size=small --label-add provider=local raspberrypi"
 
 ### travis encrypt file
 

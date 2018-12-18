@@ -138,7 +138,7 @@ services:
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
       - "traefik.frontend.entryPoints=http,https"
-      - "traefik.frontend.rule=Host:admin.synker.ovh"
+      - "traefik.frontend.rule=Host:adminer.synker.ovh"
       - "traefik.docker.network=ntw_front"
       - "traefik.port=8080"
       - "traefik.enable=true"
