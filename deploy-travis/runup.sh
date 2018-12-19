@@ -50,6 +50,7 @@ function create_shares {
   sudo mkdir /mnt/nfs/filebeat/logs_usr_share || true
   sudo mkdir /mnt/nfs/webgrab || true
   sudo mkdir /mnt/nfs/webgrab/config || true
+  sudo mkdir /mnt/nfs/webgrab/config/sitepack || true
   sudo mkdir /mnt/nfs/webgrab/data || true
   sudo mkdir /mnt/nfs/webgrab/log || true
   #sudo mkdir /mnt/nfs/logstash || true
