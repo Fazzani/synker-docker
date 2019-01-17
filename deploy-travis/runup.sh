@@ -24,6 +24,7 @@ function set_folder_permission {
   sudo chmod 777 -R /mnt/nfs/nginx-proxy
   sudo chmod 777 -R /mnt/nfs/traefik
   sudo chmod 777 -R /mnt/nfs/domotic
+  sudo chmod 777 -R /mnt/nfs/mongodb
   # sudo chmod 777 /mnt/nfs/emby
 }
 
