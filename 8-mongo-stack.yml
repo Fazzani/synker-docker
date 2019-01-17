@@ -1,0 +1,67 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:4.0
+    networks:
+      - ntw_front
+    volumes:
+      - mongodb_data:/data/db
+    deploy:
+      mode: replicated
+      replicas: 1
+      update_config:
+        failure_action: rollback
+        parallelism: 1
+        delay: 180s
+        order: start-first
+      placement:
+        constraints:
+          - node.labels.size == large
+  mongo-express:
+    image: mongo-express:0.49
+    networks:
+      - ntw_front
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=${MONGO_ROOT_USER}
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - ME_CONFIG_BASICAUTH_USERNAME=${MONGOEXPRESS_LOGIN}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${MONGOEXPRESS_PASSWORD}
+    depends_on:
+      - mongo
+    ports:
+      - '8888:8081'
+    deploy:
+      mode: replicated
+      replicas: 1
+      update_config:
+        failure_action: rollback
+        parallelism: 1
+        delay: 180s
+        order: start-first
+      placement:
+        constraints:
+          - node.role==worker
+      labels:
+      - "traefik.tags=db"
+      - "traefik.backend=mongo-express"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.passHostHeader=true"
+      - "traefik.frontend.rule=Host:mongo.synker.ovh"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.port=8888"
+      - "traefik.enable=true"
+
+volumes:
+  mongodb_data:
+    driver_opts:
+      type: "nfs"
+      o: "addr=151.80.235.155,nolock,soft,rw"
+      device: ":/mnt/nfs/mongodb/data"
+networks:
+  ntw_front:
+    external: true

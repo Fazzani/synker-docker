@@ -71,6 +71,8 @@ function create_shares {
   sudo mkdir /mnt/nfs/domotic/data || true
   sudo mkdir /mnt/nfs/domotic/db || true
   sudo mkdir /mnt/nfs/domotic/db/data || true
+  sudo mkdir /mnt/nfs/domotic/mongodb || true
+  sudo mkdir /mnt/nfs/domotic/mongodb/data || true
 }
 
 set +e
@@ -134,6 +136,7 @@ sudo docker stack deploy -c 4-elk-stack.yml elk
 sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
 sudo docker stack deploy -c 5-synker-stack.yml synker
 sudo docker stack deploy -c 6-xviewer-stack.yml xviewer
+sudo docker stack deploy -c 8-mongo-stack.yml mongo
 # sudo docker stack deploy -c 7-domotic-stack.yml --resolve-image never domotic
 #sudo docker stack deploy -c postgres-stack.yml postresql
 #sudo docker stack deploy -c ./others/others-stack.yml others

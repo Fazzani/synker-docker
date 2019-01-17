@@ -8,3 +8,4 @@ deploy_rsa.pub
 *.sql
 .vscode
 synker/appsettings.json
+data/*
