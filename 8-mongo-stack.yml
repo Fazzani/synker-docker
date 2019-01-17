@@ -56,7 +56,7 @@ services:
       - "traefik.frontend.passHostHeader=true"
       - "traefik.frontend.rule=Host:mongo.synker.ovh"
       - "traefik.docker.network=ntw_front"
-      - "traefik.port=8888"
+      - "traefik.port=8081"
       - "traefik.enable=true"
 
 volumes:
