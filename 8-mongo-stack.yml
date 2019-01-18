@@ -7,9 +7,13 @@ services:
       - ntw_front
     volumes:
       - mongodb_data:/data/db
+      - ./script-folder/:/docker-entrypoint-initdb.d
     ports:
       - '27017:27017'
     environment:
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-synkerdb}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-password}
+      DATABASE_USERNAME: ${DATABASE_USERNAME:-pl}
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
     deploy:
