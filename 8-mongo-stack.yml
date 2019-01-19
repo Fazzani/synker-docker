@@ -7,7 +7,7 @@ services:
       - ntw_front
     volumes:
       - mongodb_data:/data/db
-      - ./script-folder/:/docker-entrypoint-initdb.d
+      - mongodb_config:/docker-entrypoint-initdb.d
     ports:
       - '27017:27017'
     environment:
@@ -78,6 +78,11 @@ volumes:
       type: "nfs"
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/mongodb/data"
+  mongodb_config:
+    driver_opts:
+      type: "nfs"
+      o: "addr=151.80.235.155,nolock,soft,rw"
+      device: ":/mnt/nfs/mongodb/config"
 networks:
   ntw_front:
     external: true
