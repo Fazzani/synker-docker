@@ -26,7 +26,14 @@ services:
         order: start-first
       placement:
         constraints:
-          - node.labels.size == large
+          - node.labels.size == medium
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 2G
+        reservations:
+          cpus: '0.1'
+          memory: 400M
   mongo-express:
     image: mongo-express:0.49
     networks:
