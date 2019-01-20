@@ -72,9 +72,9 @@ function create_shares {
   sudo mkdir /mnt/nfs/domotic/data || true
   sudo mkdir /mnt/nfs/domotic/db || true
   sudo mkdir /mnt/nfs/domotic/db/data || true
-  sudo mkdir /mnt/nfs/mongodb || true
-  sudo mkdir /mnt/nfs/mongodb/data || true
-  sudo mkdir /mnt/nfs/mongodb/config || true
+  # sudo mkdir /mnt/nfs/mongodb || true
+  # sudo mkdir /mnt/nfs/mongodb/data || true
+  # sudo mkdir /mnt/nfs/mongodb/config || true
 }
 
 set +e
