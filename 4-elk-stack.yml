@@ -9,10 +9,12 @@ services:
       - discovery.zen.minimum_master_nodes=1
       #- ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD}
       - node.name=elasticsearch
+      - node.ingest=true
       - script.painless.regex.enabled=true
       - http.cors.enabled=true
       - http.cors.allow-origin="*"
-      - node.ingest=true
+      - http.cors.allow-credentials=true
+      - http.cors.allow-headers=X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization, Access-Control-Allow-Headers, Accept
       #- xpack.security.enabled=false
       #- xpack.monitoring.enabled=false
       #- xpack.ml.enabled=false
