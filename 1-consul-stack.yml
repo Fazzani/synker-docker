@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   consul:
-    image: consul:${CONSUL_VERSION:-1.0.6}
+    image: consul:${CONSUL_VERSION:-1.4.1}
     command: agent -server -bootstrap-expect=1 -ui -disable-host-node-id 
     volumes:
       - consul_data:/consul/data
