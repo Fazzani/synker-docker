@@ -32,7 +32,7 @@ services:
       - "--acme.domains=synker.ovh"
       - "--acme.storage=etc/traefik/acme/acme.json"
       - "--acme.entryPoint=https"
-      #- "--acme.httpChallenge.entryPoint=http"
+      - "--acme.httpChallenge.entryPoint=http"
       # - "--acme.dnschallenge"
       # - "--acme.dnsChallenge.provider=ovh"
       # - "--acme.dnsChallenge.delayBeforeCheck=0"  
@@ -49,16 +49,16 @@ services:
       - "--consul"
       - "--consul.endpoint=consul.synker.ovh:8500"
       - "--consul.prefix=traefik"
-      - "--consulcatalog=true"
-      - "--consulcatalog.endpoint=consul.synker.ovh:8500"
-      - "--consulcatalog.constraints=tag==public-*"
+      # - "--consulcatalog=true"
+      # - "--consulcatalog.endpoint=consul.synker.ovh:8500"
+      # - "--consulcatalog.constraints=tag==public-*"
     networks:
       - ntw_front
-    environment:
-      - OVH_ENDPOINT=${OVH_ENDPOINT:-ovh-eu}
-      - OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY:-jEncYct1dwXs3Muq}
-      - OVH_APPLICATION_SECRET=${OVH_APPLICATION_SECRET:-MvW4JHaARs5IoLxvajIQ6L2cMkh7gqgm}
-      - OVH_CONSUMER_KEY=${OVH_CONSUMER_KEY:-q9J6pT9IDHUL0YZx1R3aYYwGK3BC07j1}
+    # environment:
+    #   - OVH_ENDPOINT=${OVH_ENDPOINT:-ovh-eu}
+    #   - OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY:-jEncYct1dwXs3Muq}
+    #   - OVH_APPLICATION_SECRET=${OVH_APPLICATION_SECRET:-MvW4JHaARs5IoLxvajIQ6L2cMkh7gqgm}
+    #   - OVH_CONSUMER_KEY=${OVH_CONSUMER_KEY:-q9J6pT9IDHUL0YZx1R3aYYwGK3BC07j1}
     deploy:
       restart_policy:
         condition: on-failure
