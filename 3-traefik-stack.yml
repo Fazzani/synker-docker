@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   traefik:
-    image: traefik:${TRAEFIK_VERSION:-1.7}
+    image: traefik:${TRAEFIK_VERSION:-1.7-alpine}
     ports:
       - 80:80
       - 443:443
@@ -11,20 +11,20 @@ services:
     networks:
       - ntw_front
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - traefik_log:/log/traefik
-    command: --consul --consul.endpoint=consul.synker.ovh:8500 --consul.prefix=traefik
-    # environment:
-    #   - OVH_ENDPOINT=${OVH_ENDPOINT:-ovh-eu}
-    #   - OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY:-jEncYct1dwXs3Muq}
-    #   - OVH_APPLICATION_SECRET=${OVH_APPLICATION_SECRET:-MvW4JHaARs5IoLxvajIQ6L2cMkh7gqgm}
-    #   - OVH_CONSUMER_KEY=${OVH_CONSUMER_KEY:-q9J6pT9IDHUL0YZx1R3aYYwGK3BC07j1}
+    - /var/run/docker.sock:/var/run/docker.sock
+    # - traefik_log:/log/traefik
+    command: --consul --consul.watch --consul.endpoint=consul.synker.ovh:8500 --consul.prefix=traefik
+    environment:
+      - OVH_ENDPOINT=${OVH_ENDPOINT:-ovh-eu}
+      - OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY:-jEncYct1dwXs3Muq}
+      - OVH_APPLICATION_SECRET=${OVH_APPLICATION_SECRET:-MvW4JHaARs5IoLxvajIQ6L2cMkh7gqgm}
+      - OVH_CONSUMER_KEY=${OVH_CONSUMER_KEY:-q9J6pT9IDHUL0YZx1R3aYYwGK3BC07j1}
     deploy:
       labels:
       - "traefik.port=8080"
       - "traefik.tags=monitoring"
       - "traefik.backend.loadbalancer.stickiness=true"
-      # - "traefik.frontend.auth.basic=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
+      - "traefik.frontend.auth.basic=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
       - "traefik.frontend.passHostHeader=true"
       - "traefik.frontend.rule=Host:traefik.synker.ovh"
       - "traefik.docker.network=ntw_front"
