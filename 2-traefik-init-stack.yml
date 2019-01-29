@@ -5,7 +5,7 @@ services:
   traefik_init:
     image: traefik:${TRAEFIK_VERSION:-1.7}
     command:
-      - "traefik"
+      #- "traefik"
       - "storeconfig"
       - "--api"
       - "--debug"
