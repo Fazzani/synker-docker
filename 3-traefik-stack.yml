@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   traefik:
-    image: traefik:${TRAEFIK_VERSION:-1.5}
+    image: traefik:${TRAEFIK_VERSION:-1.7-alpine}
     ports:
       - 80:80
       - 443:443
@@ -13,7 +13,7 @@ services:
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     - traefik_log:/log/traefik
-    command: --consul --consul.watch --consul.endpoint=consul.synker.ovh:8500
+    command: --consul --consul.watch --consul.endpoint=consul.synker.ovh:8500 --consul.prefix=traefik
     environment:
       - OVH_ENDPOINT=${OVH_ENDPOINT:-ovh-eu}
       - OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY:-jEncYct1dwXs3Muq}
