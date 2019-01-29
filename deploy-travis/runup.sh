@@ -134,9 +134,9 @@ export SYNKER_VERSION=$SYNKER_VERSION
 echo "MONGOEXPRESS_LOGIN => ${MONGOEXPRESS_LOGIN}"
 
 sudo docker stack deploy -c 1-consul-stack.yml sd
-sleep 25
-sudo docker stack deploy -c 2-traefik-init-stack.yml traefik-init
 sleep 15
+sudo docker stack deploy -c 2-traefik-init-stack.yml traefik-init
+sleep 10
 sudo docker stack deploy -c 3-traefik-stack.yml lb
 sudo docker stack deploy -c 4-elk-stack.yml elk
 sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
