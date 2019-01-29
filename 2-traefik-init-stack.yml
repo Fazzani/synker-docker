@@ -33,9 +33,9 @@ services:
       - "--acme.storage=etc/traefik/acme/acme.json"
       - "--acme.entryPoint=https"
       #- "--acme.httpChallenge.entryPoint=http"
-      - "--acme.dnschallenge"
-      - "--acme.dnsChallenge.provider=ovh"
-      - "--acme.dnsChallenge.delayBeforeCheck=0"
+      # - "--acme.dnschallenge"
+      # - "--acme.dnsChallenge.provider=ovh"
+      # - "--acme.dnsChallenge.delayBeforeCheck=0"  
       - "--acme.acmelogging=true"
       - "--acme.OnHostRule=true"
       - "--acme.onDemand=false"
@@ -51,7 +51,7 @@ services:
       - "--consul.prefix=traefik"
       - --consulcatalog=true
       - --consulcatalog.endpoint=consul.synker.ovh:8500
-      - --consulcatalog.constraints="tag==public
+      - --consulcatalog.constraints="tag==public"
     networks:
       - ntw_front
     environment:
