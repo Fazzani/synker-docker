@@ -11,7 +11,7 @@ services:
     networks:
       - ntw_front
     volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
     # - traefik_log:/log/traefik
     command: --consul --consul.watch --consul.endpoint=consul.synker.ovh:8500 --consul.prefix=traefik
     environment:
