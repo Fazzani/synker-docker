@@ -7,7 +7,7 @@ services:
     command:
       - "traefik"
       - "storeconfig"
-      # - "--api"
+      - "--api"
       - "--debug"
       - "--logLevel=INFO"
       - "--accessLog.filePath=/log/traefik/access_log.json"
