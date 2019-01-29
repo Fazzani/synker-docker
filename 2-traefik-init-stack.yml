@@ -49,9 +49,9 @@ services:
       - "--consul"
       - "--consul.endpoint=consul.synker.ovh:8500"
       - "--consul.prefix=traefik"
-      #- --consulcatalog=true
-      #- --consulcatalog.endpoint=consul.synker.ovh:8500
-      # - --consulcatalog.constraints="tag==public
+      - --consulcatalog=true
+      - --consulcatalog.endpoint=consul.synker.ovh:8500
+      - --consulcatalog.constraints="tag==public
     networks:
       - ntw_front
     environment:
