@@ -5,11 +5,10 @@ services:
   traefik_init:
     image: traefik:${TRAEFIK_VERSION:-1.7}
     command:
-      #- "traefik"
       - "storeconfig"
-      - "--api"
+      #- "--api"
       - "--debug"
-      - "--logLevel=DEBUG"
+      - "--logLevel=INFO"
       - "--accessLog.filePath=/log/traefik/access_log.json"
       - "--accessLog.format=json"
       - "--traefikLog.filePath=/log/traefik/log.json"
@@ -32,10 +31,10 @@ services:
       - "--acme.domains=synker.ovh"
       - "--acme.storage=etc/traefik/acme/acme.json"
       - "--acme.entryPoint=https"
-      - "--acme.httpChallenge.entryPoint=http"
-      # - "--acme.dnschallenge"
-      # - "--acme.dnsChallenge.provider=ovh"
-      # - "--acme.dnsChallenge.delayBeforeCheck=0"  
+      #- "--acme.httpChallenge.entryPoint=http"
+      - "--acme.dnschallenge"
+      - "--acme.dnsChallenge.provider=ovh"
+      - "--acme.dnsChallenge.delayBeforeCheck=0"  
       - "--acme.acmelogging=true"
       - "--acme.OnHostRule=true"
       - "--acme.onDemand=false"
@@ -54,11 +53,6 @@ services:
       # - "--consulcatalog.constraints=tag==public-*"
     networks:
       - ntw_front
-    # environment:
-    #   - OVH_ENDPOINT=${OVH_ENDPOINT:-ovh-eu}
-    #   - OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY:-jEncYct1dwXs3Muq}
-    #   - OVH_APPLICATION_SECRET=${OVH_APPLICATION_SECRET:-MvW4JHaARs5IoLxvajIQ6L2cMkh7gqgm}
-    #   - OVH_CONSUMER_KEY=${OVH_CONSUMER_KEY:-q9J6pT9IDHUL0YZx1R3aYYwGK3BC07j1}
     deploy:
       restart_policy:
         condition: on-failure
