@@ -9,7 +9,7 @@ services:
       - "storeconfig"
       - "--api"
       - "--debug"
-      - "--logLevel=INFO"
+      - "--logLevel=DEBUG"
       - "--accessLog.filePath=/log/traefik/access_log.json"
       - "--accessLog.format=json"
       - "--traefikLog.filePath=/log/traefik/log.json"
