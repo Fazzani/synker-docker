@@ -6,7 +6,7 @@ services:
     image: traefik:${TRAEFIK_VERSION:-1.7}
     command:
       - "storeconfig"
-      - "--logLevel=DEBUG"
+      - "--logLevel=INFO"
       - "--accessLog.filePath=/log/traefik/access_log.json"
       - "--accessLog.format=json"
       - "--traefikLog.filePath=/log/traefik/log.json"
@@ -23,7 +23,7 @@ services:
       - "--entrypoints=Name:https Address::443 TLS Compress:true ProxyProtocol:true"
       - "--defaultentrypoints=http,https"
       - "--acme"
-      - "--acme.domains=synker.ovh,api.synker.ovh,visu.synker.ovh,kibana.synker.ovh,elastic.synker.ovh,rabbitmq.synker.ovh,consul.synker.ovh,adminer.synker.ovh,media.synker.ovh"
+      - "--acme.domains=synker.ovh,api.synker.ovh,visu.synker.ovh,kibana.synker.ovh,elastic.synker.ovh,rabbitmq.synker.ovh,consul.synker.ovh,adminer.synker.ovh,media.synker.ovh,holo.synker.ovh,xviewer.synker.ovh"
       # - "--acme.domains=*.synker.ovh"
       # - "--acme.domains=synker.ovh"
       - "--acme.storage=etc/traefik/acme/acme.json"
