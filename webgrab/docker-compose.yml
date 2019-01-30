@@ -47,7 +47,7 @@ services:
       # - /var/log/audit/:/var/log/audit/:ro
     # disable strict permission checks
     configs:
-     - source: fb_config
+     - source: fb_config2
        target: /usr/share/filebeat/filebeat.yml
     networks:
       - ntw_front
@@ -111,5 +111,5 @@ networks:
     external: true
 
 configs:
-  fb_config:
+  fb_config2:
     file: filebeat-docker.yml
