@@ -3,7 +3,7 @@ version: "3.3"
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:${TAG:-6}
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:${TAG:-6.5.4}
     environment:
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
       - discovery.zen.minimum_master_nodes=1
@@ -51,7 +51,7 @@ services:
           - node.labels.size == large
 
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:${TAG:-6}
+    image: docker.elastic.co/kibana/kibana-oss:${TAG:-6-5.4}
     ports:
       - 5601
     environment:
