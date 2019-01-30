@@ -51,7 +51,7 @@ services:
           - node.labels.size == large
 
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:${TAG:-6.3.0}
+    image: docker.elastic.co/kibana/kibana-oss:${TAG:-6}
     ports:
       - 5601
     environment:
