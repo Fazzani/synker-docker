@@ -65,7 +65,7 @@ services:
        - "traefik.backend=kibana"
        - "traefik.frontend.rule=Host:kibana.synker.ovh"
        - "traefik.frontend.entryPoints=http,https"
-       - "traefik.frontend.auth.basic=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
+       - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
        - "traefik.backend.loadbalancer.swarm=true"
        - "traefik.backend.loadbalancer.method=drr"
        - "traefik.enable=true"

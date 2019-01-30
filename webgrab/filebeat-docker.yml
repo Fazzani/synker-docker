@@ -14,6 +14,14 @@ filebeat.inputs:
 #   multiline.pattern: "^\t|^[[:space:]]+(at|...)|^Caused by:"
 #   multiline.match: after
 - type: log
+  paths:
+  - /var/log/traefik/*.json
+  json.keys_under_root: true
+  json.add_error_key: true
+  fields_under_root: true
+  fields:
+    tags: ['beats','json','traefik']
+- type: log
  # Change to true to enable this input configuration.
   enabled: true
   paths:
@@ -21,7 +29,7 @@ filebeat.inputs:
   fields:
     type: "sitepack"
   fields_under_root: true
-  tags: ["sitepack"]
+  tags: ['sitepack', 'beats']
   tail_files: false
   scan_frequency: 30s
   pipeline: "sitepack_pipeline"

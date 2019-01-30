@@ -71,7 +71,7 @@ services:
       - "traefik.docker.network=ntw_front"
       - "traefik.port=8081"
       - "traefik.enable=true"
-      - "traefik.frontend.auth.basic=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
+      - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
 volumes:
   mongodb_data:
     driver_opts:
