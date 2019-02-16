@@ -24,7 +24,7 @@ services:
       - "traefik.frontend.rule=Host:adminidp.synker.ovh"
       # - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
       - "traefik.docker.network=ntw_front"
-      - "traefik.port=8187"
+      - "traefik.port=80"
       - "traefik.enable=true"
       replicas: 1
       update_config:
@@ -58,7 +58,7 @@ services:
       - "traefik.frontend.rule=Host:idp.synker.ovh"
       # - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
       - "traefik.docker.network=ntw_front"
-      - "traefik.port=8020"
+      - "traefik.port=80"
       - "traefik.enable=true"
       replicas: 1
       update_config:
