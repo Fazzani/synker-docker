@@ -20,6 +20,7 @@ docker stack rm webgrab || true; echo; sleep 1;
 docker stack rm synker || true; echo; sleep 1;
 docker stack rm others || true; echo; sleep 1;
 docker stack rm proxy || true; echo; sleep 1;
+docker stack rm idp || true; echo; sleep 1;
 
 log "Remove networks ..."
 docker network rm ntw_front

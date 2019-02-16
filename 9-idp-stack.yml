@@ -1,0 +1,78 @@
+version: "3.5"
+
+services:
+  admin:
+    image: synker/adminidp
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    configs:
+      - source: adminidp_config
+        target: /app/appsettings.Production.json
+        mode: 0444
+    ports:
+      - "8021:80"
+    networks:
+      - ntw_front
+    deploy:
+      labels:
+      - "traefik.backend=admin"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:adminidp.synker.ovh"
+      - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.port=8021"
+      - "traefik.enable=true"
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+        order: start-first
+      restart_policy:
+        condition: on-failure
+        delay: 2m
+        window: 120s
+  idp:
+    image: synker/idp
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    configs:
+      - source: idp_config
+        target: /app/appsettings.Production.json
+        mode: 0444
+    ports:
+      - "8020:80"
+    networks:
+      - ntw_front
+    deploy:
+      labels:
+      - "traefik.backend=idp"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:idp.synker.ovh"
+      - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.port=8020"
+      - "traefik.enable=true"
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+        order: start-first
+      restart_policy:
+        condition: on-failure
+        delay: 2m
+        window: 120s
+configs:
+  idp_config:
+    file: ./synker/appsettings.idp.json
+  adminidp_config:
+    file: ./synker/appsettings.adminidp.json
+
+networks:
+  ntw_front:
+    external: true
