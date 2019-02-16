@@ -3,14 +3,16 @@ version: "3.5"
 services:
   admin:
     image: synker/adminidp
+    depends_on:
+      - idp
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
-      - source: adminidp_config2
+      - source: adminidp_config
         target: /app/appsettings.Production.json
         mode: 0444
     ports:
-      - "8021:80"
+      - "8187:80"
     networks:
       - ntw_front
     deploy:
@@ -22,7 +24,7 @@ services:
       - "traefik.frontend.rule=Host:adminidp.synker.ovh"
       - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
       - "traefik.docker.network=ntw_front"
-      - "traefik.port=8021"
+      - "traefik.port=8187"
       - "traefik.enable=true"
       replicas: 1
       update_config:
@@ -39,11 +41,12 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
-      - source: idp_config2
+      - source: idp_config
         target: /app/appsettings.Production.json
         mode: 0444
     ports:
       - "8020:80"
+      - "8043:443"
     networks:
       - ntw_front
     deploy:
@@ -68,9 +71,9 @@ services:
         delay: 2m
         window: 120s
 configs:
-  idp_config2:
+  idp_config:
     file: ./synker/appsettings.idp.json
-  adminidp_config2:
+  adminidp_config:
     file: ./synker/appsettings.adminidp.json
 
 networks:
