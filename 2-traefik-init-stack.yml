@@ -19,7 +19,7 @@ services:
       # - "--entrypoints=Name:http Address::80 ProxyProtocol:true Compress:true Auth.Basic.Users:admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
       # - "--entrypoints=Name:https Address::443 TLS Compress:true ProxyProtocol:true Auth.Basic.Users:admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
       # - "--entrypoints=Name:http Address::80 ProxyProtocol:true Compress:true Redirect.EntryPoint:https"
-      - "--entrypoints=Name:http Address::80 ProxyProtocol:true Compress:true Redirect.EntryPoint:https"
+      - "--entrypoints=Name:http Address::80 ProxyProtocol:true Compress:true"
       - "--entrypoints=Name:https Address::443 TLS Compress:true ProxyProtocol:true"
       - "--defaultentrypoints=http,https"
       - "--acme"
