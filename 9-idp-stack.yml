@@ -8,7 +8,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
-      - source: adminidp_config
+      - source: adminidp_config2
         target: /app/appsettings.Production.json
         mode: 0444
     ports:
@@ -41,7 +41,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
-      - source: idp_config
+      - source: idp_config2
         target: /app/appsettings.Production.json
         mode: 0444
     ports:
@@ -71,9 +71,9 @@ services:
         delay: 2m
         window: 120s
 configs:
-  idp_config:
+  idp_config2:
     file: ./synker/appsettings.idp.json
-  adminidp_config:
+  adminidp_config2:
     file: ./synker/appsettings.adminidp.json
 
 networks:
