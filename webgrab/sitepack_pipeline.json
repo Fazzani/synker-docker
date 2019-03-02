@@ -13,7 +13,7 @@
     {
       "set": {
         "field": "_id",
-        "value": "{{_source.site}}-_-{{_source.xmltv_id}}"
+        "value": "{{_source.site}}-_-{{_source.site_id}}"
       }
     },
     {
