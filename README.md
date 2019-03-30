@@ -111,7 +111,7 @@ sudo docker node update --label-add size=small --label-add provider=local raspbe
 In bash windows
 
 ```sh
-cd /mnt/c/Users/Heni/Source/Repos/synker-docker
+cd /mnt/c/Users/heni.fazzani/Documents/GitHub/synker-docker
 tar cvf secret.tar ./synker/* deploy_rsa .env
 travis encrypt-file secret.tar --add
 

@@ -156,7 +156,7 @@ sudo docker system prune -f
 # Restoring maridb data 
 # Must be running on mariadb host container
 sleep 15
-log "add sitepack.ini pipeline to elasticsearch"
+log "Updating sitepack.ini pipeline..."
 curl -k --insecure -H 'Content-Type: application/json' -H 'Accept: application/json' -XPUT 'https://elastic.synker.ovh/_ingest/pipeline/sitepack_pipeline' -d "@webgrab/sitepack_pipeline.json"
 
 if [ "$MYSQL_RESET_DATABASE" = true ] ; then
