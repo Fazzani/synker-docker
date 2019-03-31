@@ -8,7 +8,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:56801
     configs:
-      - source: webclient_config
+      - source: webclient_config4
         target: /app/appsettings.Production.json
         mode: 0444
     ports:
@@ -27,7 +27,7 @@ services:
       - "traefik.port=56801"
       - "traefik.enable=true"
       replicas: 2
-      update_config:
+      update_config4:
         parallelism: 1
         delay: 10s
         failure_action: rollback
@@ -48,7 +48,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
-      - source: webapi_config
+      - source: webapi_config4
         target: /app/appsettings.Production.json
         mode: 0444
     ports:
@@ -67,7 +67,7 @@ services:
       - "traefik.port=56800"
       - "traefik.enable=true"
       replicas: 2
-      update_config:
+      update_config4:
         parallelism: 1
         delay: 10s
         failure_action: rollback
@@ -85,7 +85,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     configs:
-      - source: batch_config
+      - source: batch_config4
         target: /app/appsettings.Production.json
         mode: 0444
     deploy:
@@ -117,7 +117,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-      update_config:
+      update_config4:
         failure_action: rollback
         parallelism: 1
         delay: 180s
@@ -172,9 +172,9 @@ networks:
     external: true
 
 configs:
-  webapi_config:
+  webapi_config4:
     file: ./synker/appsettings.webapi.json
-  webclient_config:
+  webclient_config4:
     file: ./synker/appsettings.webclient.json
-  batch_config:
+  batch_config4:
     file: ./synker/appsettings.json
