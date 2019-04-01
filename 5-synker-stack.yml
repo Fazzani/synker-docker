@@ -27,7 +27,7 @@ services:
       - "traefik.port=56801"
       - "traefik.enable=true"
       replicas: 2
-      update_config.1:
+      update_config:
         parallelism: 1
         delay: 10s
         failure_action: rollback
@@ -67,7 +67,7 @@ services:
       - "traefik.port=56800"
       - "traefik.enable=true"
       replicas: 2
-      update_config.1:
+      update_config:
         parallelism: 1
         delay: 10s
         failure_action: rollback
@@ -117,7 +117,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-      update_config.1:
+      update_config:
         failure_action: rollback
         parallelism: 1
         delay: 180s
