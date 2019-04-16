@@ -167,6 +167,9 @@ networks:
   ntw_front:
     driver: overlay
     external: true
+  monitoring:
+    driver: overlay
+    external: true
 
 volumes:
   # rabbit_database:
