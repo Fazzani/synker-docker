@@ -55,6 +55,7 @@ function create_shares {
   sudo mkdir /mnt/nfs/webgrab/config/sitepack || true
   sudo mkdir /mnt/nfs/webgrab/data || true
   sudo mkdir /mnt/nfs/webgrab/log || true
+  sudo mkdir /mnt/nfs/grafana || true
   sudo mkdir /mnt/nfs/grafana/log || true
   sudo mkdir /mnt/nfs/grafana/data || true
   #sudo mkdir /mnt/nfs/logstash || true
