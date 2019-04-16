@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   cadvisor:
-    image: google/  :${CADVISOR_VERSION:-v0.24.1}
+    image: google/cadvisor:${CADVISOR_VERSION:-v0.33.0}
     networks:
       - monitoring
       - ntw_front
