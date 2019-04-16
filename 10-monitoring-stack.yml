@@ -1,0 +1,50 @@
+version: "3.5"
+
+services:
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - grafana_log:/var/log/grafana
+    environment:
+      - GF_SERVER_ROOT_URL=http://grafana.synker.ovh
+      - GF_SECURITY_ADMIN_PASSWORD=secret
+    networks:
+      - ntw_front
+    deploy:
+      labels:
+      - "traefik.backend=grafana"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:grafana.synker.ovh"
+      - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
+      - "traefik.docker.network=ntw_front"
+      - "traefik.port=3000"
+      - "traefik.enable=true"
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+        order: start-first
+      restart_policy:
+        condition: on-failure
+        delay: 2m
+        window: 120s
+  
+volumes:
+  grafana_data:
+     driver_opts:
+      type: "nfs"
+      o: "addr=151.80.235.155,nolock,soft,rw"
+      device: ":/mnt/nfs/grafana/data"
+  grafana_log:
+     driver_opts:
+      type: "nfs"
+      o: "addr=151.80.235.155,nolock,soft,rw"
+      device: ":/mnt/nfs/grafana/log"
+
+networks:
+  ntw_front:
+    external: true

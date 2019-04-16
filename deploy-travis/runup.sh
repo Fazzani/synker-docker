@@ -25,6 +25,7 @@ function set_folder_permission {
   sudo chmod 777 -R /mnt/nfs/traefik
   sudo chmod 777 -R /mnt/nfs/domotic
   sudo chmod 777 -R /mnt/nfs/mongodb
+  sudo chmod 777 -R /mnt/nfs/grafana
   # sudo chmod 777 /mnt/nfs/emby
 }
 
@@ -54,6 +55,8 @@ function create_shares {
   sudo mkdir /mnt/nfs/webgrab/config/sitepack || true
   sudo mkdir /mnt/nfs/webgrab/data || true
   sudo mkdir /mnt/nfs/webgrab/log || true
+  sudo mkdir /mnt/nfs/grafana/log || true
+  sudo mkdir /mnt/nfs/grafana/data || true
   #sudo mkdir /mnt/nfs/logstash || true
   #sudo mkdir /mnt/nfs/logstash/pipeline || true
   #sudo mkdir /mnt/nfs/logstash/data || true
@@ -145,6 +148,7 @@ sudo docker stack deploy -c 6-xviewer-stack.yml xviewer
 # sudo docker stack deploy -c 7-domotic-stack.yml --resolve-image never domotic
 # sudo docker stack deploy -c 8-mongo-stack.yml mongo
 sudo docker stack deploy -c 9-idp-stack.yml idp
+sudo docker stack deploy -c 10-monitoring-stack.yml monitoring
 #sudo docker stack deploy -c postgres-stack.yml postresql
 #sudo docker stack deploy -c ./others/others-stack.yml others
 
