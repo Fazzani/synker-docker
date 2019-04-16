@@ -1,6 +1,41 @@
 version: "3.5"
 
 services:
+  cadvisor:
+    image: google/  :${CADVISOR_VERSION:-v0.24.1}
+    networks:
+      - monitoring
+      - ntw_front
+    ports:
+      - "8123:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /var/run:/var/run:ro
+      - /dev/disk/:/dev/disk:ro
+      - /:/rootfs:ro
+      - /sys:/sys:ro
+    command: -storage_driver="elasticsearch" -alsologtostderr=true -storage_driver_es_host="http://elasticsearch:9200"
+    deploy:
+      labels:
+      - "traefik.tags=monitoring"
+      - "traefik.backend=cadvisor"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:cadvisor.synker.ovh"
+      - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
+      - "traefik.docker.network=monitoring"
+      - "traefik.port=8080"
+      - "traefik.enable=true"
+      mode: global
+      resources:
+        limits:
+          cpus: '0.10'
+          memory: 128M
+        reservations:
+          cpus: '0.10'
+          memory: 64M
   grafana:
     image: grafana/grafana
     volumes:
@@ -13,15 +48,17 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=secret
     networks:
       - ntw_front
+      - monitoring
     deploy:
       labels:
+      - "traefik.tags=monitoring"
       - "traefik.backend=grafana"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:grafana.synker.ovh"
       - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
-      - "traefik.docker.network=ntw_front"
+      - "traefik.docker.network=monitoring"
       - "traefik.port=3000"
       - "traefik.enable=true"
       replicas: 1
@@ -49,4 +86,6 @@ volumes:
 
 networks:
   ntw_front:
+    external: true
+  monitoring:
     external: true

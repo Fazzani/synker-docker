@@ -26,6 +26,7 @@ docker stack rm monitoring || true; echo; sleep 1;
 log "Remove networks ..."
 docker network rm ntw_front
 docker network rm ingress_net_backend
+docker network rm monitoring
 
 log "Clean up ..."
 docker system prune --force

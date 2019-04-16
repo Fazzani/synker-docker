@@ -10,6 +10,7 @@ services:
       - 8080:8080
     networks:
       - ntw_front
+      - monitoring
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - traefik_log:/log/traefik

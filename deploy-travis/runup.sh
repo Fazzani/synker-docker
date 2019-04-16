@@ -129,6 +129,11 @@ sudo docker network create --driver overlay ingress_net_backend \
   --opt com.docker.network.driver.mtu=9216 \
   --opt encrypted=true || true
 
+sudo docker network create --driver overlay monitoring \
+  --attachable \
+  --subnet=70.27.0.0/24 \
+  --opt encrypted=true || true
+
 echo $POSTGRES_PASSWORD > postgres_password.txt
 awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
