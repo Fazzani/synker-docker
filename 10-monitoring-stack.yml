@@ -44,8 +44,10 @@ services:
     ports:
       - "3123:3000"
     environment:
-      - GF_SERVER_ROOT_URL=https://grafana.synker.ovh/grafana
-      # - GF_SECURITY_ADMIN_PASSWORD=secret
+      - GF_SERVER_ROOT_URL=https://grafana.synker.ovh
+      - GF_SERVER_DOMAIN=grafana.synker.ovh
+      - GF_SECURITY_ADMIN_PASSWORD=secret
+      - GF_AUTH_BASIC_ENABLED=false
     networks:
       - ntw_front
       - monitoring
