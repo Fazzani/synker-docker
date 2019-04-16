@@ -15,7 +15,7 @@ services:
       - /dev/disk/:/dev/disk:ro
       - /:/rootfs:ro
       - /sys:/sys:ro
-    command: -storage_driver="elasticsearch" -alsologtostderr=true -storage_driver_es_host="http://elastic.synker.ovh:9200"
+    # command: -storage_driver="elasticsearch" -alsologtostderr=true -storage_driver_es_host="http://elastic.synker.ovh:9200"
     deploy:
       labels:
       - "traefik.tags=monitoring"
