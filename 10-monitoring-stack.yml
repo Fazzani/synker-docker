@@ -74,7 +74,7 @@ services:
         condition: on-failure
         delay: 2m
         window: 120s
-   prometheus:
+  prometheus:
     image: prom/prometheus:latest
     ports:
       - '9090:9090'
