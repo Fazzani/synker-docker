@@ -4,6 +4,16 @@
 
 ## TODO
 
+### Consul Error
+
+Error starting agent: Failed to start Consul server: Failed to start Raft: open /var/lib/consul/raft/raft.db: invalid argument
+
+```sh
+sudo rm -Rf /mnt/nfs/consul/data/raft/raft.db && sudo rm -Rf /mnt/nfs/consul/data/serf
+```
+
+source: https://github.com/hashicorp/consul/issues/4188
+
 ### Swarm services to install
 
 - [x] [MariaDb][docker_mariadb] see [official registry][mariadb_registry]
