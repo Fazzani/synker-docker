@@ -79,8 +79,8 @@ services:
     ports:
       - '9090:9090'
     volumes:
-      - prometheus_config:/etc/prometheus/prometheus.yml:ro
-      - prometheus_data:/prometheus:rw
+      - 'prometheus_config/prometheus.yml:/etc/prometheus/prometheus.yml:ro'
+      - 'prometheus_data:/prometheus:rw'
     deploy:
       labels:
       - "traefik.tags=monitoring"
