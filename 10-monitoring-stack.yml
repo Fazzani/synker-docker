@@ -48,6 +48,7 @@ services:
       - GF_SERVER_DOMAIN=grafana.synker.ovh
       - GF_SECURITY_ADMIN_PASSWORD=secret
       - GF_AUTH_BASIC_ENABLED=false
+      - "GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource"
     networks:
       - ntw_front
       - monitoring
