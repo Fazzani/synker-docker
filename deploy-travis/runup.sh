@@ -112,7 +112,7 @@ yes | cp -rf nginx-proxy/favicon.ico /mnt/nfs/nginx-proxy/html
 
 yes | cp -rf ./configs/definitions.json /mnt/nfs/rabbitmq/config
 yes | cp -rf ./configs/rabbitmq.config /mnt/nfs/rabbitmq/config
-yes | cp -rf ./monitoring/prometheus/*.yml /mnt/nfs/prometheus/config
+# yes | cp -rf ./monitoring/prometheus/*.yml /mnt/nfs/prometheus/config
 # yes | cp -rf ./script-folder/*.sh /mnt/nfs/mongodb/config
 # copy some logstash config
 # yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
