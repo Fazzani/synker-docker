@@ -79,6 +79,7 @@ function create_shares {
   sudo mkdir /mnt/nfs/domotic/db/data || true
   sudo mkdir /mnt/nfs/prometheus || true
   sudo mkdir /mnt/nfs/prometheus/data || true
+  sudo mkdir /mnt/nfs/prometheus/config || true
   
   # sudo mkdir /mnt/nfs/mongodb || true
   # sudo mkdir /mnt/nfs/mongodb/data || true
@@ -111,6 +112,7 @@ yes | cp -rf nginx-proxy/favicon.ico /mnt/nfs/nginx-proxy/html
 
 yes | cp -rf ./configs/definitions.json /mnt/nfs/rabbitmq/config
 yes | cp -rf ./configs/rabbitmq.config /mnt/nfs/rabbitmq/config
+yes | cp -rf ./monitoring/prometheus /mnt/nfs/prometheus/config
 # yes | cp -rf ./script-folder/*.sh /mnt/nfs/mongodb/config
 # copy some logstash config
 # yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
