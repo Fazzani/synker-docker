@@ -81,7 +81,7 @@ services:
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus_data:/prometheus:rw
-     deploy:
+    deploy:
       labels:
       - "traefik.tags=monitoring"
       - "traefik.backend=prometheus"
