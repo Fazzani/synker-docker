@@ -79,8 +79,8 @@ services:
     ports:
       - '9090:9090'
     volumes:
-      - 'prometheus_config/prometheus.yml:/etc/prometheus/prometheus.yml:ro'
-      - 'prometheus_data:/prometheus:rw'
+      - prometheus_config:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus:rw
     deploy:
       labels:
       - "traefik.tags=monitoring"
@@ -121,12 +121,9 @@ volumes:
       type: "nfs"
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/prometheus/data"
+configs:
   prometheus_config:
-    driver_opts:
-      type: "nfs"
-      o: "addr=151.80.235.155,nolock,soft,rw"
-      device: ":/mnt/nfs/prometheus/config/prometheus.yml"
-
+    file: ./monitoring/prometheus/prometheus.yml
 networks:
   ntw_front:
     external: true
