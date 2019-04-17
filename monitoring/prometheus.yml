@@ -1,0 +1,13 @@
+global:
+  evaluation_interval: 15s
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: cadvisor
+    metrics_path: /metrics
+    scrape_interval: 30s
+    dns_sd_configs:
+      - names:
+          - "tasks.cadvisor"
+        type: 'A'
+        port: 8080

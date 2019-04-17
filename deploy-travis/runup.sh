@@ -26,6 +26,7 @@ function set_folder_permission {
   sudo chmod 777 -R /mnt/nfs/domotic
   sudo chmod 777 -R /mnt/nfs/mongodb
   sudo chmod 777 -R /mnt/nfs/grafana
+  sudo chmod 777 -R /mnt/nfs/prometheus
   # sudo chmod 777 /mnt/nfs/emby
 }
 
@@ -76,6 +77,9 @@ function create_shares {
   sudo mkdir /mnt/nfs/domotic/data || true
   sudo mkdir /mnt/nfs/domotic/db || true
   sudo mkdir /mnt/nfs/domotic/db/data || true
+  sudo mkdir /mnt/nfs/prometheus || true
+  sudo mkdir /mnt/nfs/prometheus/data || true
+  
   # sudo mkdir /mnt/nfs/mongodb || true
   # sudo mkdir /mnt/nfs/mongodb/data || true
   # sudo mkdir /mnt/nfs/mongodb/config || true

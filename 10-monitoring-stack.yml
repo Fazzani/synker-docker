@@ -74,7 +74,37 @@ services:
         condition: on-failure
         delay: 2m
         window: 120s
-  
+   prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus:rw
+     deploy:
+      labels:
+      - "traefik.tags=monitoring"
+      - "traefik.backend=prometheus"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:prometheus.synker.ovh"
+      - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
+      - "traefik.docker.network=monitoring"
+      - "traefik.port=9090"
+      - "traefik.enable=true"
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+        order: start-first
+      restart_policy:
+        condition: on-failure
+        delay: 2m
+        window: 120s
+    networks:
+      - monitoring
 volumes:
   grafana_data:
      driver_opts:
@@ -86,6 +116,11 @@ volumes:
       type: "nfs"
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/grafana/log"
+  prometheus_data:
+     driver_opts:
+      type: "nfs"
+      o: "addr=151.80.235.155,nolock,soft,rw"
+      device: ":/mnt/nfs/prometheus/data"
 
 networks:
   ntw_front:
