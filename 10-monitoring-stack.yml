@@ -43,10 +43,12 @@ services:
       - grafana_log:/var/log/grafana
     ports:
       - "3123:3000"
+    secrets:
+      - generic_password
     environment:
       - GF_SERVER_ROOT_URL=https://grafana.synker.ovh
       - GF_SERVER_DOMAIN=grafana.synker.ovh
-      - GF_SECURITY_ADMIN_PASSWORD=secret
+      - GF_SECURITY_ADMIN_PASSWORD=/run/secrets/generic_password
       - GF_AUTH_BASIC_ENABLED=false
       - "GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource"
     networks:
@@ -129,3 +131,6 @@ networks:
     external: true
   monitoring:
     external: true
+secrets:
+  generic_password:
+    file: generic_password.txt

@@ -20,6 +20,6 @@ ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST "sudo sysctl -w vm.m
 
 echo "Run up docker stack script"
 ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST 'bash -s' < ./deploy-travis/runup.sh \
-$REMOTE_USER $POSTGRES_PASSWORD $MYSQL_ROOT_PASSWORD $MYSQL_DATABASE $MYSQL_RESET_DATABASE $version
+$REMOTE_USER $POSTGRES_PASSWORD $MYSQL_ROOT_PASSWORD $MYSQL_DATABASE $MYSQL_RESET_DATABASE $version $GENERIC_PASSWORD
 
 exit 0

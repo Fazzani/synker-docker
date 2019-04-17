@@ -96,6 +96,7 @@ MYSQL_DATABASE=${4:-playlist}
 MYSQL_RESET_DATABASE=${5:-false}
 echo "script param 6 => $6"
 SYNKER_VERSION=${6:-0.0.93}
+GENERIC_PASSWORD=$7
 
 create_shares
 set_folder_permission
@@ -141,6 +142,8 @@ sudo docker network create --driver overlay monitoring \
   --opt encrypted=true || true
 
 echo $POSTGRES_PASSWORD > postgres_password.txt
+echo $GENERIC_PASSWORD > generic_password.txt
+
 awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 echo $TAG
