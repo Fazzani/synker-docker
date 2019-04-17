@@ -80,8 +80,11 @@ services:
     image: prom/prometheus:latest
     ports:
       - '9090:9090'
+    configs:
+      - source: prometheus_config
+        target: /etc/prometheus/prometheus.yml
+        mode: 0444
     volumes:
-      - prometheus_config:/etc/prometheus/prometheus.yml:ro
       - prometheus_data:/prometheus:rw
     deploy:
       labels:
