@@ -116,15 +116,29 @@ services:
     networks:
       - monitoring
   node-exporter:
-    image: stefanprodan/swarmprom-node-exporter
+    image: stefanprodan/swarmprom-node-exporter:v0.16.0
+    networks:
+      - monitoring
     environment:
       - NODE_ID={{.Node.ID}}
     volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
       - /etc/hostname:/etc/nodename
     command:
-      - '-collector.textfile.directory=/etc/node-exporter/'
-    networks:
-      - monitoring
+      - '--path.sysfs=/host/sys'
+      - '--path.procfs=/host/proc'
+      - '--collector.textfile.directory=/etc/node-exporter/'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+      - '--no-collector.ipvs'
+    deploy:
+      mode: global
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
 volumes:
   grafana_data:
     driver_opts:
