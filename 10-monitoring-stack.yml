@@ -163,7 +163,7 @@ services:
       - '--storage.path=/alertmanager'
     volumes:
       - alertmanager_data:/alertmanager
-     deploy:
+    deploy:
       labels:
       - "traefik.tags=monitoring"
       - "traefik.backend=alertmanager"
