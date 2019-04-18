@@ -36,6 +36,7 @@ services:
         reservations:
           cpus: '0.10'
           memory: 64M
+
   grafana:
     image: grafana/grafana
     volumes:
@@ -74,6 +75,9 @@ services:
       - "traefik.port=3000"
       - "traefik.enable=true"
       replicas: 1
+      placement:
+        constraints:
+          - node.labels.provider == ovh
       update_config:
         parallelism: 1
         delay: 10s
