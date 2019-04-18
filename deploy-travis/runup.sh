@@ -27,6 +27,7 @@ function set_folder_permission {
   sudo chmod 777 -R /mnt/nfs/mongodb
   sudo chmod 777 -R /mnt/nfs/grafana
   sudo chmod 777 -R /mnt/nfs/prometheus
+  sudo chmod 777 -R /mnt/nfs/alertmanager
   # sudo chmod 777 /mnt/nfs/emby
 }
 
@@ -61,6 +62,8 @@ function create_shares {
   sudo mkdir /mnt/nfs/grafana/data || true
   sudo mkdir /mnt/nfs/grafana/dashboards || true
   sudo mkdir /mnt/nfs/grafana/datasources || true
+  sudo mkdir /mnt/nfs/alertmanager || true
+  sudo mkdir /mnt/nfs/alertmanager/data || true
   #sudo mkdir /mnt/nfs/logstash || true
   #sudo mkdir /mnt/nfs/logstash/pipeline || true
   #sudo mkdir /mnt/nfs/logstash/data || true

@@ -160,7 +160,7 @@ services:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
       - '--storage.path=/alertmanager'
     volumes:
-      - alertmanager:/alertmanager
+      - alertmanager_data:/alertmanager
     deploy:
       mode: replicated
       replicas: 1
@@ -209,6 +209,11 @@ volumes:
       type: "nfs"
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/prometheus/data"
+  alertmanager_data:
+    driver_opts:
+      type: "nfs"
+      o: "addr=151.80.235.155,nolock,soft,rw"
+      device: ":/mnt/nfs/alertmanager/data"
 configs:
   prometheus_config2:
     file: ./monitoring/prometheus/prometheus.yml
