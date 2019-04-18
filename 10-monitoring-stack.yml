@@ -123,6 +123,8 @@ services:
       - /etc/hostname:/etc/nodename
     command:
       - '-collector.textfile.directory=/etc/node-exporter/'
+    networks:
+      - monitoring
 volumes:
   grafana_data:
     driver_opts:
