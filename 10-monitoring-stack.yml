@@ -152,6 +152,8 @@ services:
     image: stefanprodan/swarmprom-alertmanager:v0.14.0
     networks:
       - monitoring
+    ports:
+      - '9093:9093'
     environment:
       - SLACK_URL=${SLACK_URL:-https://hooks.slack.com/services/TOKEN}
       - SLACK_CHANNEL=${SLACK_CHANNEL:-Synker}
@@ -161,7 +163,18 @@ services:
       - '--storage.path=/alertmanager'
     volumes:
       - alertmanager_data:/alertmanager
-    deploy:
+     deploy:
+      labels:
+      - "traefik.tags=monitoring"
+      - "traefik.backend=alertmanager"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:alert.synker.ovh"
+      - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
+      - "traefik.docker.network=monitoring"
+      - "traefik.port=9093"
+      - "traefik.enable=true"
       mode: replicated
       replicas: 1
       placement:
@@ -177,9 +190,22 @@ services:
     image: cloudflare/unsee:v0.8.0
     networks:
       - monitoring
+    ports:
+      - '9094:9094'
     environment:
       - "ALERTMANAGER_URIS=default:http://alertmanager:9093"
     deploy:
+      labels:
+      - "traefik.tags=monitoring"
+      - "traefik.backend=unsee"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:unsee.synker.ovh"
+      - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
+      - "traefik.docker.network=monitoring"
+      - "traefik.port=9094"
+      - "traefik.enable=true"
       mode: replicated
       replicas: 1
 
