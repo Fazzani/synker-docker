@@ -162,7 +162,7 @@ volumes:
 configs:
   prometheus_config2:
     file: ./monitoring/prometheus/prometheus.yml
-   node_rules:
+  node_rules:
     file: ./monitoring/prometheus/rules/swarm_node.rules.yml
   task_rules:
     file: ./monitoring/prometheus/rules/swarm_task.rules.yml
