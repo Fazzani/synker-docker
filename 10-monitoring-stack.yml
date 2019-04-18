@@ -86,7 +86,7 @@ services:
     ports:
       - '9090:9090'
     configs:
-      - source: prometheus_config
+      - source: prometheus_config2
         target: /etc/prometheus/prometheus.yml
         mode: 0444
     volumes:
@@ -115,6 +115,14 @@ services:
         window: 120s
     networks:
       - monitoring
+  node-exporter:
+    image: stefanprodan/swarmprom-node-exporter
+    environment:
+      - NODE_ID={{.Node.ID}}
+    volumes:
+      - /etc/hostname:/etc/nodename
+    command:
+      - '-collector.textfile.directory=/etc/node-exporter/'
 volumes:
   grafana_data:
     driver_opts:
@@ -132,7 +140,7 @@ volumes:
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/prometheus/data"
 configs:
-  prometheus_config:
+  prometheus_config2:
     file: ./monitoring/prometheus/prometheus.yml
 networks:
   ntw_front:
