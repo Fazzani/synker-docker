@@ -59,6 +59,8 @@ function create_shares {
   sudo mkdir /mnt/nfs/grafana || true
   sudo mkdir /mnt/nfs/grafana/log || true
   sudo mkdir /mnt/nfs/grafana/data || true
+  sudo mkdir /mnt/nfs/grafana/dashboards || true
+  sudo mkdir /mnt/nfs/grafana/datasources || true
   #sudo mkdir /mnt/nfs/logstash || true
   #sudo mkdir /mnt/nfs/logstash/pipeline || true
   #sudo mkdir /mnt/nfs/logstash/data || true
@@ -148,6 +150,10 @@ awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 echo $TAG
 export SYNKER_VERSION=$SYNKER_VERSION
+
+export SLACK_URL=https://hooks.slack.com/services/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
+export SLACK_CHANNEL=Synker
+export SLACK_USER=alertmanager
 
 echo "MONGOEXPRESS_LOGIN => ${MONGOEXPRESS_LOGIN}"
 

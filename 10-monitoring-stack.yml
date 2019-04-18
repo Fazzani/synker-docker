@@ -41,6 +41,8 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
       - grafana_log:/var/log/grafana
+      - grafana_dashboards:/etc/grafana/provisioning/dashboards
+      - grafana_datasources:/etc/grafana/provisioning/datasources
     ports:
       - "3123:3000"
     secrets:
@@ -149,6 +151,16 @@ volumes:
       type: "nfs"
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/grafana/data"
+  grafana_datasources:
+    driver_opts:
+      type: "nfs"
+      o: "addr=151.80.235.155,nolock,soft,rw"
+      device: ":/mnt/nfs/grafana/datasources"
+  grafana_dashboards:
+    driver_opts:
+      type: "nfs"
+      o: "addr=151.80.235.155,nolock,soft,rw"
+      device: ":/mnt/nfs/grafana/dashboards"
   grafana_log:
     driver_opts:
       type: "nfs"
