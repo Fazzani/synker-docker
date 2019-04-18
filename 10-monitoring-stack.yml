@@ -89,6 +89,10 @@ services:
       - source: prometheus_config2
         target: /etc/prometheus/prometheus.yml
         mode: 0444
+      - source: node_rules
+        target: /etc/prometheus/swarm_node.rules.yml
+      - source: task_rules
+        target: /etc/prometheus/swarm_task.rules.yml
     volumes:
       - prometheus_data:/prometheus:rw
     deploy:
@@ -158,6 +162,10 @@ volumes:
 configs:
   prometheus_config2:
     file: ./monitoring/prometheus/prometheus.yml
+   node_rules:
+    file: ./monitoring/prometheus/rules/swarm_node.rules.yml
+  task_rules:
+    file: ./monitoring/prometheus/rules/swarm_task.rules.yml
 networks:
   ntw_front:
     external: true
