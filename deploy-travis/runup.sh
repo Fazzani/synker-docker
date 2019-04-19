@@ -62,6 +62,7 @@ function create_shares {
   sudo mkdir /mnt/nfs/grafana/data || true
   sudo mkdir /mnt/nfs/grafana/dashboards || true
   sudo mkdir /mnt/nfs/grafana/datasources || true
+  sudo mkdir /mnt/nfs/grafana/notifiers || true
   sudo mkdir /mnt/nfs/alertmanager || true
   sudo mkdir /mnt/nfs/alertmanager/data || true
   #sudo mkdir /mnt/nfs/logstash || true
@@ -119,6 +120,7 @@ yes | cp -rf nginx-proxy/favicon.ico /mnt/nfs/nginx-proxy/html
 yes | cp -rf ./configs/definitions.json /mnt/nfs/rabbitmq/config
 yes | cp -rf ./configs/rabbitmq.config /mnt/nfs/rabbitmq/config
 yes | cp -rf ./monitoring/grafana/dashboards/*.json /mnt/nfs/grafana/dashboards
+yes | cp -rf ./monitoring/grafana/notifiers/*.yml /mnt/nfs/grafana/notifiers
 yes | cp -rf ./monitoring/grafana/datasources/*.yml /mnt/nfs/grafana/datasources
 # yes | cp -rf ./script-folder/*.sh /mnt/nfs/mongodb/config
 # copy some logstash config

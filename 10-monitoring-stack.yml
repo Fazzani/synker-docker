@@ -44,6 +44,7 @@ services:
       - grafana_log:/var/log/grafana
       - grafana_dashboards:/var/lib/grafana/dashboards
       - grafana_datasources:/etc/grafana/provisioning/datasources
+      - grafana_notifiers:/etc/grafana/provisioning/notifiers
     configs:
       - source: swarmprom_dashboards
         target: /etc/grafana/provisioning/dashboards/swarmprom_dashboards.yml
@@ -233,6 +234,11 @@ volumes:
       type: "nfs"
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/grafana/dashboards"
+  grafana_notifiers:
+    driver_opts:
+      type: "nfs"
+      o: "addr=151.80.235.155,nolock,soft,rw"
+      device: ":/mnt/nfs/grafana/notifiers"
   grafana_log:
     driver_opts:
       type: "nfs"
