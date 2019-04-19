@@ -259,6 +259,11 @@ volumes:
       type: "nfs"
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/prometheus/data"
+  prometheus_config:
+    driver_opts:
+      type: "nfs"
+      o: "addr=151.80.235.155,nolock,soft,rw"
+      device: ":/mnt/nfs/prometheus/config"
 
   alertmanager_data:
     driver_opts:
