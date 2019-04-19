@@ -6,6 +6,7 @@ global:
 rule_files:
   - 'swarm_task.rules'
   - 'swarm_node.rules'
+  - 'swarm_service.rules'
 
 # alert
 alerting:

@@ -101,10 +101,12 @@ services:
       - source: prometheus_config
         target: /etc/prometheus/prometheus.yml
         mode: 0444
-      - source: node_rules
+      - source: prom_node_rules
         target: /etc/prometheus/swarm_node.rules.yml
-      - source: task_rules
+      - source: prom_task_rules
         target: /etc/prometheus/swarm_task.rules.yml
+      - source: prom_service_rules
+        target: /etc/prometheus/swarm_service.rules.yml
     volumes:
       - prometheus_data:/prometheus:rw
     deploy:
@@ -260,10 +262,12 @@ volumes:
 configs:
   prometheus_config:
     file: ./monitoring/prometheus/prometheus.yml
-  node_rules:
+  prom_node_rules:
     file: ./monitoring/prometheus/rules/swarm_node.rules.yml
-  task_rules:
+  prom_task_rules:
     file: ./monitoring/prometheus/rules/swarm_task.rules.yml
+  prom_service_rules:
+    file: ./monitoring/prometheus/rules/swarm_service.rules.yml
   swarmprom_dashboards2:
     file: ./monitoring/grafana/swarmprom_dashboards.yml
 
