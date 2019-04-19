@@ -19,4 +19,4 @@ groups:
       severity: page
     annotations:
       summary: "Instance {{ $labels.instance }} under high load"
-description: "{{ $labels.instance }} of job {{ $labels.job }} is under high load."
+      description: "{{ $labels.instance }} of job {{ $labels.job }} is under high load."
