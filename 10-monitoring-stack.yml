@@ -97,18 +97,25 @@ services:
     image: prom/prometheus:latest
     ports:
       - '9090:9090'
-    configs:
-      - source: prom_config
-        target: /etc/prometheus/prometheus.yml
-        mode: 0444
-      - source: prom_node_rules2
-        target: /etc/prometheus/swarm_node.rules.yml
-      - source: prom_task_rules2
-        target: /etc/prometheus/swarm_task.rules.yml
-      - source: prom_service_rules2
-        target: /etc/prometheus/swarm_service.rules.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention=72h'
+    # configs:
+    #   - source: prom_config
+    #     target: /etc/prometheus/prometheus.yml
+    #     mode: 0444
+    #   - source: prom_node_rules2
+    #     target: /etc/prometheus/swarm_node.rules.yml
+    #   - source: prom_task_rules2
+    #     target: /etc/prometheus/swarm_task.rules.yml
+    #   - source: prom_service_rules2
+    #     target: /etc/prometheus/swarm_service.rules.yml
     volumes:
-      - prometheus_data:/prometheus:rw
+      - prometheus_data:/prometheus/:ro
+      - prom_config:/etc/prometheus/:ro
     deploy:
       labels:
       - "traefik.tags=monitoring"
