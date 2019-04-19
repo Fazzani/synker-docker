@@ -267,14 +267,14 @@ volumes:
       device: ":/mnt/nfs/alertmanager/data"
 
 configs:
-  prom_config:
-    file: ./monitoring/prometheus/prometheus.yml
-  prom_node_rules2:
-    file: ./monitoring/prometheus/swarm_node.rules.yml
-  prom_task_rules2:
-    file: ./monitoring/prometheus/swarm_task.rules.yml
-  prom_service_rules2:
-    file: ./monitoring/prometheus/swarm_service.rules.yml
+  # prom_config:
+  #   file: ./monitoring/prometheus/prometheus.yml
+  # prom_node_rules2:
+  #   file: ./monitoring/prometheus/swarm_node.rules.yml
+  # prom_task_rules2:
+  #   file: ./monitoring/prometheus/swarm_task.rules.yml
+  # prom_service_rules2:
+  #   file: ./monitoring/prometheus/swarm_service.rules.yml
   swarmprom_dashboards2:
     file: ./monitoring/grafana/swarmprom_dashboards.yml
 
