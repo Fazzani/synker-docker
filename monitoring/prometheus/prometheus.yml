@@ -1,6 +1,19 @@
 global:
   evaluation_interval: 15s
   scrape_interval: 15s
+  
+# Load and evaluate rules in this file every 'evaluation_interval' seconds.
+rule_files:
+  - 'swarm_task.rules'
+  - 'swarm_node.rules'
+
+# alert
+alerting:
+  alertmanagers:
+  - scheme: http
+    static_configs:
+    - targets:
+      - "alertmanager:9093"
 
 scrape_configs:
   - job_name: cadvisor
