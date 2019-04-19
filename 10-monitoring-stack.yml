@@ -97,13 +97,18 @@ services:
     image: prom/prometheus:latest
     ports:
       - '9090:9090'
+    configs:
+      - source: prometheus_config
+        target: /etc/prometheus/prometheus.yml
+        mode: 0444
+      - source: node_rules
+        target: /etc/prometheus/swarm_node.rules.yml
+      - source: task_rules
+        target: /etc/prometheus/swarm_task.rules.yml
+      - source: service_rules
+        target: /etc/prometheus/swarm_service.rules.yml
     volumes:
       - prometheus_data:/prometheus:rw
-      - prometheus_config:/etc/prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--storage.tsdb.retention=24h'
     deploy:
       labels:
       - "traefik.tags=monitoring"
@@ -247,11 +252,6 @@ volumes:
       type: "nfs"
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/prometheus/data"
-  prometheus_config:
-    driver_opts:
-      type: "nfs"
-      o: "addr=151.80.235.155,nolock,soft,rw"
-      device: ":/mnt/nfs/prometheus/config"
 
   alertmanager_data:
     driver_opts:
@@ -260,6 +260,12 @@ volumes:
       device: ":/mnt/nfs/alertmanager/data"
 
 configs:
+  prometheus_config:
+    file: ./monitoring/prometheus/prometheus.yml
+  node_rules:
+    file: ./monitoring/prometheus/rules/swarm_node.rules.yml
+  task_rules:
+    file: ./monitoring/prometheus/rules/swarm_task.rules.yml
   swarmprom_dashboards2:
     file: ./monitoring/grafana/swarmprom_dashboards.yml
 
