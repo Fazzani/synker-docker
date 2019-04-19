@@ -17,20 +17,3 @@ notifiers:
       token: "TJ113HH88/BJ3586K70/dnlFqdq88mUAD2cBngnI9mkk"
       uploadImage: true
       url: https://slack.com
-
-delete_notifiers:
-  - name: notif_slack_infos
-    type: slack
-    uid: notifier2
-    org_name: Synker.
-    is_default: true
-    send_reminders: true
-    frequency: 1h
-    disable_resolve_message: false
-    # See `Supported Settings` section for settings supporter for each
-    # alert notification type.
-    settings:
-      recipient: "Synker"
-      token: "TJ113HH88/BJ3586K70/dnlFqdq88mUAD2cBngnI9mkk"
-      uploadImage: true
-      url: https://slack.com
