@@ -264,7 +264,7 @@ configs:
     file: ./monitoring/prometheus/prometheus.yml
   prom_node_rules2:
     file: ./monitoring/prometheus/swarm_node.rules.yml
-  prom_task_rule2s:
+  prom_task_rules2:
     file: ./monitoring/prometheus/swarm_task.rules.yml
   prom_services_rules2:
     file: ./monitoring/prometheus/swarm_service.rules.yml
