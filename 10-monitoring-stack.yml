@@ -46,7 +46,7 @@ services:
       - grafana_datasources:/etc/grafana/provisioning/datasources
       - grafana_notifiers:/etc/grafana/provisioning/notifiers
     configs:
-      - source: swarmprom_dashboards
+      - source: swarmprom_dashboards2
         target: /etc/grafana/provisioning/dashboards/swarmprom_dashboards.yml
         mode: 0444
     ports:
@@ -263,7 +263,7 @@ configs:
     file: ./monitoring/prometheus/rules/swarm_node.rules.yml
   task_rules:
     file: ./monitoring/prometheus/rules/swarm_task.rules.yml
-  swarmprom_dashboards:
+  swarmprom_dashboards2:
     file: ./monitoring/grafana/swarmprom_dashboards.yml
 
 networks:
