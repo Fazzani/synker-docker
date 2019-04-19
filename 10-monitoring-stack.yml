@@ -101,18 +101,6 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--storage.tsdb.retention.time=72h'
-      # - '--web.console.libraries=/etc/prometheus/console_libraries'
-      # - '--web.console.templates=/etc/prometheus/consoles'
-    # configs:
-    #   - source: prom_config
-    #     target: /etc/prometheus/prometheus.yml
-    #     mode: 0444
-    #   - source: prom_node_rules2
-    #     target: /etc/prometheus/swarm_node.rules.yml
-    #   - source: prom_task_rules2
-    #     target: /etc/prometheus/swarm_task.rules.yml
-    #   - source: prom_service_rules2
-    #     target: /etc/prometheus/swarm_service.rules.yml
     volumes:
       - prom_data:/prometheus/:rw
       - prom_config:/etc/prometheus/
@@ -272,14 +260,6 @@ volumes:
       device: ":/mnt/nfs/alertmanager/data"
 
 configs:
-  # prom_config:
-  #   file: ./monitoring/prometheus/prometheus.yml
-  # prom_node_rules2:
-  #   file: ./monitoring/prometheus/swarm_node.rules.yml
-  # prom_task_rules2:
-  #   file: ./monitoring/prometheus/swarm_task.rules.yml
-  # prom_service_rules2:
-  #   file: ./monitoring/prometheus/swarm_service.rules.yml
   swarmprom_dashboards2:
     file: ./monitoring/grafana/swarmprom_dashboards.yml
 
