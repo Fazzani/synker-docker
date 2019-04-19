@@ -114,7 +114,7 @@ services:
     #   - source: prom_service_rules2
     #     target: /etc/prometheus/swarm_service.rules.yml
     volumes:
-      - prometheus_data:/prometheus/:ro
+      - prom_data:/prometheus/:ro
       - prom_config:/etc/prometheus/:ro
     deploy:
       labels:
@@ -254,12 +254,12 @@ volumes:
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/grafana/log"
   
-  prometheus_data:
+  prom_data:
     driver_opts:
       type: "nfs"
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/prometheus/data"
-  prometheus_config:
+  prom_config:
     driver_opts:
       type: "nfs"
       o: "addr=151.80.235.155,nolock,soft,rw"
