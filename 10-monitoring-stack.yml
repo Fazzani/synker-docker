@@ -42,8 +42,12 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
       - grafana_log:/var/log/grafana
-      - grafana_dashboards:/etc/grafana/provisioning/dashboards
+      - grafana_dashboards:/etc/grafana/dashboards/
       - grafana_datasources:/etc/grafana/provisioning/datasources
+    configs:
+      - source: swarmprom_dashboards
+        target: /etc/grafana/provisioning/dashboards/swarmprom_dashboards.yml
+        mode: 0444
     ports:
       - "3123:3000"
     secrets:
@@ -234,6 +238,7 @@ volumes:
       type: "nfs"
       o: "addr=151.80.235.155,nolock,soft,rw"
       device: ":/mnt/nfs/grafana/log"
+  
   prometheus_data:
     driver_opts:
       type: "nfs"
@@ -251,6 +256,8 @@ configs:
     file: ./monitoring/prometheus/rules/swarm_node.rules.yml
   task_rules:
     file: ./monitoring/prometheus/rules/swarm_task.rules.yml
+  swarmprom_dashboards:
+    file: ./monitoring/grafana/swarmprom_dashboards.yml
 networks:
   ntw_front:
     external: true
