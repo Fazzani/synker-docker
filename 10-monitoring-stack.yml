@@ -100,7 +100,7 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
-      - '--storage.tsdb.retention=72h'
+      - '--storage.tsdb.retention.time=72h'
       # - '--web.console.libraries=/etc/prometheus/console_libraries'
       # - '--web.console.templates=/etc/prometheus/consoles'
     # configs:
@@ -114,7 +114,7 @@ services:
     #   - source: prom_service_rules2
     #     target: /etc/prometheus/swarm_service.rules.yml
     volumes:
-      - prom_data:/prometheus/
+      - prom_data:/prometheus/:rw
       - prom_config:/etc/prometheus/
     deploy:
       labels:
