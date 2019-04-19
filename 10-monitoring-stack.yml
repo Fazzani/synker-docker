@@ -98,7 +98,7 @@ services:
     ports:
       - '9090:9090'
     configs:
-      - source: prometheus_config2
+      - source: prometheus_config
         target: /etc/prometheus/prometheus.yml
         mode: 0444
       - source: node_rules
@@ -258,7 +258,7 @@ volumes:
       device: ":/mnt/nfs/alertmanager/data"
 
 configs:
-  prometheus_config2:
+  prometheus_config:
     file: ./monitoring/prometheus/prometheus.yml
   node_rules:
     file: ./monitoring/prometheus/rules/swarm_node.rules.yml
