@@ -99,7 +99,7 @@ services:
       - '9090:9090'
     volumes:
       - prometheus_data:/prometheus:rw
-      - prometheus_config:/etc/prometheus/:rw
+      - prometheus_config:/etc/prometheus:rw
     deploy:
       labels:
       - "traefik.tags=monitoring"
