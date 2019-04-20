@@ -164,6 +164,7 @@ sudo docker stack deploy -c 6-xviewer-stack.yml xviewer
 # sudo docker stack deploy -c 8-mongo-stack.yml mongo
 sudo docker stack deploy -c 9-idp-stack.yml idp
 sudo docker stack deploy -c 10-monitoring-stack.yml monitoring
+sudo docker stack deploy -c 11-system-stack.yml system
 # sudo docker stack deploy -c postgres-stack.yml postresql
 # sudo docker stack deploy -c ./others/others-stack.yml others
 
