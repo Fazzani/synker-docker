@@ -65,6 +65,7 @@ function create_shares {
   sudo mkdir /mnt/nfs/grafana/notifiers || true
   sudo mkdir /mnt/nfs/alertmanager || true
   sudo mkdir /mnt/nfs/alertmanager/data || true
+  sudo mkdir /mnt/nfs/alertmanager/config || true
   #sudo mkdir /mnt/nfs/logstash || true
   #sudo mkdir /mnt/nfs/logstash/pipeline || true
   #sudo mkdir /mnt/nfs/logstash/data || true
@@ -126,6 +127,8 @@ yes | cp -rf ./monitoring/grafana/datasources/*.yml /mnt/nfs/grafana/datasources
 
 yes | cp -rf ./monitoring/prometheus/*.yml /mnt/nfs/prometheus/config
 yes | cp -rf ./monitoring/prometheus/*.rules /mnt/nfs/prometheus/config
+
+yes | cp -rf ./monitoring/alertmanager/*.yml /mnt/nfs/alertmanager/config
 # yes | cp -rf ./script-folder/*.sh /mnt/nfs/mongodb/config
 # copy some logstash config
 # yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/

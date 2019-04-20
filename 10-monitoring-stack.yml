@@ -155,17 +155,13 @@ services:
           memory: 64M
 
   alertmanager:
-    image: stefanprodan/swarmprom-alertmanager:v0.14.0
+    image: prom/alertmanager
     networks:
       - monitoring
     ports:
       - '9093:9093'
-    environment:
-      - SLACK_URL=${SLACK_URL:-https://hooks.slack.com/services/TOKEN}
-      - SLACK_CHANNEL=${SLACK_CHANNEL:-Synker}
-      - SLACK_USER=${SLACK_USER:-alertmanager}
     command:
-      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--config.file=/mnt/nfs/alertmanager/config/alertmanager.yml'
       - '--storage.path=/alertmanager'
     volumes:
       - alertmanager_data:/alertmanager
