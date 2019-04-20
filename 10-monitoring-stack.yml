@@ -173,8 +173,6 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
       - grafana_log:/var/log/grafana
-      - grafana_dashboards:/var/lib/grafana/dashboards
-      - grafana_datasources:/etc/grafana/provisioning/datasources
       # - grafana_notifiers:/etc/grafana/provisioning/notifiers
     ports:
       - "3123:3000"
