@@ -101,8 +101,8 @@ set +e
 # MYSQL_ROOT_PASSWORD=$3
 # MYSQL_DATABASE=${4:-playlist}
 # MYSQL_RESET_DATABASE=${5:-false}
-echo "script param 1 => $1"
-SYNKER_VERSION=${1:-0.0.93}
+# echo "script param 1 => $1"
+# SYNKER_VERSION=${1:-0.0.93}
 # GENERIC_PASSWORD=$7
 # SENDGRID_API_KEY=$8
 # SLACK_API_URL=$9

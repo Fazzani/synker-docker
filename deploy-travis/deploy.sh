@@ -24,6 +24,6 @@ ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST "chmod +x /home/$REM
 ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST "sudo sysctl -w vm.max_map_count=262144"
 
 echo "Run up docker stack script"
-ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST 'bash -s' < ./deploy-travis/runup.sh $version
+ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST export $(cat ~/.ssh/environment) && ./deploy-travis/runup.sh
 
 exit 0
