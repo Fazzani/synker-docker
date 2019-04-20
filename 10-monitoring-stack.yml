@@ -60,9 +60,9 @@ services:
       - GF_AUTH_BASIC_ENABLED=false
       - "GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource"
       - GF_SMTP_ENABLED=true
-      - GF_SMTP_HOST=smtp.gmail.com:587
+      - GF_SMTP_HOST=smtp.sendgrid.com:587
       - GF_SMTP_USER=heni.fazzani@gmail.com
-      - GF_SMTP_PASSWORD=mypassword
+      - GF_SMTP_PASSWORD=$SENDGRID_API_KEY
       - GF_SMTP_FROM_ADDRESS=heni.fazzani@gmail.com
     networks:
       - ntw_front
