@@ -176,10 +176,6 @@ services:
       - grafana_dashboards:/var/lib/grafana/dashboards
       - grafana_datasources:/etc/grafana/provisioning/datasources
       # - grafana_notifiers:/etc/grafana/provisioning/notifiers
-    configs:
-      - source: swarmprom_dashboards2
-        target: /etc/grafana/provisioning/dashboards/swarmprom_dashboards.yml
-        mode: 0444
     ports:
       - "3123:3000"
     secrets:
@@ -203,14 +199,12 @@ services:
     configs:
       - source: grafana_dashboards_containers
         target: /etc/grafana/dashboards/containers.json
-      - source: grafana_dashboards_etcd-cluster
-        target: /etc/grafana/dashboards/etcd-cluster.json
       - source: grafana_dashboards_nodes
         target: /etc/grafana/dashboards/nodes.json
-      - source: grafana_dashboards_portworx-cluster-status
-        target: /etc/grafana/dashboards/portworx-cluster-status.json
-      - source: grafana_dashboards_portworx-volumes-status
-        target: /etc/grafana/dashboards/portworx-volumes-status.json
+      - source: grafana_dashboards_swarmprom-nodes-dash
+        target: /etc/grafana/dashboards/swarmprom-nodes-dash.json
+      - source: grafana_dashboards_swarmprom-services-dash
+        target: /etc/grafana/dashboards/swarmprom-services-dash.json
       - source: grafana_dashboards_prometheus-2-stats
         target: /etc/grafana/dashboards/prometheus-2-stats.json
       - source: grafana_provisioning_dashboards
@@ -288,8 +282,20 @@ volumes:
       device: ":/mnt/nfs/alertmanager/data"
 
 configs:
-  swarmprom_dashboards2:
+  grafana_provisioning_datasources:
+    file: ./monitoring/grafana/datasources/swarmprom_dashboards.yml
+  grafana_provisioning_dashboards:
     file: ./monitoring/grafana/swarmprom_dashboards.yml
+  grafana_dashboards_containers:
+    file: ./monitoring/grafana/dashboards/containers.yml
+  grafana_dashboards_nodes:
+    file: ./monitoring/grafana/dashboards/nodes.yml
+  grafana_dashboards_swarmprom-nodes-dash:
+    file: ./monitoring/grafana/dashboards/swarmprom-nodes-dash.yml
+  ggrafana_dashboards_prometheus-2-stats:
+    file: ./monitoring/grafana/dashboards/prometheus-2-stats.yml
+  grafana_dashboards_swarmprom-services-dash:
+    file: ./monitoring/grafana/dashboards/swarmprom-services-dash.yml
   alertmanager_config2:
     file: /mnt/nfs/alertmanager/config/alertmanager.yml
 
