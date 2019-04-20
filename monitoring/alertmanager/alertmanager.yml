@@ -45,23 +45,12 @@ route:
 
   # The child route trees.
   routes:
-  # This routes performs a regular expression match on alert labels to
-  # catch alerts that are related to a list of services.
-  - match_re:
-      service: ^(synker|holo|xviewer)$
-    receiver: perso_gmail_email
-    # The service has a sub-route for critical alerts, any alerts
-    # that do not match, i.e. severity != critical, fall-back to the
-    # parent node and are sent to 'team-X-mails'
-    routes:
-    - match:
-        severity: critical
-      receiver: perso_outlook_email
-
-    routes:
-    - match:
-        severity: critical
-      receiver: slack_general
+  - match:
+    severity: warning
+    receiver: perso_outlook_email
+  - match:
+    severity: critical
+    receiver: slack_general
 
 # Inhibition rules allow to mute a set of alerts given that another alert is
 # firing.
