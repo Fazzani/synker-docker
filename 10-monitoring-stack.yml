@@ -15,6 +15,7 @@ services:
       - /dev/disk/:/dev/disk:ro
       - /:/rootfs:ro
       - /sys:/sys:ro
+    command: -logtostderr -docker_only
     # command: -storage_driver="elasticsearch" -alsologtostderr=true -storage_driver_es_host="http://elastic.synker.ovh:9200"
     deploy:
       labels:
@@ -95,7 +96,7 @@ services:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
       - '--storage.path=/alertmanager'
     configs:
-      - source: alertmanager_config
+      - source: alertmanager_config2
         target: /etc/alertmanager/alertmanager.yml
     volumes:
       - alertmanager_data:/alertmanager
@@ -168,7 +169,7 @@ services:
       - monitoring
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:6.1.4
     volumes:
       - grafana_data:/var/lib/grafana
       - grafana_log:/var/log/grafana
@@ -199,6 +200,23 @@ services:
       - monitoring
     depends_on:
       - prometheus
+    configs:
+      - source: grafana_dashboards_containers
+        target: /etc/grafana/dashboards/containers.json
+      - source: grafana_dashboards_etcd-cluster
+        target: /etc/grafana/dashboards/etcd-cluster.json
+      - source: grafana_dashboards_nodes
+        target: /etc/grafana/dashboards/nodes.json
+      - source: grafana_dashboards_portworx-cluster-status
+        target: /etc/grafana/dashboards/portworx-cluster-status.json
+      - source: grafana_dashboards_portworx-volumes-status
+        target: /etc/grafana/dashboards/portworx-volumes-status.json
+      - source: grafana_dashboards_prometheus-2-stats
+        target: /etc/grafana/dashboards/prometheus-2-stats.json
+      - source: grafana_provisioning_dashboards
+        target: /etc/grafana/provisioning/dashboards/dashboards.yml
+      - source: grafana_provisioning_datasources
+        target: /etc/grafana/provisioning/datasources/prometheus.yaml
     deploy:
       labels:
       - "traefik.tags=monitoring"
@@ -272,7 +290,7 @@ volumes:
 configs:
   swarmprom_dashboards2:
     file: ./monitoring/grafana/swarmprom_dashboards.yml
-  alertmanager_config:
+  alertmanager_config2:
     file: /mnt/nfs/alertmanager/config/alertmanager.yml
 
 networks:

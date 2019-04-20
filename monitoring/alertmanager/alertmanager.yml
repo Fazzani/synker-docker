@@ -4,8 +4,8 @@ global:
   smtp_from: 'alertmanager@gmail.com'
   smtp_auth_username: 'apikey'
   smtp_auth_password: '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'
-  smtp_require_tls: false
-  smtp_hello: 'alert.synker.ovh'
+  # smtp_require_tls: false
+  # smtp_hello: 'alert.synker.ovh'
   
   slack_api_url: 'https://api.slack.com/apps/AJ0UFPCKX-monitoring'
 
