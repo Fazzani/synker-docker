@@ -287,16 +287,16 @@ configs:
   grafana_provisioning_dashboards:
     file: ./monitoring/grafana/swarmprom_dashboards.yml
   grafana_dashboards_containers:
-    file: ./monitoring/grafana/dashboards/containers.yml
+    file: ./monitoring/grafana/dashboards/containers.json
   grafana_dashboards_nodes:
-    file: ./monitoring/grafana/dashboards/nodes.yml
+    file: ./monitoring/grafana/dashboards/nodes.json
   grafana_dashboards_swarmprom-nodes-dash:
-    file: ./monitoring/grafana/dashboards/swarmprom-nodes-dash.yml
+    file: ./monitoring/grafana/dashboards/swarmprom-nodes-dash.json
   ggrafana_dashboards_prometheus-2-stats:
-    file: ./monitoring/grafana/dashboards/prometheus-2-stats.yml
+    file: ./monitoring/grafana/dashboards/prometheus-2-stats.json
   grafana_dashboards_swarmprom-services-dash:
-    file: ./monitoring/grafana/dashboards/swarmprom-services-dash.yml
-    
+    file: ./monitoring/grafana/dashboards/swarmprom-services-dash.json
+
   alertmanager_config2:
     file: /mnt/nfs/alertmanager/config/alertmanager.yml
 
