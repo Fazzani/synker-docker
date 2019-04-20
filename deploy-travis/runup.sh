@@ -170,9 +170,6 @@ sudo docker stack deploy -c 11-system-stack.yml system
 
 #docker stack deploy -c vpn/openvpn.yml openvpn
 
-log "Clean up ..."
-sudo docker system prune -f
-
 # Restoring maridb data 
 # Must be running on mariadb host container
 sleep 15
