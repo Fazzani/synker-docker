@@ -8,24 +8,24 @@ global:
   slack_api_url: 'https://api.slack.com/apps/AJ0UFPCKX-monitoring'
 # The root route on which each incoming alert enters.
 route:
-  group_by: ['alertname', 'service']
+  receiver: slack_general
+  group_by: [ alertname, service]
   group_wait: 30s
   group_interval: 5m
   repeat_interval: 3h 
-  receiver: slack_general
   routes:
-  - match:
-    severity: warning
-    receiver: perso_outlook_email
-  - match:
-    severity: critical
+  - match_re:
+      service: synker|elasticsearch
     receiver: slack_general
+    severity: warning
+  - match:
+      severity: critical
+    receiver: perso_outlook_email
 inhibit_rules:
 - source_match:
     severity: 'critical'
   target_match:
     severity: 'warning'
-  # Apply inhibition if the alertname is the same.
   equal: ['alertname', 'service']
 receivers:
 - name: 'perso_gmail_email'
@@ -39,6 +39,6 @@ receivers:
 - name: slack_general
   slack_configs:
   - send_resolved: true
-    username: 'tara gurung'
+    username: 'monitoring'
     channel: '#general'
     api_url: 'https://hooks.slack.com/services/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'
