@@ -1,36 +1,44 @@
-# Example alertmanager.yml configuration
-#
-# See https://prometheus.io/docs/alerting/configuration/ for Alertmanager configuration syntax and built-in receivers.
-# Currently, these include email, HipChat, PagerDuty, OpsGenie, Slack, VictorOps, and WeChat.
-
-# If you need to send to a target that isn't built into Alertmanager, consider configuring a webhook_config below and
-# using an online service such as [built.io](https://built.io) or instead running a bot container to receive
-# and relay alerts. swarmstack provides an Errbot Docker image for this purpose, which currently also supports Cisco
-# Webex Teams, IRC, Telegram Messenger, and XMPP/Jabber services such as Google Hangouts (talk.google.com).
-#
-# Other backends, such CampFire, Discord, Gitter, Matrix, Mattermost, Matrix, Microsoft Bot Framework, Skype, Tox, VK,
-# and Zulip and others are supported through the Errbot community. If you want to run a bot to relay alerts, see:
-#
-# https://github.com/swarmstack/errbot-docker
-
+global:
+  smtp_smarthost: 'smtp.sendgrid.net:587'
+  smtp_from: 'alertmanager@gmail.com'
+  smtp_auth_username: 'apikey'
+  smtp_auth_password: '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'
+  # smtp_require_tls: false
+  # smtp_hello: 'alert.synker.ovh'
+  slack_api_url: 'https://api.slack.com/apps/AJ0UFPCKX-monitoring'
+# The root route on which each incoming alert enters.
 route:
-
-  group_by: ['alertname']
-  group_wait: 45s
-  group_interval: 10m
-  repeat_interval: 6h
-  receiver: 'first-responders'
-
+  group_by: ['alertname', 'service']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 3h 
+  receiver: slack_general
+  routes:
+  - match:
+    severity: warning
+    receiver: perso_outlook_email
+  - match:
+    severity: critical
+    receiver: slack_general
+inhibit_rules:
+- source_match:
+    severity: 'critical'
+  target_match:
+    severity: 'warning'
+  # Apply inhibition if the alertname is the same.
+  equal: ['alertname', 'service']
 receivers:
+- name: 'perso_gmail_email'
+  email_configs:
+  - to: 'heni.fazzani@gmail.com'
 
-  - name: 'first-responders'
+- name: 'perso_outlook_email'
+  email_configs:
+  - to: 'fazzani.heni@outlook.fr'
 
-#    email_configs:
-#      - to: 'user@example.com'
-#        send_resolved: false
-#        from: 'no-reply@example.com'
-#        smarthost: 'outbound.example.com:25'
-
-#    webhook_configs:
-#      - send_resolved: false
-#        url: http://errbot:3141/alerrt/username/domain.com/
+- name: slack_general
+  slack_configs:
+  - send_resolved: true
+    username: 'tara gurung'
+    channel: '#general'
+    api_url: 'https://hooks.slack.com/services/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'
