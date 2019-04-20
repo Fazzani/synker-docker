@@ -14,19 +14,20 @@ route:
   group_interval: 5m
   repeat_interval: 3h 
   routes:
-  - match_re:
+  - receiver: 'slack_general'
+    match_re:
       service: synker|elasticsearch
-    receiver: slack_general
-    severity: warning
-  - match:
+  - receiver: 'perso_outlook_email'
+    match:
       severity: critical
-    receiver: perso_outlook_email
+
 inhibit_rules:
 - source_match:
     severity: 'critical'
   target_match:
     severity: 'warning'
   equal: ['alertname', 'service']
+
 receivers:
 - name: 'perso_gmail_email'
   email_configs:
