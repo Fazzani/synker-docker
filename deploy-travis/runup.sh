@@ -6,6 +6,8 @@
 
 script=$(basename "$0")
 
+export $(cat ~/.ssh/environment)
+
 function log {
    echo -e "[$(date +"%d-%m-%Y %H:%M:%S") $HOSTNAME $USER $script] $1" 
 }

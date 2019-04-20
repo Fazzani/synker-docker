@@ -13,7 +13,7 @@ scp -o "StrictHostKeyChecking no" -r $TRAVIS_BUILD_DIR $REMOTE_USER@$REMOTE_HOST
 echo "Setting env var on the remote machine"
 printenv | grep -iv -e travis -e rvm -e ^_ > sshenv
 scp sshenv $REMOTE_USER@$REMOTE_HOST:~/.ssh/environment
-ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST printenv && export $(cat ~/.ssh/environment)
+# ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST printenv && export $(cat ~/.ssh/environment)
 
 sleep 1
 
@@ -24,6 +24,6 @@ ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST "chmod +x /home/$REM
 ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST "sudo sysctl -w vm.max_map_count=262144"
 
 echo "Run up docker stack script"
-ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST export $(cat ~/.ssh/environment) && ./deploy-travis/runup.sh
+ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST 'bash -s' < ./deploy-travis/runup.sh
 
 exit 0
