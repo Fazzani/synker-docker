@@ -292,7 +292,7 @@ configs:
     file: ./monitoring/grafana/dashboards/nodes.json
   grafana_dashboards_swarmprom-nodes-dash:
     file: ./monitoring/grafana/dashboards/swarmprom-nodes-dash.json
-  ggrafana_dashboards_prometheus-2-stats:
+  grafana_dashboards_prometheus-2-stats:
     file: ./monitoring/grafana/dashboards/prometheus-2-stats.json
   grafana_dashboards_swarmprom-services-dash:
     file: ./monitoring/grafana/dashboards/swarmprom-services-dash.json
