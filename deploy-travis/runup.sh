@@ -195,11 +195,11 @@ sleep 15
 log "Updating sitepack.ini pipeline..."
 curl -k --insecure -H 'Content-Type: application/json' -H 'Accept: application/json' -XPUT 'https://elastic.synker.ovh/_ingest/pipeline/sitepack_pipeline' -d "@webgrab/sitepack_pipeline.json"
 
-if [ "$MYSQL_RESET_DATABASE" = true ] ; then
-   SERVICE_ID=$(sudo docker service ps -q -f desired-state=running  synker_synkerdb | head -1)
-   CONTAINER_ID=$(sudo docker inspect --format "{{.Status.ContainerStatus.ContainerID}}" $SERVICE_ID | head -1)
-   cat ./synker/playlist.dump-2018-05-21.sql | \
-   sudo docker exec -i -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" -e MYSQL_DATABASE="${MYSQL_DATABASE}" $CONTAINER_ID \
-   mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE}" --force
-fi
+# if [ "$MYSQL_RESET_DATABASE" = true ] ; then
+#    SERVICE_ID=$(sudo docker service ps -q -f desired-state=running  synker_synkerdb | head -1)
+#    CONTAINER_ID=$(sudo docker inspect --format "{{.Status.ContainerStatus.ContainerID}}" $SERVICE_ID | head -1)
+#    cat ./synker/playlist.dump-2018-05-21.sql | \
+#    sudo docker exec -i -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" -e MYSQL_DATABASE="${MYSQL_DATABASE}" $CONTAINER_ID \
+#    mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE}" --force
+# fi
 exit 0
