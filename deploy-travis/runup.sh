@@ -104,6 +104,8 @@ MYSQL_RESET_DATABASE=${5:-false}
 echo "script param 6 => $6"
 SYNKER_VERSION=${6:-0.0.93}
 GENERIC_PASSWORD=$7
+SENDGRID_API=$8
+SLACK_API_URL=$9
 
 create_shares
 set_folder_permission
@@ -163,10 +165,6 @@ awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 echo $TAG
 export SYNKER_VERSION=$SYNKER_VERSION
-
-export SLACK_URL=https://hooks.slack.com/services/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
-export SLACK_CHANNEL=Synker
-export SLACK_USER=alertmanager
 
 echo "MONGOEXPRESS_LOGIN => ${MONGOEXPRESS_LOGIN}"
 

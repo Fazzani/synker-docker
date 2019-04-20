@@ -161,8 +161,12 @@ services:
     ports:
       - '9093:9093'
     command:
-      - '--config.file=/mnt/nfs/alertmanager/config/alertmanager.yml'
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
       - '--storage.path=/alertmanager'
+    configs:
+      - source: alertmanager_config
+        target: /etc/alertmanager/alertmanager.yml
+        mode: 0444
     volumes:
       - alertmanager_data:/alertmanager
     deploy:
@@ -255,6 +259,8 @@ volumes:
 configs:
   swarmprom_dashboards2:
     file: ./monitoring/grafana/swarmprom_dashboards.yml
+  alertmanager_config:
+    file: /mnt/nfs/alertmanager/config/alertmanager.yml
 
 networks:
   ntw_front:
