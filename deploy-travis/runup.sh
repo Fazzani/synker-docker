@@ -172,7 +172,6 @@ sudo docker stack deploy -c 11-system-stack.yml system
 
 # Restoring maridb data 
 # Must be running on mariadb host container
-sleep 15
 log "Updating sitepack.ini pipeline..."
 curl -k --insecure -H 'Content-Type: application/json' -H 'Accept: application/json' -XPUT 'https://elastic.synker.ovh/_ingest/pipeline/sitepack_pipeline' -d "@webgrab/sitepack_pipeline.json"
 
