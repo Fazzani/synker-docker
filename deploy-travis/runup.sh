@@ -97,20 +97,6 @@ function create_shares {
 
 set +e
 
-# REMOTE_USER=$1
-# MYSQL_PASSWORD=$2
-# POSTGRES_PASSWORD=$2
-# MYSQL_ROOT_PASSWORD=$3
-# MYSQL_DATABASE=${4:-playlist}
-# MYSQL_RESET_DATABASE=${5:-false}
-# echo "script param 1 => $1"
-# SYNKER_VERSION=${1:-0.0.93}
-# GENERIC_PASSWORD=$7
-# SENDGRID_API_KEY=$8
-# SLACK_API_URL=$9
-
-echo "SLACK_API_URL $SLACK_API_URL"
-
 create_shares
 set_folder_permission
 
@@ -135,16 +121,12 @@ yes | cp -rf ./monitoring/prometheus/*.yml /mnt/nfs/prometheus/config
 yes | cp -rf ./monitoring/prometheus/*.rules /mnt/nfs/prometheus/config
 
 yes | cp -rf ./monitoring/alertmanager/*.yml /mnt/nfs/alertmanager/config
-# yes | cp -rf ./script-folder/*.sh /mnt/nfs/mongodb/config
-# copy some logstash config
-# yes | cp logstash/config/*.conf /mnt/nfs/logstash/config/
-# yes | cp logstash/config/*.yml /mnt/nfs/logstash/config/
 
 set_folder_permission
 
-if [ "$MYSQL_RESET_DATABASE" = true ]; then
-  rm  -rf /mnt/nfs/mariadb/data/*
-fi
+# if [ "$MYSQL_RESET_DATABASE" = true ]; then
+#   rm  -rf /mnt/nfs/mariadb/data/*
+# fi
 
 sudo docker network create --driver overlay ntw_front \
   --attachable \
@@ -167,26 +149,23 @@ echo $GENERIC_PASSWORD > generic_password.txt
 
 awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
-echo $TAG
 export SYNKER_VERSION=$SYNKER_VERSION
 
-echo "MONGOEXPRESS_LOGIN => ${MONGOEXPRESS_LOGIN}"
-
-# sudo docker stack deploy -c 1-consul-stack.yml sd
-# sleep 15
-# sudo docker stack deploy -c 2-traefik-init-stack.yml traefik-init
-# sleep 10
-# sudo docker stack deploy -c 3-traefik-stack.yml lb
-# sudo docker stack deploy -c 4-elk-stack.yml elk
-# sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
-# sudo docker stack deploy -c 5-synker-stack.yml synker
-# sudo docker stack deploy -c 6-xviewer-stack.yml xviewer
-# # sudo docker stack deploy -c 7-domotic-stack.yml --resolve-image never domotic
-# # sudo docker stack deploy -c 8-mongo-stack.yml mongo
-# sudo docker stack deploy -c 9-idp-stack.yml idp
+sudo docker stack deploy -c 1-consul-stack.yml sd
+sleep 15
+sudo docker stack deploy -c 2-traefik-init-stack.yml traefik-init
+sleep 10
+sudo docker stack deploy -c 3-traefik-stack.yml lb
+sudo docker stack deploy -c 4-elk-stack.yml elk
+sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
+sudo docker stack deploy -c 5-synker-stack.yml synker
+sudo docker stack deploy -c 6-xviewer-stack.yml xviewer
+# sudo docker stack deploy -c 7-domotic-stack.yml --resolve-image never domotic
+# sudo docker stack deploy -c 8-mongo-stack.yml mongo
+sudo docker stack deploy -c 9-idp-stack.yml idp
 sudo docker stack deploy -c 10-monitoring-stack.yml monitoring
-#sudo docker stack deploy -c postgres-stack.yml postresql
-#sudo docker stack deploy -c ./others/others-stack.yml others
+sudo docker stack deploy -c postgres-stack.yml postresql
+sudo docker stack deploy -c ./others/others-stack.yml others
 
 #docker stack deploy -c vpn/openvpn.yml openvpn
 

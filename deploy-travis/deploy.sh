@@ -13,7 +13,6 @@ scp -o "StrictHostKeyChecking no" -r $TRAVIS_BUILD_DIR $REMOTE_USER@$REMOTE_HOST
 echo "Setting env var on the remote machine"
 printenv | grep -iv -e travis -e rvm -e ^_ > sshenv
 scp sshenv $REMOTE_USER@$REMOTE_HOST:~/.ssh/environment
-# ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST printenv && export $(cat ~/.ssh/environment)
 
 sleep 1
 
