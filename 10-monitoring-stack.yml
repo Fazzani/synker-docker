@@ -283,7 +283,7 @@ volumes:
 
 configs:
   grafana_provisioning_datasources:
-    file: ./monitoring/grafana/datasources/swarmprom_dashboards.yml
+    file: ./monitoring/grafana/datasources/prometheus.yml
   grafana_provisioning_dashboards:
     file: ./monitoring/grafana/swarmprom_dashboards.yml
   grafana_dashboards_containers:
@@ -296,6 +296,7 @@ configs:
     file: ./monitoring/grafana/dashboards/prometheus-2-stats.yml
   grafana_dashboards_swarmprom-services-dash:
     file: ./monitoring/grafana/dashboards/swarmprom-services-dash.yml
+    
   alertmanager_config2:
     file: /mnt/nfs/alertmanager/config/alertmanager.yml
 
