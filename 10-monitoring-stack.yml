@@ -179,9 +179,6 @@ services:
       - "traefik.enable=true"
       mode: replicated
       replicas: 1
-      placement:
-        constraints:
-          - node.role == manager
       resources:
         limits:
           memory: 128M
