@@ -19,7 +19,8 @@ ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST "chmod +x /home/$REM
 ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST "sudo sysctl -w vm.max_map_count=262144"
 
 echo "Run up docker stack script"
-ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST 'bash -s' < ./deploy-travis/runup.sh \
-$REMOTE_USER $POSTGRES_PASSWORD $MYSQL_ROOT_PASSWORD $MYSQL_DATABASE $MYSQL_RESET_DATABASE $version $GENERIC_PASSWORD $SENDGRID_API $SLACK_API_URL
-
+printenv > sshenv
+scp sshenv $REMOTE_USER@$REMOTE_HOST:~/.ssh/environment
+ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST printenv
+# ssh -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST 'bash -s' < ./deploy-travis/runup.sh
 exit 0
