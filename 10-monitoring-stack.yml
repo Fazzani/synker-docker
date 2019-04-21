@@ -42,6 +42,7 @@ services:
     image: prom/node-exporter:${NODE_EXPORTER:-v0.17.0}
     networks:
       - monitoring
+      - ntw_front
     ports:
       - '9100:9100'
     environment:
