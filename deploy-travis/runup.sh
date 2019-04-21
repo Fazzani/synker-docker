@@ -100,7 +100,7 @@ function create_secrets {
   echo $POSTGRES_PASSWORD > postgres_password.txt
   echo $GENERIC_PASSWORD > generic_password.txt
   echo $SENDGRID_API_KEY > SENDGRID_API_KEY.txt
-  echo $SLACK_APP_MONITORING > SENDGRID_API_URL_MONITORING.txt
+  echo $SLACK_APP_MONITORING > SLACK_MONITORING_APP.txt
   echo $SLACK_API_URL_SECRET > SLACK_API_URL.txt
 }
 

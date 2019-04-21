@@ -313,7 +313,7 @@ secrets:
     file: generic_password.txt
   slack_api_url:
     file: SLACK_API_URL.txt
-  sendgrid_api_url_monitoring_app:
-    file: SENDGRID_API_URL_MONITORING.txt
+  slack_monitoring_app:
+    file: SLACK_MONITORING_APP.txt
   sendgrid_api_key:
     file: SENDGRID_API_KEY.txt
