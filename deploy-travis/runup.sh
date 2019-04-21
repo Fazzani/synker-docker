@@ -40,6 +40,7 @@ function create_shares {
   sudo mkdir /mnt/nfs/elastic/synkerconfig || true
   sudo mkdir /mnt/nfs/consul        || true
   sudo mkdir /mnt/nfs/consul/data || true
+  sudo mkdir /mnt/nfs/consul/config || true
   sudo mkdir /mnt/nfs/synker || true
   sudo mkdir /mnt/nfs/synker/data || true
   sudo mkdir /mnt/nfs/postgres || true
@@ -104,7 +105,7 @@ function create_secrets {
 }
 
 function set_alert_manager_config {
-  sed -i "s@slack_api@${SLACK_API_URL}@g" ./monitoring/alertmanager/alertmanager.yml
+  sed -i "s@slack_api@${SLACK_API_URL_SECRET}@g" ./monitoring/alertmanager/alertmanager.yml
   sed -i "s@smtp_auth_password_secret@${SENDGRID_API_KEY}@g" ./monitoring/alertmanager/alertmanager.yml
   sed -i "s@slack_api_monitoring_secret@${SENDGRID_API_URL_MONITORING}@g" ./monitoring/alertmanager/alertmanager.yml
   
@@ -134,6 +135,8 @@ yes | cp -rf nginx-proxy/favicon.ico /mnt/nfs/nginx-proxy/html
 
 yes | cp -rf ./configs/definitions.json /mnt/nfs/rabbitmq/config
 yes | cp -rf ./configs/rabbitmq.config /mnt/nfs/rabbitmq/config
+
+yes | cp -rf ./configs/consul.json /mnt/nfs/consul/config
 
 yes | cp -rf ./monitoring/grafana/dashboards/*.json /mnt/nfs/grafana/dashboards
 yes | cp -rf ./monitoring/grafana/notifiers/*.yml /mnt/nfs/grafana/notifiers
