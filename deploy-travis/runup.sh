@@ -100,13 +100,14 @@ function create_secrets {
   echo $POSTGRES_PASSWORD > postgres_password.txt
   echo $GENERIC_PASSWORD > generic_password.txt
   echo $SENDGRID_API_KEY > SENDGRID_API_KEY.txt
-  echo $SENDGRID_API_URL_MONITORING > SENDGRID_API_URL_MONITORING.txt
+  echo $SLACK_APP_MONITORING > SENDGRID_API_URL_MONITORING.txt
   echo $SLACK_API_URL_SECRET > SLACK_API_URL.txt
 }
 
 function set_alert_manager_config {
   sed -i "s@slack_hook@${SLACK_API_URL_SECRET}@g" ./monitoring/alertmanager/alertmanager.yml
   sed -i "s@smtp_auth_password_secret@${SENDGRID_API_KEY}@g" ./monitoring/alertmanager/alertmanager.yml
+  sed -i "s@slack_am@${SLACK_APP_MONITORING}@g" ./monitoring/alertmanager/alertmanager.yml
   
   yes | cp -rf ./monitoring/alertmanager/*.yml /mnt/nfs/alertmanager/config
 }
