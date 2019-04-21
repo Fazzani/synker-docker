@@ -38,6 +38,15 @@ scrape_configs:
   - job_name: 'prometheus'
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
-
     static_configs:
       - targets: ['localhost:9090']
+
+  - job_name: consul
+    consul_sd_configs:
+      - server: 'consul:8500'
+    relabel_configs:
+      - source_labels: [__meta_consul_tags]
+        regex: .*,monitor,.*
+        action: keep
+      - source_labels: [__meta_consul_service]
+        target_label: service

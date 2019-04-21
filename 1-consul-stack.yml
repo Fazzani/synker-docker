@@ -31,9 +31,10 @@ services:
         condition: on-failure
     networks:
       - ntw_front
+      - monitoring
 
 networks:
-  ingress_net_backend:
+  monitoring:
     driver: overlay
     external: true
   ntw_front:
