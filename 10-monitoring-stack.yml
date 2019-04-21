@@ -175,6 +175,7 @@ services:
         window: 120s
     networks:
       - monitoring
+      - ntw_front
 
   grafana:
     image: grafana/grafana:${GRAFANA_VERSION:-6.1.4}
