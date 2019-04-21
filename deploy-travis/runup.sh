@@ -101,7 +101,7 @@ function create_secrets {
   echo $GENERIC_PASSWORD > generic_password.txt
   echo $SENDGRID_API_KEY > SENDGRID_API_KEY.txt
   echo $SENDGRID_API_URL_MONITORING > SENDGRID_API_URL_MONITORING.txt
-  echo $SLACK_API_URL > SLACK_API_URL.txt
+  echo $SLACK_API_URL_SECRET > SLACK_API_URL.txt
 }
 
 function set_alert_manager_config {
