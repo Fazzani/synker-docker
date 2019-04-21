@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   consul:
-    image: consul:${CONSUL_VERSION:-1.4.1}
+    image: consul:${CONSUL_VERSION:-1.4.4}
     command: agent -server -bootstrap-expect=1 -ui -disable-host-node-id
     volumes:
       - consul_data:/consul/data
@@ -18,7 +18,7 @@ services:
       - "traefik.backend=consul"
       - "traefik.backend.loadbalancer.swarm=true"
       - "traefik.backend.loadbalancer.method=drr"
-      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.entryPoints=http"
       - "traefik.frontend.rule=Host:consul.synker.ovh"
       - "traefik.docker.network=ntw_front"
       - "traefik.port=8500"
