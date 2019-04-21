@@ -42,4 +42,4 @@ receivers:
   - send_resolved: true
     username: 'monitoring'
     channel: '#general'
-    api_url: 'slack_hook'
+    api_url: 'slack_hook_secret'
