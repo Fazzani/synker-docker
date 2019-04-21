@@ -151,20 +151,37 @@ awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 export SYNKER_VERSION=$SYNKER_VERSION
 
-sudo docker stack deploy -c 1-consul-stack.yml sd
-sleep 15
-sudo docker stack deploy -c 2-traefik-init-stack.yml traefik-init
-sleep 10
-sudo docker stack deploy -c 3-traefik-stack.yml lb
-sudo docker stack deploy -c 4-elk-stack.yml elk
-sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
-sudo docker stack deploy -c 5-synker-stack.yml synker
-sudo docker stack deploy -c 6-xviewer-stack.yml xviewer
+# sudo docker stack deploy -c 1-consul-stack.yml sd
+# sleep 15
+# sudo docker stack deploy -c 2-traefik-init-stack.yml traefik-init
+# sleep 10
+# sudo docker stack deploy -c 3-traefik-stack.yml lb
+# sudo docker stack deploy -c 4-elk-stack.yml elk
+# sudo docker stack deploy -c ./webgrab/docker-compose.yml webgrab
+# sudo docker stack deploy -c 5-synker-stack.yml synker
+# sudo docker stack deploy -c 6-xviewer-stack.yml xviewer
+
 # sudo docker stack deploy -c 7-domotic-stack.yml --resolve-image never domotic
 # sudo docker stack deploy -c 8-mongo-stack.yml mongo
 sudo docker stack deploy -c 9-idp-stack.yml idp
 sudo docker stack deploy -c 10-monitoring-stack.yml monitoring
 sudo docker stack deploy -c 11-system-stack.yml system
+
+
+cat << EOF > consul_services.json 
+{
+   "ID": "node-exporter",
+   "Name": "monitoring_node-exporter",
+   "Tags": ["monitor"],
+   "Port": 9100
+}
+EOF
+
+curl --request PUT \
+    --data @consul_services.json \
+    http://consul.synker.ovh:8500/v1/agent/service/register
+
+
 # sudo docker stack deploy -c postgres-stack.yml postresql
 # sudo docker stack deploy -c ./others/others-stack.yml others
 

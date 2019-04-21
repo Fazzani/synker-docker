@@ -2,14 +2,14 @@ global:
   smtp_smarthost: 'smtp.sendgrid.net:587'
   smtp_from: 'alertmanager@gmail.com'
   smtp_auth_username: 'apikey'
-  smtp_auth_password: '$SENDGRID_API'
+  smtp_auth_password: '$SENDGRID_API_KEY'
   # smtp_require_tls: false
   # smtp_hello: 'alert.synker.ovh'
-  slack_api_url: 'https://api.slack.com/apps/AJ0UFPCKX-monitoring'
+  slack_api_url: '$SENDGRID_API_URL_MONITORING'
 # The root route on which each incoming alert enters.
 route:
   receiver: slack_general
-  group_by: [ alertname, service]
+  group_by: [ alertname, service, cluster]
   group_wait: 30s
   group_interval: 5m
   repeat_interval: 3h 
@@ -42,4 +42,4 @@ receivers:
   - send_resolved: true
     username: 'monitoring'
     channel: '#general'
-    api_url: 'https://hooks.slack.com/services/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'
+    api_url: '$SLACK_API_URL'
