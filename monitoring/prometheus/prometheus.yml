@@ -50,3 +50,10 @@ scrape_configs:
         action: keep
       - source_labels: [__meta_consul_service]
         target_label: service
+        
+  - job_name: 'node-exporter'
+    dns_sd_configs:
+    - names:
+      - 'tasks.node-exporter'
+      type: 'A'
+      port: 9100
