@@ -150,9 +150,9 @@ echo $SENDGRID_API_KEY > SENDGRID_API_KEY.txt
 echo $SENDGRID_API_URL_MONITORING > SENDGRID_API_URL_MONITORING.txt
 echo $SLACK_API_URL > SLACK_API_URL.txt
 
-sed -i "s@slack_api_url@${SLACK_API_URL}@g" ./monitoring/alertmanager/alertmanager.yml
+sed -i "s@slack_api@${SLACK_API_URL}@g" ./monitoring/alertmanager/alertmanager.yml
 sed -i "s@smtp_auth_password@${SENDGRID_API_KEY}@g" ./monitoring/alertmanager/alertmanager.yml
-sed -i "s@slack_api_url@${SENDGRID_API_URL_MONITORING}@g" ./monitoring/alertmanager/alertmanager.yml
+sed -i "s@slack_api_url_monitoring@${SENDGRID_API_URL_MONITORING}@g" ./monitoring/alertmanager/alertmanager.yml
 
 awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
