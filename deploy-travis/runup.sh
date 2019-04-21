@@ -146,6 +146,13 @@ sudo docker network create --driver overlay monitoring \
 
 echo $POSTGRES_PASSWORD > postgres_password.txt
 echo $GENERIC_PASSWORD > generic_password.txt
+echo $SENDGRID_API_KEY > SENDGRID_API_KEY.txt
+echo $SENDGRID_API_URL_MONITORING > SENDGRID_API_URL_MONITORING.txt
+echo $SLACK_API_URL > SLACK_API_URL.txt
+
+sed -i "s/$SLACK_API_URL/${SLACK_API_URL}/g" synker-docker/monitoring/alertmanager/alertmanager.yml
+sed -i "s/$SENDGRID_API_KEY/${SENDGRID_API_KEY}/g" synker-docker/monitoring/alertmanager/alertmanager.yml
+sed -i "s/$SENDGRID_API_URL_MONITORING/${SENDGRID_API_URL_MONITORING}/g" synker-docker/monitoring/alertmanager/alertmanager.yml
 
 awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
@@ -166,21 +173,6 @@ export SYNKER_VERSION=$SYNKER_VERSION
 sudo docker stack deploy -c 9-idp-stack.yml idp
 sudo docker stack deploy -c 10-monitoring-stack.yml monitoring
 sudo docker stack deploy -c 11-system-stack.yml system
-
-
-cat << EOF > consul_services.json 
-{
-   "ID": "node-exporter",
-   "Name": "node-exporter",
-   "Tags": ["monitor"],
-   "Port": 9100
-}
-EOF
-
-curl --request PUT \
-    --data @consul_services.json \
-    http://consul.synker.ovh:8500/v1/agent/service/register
-
 
 # sudo docker stack deploy -c postgres-stack.yml postresql
 # sudo docker stack deploy -c ./others/others-stack.yml others

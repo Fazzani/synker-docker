@@ -1,0 +1,22 @@
+{
+  // cat << EOF > consul_services.json
+  // {
+  //    "ID": "node-exporter",
+  //    "Name": "node-exporter",
+  //    "Tags": ["monitor"],
+  //    "Port": 9100
+  // }
+  // EOF
+
+  // curl --request PUT \
+  // --data @consul_services.json \
+  // http://consul.synker.ovh:8500/v1/agent/service/register
+
+  "service": {
+    "ID": "node-exporter",
+    "Name": "node-exporter",
+    "Tags": ["monitor"],
+    "Port": 9100,
+    "enable_tag_override": false
+  }
+}

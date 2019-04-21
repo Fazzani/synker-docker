@@ -5,7 +5,6 @@ services:
     image: google/cadvisor:${CADVISOR_VERSION:-v0.33.0}
     networks:
       - monitoring
-      - ntw_front
     ports:
       - "8123:8080"
     volumes:
@@ -42,7 +41,6 @@ services:
     image: prom/node-exporter:${NODE_EXPORTER:-v0.17.0}
     networks:
       - monitoring
-      - ntw_front
     ports:
       - '9100:9100'
     environment:
@@ -98,7 +96,6 @@ services:
     image: prom/alertmanager:${ALERTMANAGER_VERSION:-v0.15.3}
     networks:
       - monitoring
-      - ntw_front
     ports:
       - '9093:9093'
     command:
@@ -176,7 +173,6 @@ services:
         window: 120s
     networks:
       - monitoring
-      - ntw_front
 
   grafana:
     image: grafana/grafana:${GRAFANA_VERSION:-6.1.4}
@@ -188,6 +184,7 @@ services:
       - "3123:3000"
     secrets:
       - generic_password
+      - sendgrid_api_key
     environment:
       - GF_SERVER_ROOT_URL=https://grafana.synker.ovh
       - GF_SERVER_DOMAIN=grafana.synker.ovh
@@ -197,10 +194,9 @@ services:
       - GF_SMTP_ENABLED=true
       - GF_SMTP_HOST=smtp.sendgrid.com:587
       - GF_SMTP_USER=heni.fazzani@gmail.com
-      - GF_SMTP_PASSWORD=$SENDGRID_API_KEY
+      - GF_SMTP_PASSWORD=/run/secrets/sendgrid_api_key
       - GF_SMTP_FROM_ADDRESS=heni.fazzani@gmail.com
     networks:
-      - ntw_front
       - monitoring
     depends_on:
       - prometheus
@@ -309,11 +305,15 @@ configs:
     file: /mnt/nfs/alertmanager/config/alertmanager.yml
 
 networks:
-  ntw_front:
-    external: true
   monitoring:
     external: true
 
 secrets:
   generic_password:
     file: generic_password.txt
+  slack_api_url:
+    file: SLACK_API_URL.txt
+  sendgrid_api_url_monitoring_app:
+    file: SENDGRID_API_URL_MONITORING.txt
+  sendgrid_api_key:
+    file: SENDGRID_API_KEY.txt
