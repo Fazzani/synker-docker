@@ -6,7 +6,7 @@
 ## TODO
 
 - Alert Manager // Slack, sendgrid
-- Prometheus service discovery (consul)
+- [x] Register all Prometheus exporters by service discovery (consul)
 - Grafana db to postgre
 - Synker Apps Metrics to Prometheus / Grafana dashboard
 - pushgateway

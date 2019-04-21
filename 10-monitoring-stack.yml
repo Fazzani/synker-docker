@@ -98,6 +98,7 @@ services:
     image: prom/alertmanager:${ALERTMANAGER_VERSION:-v0.15.3}
     networks:
       - monitoring
+      - ntw_front
     ports:
       - '9093:9093'
     command:
