@@ -39,9 +39,11 @@ services:
           memory: 64M
 
   node-exporter:
-    image: stefanprodan/swarmprom-node-exporter:${NODE_EXPORTER:-v0.16.0}
+    image: prom/node-exporter:${NODE_EXPORTER:-v0.17.0}
     networks:
       - monitoring
+    ports:
+      - '9100:9100'
     environment:
       - NODE_ID={{.Node.ID}}
     volumes:
@@ -49,13 +51,18 @@ services:
       - /sys:/host/sys:ro
       - /:/rootfs:ro
       - /etc/hostname:/etc/nodename
-    command:
-      - '--path.sysfs=/host/sys'
-      - '--path.procfs=/host/proc'
-      - '--collector.textfile.directory=/etc/node-exporter/'
-      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
-      - '--no-collector.ipvs'
     deploy:
+      labels:
+      - "traefik.tags=monitoring"
+      - "traefik.backend=node-exporter"
+      - "traefik.backend.loadbalancer.swarm=true"
+      - "traefik.backend.loadbalancer.method=drr"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:nodeexporter.synker.ovh"
+      - "traefik.frontend.auth.basic.users=admin:$$apr1$$8Dlf//P1$$aE5beYa7YLUDWZ16D9F6b1"
+      - "traefik.docker.network=monitoring"
+      - "traefik.port=9100"
+      - "traefik.enable=true"
       mode: global
       resources:
         limits:
