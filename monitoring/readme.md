@@ -5,13 +5,14 @@
 
 ## TODO
 
-- Alert Manager // Slack, sendgrid
-- [x] Register all Prometheus exporters by service discovery (consul)
-- Grafana db to postgre
-- Synker Apps Metrics to Prometheus / Grafana dashboard
-- pushgateway
-- caddy: swarmstack/caddy:no-stats-0.11.5
-- AlertManager en mode cluster
+- [ ] Synker APP Metrics
+- [ ] AlertManager // Slack, sendgrid
+- [ ] Grafana db to postgre
+- [ ] Synker Apps Metrics to Prometheus / Grafana dashboard
+- [ ] Prometheus pushgateway
+- [ ] caddy: swarmstack/caddy:no-stats-0.11.5
+- [ ] AlertManager en mode cluster
+- [x] Register all Prometheus exporters by service discovery (consul/swarm dns)
 
 ```yaml
  collectd:
