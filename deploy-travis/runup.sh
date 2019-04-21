@@ -171,7 +171,7 @@ sudo docker stack deploy -c 11-system-stack.yml system
 cat << EOF > consul_services.json 
 {
    "ID": "node-exporter",
-   "Name": "monitoring_node-exporter",
+   "Name": "node-exporter",
    "Tags": ["monitor"],
    "Port": 9100
 }
