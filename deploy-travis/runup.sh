@@ -95,6 +95,22 @@ function create_shares {
   # sudo mkdir /mnt/nfs/mongodb/config || true
 }
 
+function create_secrets {
+  echo $POSTGRES_PASSWORD > postgres_password.txt
+  echo $GENERIC_PASSWORD > generic_password.txt
+  echo $SENDGRID_API_KEY > SENDGRID_API_KEY.txt
+  echo $SENDGRID_API_URL_MONITORING > SENDGRID_API_URL_MONITORING.txt
+  echo $SLACK_API_URL > SLACK_API_URL.txt
+}
+
+function set_alert_manager_config{
+  sed -i "s@slack_api@${SLACK_API_URL}@g" ./monitoring/alertmanager/alertmanager.yml
+  sed -i "s@smtp_auth_password@${SENDGRID_API_KEY}@g" ./monitoring/alertmanager/alertmanager.yml
+  sed -i "s@slack_api_url_monitoring@${SENDGRID_API_URL_MONITORING}@g" ./monitoring/alertmanager/alertmanager.yml
+  
+  yes | cp -rf ./monitoring/alertmanager/*.yml /mnt/nfs/alertmanager/config
+}
+
 set +e
 
 create_shares
@@ -103,6 +119,12 @@ set_folder_permission
 set -euox
 
 cd /home/${REMOTE_USER}/synker-docker/
+
+create_secrets
+
+awk '{ sub("\r$", ""); print }' .env > env
+export $(cat env)
+export SYNKER_VERSION=$SYNKER_VERSION
 
 # copy some elastic config
 yes | cp -rf elastic/stopwords.txt /mnt/nfs/elastic/synkerconfig
@@ -120,7 +142,7 @@ yes | cp -rf ./monitoring/grafana/datasources/*.yml /mnt/nfs/grafana/datasources
 yes | cp -rf ./monitoring/prometheus/*.yml /mnt/nfs/prometheus/config
 yes | cp -rf ./monitoring/prometheus/*.rules /mnt/nfs/prometheus/config
 
-yes | cp -rf ./monitoring/alertmanager/*.yml /mnt/nfs/alertmanager/config
+set_alert_manager_config
 
 set_folder_permission
 
@@ -143,20 +165,6 @@ sudo docker network create --driver overlay monitoring \
   --attachable \
   --subnet=70.27.0.0/24 \
   --opt encrypted=true || true
-
-echo $POSTGRES_PASSWORD > postgres_password.txt
-echo $GENERIC_PASSWORD > generic_password.txt
-echo $SENDGRID_API_KEY > SENDGRID_API_KEY.txt
-echo $SENDGRID_API_URL_MONITORING > SENDGRID_API_URL_MONITORING.txt
-echo $SLACK_API_URL > SLACK_API_URL.txt
-
-sed -i "s@slack_api@${SLACK_API_URL}@g" ./monitoring/alertmanager/alertmanager.yml
-sed -i "s@smtp_auth_password@${SENDGRID_API_KEY}@g" ./monitoring/alertmanager/alertmanager.yml
-sed -i "s@slack_api_url_monitoring@${SENDGRID_API_URL_MONITORING}@g" ./monitoring/alertmanager/alertmanager.yml
-
-awk '{ sub("\r$", ""); print }' .env > env
-export $(cat env)
-export SYNKER_VERSION=$SYNKER_VERSION
 
 # sudo docker stack deploy -c 1-consul-stack.yml sd
 # sleep 15
