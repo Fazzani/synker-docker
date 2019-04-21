@@ -2,7 +2,7 @@ global:
   smtp_smarthost: 'smtp.sendgrid.net:587'
   smtp_from: 'alertmanager@gmail.com'
   smtp_auth_username: 'apikey'
-  smtp_auth_password: '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'
+  smtp_auth_password: '$SENDGRID_API'
   # smtp_require_tls: false
   # smtp_hello: 'alert.synker.ovh'
   slack_api_url: 'https://api.slack.com/apps/AJ0UFPCKX-monitoring'
