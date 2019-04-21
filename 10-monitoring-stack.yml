@@ -102,7 +102,7 @@ services:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
       - '--storage.path=/alertmanager'
     configs:
-      - source: alertmanager_config3
+      - source: alertmanager_config
         target: /etc/alertmanager/alertmanager.yml
     volumes:
       - alertmanager_data:/alertmanager
@@ -301,7 +301,7 @@ configs:
   grafana_dashboards_swarmprom-services-dash:
     file: ./monitoring/grafana/dashboards/swarmprom-services-dash.json
 
-  alertmanager_config3:
+  alertmanager_config:
     file: /mnt/nfs/alertmanager/config/alertmanager.yml
 
 networks:
