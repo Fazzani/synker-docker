@@ -103,7 +103,7 @@ function create_secrets {
   echo $SLACK_API_URL > SLACK_API_URL.txt
 }
 
-function set_alert_manager_config{
+function set_alert_manager_config {
   sed -i "s@slack_api@${SLACK_API_URL}@g" ./monitoring/alertmanager/alertmanager.yml
   sed -i "s@smtp_auth_password@${SENDGRID_API_KEY}@g" ./monitoring/alertmanager/alertmanager.yml
   sed -i "s@slack_api_url_monitoring@${SENDGRID_API_URL_MONITORING}@g" ./monitoring/alertmanager/alertmanager.yml
