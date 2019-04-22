@@ -43,7 +43,7 @@ caddy:
 
 ## References
 
-[Reference swarm 1](https://github.com/swarmstack/swarmstack/blob/master/docker-compose.yml)
-[Alerting with Grafana and Slack Example](https://medium.com/pharos-production/grafana-alerting-and-slack-notifications-3affe9d5f688)
-[Source 2](https://github.com/stefanprodan/swarmprom)
-[Source 3](https://blog.octo.com/exemple-dutilisation-de-prometheus-et-grafana-pour-le-monitoring-dun-cluster-kubernetes/)
+- [Reference swarm 1](https://github.com/swarmstack/swarmstack/blob/master/docker-compose.yml)
+- [Alerting with Grafana and Slack Example](https://medium.com/pharos-production/grafana-alerting-and-slack-notifications-3affe9d5f688)
+- [Source 2](https://github.com/stefanprodan/swarmprom)
+- [Source 3](https://blog.octo.com/exemple-dutilisation-de-prometheus-et-grafana-pour-le-monitoring-dun-cluster-kubernetes/)
