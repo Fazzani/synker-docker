@@ -142,6 +142,7 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--storage.tsdb.retention.time=72h'
+      - '--web.external-url=https://prometheus.synker.ovh'
     volumes:
       - prom_data:/prometheus/:rw
       - prom_config:/etc/prometheus/
