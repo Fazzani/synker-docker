@@ -11,3 +11,11 @@ datasources:
   isDefault: true
   version: 1
   editable: true
+- name: Elastic
+   type: elasticsearch
+   access: proxy
+   database: "[metrics-]YYYY.MM.DD"
+   url: https://elastic.synker.ovh
+   jsonData:
+     interval: Daily
+     timeField: "@timestamp"
