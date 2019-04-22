@@ -153,10 +153,6 @@ yes | cp -rf ./configs/rabbitmq.config /mnt/nfs/rabbitmq/config
 
 yes | cp -rf ./configs/consul.json /mnt/nfs/consul/config
 
-yes | cp -rf ./monitoring/grafana/dashboards/*.json /mnt/nfs/grafana/dashboards
-yes | cp -rf ./monitoring/grafana/notifiers/*.yml /mnt/nfs/grafana/notifiers
-yes | cp -rf ./monitoring/grafana/datasources/*.yml /mnt/nfs/grafana/datasources
-
 yes | cp -rf ./monitoring/prometheus/*.yml /mnt/nfs/prometheus/config
 yes | cp -rf ./monitoring/prometheus/*.rules /mnt/nfs/prometheus/config
 
