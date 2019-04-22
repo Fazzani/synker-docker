@@ -28,6 +28,6 @@ notifiers:
     # org_name: Synker
     uid: email1
     settings:
-      addresses: fazzani.heni@gmail.com
+      addresses: heni.fazzani@gmail.com;fazzani.heni@outlook.fr
 
 
