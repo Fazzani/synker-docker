@@ -103,7 +103,7 @@ services:
       - '--storage.path=/alertmanager'
       - '--web.external-url=https://alert.synker.ovh'
     configs:
-      - source: alertmanager_config2
+      - source: alertmanager_config
         target: /etc/alertmanager/alertmanager.yml
     volumes:
       - alertmanager_data:/alertmanager
@@ -216,7 +216,7 @@ services:
         target: /etc/grafana/provisioning/dashboards/dashboards.yml
       - source: grafana_provisioning_datasources1
         target: /etc/grafana/provisioning/datasources/prometheus.yaml
-      - source: grafana_provisioning_notifiers
+      - source: grafana_provisioning_notifiers1
         target: /etc/grafana/provisioning/notifiers/notifiers.yaml
     deploy:
       labels:
@@ -274,7 +274,7 @@ volumes:
       device: ":/mnt/nfs/alertmanager/data"
 
 configs:
-  grafana_provisioning_notifiers:
+  grafana_provisioning_notifiers1:
     file: ./monitoring/grafana/notifiers/notifiers.yml
   grafana_provisioning_datasources1:
     file: ./monitoring/grafana/datasources/prometheus.yml
@@ -291,7 +291,7 @@ configs:
   grafana_dashboards_swarmprom-services-dash:
     file: ./monitoring/grafana/dashboards/swarmprom-services-dash.json
 
-  alertmanager_config2:
+  alertmanager_config:
     file: /mnt/nfs/alertmanager/config/alertmanager.yml
 
 networks:

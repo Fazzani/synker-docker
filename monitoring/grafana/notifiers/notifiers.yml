@@ -17,18 +17,19 @@ notifiers:
       uploadImage: true
       url: %slack_hook_secret%
 
-  - name: notif_pushhover
+  - name: notif_pushover
     type: pushover
-    org_name: Synker
+    org_name: Synker.
     uid: pushhover1
-    apiToken: %PUSH_HOVER_API_TOKEN%
-    userKey: %PUSHHOVER_USER_KEY%
+    settings:
+      apiToken: %PUSH_HOVER_API_TOKEN%
+      userKey: %PUSHHOVER_USER_KEY%
 
   - name: email
     type: email
     org_name: Synker
     uid: email1
-      settings:
-        addresses: fazzani.heni@gmail.com
+    settings:
+      addresses: fazzani.heni@gmail.com
 
 
