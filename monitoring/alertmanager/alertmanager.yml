@@ -17,9 +17,9 @@ route:
   - receiver: 'slack_general'
     match_re:
       service: synker|elasticsearch
-  - receiver: 'perso_outlook_email'
-    match:
-      severity: warning
+  # - receiver: 'perso_outlook_email'
+  #   match:
+  #     severity: warning
   - receiver: 'pushover'
     match:
       severity: warning
