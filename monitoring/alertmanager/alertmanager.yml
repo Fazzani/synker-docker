@@ -19,7 +19,10 @@ route:
       service: synker|elasticsearch
   - receiver: 'perso_outlook_email'
     match:
-      severity: critical
+      severity: warning
+  - receiver: 'pushover'
+    match:
+      severity: warning
 
 inhibit_rules:
 - source_match:
@@ -43,3 +46,9 @@ receivers:
     username: 'monitoring'
     channel: '#general'
     api_url: '%slack_hook_secret%'
+
+- name: pushover
+  pushover_configs:
+  - send_resolved: true
+    user_key: '%PUSHHOVER_USER_KEY%'
+    token: '%PUSH_HOVER_API_TOKEN%'

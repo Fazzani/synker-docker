@@ -102,12 +102,17 @@ function create_secrets {
   echo $SENDGRID_API_KEY > SENDGRID_API_KEY.txt
   echo $SLACK_APP_MONITORING > SLACK_MONITORING_APP.txt
   echo $SLACK_API_URL_SECRET > SLACK_API_URL.txt
+  echo $PUSHHOVER_USER_KEY > PUSHHOVER_USER_KEY.txt
+  echo $PUSH_HOVER_API_TOKEN > PUSH_HOVER_API_TOKEN.txt
+  
 }
 
 function set_alert_manager_config {
   sed -i "s@%slack_am%@${SLACK_APP_MONITORING}@g" ./monitoring/alertmanager/alertmanager.yml
   sed -i "s@%smtp_auth_password_secret%@${SENDGRID_API_KEY}@g" ./monitoring/alertmanager/alertmanager.yml
   sed -i "s@%slack_hook_secret%@${SLACK_API_URL_SECRET}@g" ./monitoring/alertmanager/alertmanager.yml
+  sed -i "s@%PUSHHOVER_USER_KEY%@${PUSHHOVER_USER_KEY}@g" ./monitoring/alertmanager/alertmanager.yml
+  sed -i "s@%PUSH_HOVER_API_TOKEN%@${PUSH_HOVER_API_TOKEN}@g" ./monitoring/alertmanager/alertmanager.yml
   
   yes | cp -rf ./monitoring/alertmanager/*.yml /mnt/nfs/alertmanager/config
 }
