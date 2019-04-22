@@ -3,6 +3,15 @@
 [Reference swarm 1](https://github.com/swarmstack/swarmstack/blob/master/docker-compose.yml)
 [Source 2](https://github.com/stefanprodan/swarmprom)
 
+## Swarm monitoring stack
+
+- Prometheus
+- AlertManager
+- Grafana
+- Unsee
+- CAdvisor
+- Node-exporter
+
 ## Prometheus schema
 
 ![Prometheus](https://blog.octo.com/wp-content/uploads/2017/03/prom-archi.png 'Prometheus schema')
@@ -10,12 +19,12 @@
 ## TODO
 
 - [ ] Synker APP Metrics
-- [ ] AlertManager // Slack, sendgrid
-- [ ] Grafana db to postgre
-- [ ] Synker Apps Metrics to Prometheus / Grafana dashboard
 - [ ] Prometheus pushgateway
-- [ ] caddy: swarmstack/caddy:no-stats-0.11.5
+- [ ] Caddy: swarmstack/caddy:no-stats-0.11.5
+- [ ] Synker Apps Metrics to Prometheus / Grafana dashboard
+- [ ] Grafana db to postgre
 - [ ] AlertManager en mode cluster
+- [x] AlertManager // Slack, sendgrid
 - [x] Register all Prometheus exporters by service discovery (consul/swarm dns)
 
 ```yaml

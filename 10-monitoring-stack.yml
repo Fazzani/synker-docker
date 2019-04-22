@@ -214,7 +214,7 @@ services:
         target: /etc/grafana/dashboards/prometheus-2-stats.json
       - source: grafana_provisioning_dashboards
         target: /etc/grafana/provisioning/dashboards/dashboards.yml
-      - source: grafana_provisioning_datasources
+      - source: grafana_provisioning_datasources2
         target: /etc/grafana/provisioning/datasources/prometheus.yaml
       - source: grafana_provisioning_notifiers
         target: /etc/grafana/provisioning/notifiers/notifiers.yml
@@ -276,7 +276,7 @@ volumes:
 configs:
   grafana_provisioning_notifiers:
     file: ./monitoring/grafana/notifiers/notifiers.yml
-  grafana_provisioning_datasources:
+  grafana_provisioning_datasources2:
     file: ./monitoring/grafana/datasources/prometheus.yml
   grafana_provisioning_dashboards:
     file: ./monitoring/grafana/swarmprom_dashboards.yml
