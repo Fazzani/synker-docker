@@ -1,11 +1,11 @@
 notifiers:
   - name: notif_slack_errors
     type: slack
-    uid: notifier1
+    uid: notifier_slack_errors
     # either
     # org_id: 2
     # or
-    org_name: Synker.
+    org_name: Synker
     is_default: true
     send_reminders: true
     frequency: 1h
@@ -14,6 +14,21 @@ notifiers:
     # alert notification type.
     settings:
       recipient: "Infra"
-      token: "TJ113HH88/BJ3586K70/dnlFqdq88mUAD2cBngnI9mkk"
       uploadImage: true
-      url: https://slack.com
+      url: %slack_hook_secret%
+
+  - name: notif_pushhover
+    type: pushover
+    org_name: Synker
+    uid: pushhover1
+    apiToken: %PUSH_HOVER_API_TOKEN%
+    userKey: %PUSHHOVER_USER_KEY%
+
+  - name: email
+    type: email
+    org_name: Synker
+    uid: email1
+      settings:
+        addresses: fazzani.heni@gmail.com
+
+

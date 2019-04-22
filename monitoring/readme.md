@@ -3,6 +3,10 @@
 [Reference swarm 1](https://github.com/swarmstack/swarmstack/blob/master/docker-compose.yml)
 [Source 2](https://github.com/stefanprodan/swarmprom)
 
+## Prometheus schema
+
+![Prometheus](https://blog.octo.com/wp-content/uploads/2017/03/prom-archi.png 'Prometheus schema')
+
 ## TODO
 
 - [ ] Synker APP Metrics

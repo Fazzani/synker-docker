@@ -117,6 +117,13 @@ function set_alert_manager_config {
   yes | cp -rf ./monitoring/alertmanager/*.yml /mnt/nfs/alertmanager/config
 }
 
+function set_grafana_config {
+  sed -i "s@%smtp_auth_password_secret%@${SENDGRID_API_KEY}@g" ./monitoring/grafana/notifiers/notifiers.yml
+  sed -i "s@%slack_hook_secret%@${SLACK_API_URL_SECRET}@g" ./monitoring/grafana/notifiers/notifiers.yml
+  sed -i "s@%PUSHHOVER_USER_KEY%@${PUSHHOVER_USER_KEY}@g" ./monitoring/grafana/notifiers/notifiers.yml
+  sed -i "s@%PUSH_HOVER_API_TOKEN%@${PUSH_HOVER_API_TOKEN}@g" ./monitoring/grafana/notifiers/notifiers.yml
+}
+
 set +e
 
 create_shares
@@ -131,6 +138,9 @@ create_secrets
 awk '{ sub("\r$", ""); print }' .env > env
 export $(cat env)
 export SYNKER_VERSION=$SYNKER_VERSION
+
+set_alert_manager_config
+set_grafana_config
 
 # copy some elastic config
 yes | cp -rf elastic/stopwords.txt /mnt/nfs/elastic/synkerconfig
@@ -149,8 +159,6 @@ yes | cp -rf ./monitoring/grafana/datasources/*.yml /mnt/nfs/grafana/datasources
 
 yes | cp -rf ./monitoring/prometheus/*.yml /mnt/nfs/prometheus/config
 yes | cp -rf ./monitoring/prometheus/*.rules /mnt/nfs/prometheus/config
-
-set_alert_manager_config
 
 set_folder_permission
 

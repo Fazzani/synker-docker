@@ -181,7 +181,6 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
       - grafana_log:/var/log/grafana
-      # - grafana_notifiers:/etc/grafana/provisioning/notifiers
     ports:
       - "3123:3000"
     secrets:
@@ -215,8 +214,10 @@ services:
         target: /etc/grafana/dashboards/prometheus-2-stats.json
       - source: grafana_provisioning_dashboards
         target: /etc/grafana/provisioning/dashboards/dashboards.yml
-      - source: grafana_provisioning_datasources
+      - source: grafana_provisioning_datasources1
         target: /etc/grafana/provisioning/datasources/prometheus.yaml
+      - source: grafana_notifiers
+        target: /etc/grafana/provisioning/notifiers/notifiers.yaml
     deploy:
       labels:
       - "traefik.tags=monitoring"
@@ -288,7 +289,7 @@ volumes:
       device: ":/mnt/nfs/alertmanager/data"
 
 configs:
-  grafana_provisioning_datasources:
+  grafana_provisioning_datasources1:
     file: ./monitoring/grafana/datasources/prometheus.yml
   grafana_provisioning_dashboards:
     file: ./monitoring/grafana/swarmprom_dashboards.yml
