@@ -2,10 +2,7 @@ notifiers:
   - name: notif_slack_errors
     type: slack
     uid: notifier_slack_errors
-    # either
-    # org_id: 2
-    # or
-    org_name: Synker
+    org_id: 1
     is_default: true
     send_reminders: true
     frequency: 1h
@@ -19,7 +16,7 @@ notifiers:
 
   - name: notif_pushover
     type: pushover
-    org_name: Synker.
+    org_id: 1
     uid: pushhover1
     settings:
       apiToken: %PUSH_HOVER_API_TOKEN%
@@ -27,7 +24,8 @@ notifiers:
 
   - name: email
     type: email
-    org_name: Synker
+    org_id: 1
+    # org_name: Synker
     uid: email1
     settings:
       addresses: fazzani.heni@gmail.com
