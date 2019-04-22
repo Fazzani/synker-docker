@@ -216,8 +216,8 @@ services:
         target: /etc/grafana/provisioning/dashboards/dashboards.yml
       - source: grafana_provisioning_datasources1
         target: /etc/grafana/provisioning/datasources/prometheus.yaml
-      - source: grafana_provisioning_notifiers1
-        target: /etc/grafana/provisioning/notifiers/notifiers.yaml
+      # - source: grafana_provisioning_notifiers
+      #   target: /etc/grafana/provisioning/notifiers/notifiers.yml
     deploy:
       labels:
       - "traefik.tags=monitoring"
@@ -274,7 +274,7 @@ volumes:
       device: ":/mnt/nfs/alertmanager/data"
 
 configs:
-  grafana_provisioning_notifiers1:
+  grafana_provisioning_notifiers:
     file: ./monitoring/grafana/notifiers/notifiers.yml
   grafana_provisioning_datasources1:
     file: ./monitoring/grafana/datasources/prometheus.yml
