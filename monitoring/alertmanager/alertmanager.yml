@@ -17,19 +17,23 @@ route:
   - receiver: 'slack_general'
     match_re:
       service: synker|elasticsearch
+    routes:
   # - receiver: 'perso_outlook_email'
   #   match:
   #     severity: warning
-  - receiver: 'pushover'
-    match:
-      severity: warning
+    - receiver: 'pushover'
+      match:
+        severity: critical
+    - receiver: 'perso_gmail_email'
+      match:
+        alertname: 'high_load'
 
 inhibit_rules:
 - source_match:
     severity: 'critical'
   target_match:
     severity: 'warning'
-  equal: ['alertname', 'service']
+  equal: ['alertname', 'service', 'cluster']
 
 receivers:
 - name: 'perso_gmail_email'

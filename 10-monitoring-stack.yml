@@ -103,7 +103,7 @@ services:
       - '--storage.path=/alertmanager'
       - '--web.external-url=https://alert.synker.ovh'
     configs:
-      - source: alertmanager_config
+      - source: alertmanager_config1
         target: /etc/alertmanager/alertmanager.yml
     volumes:
       - alertmanager_data:/alertmanager
@@ -291,7 +291,7 @@ configs:
   grafana_dashboards_swarmprom-services-dash:
     file: ./monitoring/grafana/dashboards/swarmprom-services-dash.json
 
-  alertmanager_config:
+  alertmanager_config1:
     file: /mnt/nfs/alertmanager/config/alertmanager.yml
 
 networks:
