@@ -13,10 +13,12 @@
 
 ![Prometheus](https://blog.octo.com/wp-content/uploads/2017/03/prom-archi.png 'Prometheus schema')
 
+[Routing tool editor](https://prometheus.io/webtools/alerting/routing-tree-editor/)
+
 ## TODO
 
 - [ ] Synker APP Metrics
-- [ ] Prometheus pushgateway
+- [ ] Prometheus pushgateway pr les batchs
 - [ ] Caddy: swarmstack/caddy:no-stats-0.11.5
 - [ ] Synker Apps Metrics to Prometheus / Grafana dashboard
 - [ ] Grafana db to postgre
@@ -32,7 +34,7 @@ collectd:
   ports:
     - 9103:9103
   networks:
-    - monitoring
+    - monitoring  
 
 pushgateway:
   image: prom/pushgateway:v0.7.0
