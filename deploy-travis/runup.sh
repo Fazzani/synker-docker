@@ -134,9 +134,8 @@ set -euox
 cd /home/${REMOTE_USER}/synker-docker/
 
 echo "Dumping databases..."
-alias exit=return
-. /home/${REMOTE_USER}/synker-docker/deploy-travis/db_dump.sh 'pl' 'playlist' 3 || log "Warning database dumping failed!"
-unalias exit
+$(/home/${REMOTE_USER}/synker-docker/deploy-travis/db_dump.sh 'pl' 'playlist' 3) 
+[ $? -ne 0 ] || log "Warning database dumping failed!"
 
 create_secrets
 
