@@ -23,7 +23,7 @@ function purge() {
 
     files_count_to_delete="$(($(find $w_dir -name $files_pattern_to_delete -type f | wc -l) - $r))"
     rm -rf $(find $w_dir -name $files_pattern_to_delete -type f | sort -n | head -n $files_count_to_delete)
-    return 0
+    # return 0
 }
 ###################################### Variables
 
