@@ -43,4 +43,5 @@ gzip -f $local_dump_file_path
 
 echo "Purging dumps (keeping only last $retention dump files)"
 purge "dump_${database}_*.gz" $retention $dump_dir
+
 exit 0

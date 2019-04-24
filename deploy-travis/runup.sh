@@ -134,10 +134,7 @@ set -euox
 cd /home/${REMOTE_USER}/synker-docker/
 
 echo "Dumping databases..."
-
-set +e
-( /home/${REMOTE_USER}/synker-docker/deploy-travis/db_dump.sh 'pl' 'playlist' 3 ) || log "Warning database dumping failed!"
-set -e
+( /home/${REMOTE_USER}/synker-docker/deploy-travis/db_dump.sh 'pl' 'playlist' 3 || log "Warning database dumping failed!") 
 
 create_secrets
 
