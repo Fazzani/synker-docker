@@ -15,9 +15,9 @@ retention=${3:-5}
 ####################################### functions
 
 function purge() {
-    files_pattern_to_delete=${1:-*.gz}
-    retentionMax=${2:-3}
-    current_dir=${3:-.}
+    files_pattern_to_delete=${1:-'*.gz'}
+    r=${2:-3}
+    current_dir=${3:-'.'}
 
     files_count_to_delete="$(($(find $current_dir -name $files_pattern_to_delete -type f | wc -l) - $r))"
     rm -rf $(find $current_dir -name $files_pattern_to_delete -type f | sort -n | head -n $files_count_to_delete)
