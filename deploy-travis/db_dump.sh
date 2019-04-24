@@ -1,8 +1,9 @@
 #!/bin/bash
 
 function purge() {
-    retention={$1:-3}
-
+    files_pattern_to_delete=${1:*.log}
+    retention={$2:-3}
+    find $lo -type f -mtime +7 -exec /bin/rm -f {} \;
 }
 
 #SYNKER DB DUMP
