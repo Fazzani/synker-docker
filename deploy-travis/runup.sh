@@ -135,7 +135,7 @@ cd /home/${REMOTE_USER}/synker-docker/
 
 echo "Dumping databases..."
 
-./deploy-travis/db_dump.sh || log "Warning database dumping failed!"
+./deploy-travis/db_dump.sh 'pl' 'playlist' || log "Warning database dumping failed!"
 
 create_secrets
 
