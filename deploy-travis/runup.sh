@@ -129,12 +129,12 @@ set +e
 create_shares
 set_folder_permission
 
-
 cd /home/${REMOTE_USER}/synker-docker/
 
 echo "Dumping databases..."
 
-./deploy-travis/db_dump.sh 'pl' 'playlist' 3
+(./deploy-travis/db_dump.sh 'pl' 'playlist' 3)
+echo "Dumping done."
 
 set -euox
 create_secrets
