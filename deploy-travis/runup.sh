@@ -211,4 +211,7 @@ curl -k --insecure -H 'Content-Type: application/json' -H 'Accept: application/j
 #    sudo docker exec -i -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" -e MYSQL_DATABASE="${MYSQL_DATABASE}" $CONTAINER_ID \
 #    mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE}" --force
 # fi
+
+# sudo docker exec -it $(sudo docker ps -aq -f "name=*synker") /bin/bash
+# pg_dump -U pl playlist > /var/lib/postgresql/data/dump.24.04.2019.sql
 exit 0

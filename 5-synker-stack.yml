@@ -113,6 +113,8 @@ services:
       POSTGRES_USER: "pl"
       POSTGRES_DB: "playlist"
     deploy:
+      labels:
+      - "name=synker_db"
       mode: replicated
       replicas: 1
       restart_policy:
