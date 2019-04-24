@@ -16,7 +16,7 @@ retention=${3:-5}
 
 function purge() {
     files_pattern_to_delete=${1:-'*.gz'}
-    r=${2:-3}
+    r=${2:-3}#retention days
     w_dir=${3:-'.'}
 
     files_count_to_delete="$(($(find $w_dir -name $files_pattern_to_delete -type f | wc -l) - $r))"
