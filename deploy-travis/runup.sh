@@ -135,7 +135,7 @@ cd /home/${REMOTE_USER}/synker-docker/
 
 echo "Dumping databases..."
 alias exit=return
-(. /home/${REMOTE_USER}/synker-docker/deploy-travis/db_dump.sh 'pl' 'playlist' 3 || log "Warning database dumping failed!") 
+. /home/${REMOTE_USER}/synker-docker/deploy-travis/db_dump.sh 'pl' 'playlist' 3 || log "Warning database dumping failed!"
 unalias exit
 
 create_secrets
