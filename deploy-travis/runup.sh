@@ -133,6 +133,10 @@ set -euox
 
 cd /home/${REMOTE_USER}/synker-docker/
 
+echo "Dumping databases..."
+
+./db_dump.sh || log "Warning database dumping failed!"
+
 create_secrets
 
 awk '{ sub("\r$", ""); print }' .env > env
@@ -212,6 +216,4 @@ curl -k --insecure -H 'Content-Type: application/json' -H 'Accept: application/j
 #    mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE}" --force
 # fi
 
-# sudo docker exec -it $(sudo docker ps -aq -f "name=*synker") /bin/bash
-# pg_dump -U pl playlist > /var/lib/postgresql/data/dump.24.04.2019.sql
 exit 0
