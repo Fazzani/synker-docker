@@ -129,7 +129,6 @@ set +e
 create_shares
 set_folder_permission
 
-set -euox
 
 cd /home/${REMOTE_USER}/synker-docker/
 
@@ -137,6 +136,7 @@ echo "Dumping databases..."
 
 ./deploy-travis/db_dump.sh 'pl' 'playlist' 3
 
+set -euox
 create_secrets
 
 awk '{ sub("\r$", ""); print }' .env > env
