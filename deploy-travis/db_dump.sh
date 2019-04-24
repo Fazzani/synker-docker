@@ -38,10 +38,10 @@ sudo docker exec -i $(sudo docker ps -aq -f "name=synker_synkerdb") \
 
 [ -f $local_dump_file_path ] || exit -1
 
-echo "Compressing dump"
+# echo "Compressing dump"
 gzip -f $local_dump_file_path
 
-echo "Purging dumps (keeping only last $retention dump files)"
+# echo "Purging dumps (keeping only last $retention dump files)"
 purge "dump_${database}_*.gz" $retention $dump_dir
 
 exit 0
