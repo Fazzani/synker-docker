@@ -91,20 +91,20 @@ function create_docker_networks() {
   sudo docker network create --driver overlay ntw_front \
   --attachable \
   --subnet=10.0.0.0/24 \
-  --opt encrypted=true || true
+  --opt encrypted=true
 
   [ docker_network_is_exist ingress_net_backend ] && \
   sudo docker network create --driver overlay ingress_net_backend \
   --attachable \
   --subnet=70.28.0.0/16 \
   --opt com.docker.network.driver.mtu=9216 \
-  --opt encrypted=true || true
+  --opt encrypted=true
 
   [ docker_network_is_exist monitoring ] && \
   sudo docker network create --driver overlay monitoring \
   --attachable \
   --subnet=70.27.0.0/24 \
-  --opt encrypted=true || true
+  --opt encrypted=true
 }
 
 function deploy_docker_stacks() {
