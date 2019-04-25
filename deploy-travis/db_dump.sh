@@ -6,6 +6,7 @@
 # with max retention of dump files
 #
 #-------------------------------------
+source ./lib.sh
 
 set +e
 set -x

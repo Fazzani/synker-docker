@@ -5,7 +5,7 @@
 ### ### ### ### ### ### ### ### ### ### ###
 
 script=$(basename "$0")
-
+source ./lib.sh
 ### ### ### ### ### ### ### ### ### ### ###
 # Functions
 ### ### ### ### ### ### ### ### ### ### ###
@@ -139,6 +139,7 @@ set_folder_permissions
 
 echo "Dumping databases..."
 . ./deploy-travis/db_dump.sh 'pl' 'playlist' 3
+set +e
 echo "Dumping databases done."
 
 cd /home/${REMOTE_USER:-ansible}/synker-docker/
