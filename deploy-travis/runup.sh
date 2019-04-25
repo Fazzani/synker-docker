@@ -138,7 +138,7 @@ create_volumes
 set_folder_permissions
 
 echo "Dumping databases..."
-. ./deploy-travis/db_dump.sh 'pl' 'playlist' 3
+./deploy-travis/db_dump.sh 'pl' 'playlist' 3
 set +e
 echo "Dumping databases done."
 
