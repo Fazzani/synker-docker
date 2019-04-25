@@ -132,7 +132,7 @@ echo "Dumping done."
 create_secrets
 
 awk '{ sub("\r$", ""); print }' .env >env
-export $(cat env)
+export $(cat env) || true
 export SYNKER_VERSION=$SYNKER_VERSION
 
 set_alert_manager_config
