@@ -13,6 +13,10 @@ function log() {
   echo -e "[$(date +"%d-%m-%Y %H:%M:%S") $HOSTNAME $USER $script] $1"
 }
 
+function onexit() {
+  echo $?
+}
+
 function set_folder_permissions() {
   sudo chmod 777 -R /mnt/nfs/elastic
   sudo chmod 777 -R /mnt/nfs/consul
@@ -122,24 +126,25 @@ function deploy_docker_stacks() {
   sudo docker stack deploy -c 11-system-stack.yml system
 }
 
+trap onexit ERR
+set +e
+
 ### ### ### ### ### ### ### ### ### ### ###
 ###  Script body
 ### ### ### ### ### ### ### ### ### ### ###
 create_volumes
 set_folder_permissions
-
 cd /home/${REMOTE_USER:-ansible}/synker-docker/
 
-set +e
 echo "Dumping databases..."
-./deploy-travis/db_dump.sh 'pl' 'playlist' 3
-echo "Dumping done."
+./deploy-travis/db_dump.sh 'pl' 'playlist' 3 >/dev/null
+echo "Dumping databases done."
 
 cd /home/${REMOTE_USER:-ansible}/synker-docker/
-export $(cat ~/.ssh/environment) > /dev/null
+export $(cat ~/.ssh/environment) >/dev/null
 
 awk '{ sub("\r$", ""); print }' .env >env
-export $(cat env) > /dev/null
+export $(cat env) >/dev/null
 export SYNKER_VERSION=$SYNKER_VERSION
 
 create_secrets
