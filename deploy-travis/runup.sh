@@ -131,8 +131,8 @@ set_folder_permission
 
 cd /home/${REMOTE_USER}/synker-docker/
 
+set +e
 echo "Dumping databases..."
-
 (./deploy-travis/db_dump.sh 'pl' 'playlist' 3)
 echo "Dumping done."
 
