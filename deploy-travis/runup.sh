@@ -128,20 +128,20 @@ function deploy_docker_stacks() {
 
 trap onexit ERR
 set +e
+export $(cat ~/.ssh/environment)
+cd /home/${REMOTE_USER:-ansible}/synker-docker/
 
 ### ### ### ### ### ### ### ### ### ### ###
 ###  Script body
 ### ### ### ### ### ### ### ### ### ### ###
 create_volumes
 set_folder_permissions
-cd /home/${REMOTE_USER:-ansible}/synker-docker/
 
 echo "Dumping databases..."
 . ./deploy-travis/db_dump.sh 'pl' 'playlist' 3
 echo "Dumping databases done."
 
 cd /home/${REMOTE_USER:-ansible}/synker-docker/
-$(export $(cat ~/.ssh/environment)) >/dev/null
 
 awk '{ sub("\r$", ""); print }' .env >env
 export $(cat env) >/dev/null
