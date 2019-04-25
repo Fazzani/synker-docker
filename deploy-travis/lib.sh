@@ -1,3 +1,12 @@
+# Set Flags
+quiet=false
+printLog=false
+verbose=false
+force=false
+strict=false
+debug=false
+args=()
+
 # Set Colors
 bold=$(tput bold)
 reset=$(tput sgr0)
@@ -7,7 +16,6 @@ green=$(tput setaf 76)
 tan=$(tput setaf 3)
 blue=$(tput setaf 38)
 underline=$(tput sgr 0 1)
-
 
 # Logging & Feedback
 # -----------------------------------------------------
