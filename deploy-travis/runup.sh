@@ -6,7 +6,7 @@
 
 script=$(basename "$0")
 
-export $(cat ~/.ssh/environment)
+#export $(cat ~/.ssh/environment)
 
 ### ### ### ### ### ### ### ### ### ### ###
 # Functions
@@ -126,7 +126,7 @@ set_folder_permissions
 cd /home/${REMOTE_USER}/synker-docker/
 
 echo "Dumping databases..."
-(./deploy-travis/db_dump.sh 'pl' 'playlist' 3) 2>&1
+(./deploy-travis/db_dump.sh 'pl' 'playlist' 3)
 echo "Dumping done."
 
 create_secrets
