@@ -8,7 +8,7 @@ script=$(basename "$0")
 # Provide a variable with the location of this script.
 scriptPath="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-utilsLocation="${scriptPath}/lib.sh" # Update this path to find the utilities.
+utilsLocation="${scriptPath}/lib/utils.sh" # Update this path to find the utilities.
 
 if [ -f "${utilsLocation}" ]; then
   source "${utilsLocation}"
@@ -43,7 +43,7 @@ function set_folder_permissions() {
   sudo chmod 777 -R /mnt/nfs/prometheus
   sudo chmod 777 -R /mnt/nfs/alertmanager
   # sudo chmod 777 /mnt/nfs/emby
-}
+} 
 
 function create_volumes() {
   shares_arr=("/mnt/nfs/elastic" "/mnt/nfs/elastic/data" "/mnt/nfs/elastic/config" "/mnt/nfs/elastic/synkerconfig")
