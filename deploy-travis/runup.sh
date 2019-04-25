@@ -5,8 +5,7 @@
 ### ### ### ### ### ### ### ### ### ### ###
 
 script=$(basename "$0")
-set +e
-export $(cat ~/.ssh/environment) || true
+
 
 ### ### ### ### ### ### ### ### ### ### ###
 # Functions
@@ -128,6 +127,9 @@ cd /home/${REMOTE_USER}/synker-docker/
 echo "Dumping databases..."
 (./deploy-travis/db_dump.sh 'pl' 'playlist' 3)
 echo "Dumping done."
+
+set +e
+export $(cat ~/.ssh/environment) || true
 
 create_secrets
 
