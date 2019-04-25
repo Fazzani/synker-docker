@@ -45,7 +45,7 @@ local_dump_file_path="${dump_dir}${dump_filename}"
 sudo docker exec -i $(sudo docker ps -aq -f "name=synker_synkerdb") \
      /bin/bash -c "pg_dump -U $db_user $database > /var/lib/postgresql/data/${dump_filename}"
 
-[ -f $local_dump_file_path ] || { warning "Dump file $local_dump_file_path not found" && exit -1 }
+[ -f $local_dump_file_path ] || { warning "Dump dump file not found"; exit -1 }
 
 # echo "Compressing dump"
 gzip -f $local_dump_file_path
