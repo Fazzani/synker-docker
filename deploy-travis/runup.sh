@@ -129,14 +129,14 @@ echo "Dumping databases..."
 echo "Dumping done."
 
 set +e
+cd /home/${REMOTE_USER}/synker-docker/
 export $(cat ~/.ssh/environment) || true
-
-create_secrets
 
 awk '{ sub("\r$", ""); print }' .env >env
 export $(cat env) || true
 export SYNKER_VERSION=$SYNKER_VERSION
 
+create_secrets
 set_alert_manager_config
 set_grafana_config
 
