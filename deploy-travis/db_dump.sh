@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #-------------------------------------
 #
@@ -6,7 +6,14 @@
 # with max retention of dump files
 #
 #-------------------------------------
-source ./lib.sh
+# Provide a variable with the location of this script.
+scriptPath="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+utilsLocation="${scriptPath}/lib.sh" # Update this path to find the utilities.
+
+if [ -f "${utilsLocation}" ]; then
+  source "${utilsLocation}"
+fi
 
 set +e
 set -x

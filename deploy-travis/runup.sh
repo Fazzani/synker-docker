@@ -1,11 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ### ### ### ### ### ### ### ### ### ### ###
 # Deploy script for Synker docker stack
 ### ### ### ### ### ### ### ### ### ### ###
 
 script=$(basename "$0")
-source ./lib.sh
+# Provide a variable with the location of this script.
+scriptPath="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+utilsLocation="${scriptPath}/lib.sh" # Update this path to find the utilities.
+
+if [ -f "${utilsLocation}" ]; then
+  source "${utilsLocation}"
+fi
 ### ### ### ### ### ### ### ### ### ### ###
 # Functions
 ### ### ### ### ### ### ### ### ### ### ###
@@ -126,7 +133,7 @@ function deploy_docker_stacks() {
   sudo docker stack deploy -c 11-system-stack.yml system
 }
 
-trap onexit ERR
+trap onexit EXIT INT TERM
 set +e
 export $(cat ~/.ssh/environment)
 cd /home/${REMOTE_USER:-ansible}/synker-docker/
