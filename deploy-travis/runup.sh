@@ -130,11 +130,11 @@ set_folder_permissions
 
 cd /home/${REMOTE_USER:-ansible}/synker-docker/
 
+set +e
 echo "Dumping databases..."
 ./deploy-travis/db_dump.sh 'pl' 'playlist' 3
 echo "Dumping done."
 
-set +e
 cd /home/${REMOTE_USER:-ansible}/synker-docker/
 export $(cat ~/.ssh/environment) > /dev/null
 
