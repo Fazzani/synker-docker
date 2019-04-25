@@ -6,7 +6,6 @@
 
 script=$(basename "$0")
 
-
 ### ### ### ### ### ### ### ### ### ### ###
 # Functions
 ### ### ### ### ### ### ### ### ### ### ###
@@ -83,18 +82,25 @@ function set_grafana_config() {
   sed -i "s@%PUSH_HOVER_API_TOKEN%@${PUSH_HOVER_API_TOKEN}@g" ./monitoring/grafana/notifiers/notifiers.yml
 }
 
+function docker_network_is_exist() {
+  return [ $(sudo docker network ls -f name=$1 -q | wc -l) -eq 1 ]
+}
+
 function create_docker_networks() {
+  [ docker_network_is_exist ntw_front ] || \
   sudo docker network create --driver overlay ntw_front \
   --attachable \
   --subnet=10.0.0.0/24 \
   --opt encrypted=true || true
 
+  [ docker_network_is_exist ingress_net_backend ] || \
   sudo docker network create --driver overlay ingress_net_backend \
   --attachable \
   --subnet=70.28.0.0/16 \
   --opt com.docker.network.driver.mtu=9216 \
   --opt encrypted=true || true
 
+  [ docker_network_is_exist monitoring ] || \
   sudo docker network create --driver overlay monitoring \
   --attachable \
   --subnet=70.27.0.0/24 \
@@ -122,14 +128,14 @@ function deploy_docker_stacks() {
 create_volumes
 set_folder_permissions
 
-cd /home/${REMOTE_USER}/synker-docker/
+cd /home/${REMOTE_USER:-ansible}/synker-docker/
 
 echo "Dumping databases..."
 ./deploy-travis/db_dump.sh 'pl' 'playlist' 3
 echo "Dumping done."
 
 set +e
-cd /home/${REMOTE_USER}/synker-docker/
+cd /home/${REMOTE_USER:-ansible}/synker-docker/
 export $(cat ~/.ssh/environment) || true
 
 awk '{ sub("\r$", ""); print }' .env >env
