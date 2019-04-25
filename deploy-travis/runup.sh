@@ -6,7 +6,7 @@
 
 script=$(basename "$0")
 set +e
-export $(cat ~/.ssh/environment) 2>&1
+export $(cat ~/.ssh/environment) || true
 
 ### ### ### ### ### ### ### ### ### ### ###
 # Functions
