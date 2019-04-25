@@ -16,10 +16,6 @@ fi
 ### ### ### ### ### ### ### ### ### ### ###
 # Functions
 ### ### ### ### ### ### ### ### ### ### ###
-function log() {
-  echo -e "[$(date +"%d-%m-%Y %H:%M:%S") $HOSTNAME $USER $script] $1"
-}
-
 function onexit() {
   echo $?
 }
@@ -144,10 +140,10 @@ cd /home/${REMOTE_USER:-ansible}/synker-docker/
 create_volumes
 set_folder_permissions
 
-echo "Dumping databases..."
+info "Dumping databases..."
 ./deploy-travis/db_dump.sh 'pl' 'playlist' 3
 set +e
-echo "Dumping databases done."
+info "Dumping databases done."
 
 cd /home/${REMOTE_USER:-ansible}/synker-docker/
 
@@ -179,7 +175,7 @@ create_docker_networks
 
 deploy_docker_stacks
 
-log "Updating sitepack.ini pipeline..."
+info "Updating sitepack.ini pipeline..."
 curl -k --insecure -H 'Content-Type: application/json' -H 'Accept: application/json' -XPUT 'https://elastic.synker.ovh/_ingest/pipeline/sitepack_pipeline' -d "@webgrab/sitepack_pipeline.json"
 
 exit 0
