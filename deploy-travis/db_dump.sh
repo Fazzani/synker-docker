@@ -73,30 +73,35 @@ function drop() {
 }
 
 ##################################### script body
+function main() {
+    info "Database container Id : $db_container_id"
+    info "Backuping database: $database"
+    sudo docker exec -i $db_container_id \
+        /bin/bash -c "pg_dump -n public -F t -U $db_user -f /var/lib/postgresql/data/${dump_filename} $database"
+
+    info "local_dump_file_path => $local_dump_file_path"
+
+    [ -f $local_dump_file_path ] && success "$database was backuped successfully" || {
+        warning "Missed backup file"
+        exit -1
+    }
+
+    info "Compressing backup"
+    gzip -9 -f $local_dump_file_path >$local_dump_file_path_gz
+
+    info "Purging backups (keeping only last $retention dump files)"
+    purge "dump_${database}_*.tar.gz" $retention $dump_dir
+
+    # info "Restoring database"
+    # gunzip -c $local_dump_file_path_gz >$local_dump_file_path && \
+    #     drop playlist_tes pl && \
+    #     restore playlist_tes $dump_filename
+}
+
+##################################### script body
 
 trap onexit EXIT INT TERM
 
-info "Database container Id : $db_container_id"
-info "Backuping database: $database"
-sudo docker exec -i $db_container_id \
-    /bin/bash -c "pg_dump -n public -F t -U $db_user -f /var/lib/postgresql/data/${dump_filename} $database"
-
-info "local_dump_file_path => $local_dump_file_path"
-
-[ -f $local_dump_file_path ] && success "$database was backuped successfully" || {
-    warning "Missed backup file"
-    exit -1
-}
-
-info "Compressing backup"
-gzip -9 -f $local_dump_file_path >$local_dump_file_path_gz
-
-info "Purging backups (keeping only last $retention dump files)"
-purge "dump_${database}_*.tar.gz" $retention $dump_dir
-
-# info "Restoring database"
-# gunzip -c $local_dump_file_path_gz >$local_dump_file_path && \
-#     drop playlist_tes pl && \
-#     restore playlist_tes $dump_filename
+main
 
 exit 0
