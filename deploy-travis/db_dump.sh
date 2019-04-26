@@ -53,7 +53,7 @@ function drop(){
 ###################################### Variables
 
 dump_dir="/mnt/nfs/postgres/data/"
-dump_filename="dump_${database}_$(date +%F).tar.gz"
+dump_filename="dump_${database}_$(date +%F).tar"
 local_dump_file_path="${dump_dir}${dump_filename}"
 
 ##################################### script body
