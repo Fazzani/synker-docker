@@ -12,9 +12,9 @@ groups:
         $labels.container_label_com_docker_swarm_node_id }}'' CPU usage is at {{ humanize $value}}%.'
       summary: CPU alert for Swarm task '{{ $labels.container_label_com_docker_swarm_task_name}}' on '{{ $labels.container_label_com_docker_swarm_node_id }}'
 
-  - alert: task_high_memory_usage_2g
+  - alert: task_high_memory_usage_3g
     expr: sum(container_memory_rss{container_label_com_docker_swarm_task_name=~".+"})
-      BY (container_label_com_docker_swarm_task_name, container_label_com_docker_swarm_node_id) > 2e+09
+      BY (container_label_com_docker_swarm_task_name, container_label_com_docker_swarm_node_id) > 3e+09
     for: 5m
     labels:
       severity: warning
