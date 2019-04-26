@@ -3,6 +3,10 @@ version: "3.5"
 services:
   system-prune:
     image: docker
+    networks:
+      - monitoring
+      - ntw_front
+      - ingress_net_backend
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     command: docker system prune --all --force
@@ -10,3 +14,10 @@ services:
       mode: global
       restart_policy:
         delay: 24h
+networks:
+  monitoring:
+    external: true
+  ingress_net_backend:
+    external: true
+  ntw_front:
+    external: true

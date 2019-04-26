@@ -178,4 +178,7 @@ deploy_docker_stacks
 info "Updating sitepack.ini pipeline..."
 curl -k --insecure -H 'Content-Type: application/json' -H 'Accept: application/json' -XPUT 'https://elastic.synker.ovh/_ingest/pipeline/sitepack_pipeline' -d "@webgrab/sitepack_pipeline.json"
 
+info "Force update prometheus service"
+sudo docker service update monitoring_prometheus --force
+
 exit 0
