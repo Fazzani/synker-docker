@@ -24,7 +24,7 @@ services:
     volumes:
       - "/mnt/nfs/consul:/backupsource"
       - "/mnt/freebox/backup_synker/consul:/backupdest"
-    command: --exclude="config"
+    # command: --exclude="config"
     deploy:
       mode: replicated
       replicas: 1
