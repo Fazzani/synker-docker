@@ -22,7 +22,7 @@ services:
       - monitoring
       - ntw_front
     volumes:
-      - "/mnt/nfs/consul/data:/backupsource"
+      - "/mnt/nfs/consul:/backupsource"
       - "/mnt/freebox/backup_synker/consul:/backupdest"
     command: --exclude="config"
     deploy:
