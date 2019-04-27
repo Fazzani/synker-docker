@@ -34,6 +34,23 @@ services:
       restart_policy:
         delay: 24h
 
+  backup_postgres:
+    image: jordancrawford/rpi-cold-storage-rsync
+    networks:
+      - monitoring
+      - ntw_front
+    volumes:
+      - "/mnt/nfs/postgres/data:/backupsource"
+      - "/mnt/freebox/backup_synker/postgres:/backupdest"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+        - node.labels.archi==armhf
+      restart_policy:
+        delay: 24h
+
 networks:
   monitoring:
     external: true

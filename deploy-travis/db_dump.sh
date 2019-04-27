@@ -90,6 +90,7 @@ function main() {
     gzip -9 -f $local_dump_file_path >$local_dump_file_path_gz
 
     info "Purging backups (keeping only last $retention dump files)"
+
     purge "dump_${database}_*.tar.gz" $retention $dump_dir
 
     # info "Restoring database"
