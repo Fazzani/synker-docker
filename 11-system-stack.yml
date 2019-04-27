@@ -1,6 +1,7 @@
 version: "3.5"
 
 services:
+
   system-prune:
     image: docker
     networks:
@@ -14,6 +15,25 @@ services:
       mode: global
       restart_policy:
         delay: 24h
+
+  backup_consul:
+    image: jordancrawford/rpi-cold-storage-rsync
+    networks:
+      - monitoring
+      - ntw_front
+    volumes:
+      - "/mnt/nfs/consul/data:/backupsource"
+      - "/mnt/freebox/backup_synker/consul:/backupdest"
+    command: --exclude="config"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+        - node.name == raspberrypi
+      restart_policy:
+        delay: 24h
+
 networks:
   monitoring:
     external: true
