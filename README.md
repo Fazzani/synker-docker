@@ -114,7 +114,7 @@ sudo docker node update --label-add size=medium --label-add provider=ovh vps5079
 sudo docker node update --label-add size=small --label-add provider=arub arub1 &&
 sudo docker node update --label-add size=small --label-add provider=arub arub2 &&
 sudo docker node update --label-add size=small --label-add provider=arub arub3 &&
-sudo docker node update --label-add size=small --label-add provider=local raspberrypi"
+sudo docker node update --label-add archi=armhf --label-add size=small --label-add provider=local raspberrypi"
 
 ### travis encrypt file
 
