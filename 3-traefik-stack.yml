@@ -69,6 +69,7 @@ services:
     networks:
       - ntw_front
       - monitoring
+      - ingress_net_backend
   
   rabbitmq:
     image: pivotalrabbitmq/rabbitmq-autocluster:3.7-consul
