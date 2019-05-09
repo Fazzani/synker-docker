@@ -126,7 +126,7 @@ function deploy_docker_stacks() {
   sudo docker stack deploy -c 6-xviewer-stack.yml xviewer
   sudo docker stack deploy -c 9-idp-stack.yml idp
   sudo docker stack deploy -c 10-monitoring-stack.yml monitoring
-  sleep 15
+  sleep 25
   sudo docker stack deploy -c 11-system-stack.yml system
 }
 
